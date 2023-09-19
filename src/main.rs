@@ -1,13 +1,14 @@
 use bevy::prelude::*;
-use systems::{add_people::add_people, greet_people::greet_people, hello_world::hello_world};
+use plugins::hello_plugin::HelloPlugin;
 
 mod components;
-mod systems;
 mod entities;
+mod systems;
+mod plugins;
+mod resources;
 
 fn main() {
     App::new()
-        .add_systems(Startup, add_people)
-        .add_systems(Update, (hello_world, greet_people))
+        .add_plugins((DefaultPlugins, HelloPlugin))
         .run();
 }
