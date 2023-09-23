@@ -2,7 +2,7 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Sprite, SpriteBundle},
+    sprite::{Sprite, SpriteBundle}, time::{Timer, TimerMode},
 };
 
 use crate::{
@@ -24,6 +24,7 @@ pub fn spawn_mine(
     let player_transform = player.get_single().unwrap();
 
     if ammunition.0 < 1.0 {
+        info!("Out of mines");
         return;
     }
 
@@ -38,7 +39,7 @@ pub fn spawn_mine(
             // texture,
             ..Default::default()
         })
-        .insert(Mine { speed: 0.0 });
+        .insert(Mine { speed: 0.0, lifetime: Timer::from_seconds(30.0, TimerMode::Once) });
 
         ammunition.0 -= 1.0;
         info!("Fired 1 mine");
