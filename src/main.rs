@@ -1,5 +1,6 @@
 use bevy::prelude::*;
 use plugins::game_startup_plugin::GameStartupPlugin;
+use systems::player_movement::player_movement;
 
 mod components;
 mod entities;
@@ -21,5 +22,6 @@ fn main() {
                 }),
             GameStartupPlugin,
         ))
+        .add_systems(Update, player_movement)
         .run();
 }
