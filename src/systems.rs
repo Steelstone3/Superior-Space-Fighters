@@ -1,2 +1,2 @@
-pub mod add_people;
 pub mod camera;
+pub mod spawn_sprite;
