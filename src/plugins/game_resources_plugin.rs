@@ -10,8 +10,8 @@ pub struct GameResourcesPlugin;
 impl Plugin for GameResourcesPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(FleetCredits(1000.0))
-            .insert_resource(MineAmmunition(100.0))
-            .insert_resource(TorpedoAmmunition(100.0))
+            .insert_resource(MineAmmunition(10.0))
+            .insert_resource(TorpedoAmmunition(10.0))
             .insert_resource(CombatGuildReputation(1.0))
             .insert_resource(ExplorationGuildReputation(1.0))
             .insert_resource(TradingGuildReputation(1.0));
