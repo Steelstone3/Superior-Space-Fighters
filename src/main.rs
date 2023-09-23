@@ -1,4 +1,4 @@
-use bevy::{ecs::system::Command, prelude::*};
+use bevy::prelude::*;
 use plugins::game_startup_plugin::GameStartupPlugin;
 
 mod components;
