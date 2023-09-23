@@ -1,5 +1,5 @@
 use bevy::prelude::*;
-use plugins::{game_running_plugin::GameRunningPlugin, game_start_plugin::GameStartPlugin};
+use plugins::{game_running_plugin::GameRunningPlugin, game_start_plugin::GameStartPlugin, game_resources_plugin::GameResourcesPlugin};
 
 mod components;
 mod entities;
@@ -19,6 +19,7 @@ fn main() {
                     }),
                     ..Default::default()
                 }),
+            GameResourcesPlugin,
             GameStartPlugin,
             GameRunningPlugin,
         ))

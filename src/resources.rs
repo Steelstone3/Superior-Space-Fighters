@@ -2,4 +2,5 @@ pub mod fleet_credits;
 pub mod trading_guild_reputation;
 pub mod combat_guild_reputation;
 pub mod exploration_guild_reputation;
-pub mod ammunition;
+pub mod mine_ammunition;
+pub mod torpedo_ammunition;
