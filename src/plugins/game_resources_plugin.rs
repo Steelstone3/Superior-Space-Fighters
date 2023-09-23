@@ -1,7 +1,8 @@
 use crate::resources::{
-    mine_ammunition::MineAmmunition, combat_guild_reputation::CombatGuildReputation,
+    combat_guild_reputation::CombatGuildReputation,
     exploration_guild_reputation::ExplorationGuildReputation, fleet_credits::FleetCredits,
-    trading_guild_reputation::TradingGuildReputation, torpedo_ammunition::TorpedoAmmunition,
+    mine_ammunition::MineAmmunition, torpedo_ammunition::TorpedoAmmunition,
+    trading_guild_reputation::TradingGuildReputation,
 };
 use bevy::prelude::{App, Plugin};
 

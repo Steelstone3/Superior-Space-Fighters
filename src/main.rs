@@ -1,8 +1,10 @@
 use bevy::prelude::*;
-use plugins::{game_running_plugin::GameRunningPlugin, game_start_plugin::GameStartPlugin, game_resources_plugin::GameResourcesPlugin};
+use plugins::{
+    game_resources_plugin::GameResourcesPlugin, game_running_plugin::GameRunningPlugin,
+    game_start_plugin::GameStartPlugin,
+};
 
 mod components;
-mod entities;
 mod plugins;
 mod resources;
 mod systems;
