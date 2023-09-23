@@ -9,6 +9,17 @@ mod systems;
 
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins, GameStartupPlugin))
+        .add_plugins((
+            DefaultPlugins
+                .set(ImagePlugin::default_nearest())
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        title: "Superior Space Fighters".to_string(),
+                        ..Default::default()
+                    }),
+                    ..Default::default()
+                }),
+            GameStartupPlugin,
+        ))
         .run();
 }
