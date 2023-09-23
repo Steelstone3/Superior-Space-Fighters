@@ -1,6 +1,6 @@
 use bevy::{prelude::{Commands, Vec2, AssetServer, Res}, sprite::{SpriteBundle, Sprite}};
 
-pub fn spawn_sprite(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_sprite(mut commands: Commands, _asset_server: Res<AssetServer>) {
 //    let texture = asset_server.load("player_character.png");
    
     commands.spawn(SpriteBundle {
