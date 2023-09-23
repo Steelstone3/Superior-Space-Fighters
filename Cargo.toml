@@ -1,6 +1,6 @@
 [package]
 name = "superior-space-fighters"
-version = "0.1.5"
+version = "0.1.6"
 authors = ["Skippy <steelstone3@gmail.com>"]
 edition = "2021"
 homepage = "https://github.com/Steelstone3/Bubbles-Dive-Planner-Console"
@@ -15,7 +15,7 @@ include = []
 
 [dependencies]
 bevy = "0.11"
-# bevy_egui = "0.21"
+# bevy_iced = "0.4"
 # rand = "*"
 
 [workspace]
