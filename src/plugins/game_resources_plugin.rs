@@ -5,9 +5,9 @@ use crate::resources::{
 };
 use bevy::prelude::{App, Plugin};
 
-pub struct GameRunningPlugin;
+pub struct GameResourcesPlugin;
 
-impl Plugin for GameRunningPlugin {
+impl Plugin for GameResourcesPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(FleetCredits(1000.0))
             .insert_resource(MineAmmunition(100.0))

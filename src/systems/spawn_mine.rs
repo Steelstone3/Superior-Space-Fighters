@@ -31,12 +31,7 @@ pub fn spawn_mine(
         .spawn(SpriteBundle {
             sprite: Sprite {
                 custom_size: Some(Vec2::new(10.0, 10.0)),
-                color: bevy::prelude::Color::Rgba {
-                    red: 200.0,
-                    green: 42.0,
-                    blue: 12.0,
-                    alpha: 50.0,
-                },
+                color: bevy::prelude::Color::hex("FF8700").unwrap(),
                 ..Default::default()
             },
             transform: *player_transform,
