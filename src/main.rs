@@ -1,14 +1,14 @@
-use bevy::prelude::*;
-use plugins::hello_plugin::HelloPlugin;
+use bevy::{ecs::system::Command, prelude::*};
+use plugins::game_startup_plugin::GameStartupPlugin;
 
 mod components;
 mod entities;
-mod systems;
 mod plugins;
 mod resources;
+mod systems;
 
 fn main() {
     App::new()
-        .add_plugins((DefaultPlugins, HelloPlugin))
+        .add_plugins((DefaultPlugins, GameStartupPlugin))
         .run();
 }
