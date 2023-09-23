@@ -42,9 +42,9 @@ pub fn spawn_mine(
         })
         .insert(Mine {
             speed: 0.0,
-            lifetime: Timer::from_seconds(30.0, TimerMode::Once),
+            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         });
 
     ammunition.0 -= 1.0;
-    info!("Fired 1 mine");
+    info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
 }
