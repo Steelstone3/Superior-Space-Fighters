@@ -5,8 +5,8 @@ use bevy::{
 
 use crate::components::player::Player;
 
-pub fn spawn_sprite(mut commands: Commands, _asset_server: Res<AssetServer>) {
-    //    let texture = asset_server.load("player_character.png");
+pub fn spawn_sprite(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let texture = asset_server.load("images/travorian_alliance_ships.png");
 
     commands
         .spawn(SpriteBundle {
@@ -14,7 +14,7 @@ pub fn spawn_sprite(mut commands: Commands, _asset_server: Res<AssetServer>) {
                 custom_size: Some(Vec2::new(100.0, 100.0)),
                 ..Default::default()
             },
-            // texture,
+            texture,
             ..Default::default()
         })
         .insert(Player { speed: 400.0 });
