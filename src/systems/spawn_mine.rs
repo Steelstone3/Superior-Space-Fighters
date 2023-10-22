@@ -13,7 +13,7 @@ use crate::{
 
 pub fn spawn_mine(
     mut commands: Commands,
-    _asset_server: Res<AssetServer>,
+    asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<MineAmmunition>,
     player: Query<&Transform, With<Player>>,
@@ -29,6 +29,8 @@ pub fn spawn_mine(
         return;
     }
 
+    let texture = asset_server.load("images/weapons/mine_1.png");
+
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
@@ -37,7 +39,7 @@ pub fn spawn_mine(
                 ..Default::default()
             },
             transform: *player_transform,
-            // texture,
+            texture,
             ..Default::default()
         })
         .insert(Mine {

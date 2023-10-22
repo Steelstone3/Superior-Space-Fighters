@@ -6,7 +6,7 @@ use bevy::{
 use crate::components::player::Player;
 
 pub fn spawn_sprite(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let texture = asset_server.load("images/travorian_alliance_ships.png");
+    let texture = asset_server.load("images/space_ships/steel_faction/ship_1.png");
 
     commands
         .spawn(SpriteBundle {
