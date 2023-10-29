@@ -1,5 +1,6 @@
 use crate::systems::{
-    mine_lifetime::mine_lifetime, player_movement::player_movement, spawn_mine::spawn_mine,
+    player::player_movement::player_movement,
+    weapons::{mine_lifetime::mine_lifetime, spawn_mine::spawn_mine},
 };
 use bevy::prelude::{App, Plugin, Update};
 

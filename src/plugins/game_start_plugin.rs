@@ -1,4 +1,4 @@
-use crate::systems::{camera::add_camera, spawn_player::spawn_sprite};
+use crate::systems::{camera::add_camera, player::spawn_player::spawn_sprite};
 use bevy::prelude::{App, Plugin, Startup};
 
 pub struct GameStartPlugin;
