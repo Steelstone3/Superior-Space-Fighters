@@ -4,6 +4,7 @@ use plugins::{
     game_start_plugin::GameStartPlugin,
 };
 
+mod assets;
 mod components;
 mod plugins;
 mod resources;

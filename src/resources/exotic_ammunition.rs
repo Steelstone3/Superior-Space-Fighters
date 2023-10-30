@@ -1,4 +1,4 @@
 use bevy::ecs::system::Resource;
 
 #[derive(Resource)]
-pub struct FleetCredits(pub u32);
+pub struct ExoticAmmunition(pub u32);

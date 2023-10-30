@@ -1,4 +1,4 @@
 use bevy::ecs::system::Resource;
 
 #[derive(Resource)]
-pub struct TradingGuildReputation(pub f32);
+pub struct TradingGuildReputation(pub u32);
