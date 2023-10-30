@@ -6,5 +6,6 @@ use crate::assets::images::space_ships::SpaceShipSprite;
 pub struct Player {
     pub ship: SpaceShipSprite,
     pub speed: f32,
+    pub rotation: f32,
     pub size: Vec2,
 }
