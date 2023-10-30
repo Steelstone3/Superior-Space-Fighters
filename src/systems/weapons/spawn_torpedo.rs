@@ -7,16 +7,16 @@ use bevy::{
 };
 
 use crate::{
-    assets::images::weapons::mines::MineSprite,
-    components::{mine::Mine, player::Player},
-    resources::{mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon},
+    assets::images::weapons::torpedos::TorpedoSprite,
+    components::{player::Player, torpedo::Torpedo},
+    resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
 };
 
-pub fn spawn_mine(
+pub fn spawn_torpedo(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<MineAmmunition>,
+    mut ammunition: ResMut<TorpedoAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
     player: Query<&Transform, With<Player>>,
 ) {
@@ -24,36 +24,39 @@ pub fn spawn_mine(
         return;
     }
 
-    if selected_weapon.0 == 3 {
+    if selected_weapon.0 == 2 {
         let player_transform = player.get_single().unwrap();
 
         if ammunition.0 < 1 {
-            info!("Out of mines");
+            info!("Out of torpedos");
             return;
         }
 
-        let mine = Mine {
-            mine: MineSprite::Mine1,
+        let torpedo = Torpedo {
+            torpedo: TorpedoSprite::Torpedo1,
             speed: 0.0,
             size: Vec2::new(100.0, 100.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
-        let texture = asset_server.load(mine.mine.to_string());
+        let texture = asset_server.load(torpedo.torpedo.to_string());
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(mine.size),
+                    custom_size: Some(torpedo.size),
                     ..Default::default()
                 },
                 transform: *player_transform,
                 texture,
                 ..Default::default()
             })
-            .insert(mine);
+            .insert(torpedo);
 
         ammunition.0 -= 1;
-        info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
+        info!(
+            "Fired 1 torpedo. {:?} torpedo ammunition remaining",
+            ammunition.0
+        );
     }
 }

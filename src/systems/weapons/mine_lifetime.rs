@@ -17,9 +17,9 @@ pub fn mine_lifetime(
         if mine.lifetime.finished() {
             commands.entity(mine_entity).despawn();
 
-            mine_ammunition.0 += 1.0;
+            mine_ammunition.0 += 1;
 
-            info!("Mine recovered Current mines: {:?}", mine_ammunition.0);
+            info!("Mine recovered. Current mines: {:?}", mine_ammunition.0);
         }
     }
 }
