@@ -1,10 +1,10 @@
 [package]
 name = "superior-space-fighters"
-version = "0.1.14"
+version = "0.1.15"
 authors = ["Skippy <steelstone3@gmail.com>"]
 edition = "2021"
-homepage = "https://github.com/Steelstone3/Bubbles-Dive-Planner-Console"
-repository = "https://github.com/Steelstone3/Bubbles-Dive-Planner-Console"
+homepage = "https://github.com/Steelstone3/Superior-Space-Fighters"
+repository = "https://github.com/Steelstone3/Superior-Space-Fighters"
 license = "GPLv3"
 readme = "README.md"
 include = []
