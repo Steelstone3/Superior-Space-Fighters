@@ -7,26 +7,11 @@ assignees: ''
 
 ---
 
-## Description
+## Descriptive user story summary
 
 **In order to** get some value
 **As a** actor/role 
 **I would like to** desired action
-
-## Acceptance Criteria
-
-**Scenario 1** 
-**Given**
-  **And**
-  **When**
-**Then**
-
-## Technical Analysis
-
-**As a** developer
-**I want**
-**This will require**
-**This will depend on**
 
 ## Sub-Tasks
 
