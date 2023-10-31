@@ -12,9 +12,9 @@ impl Plugin for GameResourcesPlugin {
     fn build(&self, app: &mut App) {
         app.insert_resource(FleetCredits(1000))
             .insert_resource(SelectedWeapon(1))
-            .insert_resource(MineAmmunition(20))
-            .insert_resource(TorpedoAmmunition(10))
-            .insert_resource(BlasterAmmunition(100))
+            .insert_resource(MineAmmunition(3))
+            .insert_resource(TorpedoAmmunition(5))
+            .insert_resource(BlasterAmmunition(10))
             .insert_resource(ExoticAmmunition(3))
             .insert_resource(CombatGuildReputation(1))
             .insert_resource(ExplorationGuildReputation(1))
