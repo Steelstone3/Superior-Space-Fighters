@@ -15,19 +15,25 @@ pub fn player_movement(
 
         // Forward
         if input.pressed(KeyCode::W) {
-            player.current_velocity += player
-                .acceleration
-                .clamp(-player.velocity / 2.0, player.velocity);
+            if player.current_velocity >= 0.0 {
+                player.current_velocity += player
+                    .acceleration
+                    .clamp(-player.velocity / 2.0, player.velocity);
 
-            let movement_direction = transform.rotation * Vec3::Y;
-            let translation_delta = movement_direction * player_speed;
-            transform.translation += translation_delta;
+                let movement_direction = transform.rotation * Vec3::Y;
+                let translation_delta = movement_direction * player_speed;
+                transform.translation += translation_delta;
+            }
         }
         // Downward
         if input.pressed(KeyCode::S) {
-            let movement_direction = transform.rotation * Vec3::Y;
-            let translation_delta = movement_direction * (player_speed / 2.0);
-            transform.translation -= translation_delta;
+            if player.current_velocity <= 0.01 {
+                player.current_velocity -= player.acceleration.clamp(-player.velocity / 2.0, 0.01);
+
+                let movement_direction = transform.rotation * Vec3::Y;
+                let translation_delta = movement_direction * -(player_speed / 2.0);
+                transform.translation -= translation_delta;
+            }
         }
         // Rotate Right
         if input.pressed(KeyCode::D) {
