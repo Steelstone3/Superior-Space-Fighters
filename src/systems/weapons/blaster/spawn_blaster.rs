@@ -8,7 +8,7 @@ use bevy::{
 
 use crate::{
     assets::images::weapons::blasters::BlasterSprite,
-    components::{blaster::Blaster, ship::Ship},
+    components::{blaster::Blaster, starship::Starship},
     resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
 };
 
@@ -18,7 +18,7 @@ pub fn spawn_blaster(
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<BlasterAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
-    player: Query<&Transform, With<Ship>>,
+    player: Query<&Transform, With<Starship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;

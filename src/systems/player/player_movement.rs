@@ -3,10 +3,10 @@ use bevy::{
     time::Time,
 };
 
-use crate::components::ship::Ship;
+use crate::components::starship::Starship;
 
 pub fn player_movement(
-    mut characters: Query<(&mut Transform, &mut Ship)>,
+    mut characters: Query<(&mut Transform, &mut Starship)>,
     input: Res<Input<KeyCode>>,
     time: Res<Time>,
 ) {

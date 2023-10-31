@@ -3,10 +3,10 @@ use bevy::{
     sprite::{Sprite, SpriteBundle},
 };
 
-use crate::{assets::images::space_ships::SpaceShipSprite, components::ship::Ship};
+use crate::{assets::images::space_ships::SpaceShipSprite, components::starship::Starship};
 
-pub fn spawn_sprite(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let player = Ship {
+pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let player = Starship {
         ship: SpaceShipSprite::SteelFactionShip1,
         velocity: 30.0,
         rotation: f32::to_radians(10.0),
