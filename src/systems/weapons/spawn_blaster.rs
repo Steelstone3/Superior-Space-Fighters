@@ -34,7 +34,7 @@ pub fn spawn_blaster(
 
         let blaster = Blaster {
             blaster: BlasterSprite::Blaster1,
-            speed: 0.0,
+            velocity: 100.0,
             size: Vec2::new(100.0, 100.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
