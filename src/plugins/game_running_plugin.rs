@@ -1,10 +1,6 @@
 use crate::systems::{
     player::{player_movement::player_movement, player_weapon_select::player_weapon_select},
-    weapons::{
-        blaster_lifetime::blaster_lifetime, blaster_movement::blaster_movement,
-        exotic_lifetime::exotic_lifetime, exotic_movement::exotic_movement,
-        mine_lifetime::mine_lifetime, spawn_blaster::spawn_blaster, spawn_exotic::spawn_exotic,
-        spawn_mine::spawn_mine, spawn_torpedo::spawn_torpedo, torpedo_lifetime::torpedo_lifetime,
+    weapons::{mine::{spawn_mine::spawn_mine, mine_lifetime::mine_lifetime}, exotic::{spawn_exotic::spawn_exotic, exotic_lifetime::exotic_lifetime, exotic_movement::exotic_movement}, torpedo::{spawn_torpedo::spawn_torpedo, torpedo_lifetime::torpedo_lifetime}, blaster::{spawn_blaster::spawn_blaster, blaster_movement::blaster_movement, blaster_lifetime::blaster_lifetime}
     },
 };
 use bevy::prelude::{App, Plugin, Update};

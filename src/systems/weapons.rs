@@ -1,10 +1,11 @@
-pub mod blaster_lifetime;
-pub mod blaster_movement;
-pub mod exotic_lifetime;
-pub mod exotic_movement;
-pub mod mine_lifetime;
-pub mod spawn_blaster;
-pub mod spawn_exotic;
-pub mod spawn_mine;
-pub mod spawn_torpedo;
-pub mod torpedo_lifetime;
+
+
+
+
+
+
+
+pub mod blaster;
+pub mod exotic;
+pub mod mine;
+pub mod torpedo;
