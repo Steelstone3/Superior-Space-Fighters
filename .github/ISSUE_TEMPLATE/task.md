@@ -7,13 +7,13 @@ assignees: ''
 
 ---
 
-### Description
+## Description
 
 **In order to** get some value
 **As a** actor/role 
 **I would like to** desired action
 
-### Acceptance Criteria
+## Acceptance criteria
 
 **Scenario 1** 
 **Given**
@@ -21,7 +21,7 @@ assignees: ''
   **When**
 **Then**
 
-### Tech Analysis
+## Technical Analysis
 
 **As a** developer
 **I want**
