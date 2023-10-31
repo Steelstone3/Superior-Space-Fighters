@@ -1,5 +1,5 @@
 use bevy::{
-    prelude::{info, Input, KeyCode, Query, Res, Transform, Vec3},
+    prelude::{Input, KeyCode, Query, Res, Transform, Vec3},
     time::Time,
 };
 
@@ -44,8 +44,6 @@ pub fn player_movement(
                 let translation_delta = movement_direction * player_speed;
                 transform.translation += translation_delta;
             }
-
-            info!("current velocity {:?} ", player.current_velocity);
         }
 
         // Rotate Right
