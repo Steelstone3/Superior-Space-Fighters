@@ -15,24 +15,16 @@ pub fn player_movement(
 
         // Forward
         if input.pressed(KeyCode::W) {
-            if player.current_velocity >= 0.0 {
-                player.current_velocity += player.acceleration.clamp(0.0, player.velocity);
+            player.current_velocity = (player.current_velocity + player
+                .acceleration)
+                .clamp(0.0, player.velocity);
 
-                let movement_direction = transform.rotation * Vec3::Y;
-                let translation_delta = movement_direction * player_speed;
-                transform.translation += translation_delta;
-            }
+            let movement_direction = transform.rotation * Vec3::Y;
+            let translation_delta = movement_direction * player_speed;
+            transform.translation += translation_delta;
+
+            info!("current velocity {:?} ", player.current_velocity);
         }
-        // // Downward
-        // else if input.pressed(KeyCode::S) {
-        //     if player.current_velocity <= 0.01 {
-        //         player.current_velocity -= player.acceleration.clamp(-player.velocity / 2.0, 0.01);
-
-        //         let movement_direction = transform.rotation * Vec3::Y;
-        //         let translation_delta = movement_direction * -(player_speed / 2.0);
-        //         transform.translation -= translation_delta;
-        //     }
-        // }
         // Slow down
         else {
             let movement_direction = transform.rotation * Vec3::Y;
@@ -40,19 +32,6 @@ pub fn player_movement(
                 (player.current_velocity - player.acceleration).clamp(0.0, player.velocity);
             let translation_delta = movement_direction * -player_speed;
             transform.translation -= translation_delta;
-
-            // // Forwards
-            // if player.current_velocity > 0.0 {
-
-            // }
-            // // Backwards
-            // else {
-            //     player.current_velocity =
-            //         (player.current_velocity - player.acceleration).clamp(-player.velocity, 0.0);
-
-            //     let translation_delta = movement_direction * player_speed;
-            //     transform.translation += translation_delta;
-            // }
 
             info!("current velocity {:?} ", player.current_velocity);
         }
