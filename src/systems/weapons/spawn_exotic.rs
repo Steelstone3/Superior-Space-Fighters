@@ -34,8 +34,8 @@ pub fn spawn_exotic(
 
         let exotic = Exotic {
             exotic: ExoticSprite::Exotic1,
-            speed: 0.0,
-            size: Vec2::new(100.0, 100.0),
+            velocity: 75.0,
+            size: Vec2::new(80.0, 80.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
