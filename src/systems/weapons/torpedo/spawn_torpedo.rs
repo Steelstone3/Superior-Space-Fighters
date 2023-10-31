@@ -2,7 +2,7 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Sprite, SpriteBundle},
+    sprite::{Anchor, Sprite, SpriteBundle},
     time::{Timer, TimerMode},
 };
 
@@ -34,7 +34,7 @@ pub fn spawn_torpedo(
 
         let torpedo = Torpedo {
             torpedo: TorpedoSprite::Torpedo1,
-            speed: 0.0,
+            velocity: 125.0,
             size: Vec2::new(100.0, 100.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
@@ -45,6 +45,7 @@ pub fn spawn_torpedo(
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(torpedo.size),
+                    anchor: Anchor::BottomCenter,
                     ..Default::default()
                 },
                 transform: *player_transform,

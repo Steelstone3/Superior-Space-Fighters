@@ -2,21 +2,21 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Sprite, SpriteBundle},
+    sprite::{Anchor, Sprite, SpriteBundle},
     time::{Timer, TimerMode},
 };
 
 use crate::{
-    assets::images::weapons::mines::MineSprite,
-    components::{mine::Mine, player::Player},
-    resources::{mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon},
+    assets::images::weapons::blasters::BlasterSprite,
+    components::{blaster::Blaster, player::Player},
+    resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
 };
 
-pub fn spawn_mine(
+pub fn spawn_blaster(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<MineAmmunition>,
+    mut ammunition: ResMut<BlasterAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
     player: Query<&Transform, With<Player>>,
 ) {
@@ -24,36 +24,40 @@ pub fn spawn_mine(
         return;
     }
 
-    if selected_weapon.0 == 3 {
+    if selected_weapon.0 == 1 {
         let player_transform = player.get_single().unwrap();
 
         if ammunition.0 < 1 {
-            info!("Out of mines");
+            info!("Out of blaster ammunition");
             return;
         }
 
-        let mine = Mine {
-            mine: MineSprite::Mine1,
-            speed: 0.0,
+        let blaster = Blaster {
+            blaster: BlasterSprite::Blaster1,
+            velocity: 100.0,
             size: Vec2::new(100.0, 100.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
-        let texture = asset_server.load(mine.mine.to_string());
+        let texture = asset_server.load(blaster.blaster.to_string());
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(mine.size),
+                    custom_size: Some(blaster.size),
+                    anchor: Anchor::BottomCenter,
                     ..Default::default()
                 },
                 transform: *player_transform,
                 texture,
                 ..Default::default()
             })
-            .insert(mine);
+            .insert(blaster);
 
         ammunition.0 -= 1;
-        info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
+        info!(
+            "Fired 1 blaster shot. {:?} blaster shots remaining",
+            ammunition.0
+        );
     }
 }
