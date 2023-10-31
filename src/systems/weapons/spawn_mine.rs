@@ -2,7 +2,7 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Sprite, SpriteBundle},
+    sprite::{Sprite, SpriteBundle, Anchor},
     time::{Timer, TimerMode},
 };
 
@@ -45,6 +45,7 @@ pub fn spawn_mine(
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(mine.size),
+                    anchor: Anchor::TopCenter,
                     ..Default::default()
                 },
                 transform: *player_transform,
