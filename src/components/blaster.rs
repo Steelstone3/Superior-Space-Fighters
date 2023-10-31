@@ -5,7 +5,7 @@ use crate::assets::images::weapons::blasters::BlasterSprite;
 #[derive(Component)]
 pub struct Blaster {
     pub blaster: BlasterSprite,
-    pub speed: f32,
+    pub velocity: f32,
     pub size: Vec2,
     pub lifetime: Timer,
 }
