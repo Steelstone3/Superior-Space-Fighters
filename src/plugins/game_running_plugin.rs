@@ -10,7 +10,7 @@ use crate::systems::{
             spawn_exotic::spawn_exotic,
         },
         mine::{mine_lifetime::mine_lifetime, spawn_mine::spawn_mine},
-        torpedo::{spawn_torpedo::spawn_torpedo, torpedo_lifetime::torpedo_lifetime},
+        torpedo::{spawn_torpedo::spawn_torpedo, torpedo_lifetime::torpedo_lifetime, torpedo_movement::torpedo_movement},
     },
 };
 use bevy::prelude::{App, Plugin, Update};
@@ -21,15 +21,16 @@ impl Plugin for GameRunningPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Update, player_movement)
             .add_systems(Update, player_weapon_select)
-            .add_systems(Update, spawn_mine)
-            .add_systems(Update, mine_lifetime)
-            .add_systems(Update, spawn_exotic)
-            .add_systems(Update, exotic_lifetime)
-            .add_systems(Update, spawn_torpedo)
-            .add_systems(Update, torpedo_lifetime)
             .add_systems(Update, spawn_blaster)
+            .add_systems(Update, spawn_torpedo)
+            .add_systems(Update, spawn_mine)
+            .add_systems(Update, spawn_exotic)
+            .add_systems(Update, blaster_lifetime)
+            .add_systems(Update, torpedo_lifetime)
+            .add_systems(Update, mine_lifetime)
+            .add_systems(Update, exotic_lifetime)
             .add_systems(Update, blaster_movement)
-            .add_systems(Update, exotic_movement)
-            .add_systems(Update, blaster_lifetime);
+            .add_systems(Update, torpedo_movement)
+            .add_systems(Update, exotic_movement);
     }
 }
