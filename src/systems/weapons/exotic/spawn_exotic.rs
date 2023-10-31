@@ -8,7 +8,7 @@ use bevy::{
 
 use crate::{
     assets::images::weapons::exotics::ExoticSprite,
-    components::{exotic::Exotic, player::Player},
+    components::{exotic::Exotic, ship::Ship},
     resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
 };
 
@@ -18,7 +18,7 @@ pub fn spawn_exotic(
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<ExoticAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
-    player: Query<&Transform, With<Player>>,
+    player: Query<&Transform, With<Ship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;

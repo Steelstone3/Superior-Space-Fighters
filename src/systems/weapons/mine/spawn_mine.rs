@@ -8,7 +8,7 @@ use bevy::{
 
 use crate::{
     assets::images::weapons::mines::MineSprite,
-    components::{mine::Mine, player::Player},
+    components::{mine::Mine, ship::Ship},
     resources::{mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon},
 };
 
@@ -18,7 +18,7 @@ pub fn spawn_mine(
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<MineAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
-    player: Query<&Transform, With<Player>>,
+    player: Query<&Transform, With<Ship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;

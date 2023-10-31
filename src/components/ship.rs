@@ -3,7 +3,7 @@ use bevy::{ecs::component::Component, prelude::Vec2};
 use crate::assets::images::space_ships::SpaceShipSprite;
 
 #[derive(Component)]
-pub struct Player {
+pub struct Ship {
     pub ship: SpaceShipSprite,
     pub acceleration: f32,
     pub current_velocity: f32,
