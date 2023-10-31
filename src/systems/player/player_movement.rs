@@ -11,7 +11,7 @@ pub fn player_movement(
     time: Res<Time>,
 ) {
     for (mut transform, player) in &mut characters {
-        let player_speed = player.speed * time.delta_seconds();
+        let player_speed = player.velocity * time.delta_seconds();
 
         // Forward
         if input.pressed(KeyCode::W) {

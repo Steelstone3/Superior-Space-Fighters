@@ -8,7 +8,7 @@ use crate::{assets::images::space_ships::SpaceShipSprite, components::player::Pl
 pub fn spawn_sprite(mut commands: Commands, asset_server: Res<AssetServer>) {
     let player = Player {
         ship: SpaceShipSprite::SteelFactionShip1,
-        speed: 30.0,
+        velocity: 30.0,
         rotation: f32::to_radians(10.0),
         size: Vec2 { x: 100.0, y: 100.0 },
     };
