@@ -16,15 +16,14 @@ pub fn player_movement(
         // Forward
         if input.pressed(KeyCode::W) {
             if player.current_velocity >= 0.0 {
-                player.current_velocity += player
-                    .acceleration
-                    .clamp(-player.velocity / 2.0, player.velocity);
+                player.current_velocity += player.acceleration.clamp(0.0, player.velocity);
 
                 let movement_direction = transform.rotation * Vec3::Y;
                 let translation_delta = movement_direction * player_speed;
                 transform.translation += translation_delta;
             }
         }
+        
         // Downward
         if input.pressed(KeyCode::S) {
             if player.current_velocity <= 0.01 {
