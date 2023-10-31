@@ -1,6 +1,7 @@
 pub mod blaster_lifetime;
 pub mod blaster_movement;
 pub mod exotic_lifetime;
+pub mod exotic_movement;
 pub mod mine_lifetime;
 pub mod spawn_blaster;
 pub mod spawn_exotic;
