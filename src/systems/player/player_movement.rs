@@ -6,15 +6,19 @@ use bevy::{
 use crate::components::player::Player;
 
 pub fn player_movement(
-    mut characters: Query<(&mut Transform, &Player)>,
+    mut characters: Query<(&mut Transform, &mut Player)>,
     input: Res<Input<KeyCode>>,
     time: Res<Time>,
 ) {
-    for (mut transform, player) in &mut characters {
-        let player_speed = player.velocity * time.delta_seconds();
+    for (mut transform, mut player) in &mut characters {
+        let player_speed = player.current_velocity * time.delta_seconds();
 
         // Forward
         if input.pressed(KeyCode::W) {
+            player.current_velocity += player
+                .acceleration
+                .clamp(-player.velocity / 2.0, player.velocity);
+
             let movement_direction = transform.rotation * Vec3::Y;
             let translation_delta = movement_direction * player_speed;
             transform.translation += translation_delta;
