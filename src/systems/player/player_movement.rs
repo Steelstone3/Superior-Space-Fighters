@@ -13,7 +13,7 @@ pub fn player_movement(
     for (mut transform, mut player) in &mut characters {
         let player_speed = player.current_velocity * time.delta_seconds();
 
-        // Forward
+        // Forwards
         if input.pressed(KeyCode::W) {
             player.current_velocity = (player.current_velocity + player.acceleration)
                 .clamp(-player.velocity, player.velocity);
@@ -21,12 +21,14 @@ pub fn player_movement(
             let movement_direction = transform.rotation * Vec3::Y;
             let translation_delta = movement_direction * player_speed;
             transform.translation += translation_delta;
-        } else if input.pressed(KeyCode::S) {
+        } 
+        // Backwards
+        else if input.pressed(KeyCode::S) {
             player.current_velocity = (player.current_velocity - player.acceleration)
                 .clamp(-player.velocity, player.velocity);
 
             let movement_direction = transform.rotation * Vec3::Y;
-            let translation_delta = movement_direction * player_speed;
+            let translation_delta = movement_direction * player_speed / 2.0;
             transform.translation += translation_delta;
         }
         // Slow down
@@ -40,7 +42,7 @@ pub fn player_movement(
                 transform.translation -= translation_delta;
             } else if player.current_velocity < 0.0 {
                 player.current_velocity = (player.current_velocity + player.acceleration)
-                    .clamp(-player.velocity, player.velocity);
+                    .clamp(-player.velocity / 2.0, player.velocity);
                 let translation_delta = movement_direction * player_speed;
                 transform.translation += translation_delta;
             }
