@@ -9,8 +9,13 @@ use crate::systems::{
             exotic_lifetime::exotic_lifetime, exotic_movement::exotic_movement,
             spawn_exotic::spawn_exotic,
         },
-        mine::{mine_lifetime::mine_lifetime, spawn_mine::spawn_mine},
-        torpedo::{spawn_torpedo::spawn_torpedo, torpedo_lifetime::torpedo_lifetime, torpedo_movement::torpedo_movement},
+        mine::{
+            mine_lifetime::mine_lifetime, mine_movement::mine_movement, spawn_mine::spawn_mine,
+        },
+        torpedo::{
+            spawn_torpedo::spawn_torpedo, torpedo_lifetime::torpedo_lifetime,
+            torpedo_movement::torpedo_movement,
+        },
     },
 };
 use bevy::prelude::{App, Plugin, Update};
@@ -31,6 +36,7 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, exotic_lifetime)
             .add_systems(Update, blaster_movement)
             .add_systems(Update, torpedo_movement)
+            .add_systems(Update, mine_movement)
             .add_systems(Update, exotic_movement);
     }
 }

@@ -34,7 +34,7 @@ pub fn spawn_mine(
 
         let mine = Mine {
             mine: MineSprite::Mine1,
-            speed: 0.0,
+            velocity: -5.0,
             size: Vec2::new(100.0, 100.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
