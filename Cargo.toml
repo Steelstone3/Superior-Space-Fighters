@@ -15,10 +15,9 @@ include = []
 
 [dependencies]
 bevy = "0.11"
-rand="0.*"
-rand_derive2 ="0.1.*"
+rand="0"
+rand_derive2 ="0.1"
 # bevy_iced = "0.4"
-# rand = "*"
 
 [workspace]
 resolver = "2"
