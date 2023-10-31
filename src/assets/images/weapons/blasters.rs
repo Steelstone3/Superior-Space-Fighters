@@ -1,6 +1,7 @@
+use rand_derive2::RandGen;
 use core::fmt::Display;
 
-#[allow(dead_code)]
+#[derive(RandGen)]
 pub enum BlasterSprite {
     Blaster1,
     Blaster2,

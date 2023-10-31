@@ -1,13 +1,13 @@
+use crate::components::starship::Starship;
 use bevy::{
     prelude::{AssetServer, Commands, Res, Vec2},
     sprite::{Sprite, SpriteBundle},
 };
-
-use crate::{assets::images::space_ships::SpaceShipSprite, components::starship::Starship};
+use rand::random;
 
 pub fn spawn_random_ship(mut commands: Commands, asset_server: Res<AssetServer>) {
     let ship = Starship {
-        asset: SpaceShipSprite::SteelFactionShip1,
+        asset: random(),
         velocity: 30.0,
         rotation: f32::to_radians(10.0),
         size: Vec2 { x: 100.0, y: 100.0 },

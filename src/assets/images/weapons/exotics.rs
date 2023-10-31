@@ -1,6 +1,7 @@
 use core::fmt::Display;
+use rand_derive2::RandGen;
 
-#[allow(dead_code)]
+#[derive(RandGen)]
 pub enum ExoticSprite {
     Exotic1,
     Exotic2,
