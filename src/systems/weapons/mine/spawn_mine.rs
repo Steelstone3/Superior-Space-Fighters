@@ -2,7 +2,7 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Sprite, SpriteBundle, Anchor},
+    sprite::{Anchor, Sprite, SpriteBundle},
     time::{Timer, TimerMode},
 };
 
