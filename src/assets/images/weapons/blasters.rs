@@ -1,5 +1,5 @@
-use rand_derive2::RandGen;
 use core::fmt::Display;
+use rand_derive2::RandGen;
 
 #[derive(RandGen)]
 pub enum BlasterSprite {
