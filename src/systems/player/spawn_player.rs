@@ -1,5 +1,5 @@
 use bevy::{
-    prelude::{AssetServer, Commands, Res, Vec2},
+    prelude::{AssetServer, Commands, Res, Vec2, Vec3},
     sprite::{Sprite, SpriteBundle},
 };
 
@@ -29,6 +29,10 @@ pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>)
                 ..Default::default()
             },
             texture,
+            transform: bevy::prelude::Transform {
+                translation: Vec3::new(0.0, 0.0, 4.0),
+                ..Default::default()
+            },
             ..Default::default()
         })
         .insert(player);

@@ -1,6 +1,6 @@
 use crate::components::starship::Starship;
 use bevy::{
-    prelude::{AssetServer, Commands, Res, Vec2},
+    prelude::{AssetServer, Commands, Res, Vec2, Vec3},
     sprite::{Sprite, SpriteBundle},
 };
 use rand::random;
@@ -24,6 +24,10 @@ pub fn spawn_random_ship(mut commands: Commands, asset_server: Res<AssetServer>)
                 ..Default::default()
             },
             texture,
+            transform: bevy::prelude::Transform {
+                translation: Vec3::new(100.0, 100.0, 3.0),
+                ..Default::default()
+            },
             ..Default::default()
         })
         .insert(ship);
