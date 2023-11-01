@@ -8,7 +8,7 @@ use bevy::{
 
 use crate::{
     assets::images::weapons::torpedos::TorpedoSprite,
-    components::{player::Player, torpedo::Torpedo},
+    components::{player_starship::PlayerStarship, torpedo::Torpedo},
     resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
 };
 
@@ -18,7 +18,7 @@ pub fn spawn_torpedo(
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<TorpedoAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
-    player: Query<&Transform, With<Player>>,
+    player: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
@@ -35,7 +35,7 @@ pub fn spawn_torpedo(
         let torpedo = Torpedo {
             torpedo: TorpedoSprite::Torpedo1,
             velocity: 125.0,
-            size: Vec2::new(100.0, 100.0),
+            size: Vec2::new(80.0, 80.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 

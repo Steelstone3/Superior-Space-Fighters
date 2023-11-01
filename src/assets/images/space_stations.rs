@@ -1,6 +1,7 @@
+use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[allow(dead_code)]
+#[derive(RandGen)]
 pub enum SpaceStationSprite {
     Station1,
     Station2,
