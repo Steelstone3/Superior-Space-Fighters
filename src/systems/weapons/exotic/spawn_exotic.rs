@@ -2,7 +2,7 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Anchor, Sprite, SpriteBundle},
+    sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
 };
 
@@ -25,7 +25,8 @@ pub fn spawn_exotic(
     }
 
     if selected_weapon.0 == 4 {
-        let player_transform = player.get_single().unwrap();
+        let player_transform = *player.get_single().unwrap();
+        // player_transform.translation.y += 100.0;
 
         if ammunition.0 < 1 {
             info!("Out of exotic ammunition");
@@ -45,10 +46,9 @@ pub fn spawn_exotic(
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(exotic.size),
-                    anchor: Anchor::BottomCenter,
                     ..Default::default()
                 },
-                transform: *player_transform,
+                transform: player_transform,
                 texture,
                 ..Default::default()
             })

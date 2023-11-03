@@ -2,7 +2,7 @@ use bevy::{
     prelude::{
         info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
-    sprite::{Anchor, Sprite, SpriteBundle},
+    sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
 };
 
@@ -25,8 +25,9 @@ pub fn spawn_blaster(
     }
 
     if selected_weapon.0 == 1 {
-        let player_transform = player.get_single().unwrap();
-
+        let player_transform = *player.get_single().unwrap();
+        // player_transform.translation.y += 100.0;
+        
         if ammunition.0 < 1 {
             info!("Out of blaster ammunition");
             return;
@@ -41,14 +42,14 @@ pub fn spawn_blaster(
 
         let texture = asset_server.load(blaster.blaster.to_string());
 
+        
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(blaster.size),
-                    anchor: Anchor::BottomCenter,
                     ..Default::default()
                 },
-                transform: *player_transform,
+                transform: player_transform,
                 texture,
                 ..Default::default()
             })
