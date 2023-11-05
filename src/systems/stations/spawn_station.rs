@@ -27,7 +27,7 @@ pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServe
                 translation: Vec3::new(
                     random_range_f32(generate_seed(), -320.0, 320.0),
                     random_range_f32(generate_seed(), -240.0, 240.0),
-                    1.0,
+                    2.0,
                 ),
                 ..Default::default()
             },
