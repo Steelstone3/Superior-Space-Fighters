@@ -18,6 +18,7 @@ fn main() {
                 .set(WindowPlugin {
                     primary_window: Some(Window {
                         title: "Superior Space Fighters".to_string(),
+                        resolution: (640.0, 480.0).into(),
                         ..Default::default()
                     }),
                     ..Default::default()
