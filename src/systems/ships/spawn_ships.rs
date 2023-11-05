@@ -8,7 +8,7 @@ use bevy::{
 };
 use rand::random;
 
-pub fn spawn_random_ship(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>) {
     for _ in 0..random_range_i32(generate_seed(), 1, 10) {
         let ship = Starship {
             asset: random(),

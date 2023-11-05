@@ -1,1 +1,1 @@
-pub mod spawn_ship;
+pub mod spawn_ships;
