@@ -8,7 +8,10 @@ use rand::random;
 pub fn spawn_random_space_background(mut commands: Commands, asset_server: Res<AssetServer>) {
     let space = Space {
         asset: random(),
-        size: Vec2 { x: 1920.0, y: 1920.0 },
+        size: Vec2 {
+            x: 1920.0,
+            y: 1920.0,
+        },
     };
 
     let texture = asset_server.load(space.asset.to_string());
