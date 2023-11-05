@@ -25,7 +25,8 @@ pub fn spawn_exotic(
     }
 
     if selected_weapon.0 == 4 {
-        let player_transform = *player.get_single().unwrap();
+        let mut player_transform = *player.get_single().unwrap();
+        player_transform.translation.z -= 1.0;
         // player_transform.translation.y += 100.0;
 
         if ammunition.0 < 1 {
