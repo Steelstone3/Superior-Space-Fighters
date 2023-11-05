@@ -1,6 +1,7 @@
 use bevy::{
     prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time, utils::tracing,
+    time::Time,
+    utils::tracing,
 };
 
 use crate::{components::mine::Mine, resources::mine_ammunition::MineAmmunition};

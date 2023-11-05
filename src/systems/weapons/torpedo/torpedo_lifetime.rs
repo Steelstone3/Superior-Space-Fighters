@@ -1,6 +1,7 @@
 use bevy::{
     prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time, utils::tracing,
+    time::Time,
+    utils::tracing,
 };
 
 use crate::{components::torpedo::Torpedo, resources::torpedo_ammunition::TorpedoAmmunition};
@@ -20,7 +21,8 @@ pub fn torpedo_lifetime(
             torpedo_ammunition.0 += 1;
 
             tracing::info!(
-                "Torpedo ammunition recovered. Current torpedo ammunition: {:?}",torpedo_ammunition.0
+                "Torpedo ammunition recovered. Current torpedo ammunition: {:?}",
+                torpedo_ammunition.0
             );
         }
     }

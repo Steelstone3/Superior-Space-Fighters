@@ -1,4 +1,7 @@
-use bevy::{prelude::{Input, KeyCode, Res, ResMut}, utils::tracing};
+use bevy::{
+    prelude::{Input, KeyCode, Res, ResMut},
+    utils::tracing,
+};
 
 use crate::resources::selected_weapon::SelectedWeapon;
 

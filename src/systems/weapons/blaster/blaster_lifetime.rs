@@ -1,6 +1,7 @@
 use bevy::{
     prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time, utils::tracing,
+    time::Time,
+    utils::tracing,
 };
 
 use crate::{components::blaster::Blaster, resources::blaster_ammunition::BlasterAmmunition};

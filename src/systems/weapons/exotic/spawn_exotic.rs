@@ -1,9 +1,8 @@
 use bevy::{
-    prelude::{
-        AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With},
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode}, utils::tracing,
+    time::{Timer, TimerMode},
+    utils::tracing,
 };
 
 use crate::{

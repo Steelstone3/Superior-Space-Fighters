@@ -1,7 +1,8 @@
 use crate::{components::exotic::Exotic, resources::exotic_ammunition::ExoticAmmunition};
 use bevy::{
     prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time, utils::tracing,
+    time::Time,
+    utils::tracing,
 };
 
 pub fn exotic_lifetime(
