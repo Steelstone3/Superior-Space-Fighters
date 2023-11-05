@@ -1,6 +1,6 @@
 use crate::{
     components::starship::Starship,
-    systems::controllers::random_generator::{generate_seed, random_range_i32},
+    systems::controllers::random_generator::{generate_seed, random_range_f32, random_range_i32},
 };
 use bevy::{
     prelude::{AssetServer, Commands, Res, Vec2, Vec3},
@@ -29,7 +29,11 @@ pub fn spawn_random_ship(mut commands: Commands, asset_server: Res<AssetServer>)
                 },
                 texture,
                 transform: bevy::prelude::Transform {
-                    translation: Vec3::new(100.0, 100.0, 3.0),
+                    translation: Vec3::new(
+                        random_range_f32(generate_seed(), -320.0, 320.0),
+                        random_range_f32(generate_seed(), -240.0, 240.0),
+                        3.0,
+                    ),
                     ..Default::default()
                 },
                 ..Default::default()
