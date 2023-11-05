@@ -1,12 +1,12 @@
 use rand::{rngs::StdRng, Rng, SeedableRng};
 
-pub fn random_range_i32(seed: u64, minimum:i32, maximum: i32) -> i32 {
+pub fn random_range_i32(seed: u64, minimum: i32, maximum: i32) -> i32 {
     let mut rng = StdRng::seed_from_u64(seed);
 
     rng.gen_range(minimum..maximum)
 }
 
-pub fn random_range_f32(seed: u64, minimum:f32, maximum: f32) -> f32 {
+pub fn random_range_f32(seed: u64, minimum: f32, maximum: f32) -> f32 {
     let mut rng = StdRng::seed_from_u64(seed);
 
     rng.gen_range(minimum..maximum)

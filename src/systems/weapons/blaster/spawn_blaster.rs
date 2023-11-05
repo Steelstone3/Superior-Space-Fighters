@@ -27,7 +27,7 @@ pub fn spawn_blaster(
     if selected_weapon.0 == 1 {
         let player_transform = *player.get_single().unwrap();
         // player_transform.translation.y += 100.0;
-        
+
         if ammunition.0 < 1 {
             info!("Out of blaster ammunition");
             return;
@@ -42,7 +42,6 @@ pub fn spawn_blaster(
 
         let texture = asset_server.load(blaster.blaster.to_string());
 
-        
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
