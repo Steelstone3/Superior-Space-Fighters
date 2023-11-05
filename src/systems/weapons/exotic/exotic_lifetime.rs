@@ -1,7 +1,7 @@
 use crate::{components::exotic::Exotic, resources::exotic_ammunition::ExoticAmmunition};
 use bevy::{
-    prelude::{info, Commands, Entity, Query, Res, ResMut},
-    time::Time,
+    prelude::{Commands, Entity, Query, Res, ResMut},
+    time::Time, utils::tracing,
 };
 
 pub fn exotic_lifetime(
@@ -18,7 +18,7 @@ pub fn exotic_lifetime(
 
             exotic_ammunition.0 += 1;
 
-            info!(
+            tracing::info!(
                 "Exotic ammunition recovered. Current exotic ammunition: {:?}",
                 exotic_ammunition.0
             );

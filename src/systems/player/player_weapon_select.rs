@@ -1,4 +1,4 @@
-use bevy::prelude::{info, Input, KeyCode, Res, ResMut};
+use bevy::{prelude::{Input, KeyCode, Res, ResMut}, utils::tracing};
 
 use crate::resources::selected_weapon::SelectedWeapon;
 
@@ -10,24 +10,24 @@ pub fn player_weapon_select(
     if input.just_pressed(KeyCode::Key1) {
         selected_weapon.0 = 1;
 
-        info!("Blaster selected")
+        tracing::info!("Blaster selected")
     }
     // Weapon 2
     else if input.just_pressed(KeyCode::Key2) {
         selected_weapon.0 = 2;
 
-        info!("Torpedo selected")
+        tracing::info!("Torpedo selected")
     }
     // Weapon 3
     else if input.just_pressed(KeyCode::Key3) {
         selected_weapon.0 = 3;
 
-        info!("Mine selected")
+        tracing::info!("Mine selected")
     }
     // Weapon 4
     else if input.just_pressed(KeyCode::Key4) {
         selected_weapon.0 = 4;
 
-        info!("Exotic selected")
+        tracing::info!("Exotic selected")
     }
 }

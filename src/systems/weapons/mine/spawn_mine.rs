@@ -1,9 +1,9 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
+        AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode},
+    time::{Timer, TimerMode}, utils::tracing,
 };
 
 use crate::{
@@ -30,7 +30,7 @@ pub fn spawn_mine(
         // player_transform.translation.y -= 100.0;
 
         if ammunition.0 < 1 {
-            info!("Out of mines");
+            tracing::info!("Out of mines");
             return;
         }
 
@@ -56,6 +56,6 @@ pub fn spawn_mine(
             .insert(mine);
 
         ammunition.0 -= 1;
-        info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
+        tracing::info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
     }
 }

@@ -14,7 +14,7 @@ include = []
 [dev-dependencies]
 
 [dependencies]
-bevy = "0.11"
+bevy = "0.12"
 rand="0"
 rand_derive2 ="0.1"
 # bevy_iced = "0.4"

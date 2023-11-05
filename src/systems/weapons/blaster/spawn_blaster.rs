@@ -1,9 +1,9 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
+        AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode},
+    time::{Timer, TimerMode}, utils::tracing,
 };
 
 use crate::{
@@ -30,7 +30,7 @@ pub fn spawn_blaster(
         // player_transform.translation.y += 100.0;
 
         if ammunition.0 < 1 {
-            info!("Out of blaster ammunition");
+            tracing::info!("Out of blaster ammunition");
             return;
         }
 
@@ -56,7 +56,7 @@ pub fn spawn_blaster(
             .insert(blaster);
 
         ammunition.0 -= 1;
-        info!(
+        tracing::info!(
             "Fired 1 blaster shot. {:?} blaster shots remaining",
             ammunition.0
         );
