@@ -1,9 +1,8 @@
 use bevy::{
-    prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With},
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
+    utils::tracing,
 };
 
 use crate::{
@@ -30,7 +29,7 @@ pub fn spawn_exotic(
         // player_transform.translation.y += 100.0;
 
         if ammunition.0 < 1 {
-            info!("Out of exotic ammunition");
+            tracing::info!("Out of exotic ammunition");
             return;
         }
 
@@ -56,7 +55,7 @@ pub fn spawn_exotic(
             .insert(exotic);
 
         ammunition.0 -= 1;
-        info!(
+        tracing::info!(
             "Fired 1 exotic shot. {:?} exotic shots remaining",
             ammunition.0
         );

@@ -1,9 +1,8 @@
 use bevy::{
-    prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With},
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
+    utils::tracing,
 };
 
 use crate::{
@@ -30,7 +29,7 @@ pub fn spawn_torpedo(
         // player_transform.translation.y += 100;
 
         if ammunition.0 < 1 {
-            info!("Out of torpedos");
+            tracing::info!("Out of torpedos");
             return;
         }
 
@@ -56,7 +55,7 @@ pub fn spawn_torpedo(
             .insert(torpedo);
 
         ammunition.0 -= 1;
-        info!(
+        tracing::info!(
             "Fired 1 torpedo. {:?} torpedo ammunition remaining",
             ammunition.0
         );
