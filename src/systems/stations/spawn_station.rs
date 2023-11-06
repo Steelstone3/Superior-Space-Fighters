@@ -10,11 +10,11 @@ use rand::random;
 
 pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServer>) {
     let station = Station {
-        asset: random(),
+        station: random(),
         size: Vec2 { x: 500.0, y: 500.0 },
     };
 
-    let texture = asset_server.load(station.asset.to_string());
+    let texture = asset_server.load(station.station.to_string());
 
     commands
         .spawn(SpriteBundle {
