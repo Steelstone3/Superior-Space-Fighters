@@ -24,25 +24,31 @@ mod random_generator_should {
 
     #[test]
     fn generate_a_random_range_i32() {
+        // Given
         let seed = 1234;
         let minimum = -20;
         let maximum = 20;
         let expected = -18;
 
+        // When
         let actual = random_range_i32(seed, minimum, maximum);
 
+        // Then
         assert_eq!(expected, actual);
     }
 
     #[test]
     fn generate_a_random_range_f32() {
+        // Given
         let seed = 1234;
         let minimum = -20.0;
         let maximum = 20.0;
         let expected = -17.736874;
 
+        // When
         let actual = random_range_f32(seed, minimum, maximum);
 
+        // Then
         assert_eq!(expected, actual);
     }
 }

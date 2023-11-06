@@ -11,12 +11,11 @@ include = []
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dev-dependencies]
-
 [dependencies]
 bevy = "0.12"
 rand="0"
 rand_derive2 ="0.1"
+rstest = "0"
 # bevy_iced = "0.4"
 
 [workspace]
