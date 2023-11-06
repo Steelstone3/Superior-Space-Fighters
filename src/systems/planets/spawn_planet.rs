@@ -8,7 +8,7 @@ use bevy::{
 };
 use rand::random;
 
-pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_random_planet(mut commands: Commands, asset_server: Res<AssetServer>) {
     let station = Station {
         asset: random(),
         size: Vec2 { x: 500.0, y: 500.0 },
