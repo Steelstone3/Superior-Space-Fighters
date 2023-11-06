@@ -10,7 +10,7 @@ use rand::random;
 
 pub fn spawn_random_planets(mut commands: Commands, asset_server: Res<AssetServer>) {
     for _ in 0..random_range_i32(generate_seed(), 1, 5) {
-        let size = random_range_f32(generate_seed(), 10.0, 500.0);
+        let size = random_range_f32(generate_seed(), 25.0, 500.0);
 
         let planet = Planet {
             planet: random(),
