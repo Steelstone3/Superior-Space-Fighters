@@ -4,6 +4,6 @@ use crate::assets::images::space_stations::SpaceStationSprite;
 
 #[derive(Component)]
 pub struct Station {
-    pub asset: SpaceStationSprite,
+    pub station: SpaceStationSprite,
     pub size: Vec2,
 }
