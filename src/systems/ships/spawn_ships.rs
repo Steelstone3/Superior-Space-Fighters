@@ -11,7 +11,7 @@ use rand::random;
 pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>) {
     for _ in 0..random_range_i32(generate_seed(), 1, 10) {
         let ship = Starship {
-            asset: random(),
+            ship: random(),
             velocity: 30.0,
             rotation: f32::to_radians(10.0),
             size: Vec2 { x: 100.0, y: 100.0 },
@@ -19,7 +19,7 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
             current_velocity: 0.0,
         };
 
-        let texture = asset_server.load(ship.asset.to_string());
+        let texture = asset_server.load(ship.ship.to_string());
 
         commands
             .spawn(SpriteBundle {

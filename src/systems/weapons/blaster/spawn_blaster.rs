@@ -17,16 +17,20 @@ pub fn spawn_blaster(
     input: Res<Input<KeyCode>>,
     mut ammunition: ResMut<BlasterAmmunition>,
     selected_weapon: ResMut<SelectedWeapon>,
-    player: Query<&Transform, With<PlayerStarship>>,
+    player_query: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
     if selected_weapon.0 == 1 {
-        let mut player_transform = *player.get_single().unwrap();
-        player_transform.translation.z -= 1.0;
-        // player_transform.translation.y += 100.0;
+        let mut player_transform = *player_query.get_single().unwrap();
+        let blaster_size = 100.0;
+
+        let blaster_spawn_position =
+            player_transform.translation + player_transform.up() * (blaster_size / 2.0);
+        player_transform.translation = blaster_spawn_position;
+        player_transform.translation.z = 3.0;
 
         if ammunition.0 < 1 {
             tracing::info!("Out of blaster ammunition");
@@ -36,7 +40,7 @@ pub fn spawn_blaster(
         let blaster = Blaster {
             blaster: BlasterSprite::Blaster1,
             velocity: 100.0,
-            size: Vec2::new(100.0, 100.0),
+            size: Vec2::new(blaster_size, blaster_size),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 

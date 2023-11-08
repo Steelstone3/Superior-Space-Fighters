@@ -25,8 +25,12 @@ pub fn spawn_mine(
 
     if selected_weapon.0 == 3 {
         let mut player_transform = *player.get_single().unwrap();
-        player_transform.translation.z -= 1.0;
-        // player_transform.translation.y -= 100.0;
+        let mine_size = 100.0;
+
+        let mine_spawn_position =
+            player_transform.translation + player_transform.down() * (mine_size / 1.75);
+        player_transform.translation = mine_spawn_position;
+        player_transform.translation.z = 3.0;
 
         if ammunition.0 < 1 {
             tracing::info!("Out of mines");

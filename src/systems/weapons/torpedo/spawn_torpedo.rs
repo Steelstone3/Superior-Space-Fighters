@@ -25,8 +25,12 @@ pub fn spawn_torpedo(
 
     if selected_weapon.0 == 2 {
         let mut player_transform = *player.get_single().unwrap();
-        player_transform.translation.z -= 1.0;
-        // player_transform.translation.y += 100;
+        let torpedo_size = 80.0;
+
+        let torpedo_spawn_position =
+            player_transform.translation + player_transform.up() * (torpedo_size / 1.5);
+        player_transform.translation = torpedo_spawn_position;
+        player_transform.translation.z = 3.0;
 
         if ammunition.0 < 1 {
             tracing::info!("Out of torpedos");
@@ -36,7 +40,7 @@ pub fn spawn_torpedo(
         let torpedo = Torpedo {
             torpedo: TorpedoSprite::Torpedo1,
             velocity: 125.0,
-            size: Vec2::new(80.0, 80.0),
+            size: Vec2::new(torpedo_size, torpedo_size),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
