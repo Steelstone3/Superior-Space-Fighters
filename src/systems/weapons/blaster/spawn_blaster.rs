@@ -1,12 +1,15 @@
 use bevy::{
-    prelude::{AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With},
+    prelude::{
+        AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
+        With,
+    },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
     utils::tracing,
 };
 
 use crate::{
-    assets::images::weapons::blasters::BlasterSprite,
+    assets::{images::weapons::blasters::BlasterSprite, sounds::weapons::blasters::BlasterSound},
     components::{blaster::Blaster, player_starship::PlayerStarship},
     resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
 };
@@ -39,12 +42,16 @@ pub fn spawn_blaster(
 
         let blaster = Blaster {
             blaster: BlasterSprite::Blaster1,
+            sound: BlasterSound::Blaster1,
             velocity: 100.0,
             size: Vec2::new(blaster_size, blaster_size),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
-        let texture = asset_server.load(blaster.blaster.to_string());
+        let image_path = blaster.blaster.to_string();
+        let sound_path = blaster.sound.to_string();
+
+        let texture = asset_server.load(image_path);
 
         commands
             .spawn(SpriteBundle {
@@ -57,6 +64,11 @@ pub fn spawn_blaster(
                 ..Default::default()
             })
             .insert(blaster);
+
+        commands.spawn(AudioBundle {
+            source: asset_server.load(sound_path),
+            ..Default::default()
+        });
 
         ammunition.0 -= 1;
         tracing::info!(

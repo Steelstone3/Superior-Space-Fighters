@@ -1,12 +1,15 @@
 use bevy::{
-    prelude::{AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With},
+    prelude::{
+        AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
+        With,
+    },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
     utils::tracing,
 };
 
 use crate::{
-    assets::images::weapons::torpedos::TorpedoSprite,
+    assets::{images::weapons::torpedos::TorpedoSprite, sounds::weapons::torpedos::TorpedoSound},
     components::{player_starship::PlayerStarship, torpedo::Torpedo},
     resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
 };
@@ -39,12 +42,16 @@ pub fn spawn_torpedo(
 
         let torpedo = Torpedo {
             torpedo: TorpedoSprite::Torpedo1,
+            sound: TorpedoSound::Torpedo1,
             velocity: 125.0,
             size: Vec2::new(torpedo_size, torpedo_size),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
-        let texture = asset_server.load(torpedo.torpedo.to_string());
+        let image_path = torpedo.torpedo.to_string();
+        let sound_path = torpedo.sound.to_string();
+
+        let texture = asset_server.load(image_path);
 
         commands
             .spawn(SpriteBundle {
@@ -57,6 +64,11 @@ pub fn spawn_torpedo(
                 ..Default::default()
             })
             .insert(torpedo);
+
+        commands.spawn(AudioBundle {
+            source: asset_server.load(sound_path),
+            ..Default::default()
+        });
 
         ammunition.0 -= 1;
         tracing::info!(
