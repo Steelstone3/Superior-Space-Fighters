@@ -1,6 +1,7 @@
 use bevy::{
-    prelude::{info, Commands, Entity, Query, Res, ResMut},
+    prelude::{Commands, Entity, Query, Res, ResMut},
     time::Time,
+    utils::tracing,
 };
 
 use crate::{components::mine::Mine, resources::mine_ammunition::MineAmmunition};
@@ -19,7 +20,7 @@ pub fn mine_lifetime(
 
             mine_ammunition.0 += 1;
 
-            info!("Mine recovered. Current mines: {:?}", mine_ammunition.0);
+            tracing::info!("Mine recovered. Current mines: {:?}", mine_ammunition.0);
         }
     }
 }

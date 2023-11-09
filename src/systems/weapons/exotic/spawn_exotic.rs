@@ -1,13 +1,15 @@
 use bevy::{
     prelude::{
-        info, AssetServer, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
+        AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
+        With,
     },
-    sprite::{Anchor, Sprite, SpriteBundle},
+    sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
+    utils::tracing,
 };
 
 use crate::{
-    assets::images::weapons::exotics::ExoticSprite,
+    assets::{images::weapons::exotics::ExoticSprite, sounds::weapons::exotics::ExoticSound},
     components::{exotic::Exotic, player_starship::PlayerStarship},
     resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
 };
@@ -25,37 +27,51 @@ pub fn spawn_exotic(
     }
 
     if selected_weapon.0 == 4 {
-        let player_transform = player.get_single().unwrap();
+        let mut player_transform = *player.get_single().unwrap();
+        let exotic_size = 80.0;
+
+        let exotic_spawn_position =
+            player_transform.translation + player_transform.up() * (exotic_size / 1.5);
+        player_transform.translation = exotic_spawn_position;
+        player_transform.translation.z = 3.0;
 
         if ammunition.0 < 1 {
-            info!("Out of exotic ammunition");
+            tracing::info!("Out of exotic ammunition");
             return;
         }
 
         let exotic = Exotic {
             exotic: ExoticSprite::Exotic1,
+            sound: ExoticSound::Exotic1,
             velocity: 75.0,
-            size: Vec2::new(80.0, 80.0),
+            size: Vec2::new(exotic_size, exotic_size),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
-        let texture = asset_server.load(exotic.exotic.to_string());
+        let image_path = exotic.exotic.to_string();
+        let sound_path = exotic.sound.to_string();
+
+        let texture = asset_server.load(image_path);
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(exotic.size),
-                    anchor: Anchor::BottomCenter,
                     ..Default::default()
                 },
-                transform: *player_transform,
+                transform: player_transform,
                 texture,
                 ..Default::default()
             })
             .insert(exotic);
 
+        commands.spawn(AudioBundle {
+            source: asset_server.load(sound_path),
+            ..Default::default()
+        });
+
         ammunition.0 -= 1;
-        info!(
+        tracing::info!(
             "Fired 1 exotic shot. {:?} exotic shots remaining",
             ammunition.0
         );

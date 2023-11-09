@@ -1,6 +1,7 @@
 use bevy::{
-    prelude::{info, Commands, Entity, Query, Res, ResMut},
+    prelude::{Commands, Entity, Query, Res, ResMut},
     time::Time,
+    utils::tracing,
 };
 
 use crate::{components::blaster::Blaster, resources::blaster_ammunition::BlasterAmmunition};
@@ -19,7 +20,7 @@ pub fn blaster_lifetime(
 
             blaster_ammunition.0 += 1;
 
-            info!(
+            tracing::info!(
                 "Blasters ammunition recovered. Current blaster ammunition: {:?}",
                 blaster_ammunition.0
             );
