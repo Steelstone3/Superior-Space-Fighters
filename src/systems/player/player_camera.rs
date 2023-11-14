@@ -1,4 +1,4 @@
-use bevy::{core_pipeline::core_2d::Camera2dBundle, ecs::{system::{Commands, Query, ResMut, ParamSet}, query::With, event::EventReader}, transform::components::Transform, render::camera::{Camera, OrthographicProjection, self}, input::{keyboard::KeyCode, mouse::{MouseScrollUnit, MouseWheel}, Input}, math::Vec3};
+use bevy::{core_pipeline::core_2d::Camera2dBundle, ecs::{system::{Commands, Query, ResMut, ParamSet}, query::With, event::EventReader}, transform::components::Transform, render::camera::{Camera, OrthographicProjection}, input::mouse::{MouseScrollUnit, MouseWheel}, math::Vec3};
 use float_lerp::lerp;
 
 use crate::{resources::camera_settings::CameraSettings, components::player_starship::PlayerStarship};
