@@ -14,7 +14,7 @@ pub fn ai_movement(
     space_zone_border: Res<SpaceZoneBorder>,
     time: Res<Time>,
 ) {
-    for (mut transform, mut ai_ship) in &mut characters {
+    characters.par_iter_mut().for_each(|(mut transform, mut ai_ship)| {
         let ship_speed = ai_ship.current_velocity * time.delta_seconds();
 
         ai_ship.current_velocity = (ai_ship.current_velocity + ai_ship.acceleration)
@@ -37,5 +37,5 @@ pub fn ai_movement(
         } else {
             transform.translation += translation_delta;
         }
-    }
+    })
 }
