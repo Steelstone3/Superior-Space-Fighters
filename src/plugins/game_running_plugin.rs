@@ -1,6 +1,5 @@
 use crate::systems::{
-    camera::camera_movement,
-    player::{player_movement::player_movement, player_weapon_select::player_weapon_select},
+    player::{player_movement::player_movement, player_weapon_select::player_weapon_select, player_camera::camera_movement},
     ships::ship_movement::ai_movement,
     weapons::{
         blaster::{

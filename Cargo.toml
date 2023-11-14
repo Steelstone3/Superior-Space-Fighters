@@ -13,6 +13,7 @@ include = []
 
 [dependencies]
 bevy = "0.12"
+float-lerp = "0.2.0"
 rand="0"
 rand_derive2 ="0.1"
 rayon = "1"

@@ -8,3 +8,4 @@ pub mod selected_weapon;
 pub mod space_zone_border;
 pub mod torpedo_ammunition;
 pub mod trading_guild_reputation;
+pub mod camera_settings;

@@ -3,7 +3,7 @@ use crate::resources::{
     exotic_ammunition::ExoticAmmunition, exploration_guild_reputation::ExplorationGuildReputation,
     fleet_credits::FleetCredits, mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon,
     space_zone_border::SpaceZoneBorder, torpedo_ammunition::TorpedoAmmunition,
-    trading_guild_reputation::TradingGuildReputation,
+    trading_guild_reputation::TradingGuildReputation, camera_settings::CameraSettings
 };
 use bevy::prelude::{App, Plugin};
 
@@ -25,6 +25,12 @@ impl Plugin for GameResourcesPlugin {
         .insert_resource(ExoticAmmunition(2))
         .insert_resource(CombatGuildReputation(1))
         .insert_resource(ExplorationGuildReputation(1))
-        .insert_resource(TradingGuildReputation(1));
+        .insert_resource(TradingGuildReputation(1))
+        .insert_resource(CameraSettings{
+            camera_speed: 2., 
+            zoom_speed: 1.5, 
+            min_zoom: 0.1, 
+            max_zoom: 10., 
+            current_zoom: 1. });
     }
 }
