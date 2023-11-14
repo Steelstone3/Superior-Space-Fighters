@@ -1,4 +1,5 @@
 use crate::systems::{
+    camera::camera_movement,
     player::{player_movement::player_movement, player_weapon_select::player_weapon_select},
     ships::ship_movement::ai_movement,
     weapons::{
@@ -26,6 +27,7 @@ pub struct GameRunningPlugin;
 impl Plugin for GameRunningPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Update, ai_movement)
+            .add_systems(Update, camera_movement)
             .add_systems(Update, player_movement)
             .add_systems(Update, player_weapon_select)
             .add_systems(Update, spawn_blaster)
