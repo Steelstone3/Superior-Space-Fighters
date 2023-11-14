@@ -4,7 +4,8 @@ use crate::{
 };
 use bevy::{
     prelude::{AssetServer, Commands, Quat, Res, Vec2, Vec3},
-    sprite::{Sprite, SpriteBundle}, transform::components::Transform,
+    sprite::{Sprite, SpriteBundle},
+    transform::components::Transform,
 };
 use rand::random;
 
@@ -17,7 +18,26 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
             size: Vec2 { x: 100.0, y: 100.0 },
             acceleration: 0.1,
             current_velocity: 0.0,
-            transform: Transform{ translation: Vec3{x:0.,y:0.,z:0.}, rotation: Quat::from_axis_angle(Vec3{x:0.,y:0.,z:0.}, 0.), scale: Vec3{x:1.,y:1.,z:1.} }
+            transform: Transform {
+                translation: Vec3 {
+                    x: 0.,
+                    y: 0.,
+                    z: 0.,
+                },
+                rotation: Quat::from_axis_angle(
+                    Vec3 {
+                        x: 0.,
+                        y: 0.,
+                        z: 0.,
+                    },
+                    0.,
+                ),
+                scale: Vec3 {
+                    x: 1.,
+                    y: 1.,
+                    z: 1.,
+                },
+            },
         };
 
         let texture = asset_server.load(ship.ship.to_string());
