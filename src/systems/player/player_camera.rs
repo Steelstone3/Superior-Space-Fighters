@@ -1,37 +1,27 @@
-use bevy::{core_pipeline::core_2d::Camera2dBundle, ecs::{system::{Commands, Query, ResMut, Res}, query::With, event::EventReader}, transform::components::Transform, render::camera::{Camera, OrthographicProjection}, input::{keyboard::KeyCode, mouse::{MouseScrollUnit, MouseWheel}, Input}};
+use bevy::{core_pipeline::core_2d::Camera2dBundle, ecs::{system::{Commands, Query, ResMut, ParamSet}, query::With, event::EventReader}, transform::components::Transform, render::camera::{Camera, OrthographicProjection, self}, input::{keyboard::KeyCode, mouse::{MouseScrollUnit, MouseWheel}, Input}, math::Vec3};
 use float_lerp::lerp;
 
-use crate::resources::camera_settings::CameraSettings;
+use crate::{resources::camera_settings::CameraSettings, components::player_starship::PlayerStarship};
 
 pub fn add_player_camera(mut commands: Commands) {
     commands.spawn(Camera2dBundle::default());
 }
 
 pub fn camera_movement(
-    keys: Res<Input<KeyCode>>,
     mut scroll_evr: EventReader<MouseWheel>,
-    mut camera_trans_query: Query<&mut Transform, With<Camera>>,
+    mut trans_set: ParamSet<(Query<&mut Transform, With<Camera>>, Query<&Transform, With<PlayerStarship>>)>,
     mut camera_proj_query: Query<&mut OrthographicProjection, With<Camera>>,
     mut camera_settings: ResMut<CameraSettings>,
 )
 {
     let mut camera_proj = camera_proj_query.single_mut();
-    let mut camera_transform = camera_trans_query.single_mut();
-
-    if keys.pressed(KeyCode::Up) {
-        camera_transform.translation.y += camera_settings.camera_speed * camera_proj.scale * 2.0;
+    let mut player_tran: Vec3 = Default::default();
+    for player_transform in trans_set.p1().iter_mut(){
+        player_tran = player_transform.translation;
     }
 
-    if keys.pressed(KeyCode::Left) {
-        camera_transform.translation.x -= camera_settings.camera_speed * camera_proj.scale * 2.0;
-    }
-
-    if keys.pressed(KeyCode::Down) {
-        camera_transform.translation.y -= camera_settings.camera_speed * camera_proj.scale * 2.0;
-    }
-
-    if keys.pressed(KeyCode::Right) {
-        camera_transform.translation.x += camera_settings.camera_speed * camera_proj.scale * 2.0;
+    for mut camera_tran in trans_set.p0().iter_mut(){
+        camera_tran.translation = player_tran;
     }
 
     for ev in scroll_evr.read() {
@@ -54,6 +44,5 @@ pub fn camera_movement(
             }
         }
     }
-
     camera_proj.scale = lerp(camera_proj.scale, camera_settings.current_zoom, 0.1);
 }
