@@ -13,22 +13,10 @@ use crate::resources::camera_settings::CameraSettings;
 
 pub fn scroll_camera(
     mut scroll_event_reader: EventReader<MouseWheel>,
-    // mut transform_set: ParamSet<(
-    //     Query<&mut Transform, With<Camera>>,
-    //     Query<&Transform, With<PlayerStarship>>,
-    // )>,
     mut camera_projection_query: Query<&mut OrthographicProjection, With<Camera>>,
     mut camera_settings: ResMut<CameraSettings>,
 ) {
     let mut camera_projection = camera_projection_query.single_mut();
-    // let mut player_transform: Vec3 = Default::default();
-    // for player_t in transform_set.p1().iter_mut() {
-    //     player_transform = player_t.translation;
-    // }
-
-    // for mut camera_transform in transform_set.p0().iter_mut() {
-    //     camera_transform.translation = player_transform;
-    // }
 
     for event in scroll_event_reader.read() {
         match event.unit {
