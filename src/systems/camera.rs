@@ -1,5 +1,3 @@
-use bevy::prelude::{Camera2dBundle, Commands};
-
-pub fn add_camera(mut commands: Commands) {
-    commands.spawn(Camera2dBundle::default());
-}
+pub mod camera_movement;
+pub mod scroll_camera;
+pub mod spawn_player_camera;

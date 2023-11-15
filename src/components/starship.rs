@@ -1,4 +1,4 @@
-use bevy::{ecs::component::Component, prelude::Vec2};
+use bevy::{ecs::component::Component, prelude::Vec2, transform::components::Transform};
 
 use crate::assets::images::space_ships::SpaceShipSprite;
 
@@ -9,5 +9,6 @@ pub struct Starship {
     pub current_velocity: f32,
     pub velocity: f32,
     pub rotation: f32,
+    pub transform: Transform,
     pub size: Vec2,
 }
