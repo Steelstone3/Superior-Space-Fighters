@@ -1,3 +1,5 @@
+use std::sync::{Arc, Mutex};
+
 use crate::{
     components::starship::Starship,
     systems::controllers::random_generator::{generate_seed, random_range_f32, random_range_i32},
@@ -8,9 +10,15 @@ use bevy::{
     transform::components::Transform,
 };
 use rand::random;
+use rayon::iter::{IntoParallelIterator, ParallelIterator};
 
-pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>) {
-    for _ in 0..random_range_i32(generate_seed(), 1, 10) {
+pub fn spawn_random_ships(commands: Commands, asset_server: Res<AssetServer>) {
+    let number_of_ships = random_range_i32(generate_seed(), 1, 10);
+
+    // Create a thread bottleneck
+    let arc_commands = Arc::new(Mutex::new(commands));
+
+    (1..number_of_ships).into_par_iter().for_each(|_| {
         let ship = Starship {
             ship: random(),
             velocity: 30.0,
@@ -42,7 +50,9 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
 
         let texture = asset_server.load(ship.ship.to_string());
 
-        commands
+        // One thread at a time can access locked_commands (the bottleneck)
+        let mut locked_commands = arc_commands.lock().unwrap();
+        locked_commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
                     custom_size: Some(ship.size),
@@ -68,5 +78,5 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
                 ..Default::default()
             })
             .insert(ship);
-    }
+    })
 }
