@@ -4,18 +4,20 @@ use bevy::{
     utils::tracing,
 };
 
-use crate::{components::torpedo::Torpedo, resources::torpedo_ammunition::TorpedoAmmunition};
+use crate::{
+    components::player_torpedo::PlayerTorpedo, resources::torpedo_ammunition::TorpedoAmmunition,
+};
 
 pub fn player_torpedo_lifetime(
     mut commands: Commands,
     time: Res<Time>,
-    mut torpedo: Query<(Entity, &mut Torpedo)>,
+    mut torpedo: Query<(Entity, &mut PlayerTorpedo)>,
     mut torpedo_ammunition: ResMut<TorpedoAmmunition>,
 ) {
     for (torpedo_entity, mut torpedo) in &mut torpedo {
-        torpedo.lifetime.tick(time.delta());
+        torpedo.torpedo.lifetime.tick(time.delta());
 
-        if torpedo.lifetime.finished() {
+        if torpedo.torpedo.lifetime.finished() {
             commands.entity(torpedo_entity).despawn();
 
             torpedo_ammunition.0 += 1;
