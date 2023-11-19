@@ -28,12 +28,8 @@ pub fn spawn_exotic(
 
     if selected_weapon.0 == 4 {
         let mut player_transform = *player.get_single().unwrap();
-        let exotic_size = 80.0;
-
-        let exotic_spawn_position =
-            player_transform.translation + player_transform.up() * (exotic_size / 1.5);
-        player_transform.translation = exotic_spawn_position;
         player_transform.translation.z = 3.0;
+        let exotic_size = 80.0;
 
         if ammunition.0 < 1 {
             tracing::info!("Out of exotic ammunition");

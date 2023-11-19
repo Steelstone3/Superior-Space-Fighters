@@ -28,12 +28,8 @@ pub fn spawn_blaster(
 
     if selected_weapon.0 == 1 {
         let mut player_transform = *player_query.get_single().unwrap();
-        let blaster_size = 100.0;
-
-        let blaster_spawn_position =
-            player_transform.translation + player_transform.up() * (blaster_size / 2.0);
-        player_transform.translation = blaster_spawn_position;
         player_transform.translation.z = 3.0;
+        let blaster_size = 100.0;
 
         if ammunition.0 < 1 {
             tracing::info!("Out of blaster ammunition");
