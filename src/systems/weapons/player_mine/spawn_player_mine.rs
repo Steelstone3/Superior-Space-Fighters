@@ -10,7 +10,7 @@ use bevy::{
 
 use crate::{
     assets::{images::weapons::mines::MineSprite, sounds::weapons::mines::MineSound},
-    components::{mine::Mine, player_starship::PlayerStarship},
+    components::{mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship},
     resources::{mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon},
 };
 
@@ -40,23 +40,25 @@ pub fn spawn_player_mine(
             return;
         }
 
-        let mine = Mine {
-            mine: MineSprite::Mine1,
-            sound: MineSound::Mine1,
-            velocity: -5.0,
-            size: Vec2::new(100.0, 100.0),
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+        let mine = PlayerMine {
+            mine: Mine {
+                mine: MineSprite::Mine1,
+                sound: MineSound::Mine1,
+                velocity: -5.0,
+                size: Vec2::new(100.0, 100.0),
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            },
         };
 
-        let image_path = mine.mine.to_string();
-        let sound_path = mine.sound.to_string();
+        let image_path = mine.mine.mine.to_string();
+        let sound_path = mine.mine.sound.to_string();
 
         let texture = asset_server.load(image_path);
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(mine.size),
+                    custom_size: Some(mine.mine.size),
                     ..Default::default()
                 },
                 transform: player_transform,

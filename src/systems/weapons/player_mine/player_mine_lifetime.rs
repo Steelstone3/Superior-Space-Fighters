@@ -4,18 +4,18 @@ use bevy::{
     utils::tracing,
 };
 
-use crate::{components::mine::Mine, resources::mine_ammunition::MineAmmunition};
+use crate::{components::player_mine::PlayerMine, resources::mine_ammunition::MineAmmunition};
 
 pub fn player_mine_lifetime(
     mut commands: Commands,
     time: Res<Time>,
-    mut mines: Query<(Entity, &mut Mine)>,
+    mut mines: Query<(Entity, &mut PlayerMine)>,
     mut mine_ammunition: ResMut<MineAmmunition>,
 ) {
     for (mine_entity, mut mine) in &mut mines {
-        mine.lifetime.tick(time.delta());
+        mine.mine.lifetime.tick(time.delta());
 
-        if mine.lifetime.finished() {
+        if mine.mine.lifetime.finished() {
             commands.entity(mine_entity).despawn();
 
             mine_ammunition.0 += 1;
