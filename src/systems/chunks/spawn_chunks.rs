@@ -1,17 +1,34 @@
-use bevy::{ecs::system::{ResMut, Commands, Res}, math::{Vec2, Vec3}, asset::AssetServer};
+use bevy::{ecs::{system::{ResMut, Commands, Res, Query}, query::With}, math::{Vec2, Vec3}, asset::AssetServer, transform::components::Transform};
 
-use crate::{resources::chunks::{Chunks, Chunk}, systems::space::spawn_space::spawn_random_space_background};
+use crate::{resources::chunks::{Chunks, Chunk}, systems::space::spawn_space::spawn_random_space_background, components::player_starship::PlayerStarship};
 
 pub fn spawn_chunks(
+    player_tran_query: Query<&Transform, With<PlayerStarship>>,
     mut chunks: ResMut<Chunks>,
     mut commands: Commands, 
     asset_server: Res<AssetServer>
 ){
-    //x and y offsets to ensure sprites spawn in middle of screen
-   
+    //TODO replace hardcoded numbers with values from ChunkSettingsResource
 
-    for x in 0..3{
-        for y in 0..3{
+    //use player location to determine what chuncks to load
+    let player_tran = player_tran_query.single().translation;
+    let mut x_start = 0;
+    let mut y_start = 0;
+
+    if  player_tran.x > 0. {
+        x_start = (player_tran.x / 1920.).ceil() as i32;
+    }else if player_tran.x < 0. {
+        x_start = (player_tran.x / 1920.).floor() as i32;
+    }
+
+    if player_tran.y > 0.{
+        y_start = (player_tran.y / 1920.).ceil() as i32;
+    }else if player_tran.y < 0.{
+        y_start = (player_tran.y / 1920.).floor() as i32;
+    }
+
+    for x in x_start..x_start + 3{
+        for y in y_start..y_start + 3{
             let x = x as f32;
             let y = y as f32;
 
