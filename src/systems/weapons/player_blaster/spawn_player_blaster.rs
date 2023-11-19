@@ -10,7 +10,9 @@ use bevy::{
 
 use crate::{
     assets::{images::weapons::blasters::BlasterSprite, sounds::weapons::blasters::BlasterSound},
-    components::{blaster::Blaster, player_starship::PlayerStarship},
+    components::{
+        blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
+    },
     resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
 };
 
@@ -36,23 +38,25 @@ pub fn spawn_player_blaster(
             return;
         }
 
-        let blaster = Blaster {
-            blaster: BlasterSprite::Blaster1,
-            sound: BlasterSound::Blaster1,
-            velocity: 100.0,
-            size: Vec2::new(blaster_size, blaster_size),
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+        let blaster = PlayerBlaster {
+            blaster: Blaster {
+                blaster: BlasterSprite::Blaster1,
+                sound: BlasterSound::Blaster1,
+                velocity: 100.0,
+                size: Vec2::new(blaster_size, blaster_size),
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            },
         };
 
-        let image_path = blaster.blaster.to_string();
-        let sound_path = blaster.sound.to_string();
+        let image_path = blaster.blaster.blaster.to_string();
+        let sound_path = blaster.blaster.sound.to_string();
 
         let texture = asset_server.load(image_path);
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(blaster.size),
+                    custom_size: Some(blaster.blaster.size),
                     ..Default::default()
                 },
                 transform: player_transform,
