@@ -4,7 +4,7 @@ use crate::resources::{
     exploration_guild_reputation::ExplorationGuildReputation, fleet_credits::FleetCredits,
     mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon,
     space_zone_border::SpaceZoneBorder, torpedo_ammunition::TorpedoAmmunition,
-    trading_guild_reputation::TradingGuildReputation,
+    trading_guild_reputation::TradingGuildReputation, chunks::Chunks,
 };
 use bevy::prelude::{App, Plugin};
 
@@ -33,6 +33,9 @@ impl Plugin for GameResourcesPlugin {
             min_zoom: 0.1,
             max_zoom: 10.,
             current_zoom: 1.,
+        })
+        .insert_resource(Chunks{
+            chunks: Vec::new()
         });
     }
 }

@@ -1,5 +1,6 @@
 pub mod blaster_ammunition;
 pub mod camera_settings;
+pub mod chunks;
 pub mod combat_guild_reputation;
 pub mod exotic_ammunition;
 pub mod exploration_guild_reputation;
