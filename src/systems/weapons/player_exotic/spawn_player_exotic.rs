@@ -75,3 +75,15 @@ pub fn spawn_player_exotic(
         );
     }
 }
+
+#[cfg(test)]
+mod spawn_player_exotic_should {
+    #[test]
+    fn spawn_a_player_fired_exotic_projectile() {
+        // Given
+
+        // When
+
+        // Then
+    }
+}
