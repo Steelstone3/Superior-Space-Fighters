@@ -14,7 +14,7 @@ use crate::{
     resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
 };
 
-pub fn spawn_exotic(
+pub fn spawn_player_exotic(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,

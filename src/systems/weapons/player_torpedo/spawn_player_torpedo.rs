@@ -14,7 +14,7 @@ use crate::{
     resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
 };
 
-pub fn spawn_torpedo(
+pub fn spawn_player_torpedo(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,

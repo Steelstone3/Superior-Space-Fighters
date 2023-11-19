@@ -5,7 +5,7 @@ use bevy::{
     utils::tracing,
 };
 
-pub fn exotic_lifetime(
+pub fn player_exotic_lifetime(
     mut commands: Commands,
     time: Res<Time>,
     mut exotics: Query<(Entity, &mut Exotic)>,

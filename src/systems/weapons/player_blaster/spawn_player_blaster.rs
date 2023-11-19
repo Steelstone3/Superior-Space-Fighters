@@ -14,7 +14,7 @@ use crate::{
     resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
 };
 
-pub fn spawn_blaster(
+pub fn spawn_player_blaster(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,

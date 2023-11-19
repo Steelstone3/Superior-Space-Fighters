@@ -6,7 +6,7 @@ use bevy::{
 
 use crate::{components::blaster::Blaster, resources::blaster_ammunition::BlasterAmmunition};
 
-pub fn blaster_lifetime(
+pub fn player_blaster_lifetime(
     mut commands: Commands,
     time: Res<Time>,
     mut blasters: Query<(Entity, &mut Blaster)>,

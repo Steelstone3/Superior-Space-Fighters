@@ -3,7 +3,7 @@ use bevy::time::Time;
 
 use crate::components::mine::Mine;
 
-pub fn mine_movement(mut mines: Query<(&mut Transform, &Mine)>, time: Res<Time>) {
+pub fn player_mine_movement(mut mines: Query<(&mut Transform, &Mine)>, time: Res<Time>) {
     for (mut mine_transform, mine) in &mut mines {
         let mine_speed = mine.velocity * time.delta_seconds();
         let movement_direction = mine_transform.rotation * Vec3::Y;

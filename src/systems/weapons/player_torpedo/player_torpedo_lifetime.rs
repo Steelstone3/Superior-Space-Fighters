@@ -6,7 +6,7 @@ use bevy::{
 
 use crate::{components::torpedo::Torpedo, resources::torpedo_ammunition::TorpedoAmmunition};
 
-pub fn torpedo_lifetime(
+pub fn player_torpedo_lifetime(
     mut commands: Commands,
     time: Res<Time>,
     mut torpedo: Query<(Entity, &mut Torpedo)>,

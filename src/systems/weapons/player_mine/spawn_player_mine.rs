@@ -14,7 +14,7 @@ use crate::{
     resources::{mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon},
 };
 
-pub fn spawn_mine(
+pub fn spawn_player_mine(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,

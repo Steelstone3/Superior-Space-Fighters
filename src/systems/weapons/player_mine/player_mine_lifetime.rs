@@ -6,7 +6,7 @@ use bevy::{
 
 use crate::{components::mine::Mine, resources::mine_ammunition::MineAmmunition};
 
-pub fn mine_lifetime(
+pub fn player_mine_lifetime(
     mut commands: Commands,
     time: Res<Time>,
     mut mines: Query<(Entity, &mut Mine)>,
