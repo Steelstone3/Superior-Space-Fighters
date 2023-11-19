@@ -10,7 +10,7 @@ use bevy::{
 
 use crate::{
     assets::{images::weapons::exotics::ExoticSprite, sounds::weapons::exotics::ExoticSound},
-    components::{exotic::Exotic, player_starship::PlayerStarship},
+    components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
     resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
 };
 
@@ -36,23 +36,25 @@ pub fn spawn_player_exotic(
             return;
         }
 
-        let exotic = Exotic {
-            exotic: ExoticSprite::Exotic1,
-            sound: ExoticSound::Exotic1,
-            velocity: 75.0,
-            size: Vec2::new(exotic_size, exotic_size),
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+        let exotic = PlayerExotic {
+            exotic: Exotic {
+                exotic: ExoticSprite::Exotic1,
+                sound: ExoticSound::Exotic1,
+                velocity: 75.0,
+                size: Vec2::new(exotic_size, exotic_size),
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            },
         };
 
-        let image_path = exotic.exotic.to_string();
-        let sound_path = exotic.sound.to_string();
+        let image_path = exotic.exotic.exotic.to_string();
+        let sound_path = exotic.exotic.sound.to_string();
 
         let texture = asset_server.load(image_path);
 
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(exotic.size),
+                    custom_size: Some(exotic.exotic.size),
                     ..Default::default()
                 },
                 transform: player_transform,
