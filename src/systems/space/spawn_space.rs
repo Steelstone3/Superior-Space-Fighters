@@ -5,7 +5,11 @@ use bevy::{
 };
 use rand::random;
 
-pub fn spawn_random_space_background(commands: &mut Commands, asset_server: &Res<AssetServer>, location:Vec3) {
+pub fn spawn_random_space_background(
+    commands: &mut Commands,
+    asset_server: &Res<AssetServer>,
+    location: Vec3,
+) {
     let space = Space {
         asset: random(),
         size: Vec2 {

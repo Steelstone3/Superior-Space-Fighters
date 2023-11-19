@@ -1,10 +1,10 @@
 use crate::resources::{
-    blaster_ammunition::BlasterAmmunition, camera_settings::CameraSettings,
+    blaster_ammunition::BlasterAmmunition, camera_settings::CameraSettings, chunks::Chunks,
     combat_guild_reputation::CombatGuildReputation, exotic_ammunition::ExoticAmmunition,
     exploration_guild_reputation::ExplorationGuildReputation, fleet_credits::FleetCredits,
     mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon,
     space_zone_border::SpaceZoneBorder, torpedo_ammunition::TorpedoAmmunition,
-    trading_guild_reputation::TradingGuildReputation, chunks::Chunks,
+    trading_guild_reputation::TradingGuildReputation,
 };
 use bevy::prelude::{App, Plugin};
 
@@ -31,11 +31,9 @@ impl Plugin for GameResourcesPlugin {
             camera_speed: 2.,
             zoom_speed: 1.5,
             min_zoom: 0.1,
-            max_zoom: 10.,
+            max_zoom: 2.,
             current_zoom: 1.,
         })
-        .insert_resource(Chunks{
-            chunks: Vec::new()
-        });
+        .insert_resource(Chunks { chunks: Vec::new() });
     }
 }
