@@ -28,7 +28,6 @@ impl Plugin for GameResourcesPlugin {
         .insert_resource(ExplorationGuildReputation(1))
         .insert_resource(TradingGuildReputation(1))
         .insert_resource(CameraSettings {
-            camera_speed: 2.,
             zoom_speed: 1.5,
             min_zoom: 0.1,
             max_zoom: 2.,
