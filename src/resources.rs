@@ -7,6 +7,6 @@ pub mod exploration_guild_reputation;
 pub mod fleet_credits;
 pub mod mine_ammunition;
 pub mod selected_weapon;
-pub mod space_zone_border;
+pub mod sector_size;
 pub mod torpedo_ammunition;
 pub mod trading_guild_reputation;

@@ -10,7 +10,10 @@ use bevy::{
 
 use crate::{
     components::player_starship::PlayerStarship,
-    resources::chunks::{Chunk, Chunks},
+    resources::{
+        chunks::{Chunk, Chunks},
+        sector_size::SectorSize,
+    },
     systems::space::spawn_space::spawn_random_space_background,
 };
 
@@ -18,6 +21,7 @@ pub fn spawn_chunks(
     player_tran_query: Query<&Transform, With<PlayerStarship>>,
     mut chunks: ResMut<Chunks>,
     mut commands: Commands,
+    sector_size: Res<SectorSize>,
     asset_server: Res<AssetServer>,
 ) {
     //TODO replace hardcoded numbers with values from ChunkSettingsResource
@@ -28,18 +32,26 @@ pub fn spawn_chunks(
     let mut y_start = 0;
 
     if player_tran.x > 0. {
-        x_start = (player_tran.x / 1920.).ceil().clamp(-4093., 4093.) as i32;
+        x_start = (player_tran.x / 1920.)
+            .ceil()
+            .clamp(sector_size.left_border, sector_size.right_border) as i32;
     } else if player_tran.x < 0. {
-        x_start = (player_tran.x / 1920.).floor().clamp(-4093., 4093.) as i32;
+        x_start = (player_tran.x / 1920.)
+            .floor()
+            .clamp(sector_size.left_border, sector_size.right_border) as i32;
     }
 
     if player_tran.y > 0. {
-        y_start = (player_tran.y / 1920.).ceil().clamp(-4093., 4093.) as i32;
+        y_start = (player_tran.y / 1920.)
+            .ceil()
+            .clamp(sector_size.bottom_border, sector_size.top_border) as i32;
     } else if player_tran.y < 0. {
-        y_start = (player_tran.y / 1920.).floor().clamp(-4093., 4093.) as i32;
+        y_start = (player_tran.y / 1920.)
+            .floor()
+            .clamp(sector_size.bottom_border, sector_size.top_border) as i32;
     }
 
-    print!("xstart: {}, ystart: {}", x_start, y_start);
+    // print!("xstart: {}, ystart: {}", x_start, y_start);
 
     for x in x_start..x_start + 3 {
         for y in y_start..y_start + 3 {

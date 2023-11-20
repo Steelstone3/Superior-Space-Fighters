@@ -5,13 +5,13 @@ use bevy::{
 
 use crate::{
     components::starship::Starship,
-    resources::space_zone_border::SpaceZoneBorder,
+    resources::sector_size::SectorSize,
     systems::controllers::random_generator::{generate_seed, random_range_f32},
 };
 
 pub fn ai_movement(
     mut characters: Query<(&mut Transform, &mut Starship)>,
-    space_zone_border: Res<SpaceZoneBorder>,
+    space_zone_border: Res<SectorSize>,
     time: Res<Time>,
 ) {
     characters
