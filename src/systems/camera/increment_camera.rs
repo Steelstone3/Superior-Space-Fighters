@@ -1,6 +1,4 @@
-use crate::{
-    components::player_starship::PlayerStarship, resources::camera_settings::CameraSettings,
-};
+use crate::resources::camera_settings::CameraSettings;
 use bevy::prelude::{Camera, Input, KeyCode, OrthographicProjection, Query, Res, ResMut, With};
 
 pub fn increment_camera(
