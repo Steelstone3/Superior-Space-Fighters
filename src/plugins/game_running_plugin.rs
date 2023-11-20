@@ -1,4 +1,5 @@
 use crate::systems::{
+    camera::increment_camera::increment_camera,
     camera::{camera_movement::camera_movement, scroll_camera::scroll_camera},
     chunks::spawn_chunks::spawn_chunks,
     player::{player_movement::player_movement, player_weapon_select::player_weapon_select},
@@ -34,6 +35,7 @@ impl Plugin for GameRunningPlugin {
         app.add_systems(Update, ai_movement)
             .add_systems(Update, camera_movement)
             .add_systems(Update, scroll_camera)
+            .add_systems(Update, increment_camera)
             .add_systems(Update, player_movement)
             .add_systems(Update, player_weapon_select)
             .add_systems(Update, spawn_player_blaster)

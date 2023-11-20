@@ -28,9 +28,9 @@ impl Plugin for GameResourcesPlugin {
         .insert_resource(TradingGuildReputation(1))
         .insert_resource(CameraSettings {
             zoom_speed: 1.5,
-            min_zoom: 0.1,
-            max_zoom: 2.,
-            current_zoom: 1.,
+            min_zoom: 0.5,
+            max_zoom: 2.0,
+            current_zoom: 1.0,
         })
         .insert_resource(Chunks { chunks: Vec::new() });
     }
