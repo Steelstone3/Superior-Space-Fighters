@@ -5,7 +5,11 @@ use bevy::{
 };
 use rand::random;
 
-pub fn spawn_random_space_background(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_random_space_background(
+    commands: &mut Commands,
+    asset_server: &Res<AssetServer>,
+    location: Vec3,
+) {
     let space = Space {
         asset: random(),
         size: Vec2 {
@@ -24,7 +28,7 @@ pub fn spawn_random_space_background(mut commands: Commands, asset_server: Res<A
             },
             texture,
             transform: bevy::prelude::Transform {
-                translation: Vec3::new(0.0, 0.0, 0.0),
+                translation: location,
                 ..Default::default()
             },
             ..Default::default()

@@ -1,4 +1,5 @@
 pub mod camera;
+pub mod chunks;
 mod controllers;
 pub mod planets;
 pub mod player;
