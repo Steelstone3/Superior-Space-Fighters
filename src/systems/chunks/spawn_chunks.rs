@@ -67,7 +67,7 @@ pub fn spawn_chunks(
                     Vec3::new(spawn_location.x, spawn_location.y, 0.),
                 );
                 chunks.chunks.push(Chunk {
-                    chunk_id: chunk_id,
+                    chunk_id,
                     chunk_location: spawn_location,
                 });
             }

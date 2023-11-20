@@ -2,9 +2,8 @@ use crate::resources::{
     blaster_ammunition::BlasterAmmunition, camera_settings::CameraSettings, chunks::Chunks,
     combat_guild_reputation::CombatGuildReputation, exotic_ammunition::ExoticAmmunition,
     exploration_guild_reputation::ExplorationGuildReputation, fleet_credits::FleetCredits,
-    mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon,
-    sector_size::SectorSize, torpedo_ammunition::TorpedoAmmunition,
-    trading_guild_reputation::TradingGuildReputation,
+    mine_ammunition::MineAmmunition, sector_size::SectorSize, selected_weapon::SelectedWeapon,
+    torpedo_ammunition::TorpedoAmmunition, trading_guild_reputation::TradingGuildReputation,
 };
 use bevy::prelude::{App, Plugin};
 

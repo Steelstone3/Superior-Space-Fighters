@@ -18,6 +18,6 @@ impl Chunks {
                 return true;
             }
         }
-        return false;
+        false
     }
 }
