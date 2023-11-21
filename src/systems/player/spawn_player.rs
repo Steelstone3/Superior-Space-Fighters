@@ -21,22 +21,15 @@ pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>)
             current_velocity: 0.0,
             transform: Transform {
                 translation: Vec3 {
-                    x: 0.,
-                    y: 0.,
-                    z: 0.,
+                    x: 0.0,
+                    y: 0.0,
+                    z: 0.0,
                 },
-                rotation: Quat::from_axis_angle(
-                    Vec3 {
-                        x: 0.,
-                        y: 0.,
-                        z: 0.,
-                    },
-                    0.,
-                ),
+                rotation: Quat::from_rotation_z(0.0),
                 scale: Vec3 {
-                    x: 1.,
-                    y: 1.,
-                    z: 1.,
+                    x: 1.0,
+                    y: 1.0,
+                    z: 1.0,
                 },
             },
         },
