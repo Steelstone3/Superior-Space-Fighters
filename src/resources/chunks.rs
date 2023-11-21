@@ -25,36 +25,36 @@ impl Chunks {
                 return Ok(chunk);
             }
         }
-        return Err("Failed to find chunk");
+        Err("Failed to find chunk")
     }
 
     pub fn chunk_exists(&mut self, chunk_id: Vec2) -> bool {
         if self.find_chunk(chunk_id).is_ok() {
             return true;
         }
-        return false;
+        false
     }
 
     pub fn set_chunk_visibility(&mut self, chunk_id: Vec2, visibility: bool) {
         let chunk = self.find_chunk(chunk_id);
-        if chunk.is_ok() {
-            chunk.unwrap().chunk_visible = visibility;
+        if let Ok(chunk) = chunk {
+            chunk.chunk_visible = visibility;
         }
     }
 
     pub fn set_space_entity(&mut self, chunk_id: Vec2, space_entity: Entity) {
         let chunk = self.find_chunk(chunk_id);
-        if chunk.is_ok() {
-            chunk.unwrap().space_entity = space_entity;
+        if let Ok(chunk) = chunk {
+            chunk.space_entity = space_entity;
         }
     }
 
     pub fn get_visibility(&mut self, chunk_id: Vec2) -> bool {
         let chunk = self.find_chunk(chunk_id);
-        if chunk.is_ok() {
-            return chunk.unwrap().chunk_visible;
+        if let Ok(chunk) = chunk {
+            chunk.chunk_visible
         } else {
-            return false;
+            false
         }
     }
 }

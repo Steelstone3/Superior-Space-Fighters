@@ -39,5 +39,5 @@ pub fn spawn_random_space_background(
         .insert(space)
         .id();
 
-    return (space_id, texture_location);
+    (space_id, texture_location)
 }
