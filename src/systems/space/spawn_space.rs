@@ -1,15 +1,16 @@
 use crate::components::space::Space;
 use bevy::{
+    ecs::entity::Entity,
     prelude::{AssetServer, Commands, Res, Vec2, Vec3},
-    sprite::{Sprite, SpriteBundle}, ecs::entity::Entity,
+    sprite::{Sprite, SpriteBundle},
 };
 use rand::random;
 
 pub fn spawn_random_space_background(
-    commands: & mut Commands,
-    asset_server: & Res<AssetServer>,
+    commands: &mut Commands,
+    asset_server: &Res<AssetServer>,
     location: Vec3,
-    texture_location: Option<String>
+    texture_location: Option<String>,
 ) -> (Entity, String) {
     let space = Space {
         asset: random(),
@@ -35,7 +36,8 @@ pub fn spawn_random_space_background(
             },
             ..Default::default()
         })
-        .insert(space).id();
+        .insert(space)
+        .id();
 
     return (space_id, texture_location);
 }
