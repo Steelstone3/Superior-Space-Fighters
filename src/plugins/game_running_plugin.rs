@@ -1,7 +1,7 @@
 use crate::systems::{
     camera::increment_camera::increment_camera,
     camera::{camera_movement::camera_movement, scroll_camera::scroll_camera},
-    chunks::spawn_chunks::spawn_chunks,
+    chunks::{despawn_chunks::despawn_chunks, spawn_chunks::spawn_chunks},
     player::{player_movement::player_movement, player_weapon_select::player_weapon_select},
     ships::ship_movement::ai_movement,
     weapons::{
@@ -50,6 +50,7 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, player_torpedo_movement)
             .add_systems(Update, player_mine_movement)
             .add_systems(Update, player_exotic_movement)
-            .add_systems(Update, spawn_chunks);
+            .add_systems(Update, spawn_chunks)
+            .add_systems(Update, despawn_chunks);
     }
 }

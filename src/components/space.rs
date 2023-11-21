@@ -1,4 +1,7 @@
-use bevy::{ecs::component::Component, prelude::Vec2};
+use bevy::{
+    ecs::{component::Component, entity::Entity},
+    prelude::Vec2,
+};
 
 use crate::assets::images::space::SpaceSprite;
 
