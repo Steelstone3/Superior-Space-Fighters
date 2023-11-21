@@ -24,8 +24,6 @@ pub fn spawn_chunks(
     sector_size: Res<SectorSize>,
     asset_server: Res<AssetServer>,
 ) {
-    //TODO replace hardcoded numbers with values from ChunkSettingsResource
-
     //use player location to determine what chuncks to load
     let player_tran = player_tran_query.single().translation;
     let mut x_start = 0;
@@ -51,8 +49,6 @@ pub fn spawn_chunks(
             .clamp(sector_size.bottom_border, sector_size.top_border) as i32;
     }
 
-    // print!("xstart: {}, ystart: {}", x_start, y_start);
-
     for x in x_start..x_start + 3 {
         for y in y_start..y_start + 3 {
             let x = x as f32;
@@ -61,15 +57,30 @@ pub fn spawn_chunks(
             let chunk_id = Vec2::new(x, y);
             let spawn_location = Vec2::new((x * 1920.) - 2880. + 960., (y * 1920.) - 2880. + 960.);
             if !chunks.chunk_exists(chunk_id) {
-                spawn_random_space_background(
+                let space_entity = spawn_random_space_background(
                     &mut commands,
                     &asset_server,
                     Vec3::new(spawn_location.x, spawn_location.y, 0.),
+                    None,
                 );
                 chunks.chunks.push(Chunk {
                     chunk_id,
                     chunk_location: spawn_location,
+                    chunk_visible: true,
+                    space_entity: space_entity.0,
+                    chunk_background: space_entity.1,
                 });
+            } else if !chunks.get_visibility(chunk_id) {
+                let chunk = chunks.find_chunk(chunk_id).unwrap();
+                let chunk_bak: String = String::from(&chunk.chunk_background);
+                chunks.set_chunk_visibility(chunk_id, true);
+                let space_entity = spawn_random_space_background(
+                    &mut commands,
+                    &asset_server,
+                    Vec3::new(spawn_location.x, spawn_location.y, 0.),
+                    Some(chunk_bak),
+                );
+                chunks.set_space_entity(chunk_id, space_entity.0)
             }
         }
     }
