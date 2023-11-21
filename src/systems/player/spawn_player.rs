@@ -14,7 +14,7 @@ pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>)
     let player = PlayerStarship {
         ship: Starship {
             ship: SpaceShipSprite::SteelFactionShip1,
-            velocity: 30.,
+            velocity: 30.0,
             rotation: f32::to_radians(10.0),
             size: Vec2 { x: 100.0, y: 100.0 },
             acceleration: 0.1,
