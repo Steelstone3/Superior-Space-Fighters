@@ -61,19 +61,25 @@ pub fn spawn_chunks(
                     &mut commands,
                     &asset_server,
                     Vec3::new(spawn_location.x, spawn_location.y, 0.),
+                    None
                 );
                 chunks.chunks.push(Chunk {
                     chunk_id,
                     chunk_location: spawn_location,
                     chunk_visible: true,
-                    space_entity
+                    space_entity: space_entity.0,
+                    chunk_background: space_entity.1
                 });
             }else if !chunks.get_visibility(chunk_id){
+                let chunk = chunks.find_chunk(chunk_id).unwrap();
+                let chunk_bak: String = String::from(&chunk.chunk_background);
                 chunks.set_chunk_visibility(chunk_id, true);
                 let space_entity = spawn_random_space_background( &mut commands,
                     &asset_server,
-                    Vec3::new(spawn_location.x, spawn_location.y, 0.),);
-                chunks.set_space_entity(chunk_id, space_entity)
+                    Vec3::new(spawn_location.x, spawn_location.y, 0.),
+                    Some(chunk_bak)
+                );
+                chunks.set_space_entity(chunk_id, space_entity.0)
             }
         }
     }

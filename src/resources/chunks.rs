@@ -1,6 +1,6 @@
 use bevy::{
     ecs::{entity::Entity, system::Resource},
-    math::Vec2, render::view::{visibility, Visibility}
+    math::Vec2
 };
 
 #[derive(Resource)]
@@ -14,10 +14,11 @@ pub struct Chunk {
     pub chunk_location: Vec2,
     pub chunk_visible: bool,
     pub space_entity: Entity,
+    pub chunk_background: String
 }
 
 impl Chunks {
-    fn find_chunk(&mut self, chunk_id: Vec2) -> Result<&mut Chunk, &str>{
+    pub fn find_chunk(&mut self, chunk_id: Vec2) -> Result<&mut Chunk, &str>{
         let chunks = &mut self.chunks;
         for chunk in chunks {
             if chunk.chunk_id == chunk_id {

@@ -1,5 +1,5 @@
 use bevy::{
-    ecs::{component::Component, entity::Entity},
+    ecs::component::Component,
     prelude::Vec2,
 };
 
