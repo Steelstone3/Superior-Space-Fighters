@@ -79,16 +79,21 @@ pub fn spawn_player_exotic(
 #[cfg(test)]
 mod spawn_player_exotic_should {
     use super::*;
-    use bevy::prelude::{App, Update};
+    use bevy::{
+        input::InputPlugin,
+        prelude::{App, Update},
+    };
 
     #[test]
     fn spawn_a_player_fired_exotic_projectile() {
         // Given
         let mut app = App::new();
         app.add_systems(Update, spawn_player_exotic);
-        let mut input = Input::<KeyCode>::default();
-        app.insert_resource(input.clone());
-        input.press(KeyCode::Space);
+        app.add_plugins(InputPlugin);
+        // app.world
+        //     .get_resource_mut::<Input<KeyCode>>()
+        //     .unwrap()
+        //     .just_pressed(KeyCode::W);
 
         // When
         // app.update();
