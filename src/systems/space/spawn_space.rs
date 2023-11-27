@@ -1,4 +1,4 @@
-use crate::components::space::Space;
+use crate::{components::space::Space, assets::images::space::SpaceSprite};
 use bevy::{
     math::{Vec2, Vec3},
     prelude::{AssetServer, Commands, Res},
@@ -11,8 +11,10 @@ pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server:
     let total_area_around_player = 1920.0 * 1.5;
     let half_space_tile_size = 1920.0 * 0.5;
 
-    for x in 0..3 {
-        for y in 0..3 {
+    let rand_texture = random::<SpaceSprite>();
+
+    for x in 0..5 {
+        for y in 0..5 {
             let space_grid_position = Vec2::new(x as f32, y as f32);
 
             let space = Space {
@@ -31,7 +33,7 @@ pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server:
                 ),
             };
 
-            let texture = asset_server.load(space.asset.to_string());
+            let texture = asset_server.load(rand_texture.to_string());
 
             commands
                 .spawn(SpriteBundle {

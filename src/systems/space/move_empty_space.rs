@@ -16,21 +16,36 @@ pub fn move_empty_space(
     sector_size: Res<SectorSize>,
     mut space_query: Query<(&mut Transform, &mut Space), Without<PlayerStarship>>,
 ) {
-    let number_of_tiles = 3;
-    let total_area_around_player = 1920.0 * 1.5;
+    let number_of_tiles = 5;
+    let total_area_around_player = 1920.0 * 2.5;
     let half_space_tile_size = 1920.0 * 0.5;
 
     //use player location to determine what chunks to load
     let player_translation = player_translation_query.single().translation;
     let space_tile_size = 1920.0;
 
-    let x_start = ((player_translation.x - half_space_tile_size) / space_tile_size)
-        .ceil()
-        .clamp(sector_size.left_border, sector_size.right_border) as i32;
+    let mut x_start = 0;
+    let mut y_start = 0;
 
-    let y_start = ((player_translation.y - half_space_tile_size) / space_tile_size)
-        .ceil()
-        .clamp(sector_size.bottom_border, sector_size.top_border) as i32;
+    if player_translation.x > 0.0 {
+        x_start = ((player_translation.x - (half_space_tile_size * 2.0)) / space_tile_size)
+            .ceil()
+            .clamp(sector_size.left_border, sector_size.right_border) as i32;
+    } else if player_translation.x < 0.0 {
+        x_start = ((player_translation.x + (half_space_tile_size * 2.0)) / space_tile_size)
+            .floor()
+            .clamp(sector_size.left_border, sector_size.right_border) as i32;
+    }
+
+    if player_translation.y > 0.0 {
+        y_start = ((player_translation.y - (half_space_tile_size * 2.0)) / space_tile_size)
+            .ceil()
+            .clamp(sector_size.bottom_border, sector_size.top_border) as i32;
+    } else if player_translation.y < 0.0 {
+        y_start = ((player_translation.y + (half_space_tile_size * 2.0)) / space_tile_size)
+            .floor()
+            .clamp(sector_size.bottom_border, sector_size.top_border) as i32;
+    }
 
     let mut space_enumeration = space_query.iter_mut();
     for x in x_start..x_start + number_of_tiles {
