@@ -9,6 +9,19 @@ use bevy::{
 use rand::random;
 
 pub fn spawn_random_planets(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let planet_locations: [Vec2; 10] = [
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+        Vec2::default(),
+    ];
+
     for _ in 0..random_range_i32(generate_seed(), 1, 10) {
         let size = random_range_f32(generate_seed(), 25.0, 500.0);
 

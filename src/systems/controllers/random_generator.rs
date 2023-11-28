@@ -51,4 +51,21 @@ mod random_generator_should {
         // Then
         assert_eq!(expected, actual);
     }
+
+    #[test]
+    #[ignore]
+    fn generate_a_random_value_with_excluded_values_f32() {
+        // Given
+        let seed = 1234;
+        let minimum = -20.0;
+        let maximum = 20.0;
+        let excluded_values = [-17.736874];
+        let expected = -17.736874;
+
+        // When
+        // let actual = random_value_with_excluded_range_f32(seed, minimum, maximum, excluded_values);
+
+        // Then
+        // assert_eq!(expected, actual);
+    }
 }
