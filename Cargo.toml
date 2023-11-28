@@ -1,6 +1,6 @@
 [package]
 name = "superior-space-fighters"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["Skippy <steelstone3@gmail.com>"]
 edition = "2021"
 homepage = "https://github.com/Steelstone3/Superior-Space-Fighters"
@@ -13,9 +13,9 @@ include = []
 
 [dependencies]
 bevy = "0.12"
-float-lerp = "0.2.0"
+float-lerp = "0"
 rand="0"
-rand_derive2 ="0.1"
+rand_derive2 ="0"
 rayon = "1"
 # rstest = "0"
 # bevy_iced = "0.4"
