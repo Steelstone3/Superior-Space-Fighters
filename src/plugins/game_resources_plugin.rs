@@ -1,5 +1,5 @@
 use crate::resources::{
-    blaster_ammunition::BlasterAmmunition, camera_settings::CameraSettings, chunks::Chunks,
+    blaster_ammunition::BlasterAmmunition, camera_settings::CameraSettings,
     combat_guild_reputation::CombatGuildReputation, exotic_ammunition::ExoticAmmunition,
     exploration_guild_reputation::ExplorationGuildReputation, fleet_credits::FleetCredits,
     mine_ammunition::MineAmmunition, sector_size::SectorSize, selected_weapon::SelectedWeapon,
@@ -31,7 +31,6 @@ impl Plugin for GameResourcesPlugin {
             min_zoom: 0.5,
             max_zoom: 2.0,
             current_zoom: 1.0,
-        })
-        .insert_resource(Chunks { chunks: Vec::new() });
+        });
     }
 }

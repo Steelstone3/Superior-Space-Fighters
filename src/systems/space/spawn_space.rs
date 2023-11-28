@@ -1,43 +1,54 @@
-use crate::components::space::Space;
+use crate::{components::space::Space, assets::images::space::SpaceSprite};
 use bevy::{
-    ecs::entity::Entity,
-    prelude::{AssetServer, Commands, Res, Vec2, Vec3},
+    math::{Vec2, Vec3},
+    prelude::{AssetServer, Commands, Res},
     sprite::{Sprite, SpriteBundle},
 };
 use rand::random;
 
-pub fn spawn_random_space_background(
-    commands: &mut Commands,
-    asset_server: &Res<AssetServer>,
-    location: Vec3,
-    texture_location: Option<String>,
-) -> (Entity, String) {
-    let space = Space {
-        asset: random(),
-        size: Vec2 {
-            x: 1920.0,
-            y: 1920.0,
-        },
-    };
+pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server: Res<AssetServer>) {
+    let space_tile_size = 1920.0;
+    let total_area_around_player = 1920.0 * 1.5;
+    let half_space_tile_size = 1920.0 * 0.5;
 
-    let texture_location = texture_location.unwrap_or(space.asset.to_string());
-    let texture = asset_server.load(&texture_location);
+    let rand_texture = random::<SpaceSprite>();
 
-    let space_id = commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(space.size),
-                ..Default::default()
-            },
-            texture,
-            transform: bevy::prelude::Transform {
-                translation: location,
-                ..Default::default()
-            },
-            ..Default::default()
-        })
-        .insert(space)
-        .id();
+    for x in 0..5 {
+        for y in 0..5 {
+            let space_grid_position = Vec2::new(x as f32, y as f32);
 
-    (space_id, texture_location)
+            let space = Space {
+                asset: random(),
+                size: Vec2 {
+                    x: space_tile_size,
+                    y: space_tile_size,
+                },
+                space_grid_position,
+                space_location: Vec3::new(
+                    (space_grid_position.x * space_tile_size) - total_area_around_player
+                        + half_space_tile_size,
+                    (space_grid_position.y * space_tile_size) - total_area_around_player
+                        + half_space_tile_size,
+                    0.0,
+                ),
+            };
+
+            let texture = asset_server.load(rand_texture.to_string());
+
+            commands
+                .spawn(SpriteBundle {
+                    sprite: Sprite {
+                        custom_size: Some(space.size),
+                        ..Default::default()
+                    },
+                    texture,
+                    transform: bevy::prelude::Transform {
+                        translation: space.space_location,
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                })
+                .insert(space);
+        }
+    }
 }
