@@ -1,7 +1,7 @@
 use bevy::ecs::system::Resource;
 
 #[derive(Resource)]
-pub struct SpaceZoneBorder {
+pub struct SectorSize {
     pub top_border: f32,
     pub left_border: f32,
     pub bottom_border: f32,
