@@ -25,8 +25,8 @@ pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServe
             texture,
             transform: bevy::prelude::Transform {
                 translation: Vec3::new(
-                    random_value_f32(generate_seed(), -320.0, 320.0),
-                    random_value_f32(generate_seed(), -320.0, 320.0),
+                    random_value_f32(generate_seed(), -320.0..320.0),
+                    random_value_f32(generate_seed(), -320.0..320.0),
                     2.0,
                 ),
                 ..Default::default()

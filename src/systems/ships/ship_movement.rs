@@ -34,7 +34,7 @@ pub fn ai_movement(
             {
                 transform.rotate(Quat::from_axis_angle(
                     Vec3::new(0.0, 0.0, 1.0),
-                    random_value_f32(generate_seed(), 150.0, 210.0),
+                    random_value_f32(generate_seed(), 150.0..210.0),
                 ))
             } else {
                 transform.translation += translation_delta;
