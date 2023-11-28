@@ -1,4 +1,4 @@
-use crate::{components::space::Space, assets::images::space::SpaceSprite};
+use crate::{assets::images::space::SpaceSprite, components::space::Space};
 use bevy::{
     math::{Vec2, Vec3},
     prelude::{AssetServer, Commands, Res},
