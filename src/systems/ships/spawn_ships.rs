@@ -1,6 +1,6 @@
 use crate::{
     components::starship::Starship,
-    systems::controllers::random_generator::{generate_seed, random_range_f32, random_range_i32},
+    systems::controllers::random_generator::{generate_seed, random_value_f32, random_value_i32},
 };
 use bevy::{
     prelude::{AssetServer, Commands, Quat, Res, Vec2, Vec3},
@@ -10,7 +10,7 @@ use bevy::{
 use rand::random;
 
 pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>) {
-    for _ in 0..random_range_i32(generate_seed(), 1, 10) {
+    for _ in 0..random_value_i32(generate_seed(), 1, 10) {
         let ship = Starship {
             ship: random(),
             velocity: 30.0,
@@ -51,8 +51,8 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
                 texture,
                 transform: bevy::prelude::Transform {
                     translation: Vec3::new(
-                        random_range_f32(generate_seed(), -320.0, 320.0),
-                        random_range_f32(generate_seed(), -240.0, 240.0),
+                        random_value_f32(generate_seed(), -320.0, 320.0),
+                        random_value_f32(generate_seed(), -240.0, 240.0),
                         3.0,
                     ),
                     rotation: Quat::from_axis_angle(
@@ -61,7 +61,7 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
                             y: 0.0,
                             z: 1.0,
                         },
-                        random_range_f32(generate_seed(), 0.0, 360.0),
+                        random_value_f32(generate_seed(), 0.0, 360.0),
                     ),
                     ..Default::default()
                 },

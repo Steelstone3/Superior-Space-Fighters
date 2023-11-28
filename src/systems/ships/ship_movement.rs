@@ -6,7 +6,7 @@ use bevy::{
 use crate::{
     components::starship::Starship,
     resources::sector_size::SectorSize,
-    systems::controllers::random_generator::{generate_seed, random_range_f32},
+    systems::controllers::random_generator::{generate_seed, random_value_f32},
 };
 
 pub fn ai_movement(
@@ -34,7 +34,7 @@ pub fn ai_movement(
             {
                 transform.rotate(Quat::from_axis_angle(
                     Vec3::new(0.0, 0.0, 1.0),
-                    random_range_f32(generate_seed(), 150.0, 210.0),
+                    random_value_f32(generate_seed(), 150.0, 210.0),
                 ))
             } else {
                 transform.translation += translation_delta;
