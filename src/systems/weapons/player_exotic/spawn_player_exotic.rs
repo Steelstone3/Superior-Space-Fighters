@@ -1,3 +1,11 @@
+use crate::{
+    assets::{
+        images::starships::weapons::exotics::ExoticSprite,
+        sounds::starships::weapons::exotics::ExoticSound,
+    },
+    components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
+    resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
+};
 use bevy::{
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,

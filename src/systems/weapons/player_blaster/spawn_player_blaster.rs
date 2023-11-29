@@ -1,3 +1,13 @@
+use crate::{
+    assets::{
+        images::starships::weapons::blasters::BlasterSprite,
+        sounds::starships::weapons::blasters::BlasterSound,
+    },
+    components::{
+        blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
+    },
+    resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
+};
 use bevy::{
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,

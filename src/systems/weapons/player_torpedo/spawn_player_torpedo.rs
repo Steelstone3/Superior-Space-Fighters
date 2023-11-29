@@ -1,3 +1,13 @@
+use crate::{
+    assets::{
+        images::starships::weapons::torpedos::TorpedoSprite,
+        sounds::starships::weapons::torpedos::TorpedoSound,
+    },
+    components::{
+        player_starship::PlayerStarship, player_torpedo::PlayerTorpedo, torpedo::Torpedo,
+    },
+    resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
+};
 use bevy::{
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,

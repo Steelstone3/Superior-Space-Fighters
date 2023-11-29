@@ -1,8 +1,8 @@
-use bevy::{ecs::component::Component, prelude::Vec2, time::Timer};
-
 use crate::assets::{
-    images::weapons::blasters::BlasterSprite, sounds::weapons::blasters::BlasterSound,
+    images::starships::weapons::blasters::BlasterSprite,
+    sounds::starships::weapons::blasters::BlasterSound,
 };
+use bevy::{ecs::component::Component, prelude::Vec2, time::Timer};
 
 #[derive(Component)]
 pub struct Blaster {

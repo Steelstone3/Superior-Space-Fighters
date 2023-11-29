@@ -35,6 +35,12 @@ impl Plugin for GameResourcesPlugin {
             current_zoom: 1.0,
             zoom_in: 1.1,
             zoom_out: 0.9,
+        })
+        .insert_resource(Music {
+            combat_music: CombatMusicSound::default(),
+            exploration_music: ExplorationMusicSound::default(),
+            trading_music: TradingMusicSound::default(),
+            menu_music: MenuMusicSound::default(),
         });
     }
 }
