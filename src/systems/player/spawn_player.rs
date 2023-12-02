@@ -52,3 +52,26 @@ pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>)
         })
         .insert(player);
 }
+
+#[cfg(test)]
+mod spawn_player_should {
+    use super::spawn_player_ship;
+    
+    use bevy::prelude::{App, AssetPlugin, Update};
+    #[test]
+    fn spawn_a_player_ship() {
+        // Given
+        let mut app = App::new();
+        app.add_systems(Update, spawn_player_ship);
+        app.add_plugins(AssetPlugin::default());
+
+        // When
+        // app.update();
+
+        // Then
+        // assert_eq!(
+        // app.world.query::<&PlayerStarship>().iter(&app.world).len(),
+        // 1
+        // );
+    }
+}

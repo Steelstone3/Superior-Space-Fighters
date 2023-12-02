@@ -70,3 +70,16 @@ pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>
             .insert(ship);
     }
 }
+
+#[cfg(test)]
+mod spawn_ship_should {
+    
+    #[test]
+    fn spawn_a_ship() {
+        // Given
+
+        // When
+
+        // Then
+    }
+}

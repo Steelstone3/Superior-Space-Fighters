@@ -74,3 +74,25 @@ pub fn spawn_player_exotic(
         );
     }
 }
+
+#[cfg(test)]
+mod spawn_player_exotic_should {
+    use super::*;
+    use bevy::prelude::{App, Update};
+
+    #[test]
+    fn spawn_a_player_fired_exotic_projectile() {
+        // Given
+        let mut app = App::new();
+        app.add_systems(Update, spawn_player_exotic);
+        let mut input = Input::<KeyCode>::default();
+        app.insert_resource(input.clone());
+        input.press(KeyCode::Space);
+
+        // When
+        // app.update();
+
+        // Then
+        // assert_eq!(app.world.query::<&PlayerExotic>().iter(&app.world).len(), 1);
+    }
+}
