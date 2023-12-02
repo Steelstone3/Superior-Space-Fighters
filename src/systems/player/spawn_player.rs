@@ -56,7 +56,7 @@ pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>)
 #[cfg(test)]
 mod spawn_player_should {
     use super::spawn_player_ship;
-    
+
     use bevy::prelude::{App, AssetPlugin, Update};
     #[test]
     fn spawn_a_player_ship() {
