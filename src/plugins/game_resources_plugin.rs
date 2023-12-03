@@ -1,9 +1,7 @@
 use crate::resources::{
-    blaster_ammunition::BlasterAmmunition, camera_settings::CameraSettings,
-    combat_guild_reputation::CombatGuildReputation, exotic_ammunition::ExoticAmmunition,
-    exploration_guild_reputation::ExplorationGuildReputation, fleet_credits::FleetCredits,
-    mine_ammunition::MineAmmunition, sector_size::SectorSize, selected_weapon::SelectedWeapon,
-    torpedo_ammunition::TorpedoAmmunition, trading_guild_reputation::TradingGuildReputation,
+    camera_settings::CameraSettings, fleet_credits::FleetCredits,
+    guild_reputation::GuildReputation, projectile_ammunition::ProjectileAmmunition,
+    sector_size::SectorSize,
 };
 use bevy::prelude::{App, Plugin};
 
@@ -18,14 +16,18 @@ impl Plugin for GameResourcesPlugin {
             right_border: 1000.0,
         })
         .insert_resource(FleetCredits(1000))
-        .insert_resource(SelectedWeapon(1))
-        .insert_resource(MineAmmunition(7))
-        .insert_resource(TorpedoAmmunition(5))
-        .insert_resource(BlasterAmmunition(20))
-        .insert_resource(ExoticAmmunition(2))
-        .insert_resource(CombatGuildReputation(1))
-        .insert_resource(ExplorationGuildReputation(1))
-        .insert_resource(TradingGuildReputation(1))
+        .insert_resource(ProjectileAmmunition {
+            blaster_ammunition: 20,
+            torpedo_ammunition: 5,
+            mine_ammunition: 7,
+            exotic_ammunition: 2,
+            selected_weapon: 1,
+        })
+        .insert_resource(GuildReputation {
+            trading_guild_reputation: 1,
+            exploration_guild_reputation: 1,
+            combat_guild_reputation: 1,
+        })
         .insert_resource(CameraSettings {
             zoom_speed: 1.5,
             min_zoom: 0.5,
