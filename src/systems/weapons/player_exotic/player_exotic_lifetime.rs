@@ -12,7 +12,7 @@ pub fn player_exotic_lifetime(
     mut commands: Commands,
     time: Res<Time>,
     mut exotics: Query<(Entity, &mut PlayerExotic)>,
-    mut exotic_ammunition: ResMut<ProjectileAmmunition>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (exotic_entity, mut exotic) in &mut exotics {
         exotic.exotic.lifetime.tick(time.delta());
@@ -20,11 +20,11 @@ pub fn player_exotic_lifetime(
         if exotic.exotic.lifetime.finished() {
             commands.entity(exotic_entity).despawn();
 
-            exotic_ammunition.exotic_ammunition += 1;
+            ammunition.exotic_ammunition += 1;
 
             tracing::info!(
                 "Exotic ammunition recovered. Current exotic ammunition: {:?}",
-                exotic_ammunition.exotic_ammunition
+                ammunition.exotic_ammunition
             );
         }
     }
