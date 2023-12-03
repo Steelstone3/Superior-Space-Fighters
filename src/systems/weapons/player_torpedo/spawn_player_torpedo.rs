@@ -13,22 +13,21 @@ use crate::{
     components::{
         player_starship::PlayerStarship, player_torpedo::PlayerTorpedo, torpedo::Torpedo,
     },
-    resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 
 pub fn spawn_player_torpedo(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<TorpedoAmmunition>,
-    selected_weapon: ResMut<SelectedWeapon>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    if selected_weapon.0 == 2 {
+    if ammunition.selected_weapon == 2 {
         let mut player_transform = *player.get_single().unwrap();
         let torpedo_size = 80.0;
 
@@ -37,7 +36,7 @@ pub fn spawn_player_torpedo(
         player_transform.translation = torpedo_spawn_position;
         player_transform.translation.z = 3.0;
 
-        if ammunition.0 < 1 {
+        if ammunition.torpedo_ammunition < 1 {
             tracing::info!("Out of torpedos");
             return;
         }
@@ -74,10 +73,10 @@ pub fn spawn_player_torpedo(
             ..Default::default()
         });
 
-        ammunition.0 -= 1;
+        ammunition.torpedo_ammunition -= 1;
         tracing::info!(
             "Fired 1 torpedo. {:?} torpedo ammunition remaining",
-            ammunition.0
+            ammunition.torpedo_ammunition
         );
     }
 }

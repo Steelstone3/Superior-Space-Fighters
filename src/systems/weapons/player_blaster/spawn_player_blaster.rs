@@ -13,27 +13,26 @@ use crate::{
     components::{
         blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
     },
-    resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 
 pub fn spawn_player_blaster(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<BlasterAmmunition>,
-    selected_weapon: ResMut<SelectedWeapon>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     player_query: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    if selected_weapon.0 == 1 {
+    if ammunition.selected_weapon == 1 {
         let mut player_transform = *player_query.get_single().unwrap();
         player_transform.translation.z = 3.0;
         let blaster_size = 100.0;
 
-        if ammunition.0 < 1 {
+        if ammunition.blaster_ammunition < 1 {
             tracing::info!("Out of blaster ammunition");
             return;
         }
@@ -70,10 +69,10 @@ pub fn spawn_player_blaster(
             ..Default::default()
         });
 
-        ammunition.0 -= 1;
+        ammunition.blaster_ammunition -= 1;
         tracing::info!(
             "Fired 1 blaster shot. {:?} blaster shots remaining",
-            ammunition.0
+            ammunition.blaster_ammunition
         );
     }
 }

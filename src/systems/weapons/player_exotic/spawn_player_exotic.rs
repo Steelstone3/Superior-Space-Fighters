@@ -11,27 +11,26 @@ use bevy::{
 use crate::{
     assets::{images::weapons::exotics::ExoticSprite, sounds::weapons::exotics::ExoticSound},
     components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
-    resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 
 pub fn spawn_player_exotic(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<ExoticAmmunition>,
-    selected_weapon: ResMut<SelectedWeapon>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    if selected_weapon.0 == 4 {
+    if ammunition.selected_weapon == 4 {
         let mut player_transform = *player.get_single().unwrap();
         player_transform.translation.z = 3.0;
         let exotic_size = 80.0;
 
-        if ammunition.0 < 1 {
+        if ammunition.exotic_ammunition < 1 {
             tracing::info!("Out of exotic ammunition");
             return;
         }
@@ -68,10 +67,10 @@ pub fn spawn_player_exotic(
             ..Default::default()
         });
 
-        ammunition.0 -= 1;
+        ammunition.exotic_ammunition -= 1;
         tracing::info!(
             "Fired 1 exotic shot. {:?} exotic shots remaining",
-            ammunition.0
+            ammunition.exotic_ammunition
         );
     }
 }

@@ -1,3 +1,8 @@
+use crate::{
+    assets::{images::weapons::mines::MineSprite, sounds::weapons::mines::MineSound},
+    components::{mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship},
+    resources::projectile_ammunition::ProjectileAmmunition,
+};
 use bevy::{
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
@@ -8,25 +13,18 @@ use bevy::{
     utils::tracing,
 };
 
-use crate::{
-    assets::{images::weapons::mines::MineSprite, sounds::weapons::mines::MineSound},
-    components::{mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship},
-    resources::{mine_ammunition::MineAmmunition, selected_weapon::SelectedWeapon},
-};
-
 pub fn spawn_player_mine(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<MineAmmunition>,
-    selected_weapon: ResMut<SelectedWeapon>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    if selected_weapon.0 == 3 {
+    if ammunition.selected_weapon == 3 {
         let mut player_transform = *player.get_single().unwrap();
         let mine_size = 100.0;
 
@@ -35,7 +33,7 @@ pub fn spawn_player_mine(
         player_transform.translation = mine_spawn_position;
         player_transform.translation.z = 3.0;
 
-        if ammunition.0 < 1 {
+        if ammunition.mine_ammunition < 1 {
             tracing::info!("Out of mines");
             return;
         }
@@ -72,7 +70,10 @@ pub fn spawn_player_mine(
             ..Default::default()
         });
 
-        ammunition.0 -= 1;
-        tracing::info!("Fired 1 mine. {:?} mines remaining", ammunition.0);
+        ammunition.mine_ammunition -= 1;
+        tracing::info!(
+            "Fired 1 mine. {:?} mines remaining",
+            ammunition.mine_ammunition
+        );
     }
 }
