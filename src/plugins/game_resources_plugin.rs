@@ -30,9 +30,11 @@ impl Plugin for GameResourcesPlugin {
         })
         .insert_resource(CameraSettings {
             zoom_speed: 1.5,
-            min_zoom: 0.5,
-            max_zoom: 2.0,
+            minimum_zoom: 0.5,
+            maximum_zoom: 2.0,
             current_zoom: 1.0,
+            zoom_in: 1.1,
+            zoom_out: 0.9,
         });
     }
 }

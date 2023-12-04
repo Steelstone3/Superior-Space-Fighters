@@ -23,25 +23,27 @@ pub fn scroll_camera(
             //For mouse
             MouseScrollUnit::Line => {
                 if event.y < 0.0 {
-                    camera_settings.current_zoom =
-                        (camera_settings.current_zoom * 1.25 * camera_settings.zoom_speed)
-                            .clamp(camera_settings.min_zoom, camera_settings.max_zoom);
+                    camera_settings.current_zoom = (camera_settings.current_zoom
+                        * camera_settings.zoom_in
+                        * camera_settings.zoom_speed)
+                        .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 } else if event.y > 0.0 {
-                    camera_settings.current_zoom = (camera_settings.current_zoom * 0.75
+                    camera_settings.current_zoom = (camera_settings.current_zoom
+                        * camera_settings.zoom_out
                         / camera_settings.zoom_speed)
-                        .clamp(camera_settings.min_zoom, camera_settings.max_zoom);
+                        .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 }
             }
             //For touchpads
             MouseScrollUnit::Pixel => {
                 if event.y < 0.0 {
                     camera_settings.current_zoom =
-                        (camera_settings.current_zoom * 1.25 * camera_settings.zoom_speed)
-                            .clamp(camera_settings.min_zoom, camera_settings.max_zoom);
+                        (camera_settings.current_zoom * 1.1 * camera_settings.zoom_speed)
+                            .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 } else if event.y > 0.0 {
-                    camera_settings.current_zoom = (camera_settings.current_zoom * 0.75
+                    camera_settings.current_zoom = (camera_settings.current_zoom * 0.9
                         / camera_settings.zoom_speed)
-                        .clamp(camera_settings.min_zoom, camera_settings.max_zoom);
+                        .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 }
             }
         }
