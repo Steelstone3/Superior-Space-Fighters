@@ -1,8 +1,8 @@
-use bevy::{ecs::component::Component, prelude::Vec2, time::Timer};
-
 use crate::assets::{
-    images::weapons::torpedos::TorpedoSprite, sounds::weapons::torpedos::TorpedoSound,
+    images::starships::weapons::torpedos::TorpedoSprite,
+    sounds::starships::weapons::torpedos::TorpedoSound,
 };
+use bevy::{ecs::component::Component, prelude::Vec2, time::Timer};
 
 #[derive(Component)]
 pub struct Torpedo {

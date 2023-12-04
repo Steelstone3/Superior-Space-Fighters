@@ -1,6 +1,7 @@
+use crate::assets::{
+    images::starships::weapons::mines::MineSprite, sounds::starships::weapons::mines::MineSound,
+};
 use bevy::{ecs::component::Component, prelude::Vec2, time::Timer};
-
-use crate::assets::{images::weapons::mines::MineSprite, sounds::weapons::mines::MineSound};
 
 #[derive(Component)]
 pub struct Mine {

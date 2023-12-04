@@ -1,7 +1,13 @@
-use crate::resources::{
-    camera_settings::CameraSettings, fleet_credits::FleetCredits,
-    guild_reputation::GuildReputation, projectile_ammunition::ProjectileAmmunition,
-    sector_size::SectorSize,
+use crate::{
+    assets::sounds::music::{
+        combat_music::CombatMusicSound, exploration_music::ExplorationMusicSound,
+        menu_music::MenuMusicSound, trading_music::TradingMusicSound,
+    },
+    resources::{
+        camera_settings::CameraSettings, fleet_credits::FleetCredits,
+        guild_reputation::GuildReputation, music::Music,
+        projectile_ammunition::ProjectileAmmunition, sector_size::SectorSize,
+    },
 };
 use bevy::prelude::{App, Plugin};
 
@@ -35,6 +41,12 @@ impl Plugin for GameResourcesPlugin {
             current_zoom: 1.0,
             zoom_in: 1.1,
             zoom_out: 0.9,
+        })
+        .insert_resource(Music {
+            combat_music: CombatMusicSound::default(),
+            exploration_music: ExplorationMusicSound::default(),
+            trading_music: TradingMusicSound::default(),
+            menu_music: MenuMusicSound::default(),
         });
     }
 }
