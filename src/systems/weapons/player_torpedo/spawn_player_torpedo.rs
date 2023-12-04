@@ -6,7 +6,7 @@ use crate::{
     components::{
         player_starship::PlayerStarship, player_torpedo::PlayerTorpedo, torpedo::Torpedo,
     },
-    resources::{selected_weapon::SelectedWeapon, torpedo_ammunition::TorpedoAmmunition},
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     prelude::{
@@ -16,14 +16,6 @@ use bevy::{
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
     utils::tracing,
-};
-
-use crate::{
-    assets::{images::weapons::torpedos::TorpedoSprite, sounds::weapons::torpedos::TorpedoSound},
-    components::{
-        player_starship::PlayerStarship, player_torpedo::PlayerTorpedo, torpedo::Torpedo,
-    },
-    resources::projectile_ammunition::ProjectileAmmunition,
 };
 
 pub fn spawn_player_torpedo(

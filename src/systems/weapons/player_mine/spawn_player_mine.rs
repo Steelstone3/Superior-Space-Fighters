@@ -1,5 +1,7 @@
 use crate::{
-    assets::{images::weapons::mines::MineSprite, sounds::weapons::mines::MineSound},
+    assets::{
+        images::starships::weapons::mines::MineSprite, sounds::starships::weapons::mines::MineSound,
+    },
     components::{mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship},
     resources::projectile_ammunition::ProjectileAmmunition,
 };

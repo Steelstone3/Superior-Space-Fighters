@@ -1,10 +1,10 @@
+use crate::resources::projectile_ammunition::ProjectileAmmunition;
 use crate::{
     assets::{
         images::starships::weapons::exotics::ExoticSprite,
         sounds::starships::weapons::exotics::ExoticSound,
     },
     components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
-    resources::{exotic_ammunition::ExoticAmmunition, selected_weapon::SelectedWeapon},
 };
 use bevy::{
     prelude::{
@@ -14,12 +14,6 @@ use bevy::{
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
     utils::tracing,
-};
-
-use crate::{
-    assets::{images::weapons::exotics::ExoticSprite, sounds::weapons::exotics::ExoticSound},
-    components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
-    resources::projectile_ammunition::ProjectileAmmunition,
 };
 
 pub fn spawn_player_exotic(

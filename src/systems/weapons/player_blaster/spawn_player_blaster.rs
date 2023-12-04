@@ -6,7 +6,7 @@ use crate::{
     components::{
         blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
     },
-    resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     prelude::{
@@ -16,14 +16,6 @@ use bevy::{
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
     utils::tracing,
-};
-
-use crate::{
-    assets::{images::weapons::blasters::BlasterSprite, sounds::weapons::blasters::BlasterSound},
-    components::{
-        blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
-    },
-    resources::projectile_ammunition::ProjectileAmmunition,
 };
 
 pub fn spawn_player_blaster(
