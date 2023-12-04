@@ -1,3 +1,4 @@
+use crate::resources::camera_settings::CameraSettings;
 use bevy::{
     ecs::{
         event::EventReader,
@@ -9,8 +10,6 @@ use bevy::{
 };
 use float_lerp::lerp;
 
-use crate::resources::camera_settings::CameraSettings;
-
 pub fn scroll_camera(
     mut scroll_event_reader: EventReader<MouseWheel>,
     mut camera_projection_query: Query<&mut OrthographicProjection, With<Camera>>,
@@ -20,7 +19,7 @@ pub fn scroll_camera(
 
     for event in scroll_event_reader.read() {
         match event.unit {
-            //For mouse
+            // For mouse
             MouseScrollUnit::Line => {
                 if event.y < 0.0 {
                     camera_settings.current_zoom = (camera_settings.current_zoom
@@ -34,14 +33,16 @@ pub fn scroll_camera(
                         .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 }
             }
-            //For touchpads
+            // For touchpads
             MouseScrollUnit::Pixel => {
                 if event.y < 0.0 {
-                    camera_settings.current_zoom =
-                        (camera_settings.current_zoom * 1.1 * camera_settings.zoom_speed)
-                            .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
+                    camera_settings.current_zoom = (camera_settings.current_zoom
+                        * camera_settings.zoom_in
+                        * camera_settings.zoom_speed)
+                        .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 } else if event.y > 0.0 {
-                    camera_settings.current_zoom = (camera_settings.current_zoom * 0.9
+                    camera_settings.current_zoom = (camera_settings.current_zoom
+                        * camera_settings.zoom_out
                         / camera_settings.zoom_speed)
                         .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
                 }
