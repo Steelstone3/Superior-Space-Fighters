@@ -23,9 +23,9 @@ rayon = "1"
 [workspace]
 resolver = "2"
 
-# Enable a small amount of optimization in debug mode
+# No optimisation for better debugging. Set to 1 for some optimisation
 [profile.dev]
-opt-level = 1
+opt-level = 0
 
 # Enable high optimizations for dependencies (incl. Bevy), but not for our code:
 [profile.dev.package."*"]
