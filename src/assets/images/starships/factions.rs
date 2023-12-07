@@ -98,7 +98,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::DarkstarFaelithDominionExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/darkstar_faelith_dominion/ship_2.png"
+                    "images/starships/factions/darkstar_faelith_dominion/explorer.png"
                 )
             }
             SpaceShipSprite::DarkstarFaelithDominionFighter => {
@@ -122,7 +122,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::FreeStarConfederacyExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/free_star_confederacy/ship_2.png"
+                    "images/starships/factions/free_star_confederacy/explorer.png"
                 )
             }
             SpaceShipSprite::FreeStarConfederacyFighter => {
@@ -152,7 +152,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::MoonhoofClanExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/moonhoof_clan/ship_2.png"
+                    "images/starships/factions/moonhoof_clan/explorer.png"
                 )
             }
             SpaceShipSprite::MoonhoofClanFighter => {
@@ -176,7 +176,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::OuterReachMiningGuildExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/outer_reach_mining_guild/ship_2.png"
+                    "images/starships/factions/outer_reach_mining_guild/explorer.png"
                 )
             }
             SpaceShipSprite::OuterReachMiningGuildFighter => {
@@ -200,7 +200,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::SiliconFangTechnocracyExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/silicon_fang_technocracy/ship_2.png"
+                    "images/starships/factions/silicon_fang_technocracy/explorer.png"
                 )
             }
             SpaceShipSprite::SiliconFangTechnocracyFighter => {
@@ -224,7 +224,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::SolarisUnionExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/solaris_union/ship_2.png"
+                    "images/starships/factions/solaris_union/explorer.png"
                 )
             }
             SpaceShipSprite::SolarisUnionFighter => {
