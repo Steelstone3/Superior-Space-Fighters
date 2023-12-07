@@ -11,32 +11,32 @@ pub enum SpaceShipSprite {
     CosmicCommerceAssemblyExplorer,
     CosmicCommerceAssemblyFighter,
     CosmicCommerceAssemblyTrader,
-    DarkstarFaelithDominionShip1,
-    DarkstarFaelithDominionShip2,
-    DarkstarFaelithDominionShip3,
-    DarkstarFaelithDominionShip4,
-    FreeStarConfederacyShip1,
-    FreeStarConfederacyShip2,
-    FreeStarConfederacyShip3,
-    FreeStarConfederacyShip4,
-    LumithrinShip1,
-    MoonhoofClanShip1,
-    MoonhoofClanShip2,
-    MoonhoofClanShip3,
-    MoonhoofClanShip4,
-    OuterReachMiningGuildShip1,
-    OuterReachMiningGuildShip2,
-    OuterReachMiningGuildShip3,
-    OuterReachMiningGuildShip4,
-    SiliconFangTechnocracyShip1,
-    SiliconFangTechnocracyShip2,
-    SiliconFangTechnocracyShip3,
-    SiliconFangTechnocracyShip4,
-    SolarisUnionShip1,
-    SolarisUnionShip2,
-    SolarisUnionShip3,
-    SolarisUnionShip4,
-    ZephyrarianShip1,
+    DarkstarFaelithDominionAllRounder,
+    DarkstarFaelithDominionExplorer,
+    DarkstarFaelithDominionFighter,
+    DarkstarFaelithDominionTrader,
+    FreeStarConfederacyAllRounder,
+    FreeStarConfederacyExplorer,
+    FreeStarConfederacyFighter,
+    FreeStarConfederacyTrader,
+    LumithrinAllRounder,
+    MoonhoofClanAllRounder,
+    MoonhoofClanExplorer,
+    MoonhoofClanFighter,
+    MoonhoofClanTrader,
+    OuterReachMiningGuildAllRounder,
+    OuterReachMiningGuildExplorer,
+    OuterReachMiningGuildFighter,
+    OuterReachMiningGuildTrader,
+    SiliconFangTechnocracyAllRounder,
+    SiliconFangTechnocracyExplorer,
+    SiliconFangTechnocracyFighter,
+    SiliconFangTechnocracyTrader,
+    SolarisUnionAllRounder,
+    SolarisUnionExplorer,
+    SolarisUnionFighter,
+    SolarisUnionTrader,
+    ZephyrarianAllRounder,
 }
 impl Display for SpaceShipSprite {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
@@ -89,157 +89,157 @@ impl Display for SpaceShipSprite {
                     "images/starships/factions/cosmic_commerce_assembly/trader.png"
                 )
             }
-            SpaceShipSprite::DarkstarFaelithDominionShip1 => {
+            SpaceShipSprite::DarkstarFaelithDominionAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/darkstar_faelith_dominion/ship_1.png"
                 )
             }
-            SpaceShipSprite::DarkstarFaelithDominionShip2 => {
+            SpaceShipSprite::DarkstarFaelithDominionExplorer => {
                 write!(
                     formatter,
                     "images/starships/factions/darkstar_faelith_dominion/ship_2.png"
                 )
             }
-            SpaceShipSprite::DarkstarFaelithDominionShip3 => {
+            SpaceShipSprite::DarkstarFaelithDominionFighter => {
                 write!(
                     formatter,
                     "images/starships/factions/darkstar_faelith_dominion/ship_3.png"
                 )
             }
-            SpaceShipSprite::DarkstarFaelithDominionShip4 => {
+            SpaceShipSprite::DarkstarFaelithDominionTrader => {
                 write!(
                     formatter,
                     "images/starships/factions/darkstar_faelith_dominion/ship_4.png"
                 )
             }
-            SpaceShipSprite::FreeStarConfederacyShip1 => {
+            SpaceShipSprite::FreeStarConfederacyAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/free_star_confederacy/ship_1.png"
                 )
             }
-            SpaceShipSprite::FreeStarConfederacyShip2 => {
+            SpaceShipSprite::FreeStarConfederacyExplorer => {
                 write!(
                     formatter,
                     "images/starships/factions/free_star_confederacy/ship_2.png"
                 )
             }
-            SpaceShipSprite::FreeStarConfederacyShip3 => {
+            SpaceShipSprite::FreeStarConfederacyFighter => {
                 write!(
                     formatter,
                     "images/starships/factions/free_star_confederacy/ship_3.png"
                 )
             }
-            SpaceShipSprite::FreeStarConfederacyShip4 => {
+            SpaceShipSprite::FreeStarConfederacyTrader => {
                 write!(
                     formatter,
                     "images/starships/factions/free_star_confederacy/ship_4.png"
                 )
             }
-            SpaceShipSprite::LumithrinShip1 => {
+            SpaceShipSprite::LumithrinAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/aliens/lumithrin_ship_1.png"
                 )
             }
-            SpaceShipSprite::MoonhoofClanShip1 => {
+            SpaceShipSprite::MoonhoofClanAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/moonhoof_clan/ship_1.png"
                 )
             }
-            SpaceShipSprite::MoonhoofClanShip2 => {
+            SpaceShipSprite::MoonhoofClanExplorer => {
                 write!(
                     formatter,
                     "images/starships/factions/moonhoof_clan/ship_2.png"
                 )
             }
-            SpaceShipSprite::MoonhoofClanShip3 => {
+            SpaceShipSprite::MoonhoofClanFighter => {
                 write!(
                     formatter,
                     "images/starships/factions/moonhoof_clan/ship_3.png"
                 )
             }
-            SpaceShipSprite::MoonhoofClanShip4 => {
+            SpaceShipSprite::MoonhoofClanTrader => {
                 write!(
                     formatter,
                     "images/starships/factions/moonhoof_clan/ship_4.png"
                 )
             }
-            SpaceShipSprite::OuterReachMiningGuildShip1 => {
+            SpaceShipSprite::OuterReachMiningGuildAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/outer_reach_mining_guild/ship_1.png"
                 )
             }
-            SpaceShipSprite::OuterReachMiningGuildShip2 => {
+            SpaceShipSprite::OuterReachMiningGuildExplorer => {
                 write!(
                     formatter,
                     "images/starships/factions/outer_reach_mining_guild/ship_2.png"
                 )
             }
-            SpaceShipSprite::OuterReachMiningGuildShip3 => {
+            SpaceShipSprite::OuterReachMiningGuildFighter => {
                 write!(
                     formatter,
                     "images/starships/factions/outer_reach_mining_guild/ship_3.png"
                 )
             }
-            SpaceShipSprite::OuterReachMiningGuildShip4 => {
+            SpaceShipSprite::OuterReachMiningGuildTrader => {
                 write!(
                     formatter,
                     "images/starships/factions/outer_reach_mining_guild/ship_4.png"
                 )
             }
-            SpaceShipSprite::SiliconFangTechnocracyShip1 => {
+            SpaceShipSprite::SiliconFangTechnocracyAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/silicon_fang_technocracy/ship_1.png"
                 )
             }
-            SpaceShipSprite::SiliconFangTechnocracyShip2 => {
+            SpaceShipSprite::SiliconFangTechnocracyExplorer => {
                 write!(
                     formatter,
                     "images/starships/factions/silicon_fang_technocracy/ship_2.png"
                 )
             }
-            SpaceShipSprite::SiliconFangTechnocracyShip3 => {
+            SpaceShipSprite::SiliconFangTechnocracyFighter => {
                 write!(
                     formatter,
                     "images/starships/factions/silicon_fang_technocracy/ship_3.png"
                 )
             }
-            SpaceShipSprite::SiliconFangTechnocracyShip4 => {
+            SpaceShipSprite::SiliconFangTechnocracyTrader => {
                 write!(
                     formatter,
                     "images/starships/factions/silicon_fang_technocracy/ship_4.png"
                 )
             }
-            SpaceShipSprite::SolarisUnionShip1 => {
+            SpaceShipSprite::SolarisUnionAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/solaris_union/ship_1.png"
                 )
             }
-            SpaceShipSprite::SolarisUnionShip2 => {
+            SpaceShipSprite::SolarisUnionExplorer => {
                 write!(
                     formatter,
                     "images/starships/factions/solaris_union/ship_2.png"
                 )
             }
-            SpaceShipSprite::SolarisUnionShip3 => {
+            SpaceShipSprite::SolarisUnionFighter => {
                 write!(
                     formatter,
                     "images/starships/factions/solaris_union/ship_3.png"
                 )
             }
-            SpaceShipSprite::SolarisUnionShip4 => {
+            SpaceShipSprite::SolarisUnionTrader => {
                 write!(
                     formatter,
                     "images/starships/factions/solaris_union/ship_4.png"
                 )
             }
-            SpaceShipSprite::ZephyrarianShip1 => {
+            SpaceShipSprite::ZephyrarianAllRounder => {
                 write!(
                     formatter,
                     "images/starships/factions/aliens/zephyrarian_ship_1.png"
