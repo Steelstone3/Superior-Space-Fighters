@@ -4,13 +4,13 @@ use std::fmt::Display;
 #[derive(RandGen)]
 pub enum SpaceShipSprite {
     AstralSovereignAllRounder,
-    AstralSovereignTrader,
     AstralSovereignExplorer,
     AstralSovereignFighter,
-    CosmicCommerceAssemblyShip1,
-    CosmicCommerceAssemblyShip2,
-    CosmicCommerceAssemblyShip3,
-    CosmicCommerceAssemblyShip4,
+    AstralSovereignTrader,
+    CosmicCommerceAssemblyAllRounder,
+    CosmicCommerceAssemblyExplorer,
+    CosmicCommerceAssemblyFighter,
+    CosmicCommerceAssemblyTrader,
     DarkstarFaelithDominionShip1,
     DarkstarFaelithDominionShip2,
     DarkstarFaelithDominionShip3,
@@ -65,28 +65,28 @@ impl Display for SpaceShipSprite {
                     "images/starships/factions/astral_sovereign/trader.png"
                 )
             }
-            SpaceShipSprite::CosmicCommerceAssemblyShip1 => {
+            SpaceShipSprite::CosmicCommerceAssemblyAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/cosmic_commerce_assembly/ship_1.png"
+                    "images/starships/factions/cosmic_commerce_assembly/all_rounder.png"
                 )
             }
-            SpaceShipSprite::CosmicCommerceAssemblyShip2 => {
+            SpaceShipSprite::CosmicCommerceAssemblyExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/cosmic_commerce_assembly/ship_2.png"
+                    "images/starships/factions/cosmic_commerce_assembly/explorer.png"
                 )
             }
-            SpaceShipSprite::CosmicCommerceAssemblyShip3 => {
+            SpaceShipSprite::CosmicCommerceAssemblyFighter => {
                 write!(
                     formatter,
-                    "images/starships/factions/cosmic_commerce_assembly/ship_3.png"
+                    "images/starships/factions/cosmic_commerce_assembly/fighter.png"
                 )
             }
-            SpaceShipSprite::CosmicCommerceAssemblyShip4 => {
+            SpaceShipSprite::CosmicCommerceAssemblyTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/cosmic_commerce_assembly/ship_4.png"
+                    "images/starships/factions/cosmic_commerce_assembly/trader.png"
                 )
             }
             SpaceShipSprite::DarkstarFaelithDominionShip1 => {
