@@ -110,7 +110,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::DarkstarFaelithDominionTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/darkstar_faelith_dominion/ship_4.png"
+                    "images/starships/factions/darkstar_faelith_dominion/trader.png"
                 )
             }
             SpaceShipSprite::FreeStarConfederacyAllRounder => {
@@ -134,7 +134,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::FreeStarConfederacyTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/free_star_confederacy/ship_4.png"
+                    "images/starships/factions/free_star_confederacy/trader.png"
                 )
             }
             SpaceShipSprite::LumithrinAllRounder => {
@@ -164,7 +164,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::MoonhoofClanTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/moonhoof_clan/ship_4.png"
+                    "images/starships/factions/moonhoof_clan/trader.png"
                 )
             }
             SpaceShipSprite::OuterReachMiningGuildAllRounder => {
@@ -188,7 +188,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::OuterReachMiningGuildTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/outer_reach_mining_guild/ship_4.png"
+                    "images/starships/factions/outer_reach_mining_guild/trader.png"
                 )
             }
             SpaceShipSprite::SiliconFangTechnocracyAllRounder => {
@@ -212,7 +212,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::SiliconFangTechnocracyTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/silicon_fang_technocracy/ship_4.png"
+                    "images/starships/factions/silicon_fang_technocracy/trader.png"
                 )
             }
             SpaceShipSprite::SolarisUnionAllRounder => {
@@ -236,7 +236,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::SolarisUnionTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/solaris_union/ship_4.png"
+                    "images/starships/factions/solaris_union/trader.png"
                 )
             }
             SpaceShipSprite::ZephyrarianAllRounder => {
