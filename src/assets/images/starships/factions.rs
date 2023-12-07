@@ -92,7 +92,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::DarkstarFaelithDominionAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/darkstar_faelith_dominion/ship_1.png"
+                    "images/starships/factions/darkstar_faelith_dominion/all_rounder.png"
                 )
             }
             SpaceShipSprite::DarkstarFaelithDominionExplorer => {
@@ -116,7 +116,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::FreeStarConfederacyAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/free_star_confederacy/ship_1.png"
+                    "images/starships/factions/free_star_confederacy/all_rounder.png"
                 )
             }
             SpaceShipSprite::FreeStarConfederacyExplorer => {
@@ -140,13 +140,13 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::LumithrinAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/aliens/lumithrin_ship_1.png"
+                    "images/starships/factions/aliens/lumithrin_all_rounder.png"
                 )
             }
             SpaceShipSprite::MoonhoofClanAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/moonhoof_clan/ship_1.png"
+                    "images/starships/factions/moonhoof_clan/all_rounder.png"
                 )
             }
             SpaceShipSprite::MoonhoofClanExplorer => {
@@ -170,7 +170,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::OuterReachMiningGuildAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/outer_reach_mining_guild/ship_1.png"
+                    "images/starships/factions/outer_reach_mining_guild/all_rounder.png"
                 )
             }
             SpaceShipSprite::OuterReachMiningGuildExplorer => {
@@ -194,7 +194,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::SiliconFangTechnocracyAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/silicon_fang_technocracy/ship_1.png"
+                    "images/starships/factions/silicon_fang_technocracy/all_rounder.png"
                 )
             }
             SpaceShipSprite::SiliconFangTechnocracyExplorer => {
@@ -218,7 +218,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::SolarisUnionAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/solaris_union/ship_1.png"
+                    "images/starships/factions/solaris_union/all_rounder.png"
                 )
             }
             SpaceShipSprite::SolarisUnionExplorer => {
@@ -242,7 +242,7 @@ impl Display for SpaceShipSprite {
             SpaceShipSprite::ZephyrarianAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/aliens/zephyrarian_ship_1.png"
+                    "images/starships/factions/aliens/zephyrarian_all_rounder.png"
                 )
             }
         }
