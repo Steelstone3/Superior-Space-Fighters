@@ -3,10 +3,10 @@ use std::fmt::Display;
 
 #[derive(RandGen)]
 pub enum SpaceShipSprite {
-    AstralSovereignShip1,
-    AstralSovereignShip2,
-    AstralSovereignShip3,
-    AstralSovereignShip4,
+    AstralSovereignAllRounder,
+    AstralSovereignTrader,
+    AstralSovereignExplorer,
+    AstralSovereignFighter,
     CosmicCommerceAssemblyShip1,
     CosmicCommerceAssemblyShip2,
     CosmicCommerceAssemblyShip3,
@@ -41,28 +41,28 @@ pub enum SpaceShipSprite {
 impl Display for SpaceShipSprite {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            SpaceShipSprite::AstralSovereignShip1 => {
+            SpaceShipSprite::AstralSovereignAllRounder => {
                 write!(
                     formatter,
-                    "images/starships/factions/astral_sovereign/ship_1.png"
+                    "images/starships/factions/astral_sovereign/all_rounder.png"
                 )
             }
-            SpaceShipSprite::AstralSovereignShip2 => {
+            SpaceShipSprite::AstralSovereignExplorer => {
                 write!(
                     formatter,
-                    "images/starships/factions/astral_sovereign/ship_2.png"
+                    "images/starships/factions/astral_sovereign/explorer.png"
                 )
             }
-            SpaceShipSprite::AstralSovereignShip3 => {
+            SpaceShipSprite::AstralSovereignFighter => {
                 write!(
                     formatter,
-                    "images/starships/factions/astral_sovereign/ship_3.png"
+                    "images/starships/factions/astral_sovereign/fighter.png"
                 )
             }
-            SpaceShipSprite::AstralSovereignShip4 => {
+            SpaceShipSprite::AstralSovereignTrader => {
                 write!(
                     formatter,
-                    "images/starships/factions/astral_sovereign/ship_4.png"
+                    "images/starships/factions/astral_sovereign/trader.png"
                 )
             }
             SpaceShipSprite::CosmicCommerceAssemblyShip1 => {
