@@ -13,6 +13,7 @@ pub fn single_gamepad_connection(
     for event in gamepad_event_reader.read() {
         match event.connection {
             GamepadConnection::Connected(_) => {
+                let gamepad = event.gamepad;
                 tracing::info!("Controller connected!");
             }
             GamepadConnection::Disconnected => {
