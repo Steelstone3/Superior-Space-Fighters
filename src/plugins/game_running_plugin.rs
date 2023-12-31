@@ -24,7 +24,7 @@ use crate::systems::{
             player_torpedo_movement::player_torpedo_movement,
             spawn_player_torpedo::spawn_player_torpedo,
         },
-    },
+    }, gamepad::gamepad_connection::single_gamepad_connection,
 };
 use bevy::prelude::{App, Plugin, Update};
 
@@ -37,6 +37,7 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, scroll_camera)
             .add_systems(Update, increment_camera)
             .add_systems(Update, move_empty_space)
+            .add_systems(Update, single_gamepad_connection)
             .add_systems(Update, player_movement)
             .add_systems(Update, player_weapon_select)
             .add_systems(Update, spawn_player_blaster)
