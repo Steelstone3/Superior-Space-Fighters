@@ -16,7 +16,7 @@ pub fn single_gamepad_connection(
                 tracing::info!("Controller connected!");
             }
             GamepadConnection::Disconnected => {
-
+                tracing::info("Controller disconnected");
             }
         }
     }
