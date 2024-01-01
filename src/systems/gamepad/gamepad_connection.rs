@@ -1,15 +1,10 @@
+use crate::resources::my_gamepad::MyGamepad;
 use bevy::{
-    ecs::{
-        event::EventReader,
-        system::Res,
-    },
-    input::gamepad::{Gamepad, GamepadConnection, GamepadConnectionEvent},
-    prelude::{Commands, Resource},
+    ecs::{event::EventReader, system::Res},
+    input::gamepad::{GamepadConnection, GamepadConnectionEvent},
+    prelude::Commands,
     utils::tracing,
 };
-
-#[derive(Resource)]
-pub struct MyGamepad(Gamepad);
 
 pub fn single_gamepad_connection(
     mut commands: Commands,
