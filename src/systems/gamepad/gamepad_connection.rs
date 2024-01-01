@@ -12,7 +12,7 @@ use bevy::{
 pub struct MyGamepad(Gamepad);
 
 pub fn single_gamepad_connection(
-    mut _commands: Commands,
+    mut commands: Commands,
     mut my_gamepad: Option<ResMut<MyGamepad>>,
     mut gamepad_event_reader: EventReader<GamepadConnectionEvent>,
 ) {
@@ -22,9 +22,11 @@ pub fn single_gamepad_connection(
                 match event.connection {
                     GamepadConnection::Connected(_) => {
                         gamepad.0 = event.gamepad;
+                        commands.insert_resource(MyGamepad(gamepad.0));
                         tracing::info!("Controller connected");
                     }
                     GamepadConnection::Disconnected => {
+                        commands.remove_resource::<MyGamepad>();
                         tracing::info!("Controller disconnected");
                     }
                 }
