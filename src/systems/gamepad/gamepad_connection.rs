@@ -1,7 +1,7 @@
 use bevy::{
     ecs::{
         event::EventReader,
-        system::{Res, ResMut},
+        system::Res,
     },
     input::gamepad::{Gamepad, GamepadConnection, GamepadConnectionEvent},
     prelude::{Commands, Resource},
@@ -13,16 +13,15 @@ pub struct MyGamepad(Gamepad);
 
 pub fn single_gamepad_connection(
     mut commands: Commands,
-    mut my_gamepad: Option<ResMut<MyGamepad>>,
+    my_gamepad: Option<Res<MyGamepad>>,
     mut gamepad_event_reader: EventReader<GamepadConnectionEvent>,
 ) {
     match my_gamepad {
-        Some(mut gamepad) => {
+        Some(_) => {
             for event in gamepad_event_reader.read() {
                 match event.connection {
                     GamepadConnection::Connected(_) => {
-                        gamepad.0 = event.gamepad;
-                        commands.insert_resource(MyGamepad(gamepad.0));
+                        commands.insert_resource(MyGamepad(event.gamepad));
                         tracing::info!("Controller connected");
                     }
                     GamepadConnection::Disconnected => {
