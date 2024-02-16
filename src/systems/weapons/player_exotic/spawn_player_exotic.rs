@@ -7,13 +7,13 @@ use crate::{
     },
     components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
 };
+use bevy::math::Vec3;
 use bevy::{
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
         With,
     },
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode},
     utils::tracing,
 };
 
@@ -43,9 +43,14 @@ pub fn spawn_player_exotic(
                 exotic: ExoticSprite::Exotic1,
                 sound: ExoticSound::Exotic1,
                 weapon: Weapon {
+                    original_position: Vec3::new(
+                        player_transform.translation.x,
+                        player_transform.translation.y,
+                        player_transform.translation.z,
+                    ),
                     size: Vec2::new(exotic_size, exotic_size),
-                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
                     velocity: 75.0,
+                    range: 500.0,
                 },
             },
         };

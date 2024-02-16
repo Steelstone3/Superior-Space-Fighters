@@ -2,9 +2,7 @@ use crate::{
     assets::{
         images::starships::weapons::mines::MineSprite, sounds::starships::weapons::mines::MineSound,
     },
-    components::{
-        mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship, weapon::Weapon,
-    },
+    components::{mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
@@ -46,11 +44,9 @@ pub fn spawn_player_mine(
             mine: Mine {
                 mine: MineSprite::Mine1,
                 sound: MineSound::Mine1,
-                weapon: Weapon {
-                    velocity: -5.0,
-                    size: Vec2::new(100.0, 100.0),
-                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-                },
+                velocity: -5.0,
+                size: Vec2::new(100.0, 100.0),
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             },
         };
 
@@ -62,7 +58,7 @@ pub fn spawn_player_mine(
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(mine.mine.weapon.size),
+                    custom_size: Some(mine.mine.size),
                     ..Default::default()
                 },
                 transform: player_transform,

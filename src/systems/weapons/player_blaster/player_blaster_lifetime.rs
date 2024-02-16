@@ -3,21 +3,22 @@ use crate::{
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
-    prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time,
+    prelude::{Commands, Entity, Query, ResMut},
+    transform::components::Transform,
     utils::tracing,
 };
 
 pub fn player_blaster_lifetime(
     mut commands: Commands,
-    time: Res<Time>,
-    mut blasters: Query<(Entity, &mut PlayerBlaster)>,
+    mut blasters: Query<(Entity, &mut Transform, &mut PlayerBlaster)>,
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
-    for (blaster_entity, mut blaster) in &mut blasters {
-        blaster.blaster.weapon.lifetime.tick(time.delta());
+    for (blaster_entity, blaster_transform, blaster) in &mut blasters {
+        let is_past_maximum_range =
+            (blaster_transform.translation - blaster.blaster.weapon.original_position).length()
+                > blaster.blaster.weapon.range;
 
-        if blaster.blaster.weapon.lifetime.finished() {
+        if is_past_maximum_range {
             commands.entity(blaster_entity).despawn();
 
             ammunition.blaster_ammunition += 1;

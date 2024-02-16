@@ -1,23 +1,23 @@
-use bevy::{
-    prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time,
-    utils::tracing,
-};
-
 use crate::{
     components::player_exotic::PlayerExotic, resources::projectile_ammunition::ProjectileAmmunition,
+};
+use bevy::{
+    prelude::{Commands, Entity, Query, ResMut},
+    transform::components::Transform,
+    utils::tracing,
 };
 
 pub fn player_exotic_lifetime(
     mut commands: Commands,
-    time: Res<Time>,
-    mut exotics: Query<(Entity, &mut PlayerExotic)>,
+    mut exotics: Query<(Entity, &mut Transform, &mut PlayerExotic)>,
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
-    for (exotic_entity, mut exotic) in &mut exotics {
-        exotic.exotic.weapon.lifetime.tick(time.delta());
+    for (exotic_entity, exotic_transform, exotic) in &mut exotics {
+        let is_past_maximum_range =
+            (exotic_transform.translation - exotic.exotic.weapon.original_position).length()
+                > exotic.exotic.weapon.range;
 
-        if exotic.exotic.weapon.lifetime.finished() {
+        if is_past_maximum_range {
             commands.entity(exotic_entity).despawn();
 
             ammunition.exotic_ammunition += 1;

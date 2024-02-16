@@ -14,9 +14,9 @@ pub fn player_mine_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (mine_entity, mut mine) in &mut mines {
-        mine.mine.weapon.lifetime.tick(time.delta());
+        mine.mine.lifetime.tick(time.delta());
 
-        if mine.mine.weapon.lifetime.finished() {
+        if mine.mine.lifetime.finished() {
             commands.entity(mine_entity).despawn();
 
             ammunition.mine_ammunition += 1;

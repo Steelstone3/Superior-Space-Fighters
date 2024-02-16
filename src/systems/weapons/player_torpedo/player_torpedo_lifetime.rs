@@ -3,21 +3,22 @@ use crate::{
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
-    prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time,
+    prelude::{Commands, Entity, Query, ResMut},
+    transform::components::Transform,
     utils::tracing,
 };
 
 pub fn player_torpedo_lifetime(
     mut commands: Commands,
-    time: Res<Time>,
-    mut torpedo: Query<(Entity, &mut PlayerTorpedo)>,
+    mut torpedoes: Query<(Entity, &mut Transform, &mut PlayerTorpedo)>,
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
-    for (torpedo_entity, mut torpedo) in &mut torpedo {
-        torpedo.torpedo.weapon.lifetime.tick(time.delta());
+    for (torpedo_entity, torpedo_transform, torpedo) in &mut torpedoes {
+        let is_past_maximum_range =
+            (torpedo_transform.translation - torpedo.torpedo.weapon.original_position).length()
+                > torpedo.torpedo.weapon.range;
 
-        if torpedo.torpedo.weapon.lifetime.finished() {
+        if is_past_maximum_range {
             commands.entity(torpedo_entity).despawn();
 
             ammunition.torpedo_ammunition += 1;

@@ -10,12 +10,12 @@ use crate::{
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
+    math::Vec3,
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
         With,
     },
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode},
     utils::tracing,
 };
 
@@ -49,9 +49,14 @@ pub fn spawn_player_torpedo(
                 torpedo: TorpedoSprite::Torpedo1,
                 sound: TorpedoSound::Torpedo1,
                 weapon: Weapon {
+                    original_position: Vec3::new(
+                        player_transform.translation.x,
+                        player_transform.translation.y,
+                        player_transform.translation.z,
+                    ),
                     velocity: 125.0,
                     size: Vec2::new(torpedo_size, torpedo_size),
-                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                    range: 1500.0,
                 },
             },
         };
