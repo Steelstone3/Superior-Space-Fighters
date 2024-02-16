@@ -15,9 +15,9 @@ pub fn player_blaster_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (blaster_entity, mut blaster) in &mut blasters {
-        blaster.blaster.lifetime.tick(time.delta());
+        blaster.blaster.weapon.lifetime.tick(time.delta());
 
-        if blaster.blaster.lifetime.finished() {
+        if blaster.blaster.weapon.lifetime.finished() {
             commands.entity(blaster_entity).despawn();
 
             ammunition.blaster_ammunition += 1;

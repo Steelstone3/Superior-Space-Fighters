@@ -11,3 +11,4 @@ pub mod space;
 pub mod starship;
 pub mod station;
 pub mod torpedo;
+pub mod weapon;

@@ -1,3 +1,4 @@
+use crate::components::weapon::Weapon;
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
 use crate::{
     assets::{
@@ -41,9 +42,11 @@ pub fn spawn_player_exotic(
             exotic: Exotic {
                 exotic: ExoticSprite::Exotic1,
                 sound: ExoticSound::Exotic1,
-                velocity: 75.0,
-                size: Vec2::new(exotic_size, exotic_size),
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                weapon: Weapon {
+                    size: Vec2::new(exotic_size, exotic_size),
+                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                    velocity: 75.0,
+                },
             },
         };
 
@@ -55,7 +58,7 @@ pub fn spawn_player_exotic(
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(exotic.exotic.size),
+                    custom_size: Some(exotic.exotic.weapon.size),
                     ..Default::default()
                 },
                 transform: player_transform,

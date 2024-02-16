@@ -5,6 +5,7 @@ use crate::{
     },
     components::{
         blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
+        weapon::Weapon,
     },
     resources::projectile_ammunition::ProjectileAmmunition,
 };
@@ -43,9 +44,11 @@ pub fn spawn_player_blaster(
             blaster: Blaster {
                 blaster: BlasterSprite::Blaster1,
                 sound: BlasterSound::Blaster1,
-                velocity: 100.0,
-                size: Vec2::new(blaster_size, blaster_size),
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                weapon: Weapon {
+                    velocity: 100.0,
+                    size: Vec2::new(blaster_size, blaster_size),
+                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                },
             },
         };
 
@@ -57,7 +60,7 @@ pub fn spawn_player_blaster(
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(blaster.blaster.size),
+                    custom_size: Some(blaster.blaster.weapon.size),
                     ..Default::default()
                 },
                 transform: player_transform,

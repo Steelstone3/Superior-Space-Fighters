@@ -15,9 +15,9 @@ pub fn player_exotic_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (exotic_entity, mut exotic) in &mut exotics {
-        exotic.exotic.lifetime.tick(time.delta());
+        exotic.exotic.weapon.lifetime.tick(time.delta());
 
-        if exotic.exotic.lifetime.finished() {
+        if exotic.exotic.weapon.lifetime.finished() {
             commands.entity(exotic_entity).despawn();
 
             ammunition.exotic_ammunition += 1;

@@ -5,6 +5,7 @@ use crate::{
     },
     components::{
         player_starship::PlayerStarship, player_torpedo::PlayerTorpedo, torpedo::Torpedo,
+        weapon::Weapon,
     },
     resources::projectile_ammunition::ProjectileAmmunition,
 };
@@ -47,9 +48,11 @@ pub fn spawn_player_torpedo(
             torpedo: Torpedo {
                 torpedo: TorpedoSprite::Torpedo1,
                 sound: TorpedoSound::Torpedo1,
-                velocity: 125.0,
-                size: Vec2::new(torpedo_size, torpedo_size),
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                weapon: Weapon {
+                    velocity: 125.0,
+                    size: Vec2::new(torpedo_size, torpedo_size),
+                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                },
             },
         };
 
@@ -61,7 +64,7 @@ pub fn spawn_player_torpedo(
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(torpedo.torpedo.size),
+                    custom_size: Some(torpedo.torpedo.weapon.size),
                     ..Default::default()
                 },
                 transform: player_transform,

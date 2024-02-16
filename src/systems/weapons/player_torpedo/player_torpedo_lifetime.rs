@@ -15,9 +15,9 @@ pub fn player_torpedo_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (torpedo_entity, mut torpedo) in &mut torpedo {
-        torpedo.torpedo.lifetime.tick(time.delta());
+        torpedo.torpedo.weapon.lifetime.tick(time.delta());
 
-        if torpedo.torpedo.lifetime.finished() {
+        if torpedo.torpedo.weapon.lifetime.finished() {
             commands.entity(torpedo_entity).despawn();
 
             ammunition.torpedo_ammunition += 1;
