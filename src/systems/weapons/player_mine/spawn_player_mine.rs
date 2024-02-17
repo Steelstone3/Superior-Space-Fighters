@@ -6,9 +6,9 @@ use crate::{
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
+    input::ButtonInput,
     prelude::{
-        AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
-        With,
+        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
     sprite::{Sprite, SpriteBundle},
     time::{Timer, TimerMode},
@@ -18,7 +18,7 @@ use bevy::{
 pub fn spawn_player_mine(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    input: Res<Input<KeyCode>>,
+    input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {

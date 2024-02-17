@@ -1,5 +1,6 @@
 use bevy::{
-    prelude::{Input, KeyCode, Query, Res, Transform, Vec3},
+    input::ButtonInput,
+    prelude::{KeyCode, Query, Res, Transform, Vec3},
     time::Time,
 };
 
@@ -7,14 +8,14 @@ use crate::components::player_starship::PlayerStarship;
 
 pub fn player_movement(
     mut characters: Query<(&mut Transform, &mut PlayerStarship)>,
-    input: Res<Input<KeyCode>>,
+    input: Res<ButtonInput<KeyCode>>,
     time: Res<Time>,
 ) {
     for (mut transform, mut player) in &mut characters {
         let player_speed = player.ship.current_velocity * time.delta_seconds();
 
         // Forwards
-        if input.pressed(KeyCode::W) {
+        if input.pressed(KeyCode::KeyW) {
             player.ship.current_velocity = (player.ship.current_velocity
                 + player.ship.acceleration)
                 .clamp(-player.ship.velocity, player.ship.velocity);
@@ -24,7 +25,7 @@ pub fn player_movement(
             transform.translation += translation_delta;
         }
         // Backwards
-        else if input.pressed(KeyCode::S) {
+        else if input.pressed(KeyCode::KeyS) {
             player.ship.current_velocity = (player.ship.current_velocity
                 - player.ship.acceleration)
                 .clamp(-player.ship.velocity, player.ship.velocity);
@@ -53,13 +54,13 @@ pub fn player_movement(
         }
 
         // Rotate Right
-        if input.pressed(KeyCode::D) {
+        if input.pressed(KeyCode::KeyD) {
             let reverse_player_rotation = player.ship.rotation * -1.0;
             transform.rotate_z(reverse_player_rotation * time.delta_seconds());
         }
 
         // Rotate Left
-        if input.pressed(KeyCode::A) {
+        if input.pressed(KeyCode::KeyA) {
             transform.rotate_z(player.ship.rotation * time.delta_seconds());
         }
     }

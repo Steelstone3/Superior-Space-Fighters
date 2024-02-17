@@ -10,10 +10,10 @@ use crate::{
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
+    input::ButtonInput,
     math::Vec3,
     prelude::{
-        AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
-        With,
+        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
@@ -22,7 +22,7 @@ use bevy::{
 pub fn spawn_player_torpedo(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    input: Res<Input<KeyCode>>,
+    input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
