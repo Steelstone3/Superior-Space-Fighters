@@ -1,6 +1,6 @@
 use bevy::{
     ecs::{
-        query::{With, Without},
+        query::Without,
         system::{Commands, Query, Res},
     },
     input::{keyboard::KeyCode, ButtonInput},
@@ -31,7 +31,7 @@ pub fn spawn_player_targeting(
             };
 
             commands.spawn(SpriteBundle {
-                sprite: sprite,
+                sprite,
                 transform: *other_ship.0,
                 ..Default::default()
             });
