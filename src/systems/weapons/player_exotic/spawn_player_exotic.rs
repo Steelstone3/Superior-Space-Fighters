@@ -7,11 +7,11 @@ use crate::{
     },
     components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
 };
+use bevy::input::ButtonInput;
 use bevy::math::Vec3;
 use bevy::{
     prelude::{
-        AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
-        With,
+        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
     },
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
@@ -20,7 +20,7 @@ use bevy::{
 pub fn spawn_player_exotic(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    input: Res<Input<KeyCode>>,
+    input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
