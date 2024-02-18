@@ -3,7 +3,10 @@ use crate::systems::{
         camera_movement::camera_movement, increment_camera::increment_camera,
         scroll_camera::scroll_camera,
     },
-    player::{player_movement::player_movement, player_weapon_select::player_weapon_select},
+    player::{
+        player_movement::player_movement, player_sound::player_sound,
+        player_weapon_select::player_weapon_select,
+    },
     ships::ship_movement::ai_movement,
     space::move_empty_space::move_empty_space,
     weapons::{
@@ -44,6 +47,7 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, increment_camera)
             .add_systems(Update, move_empty_space)
             .add_systems(Update, player_movement)
+            .add_systems(Update, player_sound)
             .add_systems(Update, player_weapon_select)
             .add_systems(Update, spawn_player_blaster)
             .add_systems(Update, player_blaster_movement)
