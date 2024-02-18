@@ -13,7 +13,7 @@ use bevy::{
 
 use crate::components::{player_starship::PlayerStarship, starship::Starship};
 
-pub fn player_targeting(
+pub fn spawn_player_targeting(
     input: Res<ButtonInput<KeyCode>>,
     mut commands: Commands,
     mut other_ships: Query<(&Transform, &Starship), Without<PlayerStarship>>,
@@ -23,7 +23,7 @@ pub fn player_targeting(
             log::info!("Target Locked");
 
             let sprite = Sprite {
-                color: Color::rgb(1.0, 1.0, 1.0),
+                color: Color::rgba(1.0, 1.0, 1.0, 0.1),
                 flip_x: false,
                 flip_y: false,
                 custom_size: Some(Vec2::new(100.0, 100.0)),

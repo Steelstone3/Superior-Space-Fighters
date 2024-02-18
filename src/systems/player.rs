@@ -1,5 +1,5 @@
 pub mod player_movement;
 pub mod player_sound;
-pub mod player_targeting;
 pub mod player_weapon_select;
 pub mod spawn_player;
+pub mod spawn_player_targeting;
