@@ -1,39 +1,41 @@
+use crate::{
+    assets::{
+        images::starships::weapons::blasters::BlasterSprite,
+        sounds::starships::weapons::blasters::BlasterSound,
+    },
+    components::{
+        blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
+        weapon::Weapon,
+    },
+    resources::projectile_ammunition::ProjectileAmmunition,
+};
 use bevy::{
+    math::Vec3,
     prelude::{
         AssetServer, AudioBundle, Commands, Input, KeyCode, Query, Res, ResMut, Transform, Vec2,
         With,
     },
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode},
     utils::tracing,
-};
-
-use crate::{
-    assets::{images::weapons::blasters::BlasterSprite, sounds::weapons::blasters::BlasterSound},
-    components::{
-        blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
-    },
-    resources::{blaster_ammunition::BlasterAmmunition, selected_weapon::SelectedWeapon},
 };
 
 pub fn spawn_player_blaster(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<Input<KeyCode>>,
-    mut ammunition: ResMut<BlasterAmmunition>,
-    selected_weapon: ResMut<SelectedWeapon>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     player_query: Query<&Transform, With<PlayerStarship>>,
 ) {
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    if selected_weapon.0 == 1 {
+    if ammunition.selected_weapon == 1 {
         let mut player_transform = *player_query.get_single().unwrap();
         player_transform.translation.z = 3.0;
         let blaster_size = 100.0;
 
-        if ammunition.0 < 1 {
+        if ammunition.blaster_ammunition < 1 {
             tracing::info!("Out of blaster ammunition");
             return;
         }
@@ -42,9 +44,16 @@ pub fn spawn_player_blaster(
             blaster: Blaster {
                 blaster: BlasterSprite::Blaster1,
                 sound: BlasterSound::Blaster1,
-                velocity: 100.0,
-                size: Vec2::new(blaster_size, blaster_size),
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+                weapon: Weapon {
+                    original_position: Vec3::new(
+                        player_transform.translation.x,
+                        player_transform.translation.y,
+                        player_transform.translation.z,
+                    ),
+                    velocity: 100.0,
+                    size: Vec2::new(blaster_size, blaster_size),
+                    range: 750.0,
+                },
             },
         };
 
@@ -56,7 +65,7 @@ pub fn spawn_player_blaster(
         commands
             .spawn(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(blaster.blaster.size),
+                    custom_size: Some(blaster.blaster.weapon.size),
                     ..Default::default()
                 },
                 transform: player_transform,
@@ -70,10 +79,10 @@ pub fn spawn_player_blaster(
             ..Default::default()
         });
 
-        ammunition.0 -= 1;
+        ammunition.blaster_ammunition -= 1;
         tracing::info!(
             "Fired 1 blaster shot. {:?} blaster shots remaining",
-            ammunition.0
+            ammunition.blaster_ammunition
         );
     }
 }

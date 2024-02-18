@@ -1,6 +1,5 @@
+use crate::assets::images::starships::factions::SpaceShipSprite;
 use bevy::{ecs::component::Component, prelude::Vec2, transform::components::Transform};
-
-use crate::assets::images::space_ships::SpaceShipSprite;
 
 #[derive(Component)]
 pub struct Starship {

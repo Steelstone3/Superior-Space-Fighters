@@ -3,46 +3,70 @@ use std::fmt::Display;
 
 #[derive(RandGen)]
 pub enum SpaceStationSprite {
-    Station1,
-    Station2,
-    Station3,
-    Station4,
-    Station5,
-    Station6,
-    Station7,
-    Station8,
-    Station9,
+    AstralSovereignStation1,
+    AstralSovereignStation2,
+    AstralSovereignStation3,
+    GeneralStation1,
+    OuterReachMiningGuildStation1,
+    SiliconFangTechnocracyStation1,
+    SiliconFangTechnocracyStation2,
+    SiliconFangTechnocracyStation3,
+    SolarisUnionStation1,
 }
 
 impl Display for SpaceStationSprite {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            SpaceStationSprite::Station1 => {
-                write!(formatter, "images/space_stations/station_1.png")
+            SpaceStationSprite::AstralSovereignStation1 => {
+                write!(
+                    formatter,
+                    "images/space_stations/astral_sovereign_station_1.png"
+                )
             }
-            SpaceStationSprite::Station2 => {
-                write!(formatter, "images/space_stations/station_2.png")
+            SpaceStationSprite::AstralSovereignStation2 => {
+                write!(
+                    formatter,
+                    "images/space_stations/astral_sovereign_station_2.png"
+                )
             }
-            SpaceStationSprite::Station3 => {
-                write!(formatter, "images/space_stations/station_3.png")
+            SpaceStationSprite::AstralSovereignStation3 => {
+                write!(
+                    formatter,
+                    "images/space_stations/astral_sovereign_station_3.png"
+                )
             }
-            SpaceStationSprite::Station4 => {
-                write!(formatter, "images/space_stations/station_4.png")
+            SpaceStationSprite::GeneralStation1 => {
+                write!(formatter, "images/space_stations/general_station_1.png")
             }
-            SpaceStationSprite::Station5 => {
-                write!(formatter, "images/space_stations/station_5.png")
+            SpaceStationSprite::OuterReachMiningGuildStation1 => {
+                write!(
+                    formatter,
+                    "images/space_stations/outer_reach_mining_guild_station_1.png"
+                )
             }
-            SpaceStationSprite::Station6 => {
-                write!(formatter, "images/space_stations/station_6.png")
+            SpaceStationSprite::SiliconFangTechnocracyStation1 => {
+                write!(
+                    formatter,
+                    "images/space_stations/silicon_fang_technocracy_station_1.png"
+                )
             }
-            SpaceStationSprite::Station7 => {
-                write!(formatter, "images/space_stations/station_7.png")
+            SpaceStationSprite::SiliconFangTechnocracyStation2 => {
+                write!(
+                    formatter,
+                    "images/space_stations/silicon_fang_technocracy_station_2.png"
+                )
             }
-            SpaceStationSprite::Station8 => {
-                write!(formatter, "images/space_stations/station_8.png")
+            SpaceStationSprite::SiliconFangTechnocracyStation3 => {
+                write!(
+                    formatter,
+                    "images/space_stations/silicon_fang_technocracy_station_3.png"
+                )
             }
-            SpaceStationSprite::Station9 => {
-                write!(formatter, "images/space_stations/station_9.png")
+            SpaceStationSprite::SolarisUnionStation1 => {
+                write!(
+                    formatter,
+                    "images/space_stations/solaris_union_station_1.png"
+                )
             }
         }
     }

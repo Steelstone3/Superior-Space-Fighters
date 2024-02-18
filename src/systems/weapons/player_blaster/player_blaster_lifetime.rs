@@ -1,30 +1,31 @@
-use bevy::{
-    prelude::{Commands, Entity, Query, Res, ResMut},
-    time::Time,
-    utils::tracing,
-};
-
 use crate::{
-    components::player_blaster::PlayerBlaster, resources::blaster_ammunition::BlasterAmmunition,
+    components::player_blaster::PlayerBlaster,
+    resources::projectile_ammunition::ProjectileAmmunition,
+};
+use bevy::{
+    prelude::{Commands, Entity, Query, ResMut},
+    transform::components::Transform,
+    utils::tracing,
 };
 
 pub fn player_blaster_lifetime(
     mut commands: Commands,
-    time: Res<Time>,
-    mut blasters: Query<(Entity, &mut PlayerBlaster)>,
-    mut blaster_ammunition: ResMut<BlasterAmmunition>,
+    mut blasters: Query<(Entity, &mut Transform, &mut PlayerBlaster)>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
-    for (blaster_entity, mut blaster) in &mut blasters {
-        blaster.blaster.lifetime.tick(time.delta());
+    for (blaster_entity, blaster_transform, blaster) in &mut blasters {
+        let is_past_maximum_range =
+            (blaster_transform.translation - blaster.blaster.weapon.original_position).length()
+                > blaster.blaster.weapon.range;
 
-        if blaster.blaster.lifetime.finished() {
+        if is_past_maximum_range {
             commands.entity(blaster_entity).despawn();
 
-            blaster_ammunition.0 += 1;
+            ammunition.blaster_ammunition += 1;
 
             tracing::info!(
                 "Blasters ammunition recovered. Current blaster ammunition: {:?}",
-                blaster_ammunition.0
+                ammunition.blaster_ammunition
             );
         }
     }

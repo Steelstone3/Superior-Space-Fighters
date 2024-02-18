@@ -13,15 +13,15 @@ pub fn increment_camera(
     let mut camera_projection = camera_projection_query.single_mut();
 
     if input.just_pressed(KeyCode::Equals) {
-        camera_settings.current_zoom = (camera_settings.current_zoom * 0.9
+        camera_settings.current_zoom = (camera_settings.current_zoom * camera_settings.zoom_out
             / camera_settings.zoom_speed)
-            .clamp(camera_settings.min_zoom, camera_settings.max_zoom);
+            .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
         tracing::info!("Camera zoomed in");
     }
     if input.just_pressed(KeyCode::Minus) {
         camera_settings.current_zoom =
-            (camera_settings.current_zoom * 1.1 * camera_settings.zoom_speed)
-                .clamp(camera_settings.min_zoom, camera_settings.max_zoom);
+            (camera_settings.current_zoom * camera_settings.zoom_out * camera_settings.zoom_speed)
+                .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);
         tracing::info!("Camera zoomed out");
     }
     if input.just_pressed(KeyCode::Home) {

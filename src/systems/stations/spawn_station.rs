@@ -1,6 +1,6 @@
 use crate::{
     components::station::Station,
-    systems::controllers::random_generator::{generate_seed, random_range_f32},
+    systems::controllers::random_generator::{generate_seed, random_value_f32},
 };
 use bevy::{
     prelude::{AssetServer, Commands, Res, Vec2, Vec3},
@@ -25,8 +25,8 @@ pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServe
             texture,
             transform: bevy::prelude::Transform {
                 translation: Vec3::new(
-                    random_range_f32(generate_seed(), -320.0, 320.0),
-                    random_range_f32(generate_seed(), -240.0, 240.0),
+                    random_value_f32(generate_seed(), -320.0..320.0),
+                    random_value_f32(generate_seed(), -320.0..320.0),
                     2.0,
                 ),
                 ..Default::default()
