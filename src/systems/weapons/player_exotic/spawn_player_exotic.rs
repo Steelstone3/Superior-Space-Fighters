@@ -1,3 +1,4 @@
+use crate::assets::sounds::starships::weapons::impacts::ImpactSound;
 use crate::components::weapon::Weapon;
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
 use crate::{
@@ -40,8 +41,9 @@ pub fn spawn_player_exotic(
 
         let exotic = PlayerExotic {
             exotic: Exotic {
-                exotic: ExoticSprite::Exotic1,
-                sound: ExoticSound::Exotic1,
+                exotic: ExoticSprite::default(),
+                firing_sound: ExoticSound::default(),
+                impact_sound: ImpactSound::default(),
                 weapon: Weapon {
                     original_position: Vec3::new(
                         player_transform.translation.x,
@@ -56,7 +58,7 @@ pub fn spawn_player_exotic(
         };
 
         let image_path = exotic.exotic.exotic.to_string();
-        let sound_path = exotic.exotic.sound.to_string();
+        let sound_path = exotic.exotic.firing_sound.to_string();
 
         let texture = asset_server.load(image_path);
 

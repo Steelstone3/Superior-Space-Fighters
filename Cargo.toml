@@ -15,10 +15,10 @@ include = []
 bevy = { version = "0.13", features = ["wayland", "x11"] }
 wayland-sys = "0.30"
 float-lerp = "0"
-rand="0"
+rand = "0"
 rand_derive2 ="0"
 rayon = "1"
-# rstest = "0"
+rstest = "0"
 # bevy_iced = "0.4"
 
 [workspace]

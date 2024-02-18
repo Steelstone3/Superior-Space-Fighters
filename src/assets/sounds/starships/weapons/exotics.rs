@@ -1,8 +1,9 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(RandGen)]
+#[derive(Default, RandGen)]
 pub enum ExoticSound {
+    #[default]
     Exotic1,
     Exotic2,
     Exotic3,
