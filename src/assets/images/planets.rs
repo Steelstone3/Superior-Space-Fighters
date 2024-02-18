@@ -1007,3 +1007,6 @@ impl Display for PlanetSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

@@ -47,3 +47,6 @@ impl Display for TorpedoSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

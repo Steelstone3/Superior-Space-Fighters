@@ -24,3 +24,6 @@ impl Display for CombatMusicSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

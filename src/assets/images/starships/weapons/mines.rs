@@ -47,3 +47,6 @@ impl Display for MineSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

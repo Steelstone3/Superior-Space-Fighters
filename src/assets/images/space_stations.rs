@@ -71,3 +71,6 @@ impl Display for SpaceStationSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

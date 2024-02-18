@@ -32,3 +32,6 @@ impl Display for TradingMusicSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

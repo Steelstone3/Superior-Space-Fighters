@@ -140,3 +140,6 @@ impl Display for SpaceSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

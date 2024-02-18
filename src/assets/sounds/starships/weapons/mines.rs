@@ -35,3 +35,6 @@ impl Display for MineSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

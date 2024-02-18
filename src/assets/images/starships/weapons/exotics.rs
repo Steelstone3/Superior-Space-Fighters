@@ -123,3 +123,6 @@ impl Display for ExoticSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

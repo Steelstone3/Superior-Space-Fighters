@@ -23,3 +23,6 @@ impl Display for TorpedoSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

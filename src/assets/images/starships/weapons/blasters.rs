@@ -124,3 +124,6 @@ impl Display for BlasterSprite {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

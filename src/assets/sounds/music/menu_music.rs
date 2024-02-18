@@ -20,3 +20,6 @@ impl Display for MenuMusicSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

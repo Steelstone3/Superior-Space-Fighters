@@ -19,3 +19,6 @@ impl Display for BlasterSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}

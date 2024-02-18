@@ -49,3 +49,6 @@ impl Display for ExplorationMusicSound {
         }
     }
 }
+
+#[cfg(test)]
+mod blaster_sound_should {}
