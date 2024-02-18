@@ -5,6 +5,7 @@ use crate::systems::{
     },
     player::{
         player_engine_rumble_sound::player_engine_rumble_sound, player_movement::player_movement,
+        player_targeting_movement::update_player_targeting,
         player_weapon_select::player_weapon_select, spawn_player_targeting::spawn_player_targeting,
     },
     ships::ship_movement::ai_movement,
@@ -65,6 +66,7 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, spawn_player_exotic)
             .add_systems(Update, player_exotic_movement)
             .add_systems(Update, player_exotic_lifetime)
-            .add_systems(Update, player_exotic_collision_with_starship);
+            .add_systems(Update, player_exotic_collision_with_starship)
+            .add_systems(Update, update_player_targeting);
     }
 }
