@@ -1,6 +1,8 @@
 use crate::components::{player_torpedo::PlayerTorpedo, starship::Starship};
 use bevy::{
-    ecs::query::Without,
+    asset::AssetServer,
+    audio::AudioBundle,
+    ecs::{query::Without, system::Res},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
@@ -9,10 +11,11 @@ use bevy::{
 // TODO multi-thread
 pub fn player_torpedo_collision_with_starship(
     mut commands: Commands,
+    asset_server: Res<AssetServer>,
     mut torpedoes: Query<(Entity, &mut Transform, &mut PlayerTorpedo), Without<Starship>>,
     mut starships: Query<(Entity, &mut Transform, &mut Starship)>,
 ) {
-    for (torpedo_entity, torpedo_transform, _torpedo) in &mut torpedoes {
+    for (torpedo_entity, torpedo_transform, torpedo) in &mut torpedoes {
         for (starship_entity, starship_transform, starship) in &mut starships {
             let distance_to_starship =
                 (torpedo_transform.translation - starship_transform.translation).length();
@@ -22,6 +25,11 @@ pub fn player_torpedo_collision_with_starship(
 
             if is_collision {
                 tracing::info!("Torpedo collision with starship");
+
+                commands.spawn(AudioBundle {
+                    source: asset_server.load(torpedo.torpedo.impact_sound.to_string()),
+                    ..Default::default()
+                });
 
                 commands.entity(torpedo_entity).despawn();
                 commands.entity(starship_entity).despawn();

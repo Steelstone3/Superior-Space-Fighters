@@ -1,7 +1,7 @@
 use crate::{
     assets::{
         images::starships::weapons::torpedos::TorpedoSprite,
-        sounds::starships::weapons::torpedos::TorpedoSound,
+        sounds::starships::weapons::{impacts::ImpactSound, torpedos::TorpedoSound},
     },
     components::{
         player_starship::PlayerStarship, player_torpedo::PlayerTorpedo, torpedo::Torpedo,
@@ -46,8 +46,9 @@ pub fn spawn_player_torpedo(
 
         let torpedo = PlayerTorpedo {
             torpedo: Torpedo {
-                torpedo: TorpedoSprite::Torpedo1,
-                sound: TorpedoSound::Torpedo1,
+                torpedo: TorpedoSprite::default(),
+                firing_sound: TorpedoSound::default(),
+                impact_sound: ImpactSound::default(),
                 weapon: Weapon {
                     original_position: Vec3::new(
                         player_transform.translation.x,
@@ -62,7 +63,7 @@ pub fn spawn_player_torpedo(
         };
 
         let image_path = torpedo.torpedo.torpedo.to_string();
-        let sound_path = torpedo.torpedo.sound.to_string();
+        let sound_path = torpedo.torpedo.firing_sound.to_string();
 
         let texture = asset_server.load(image_path);
 

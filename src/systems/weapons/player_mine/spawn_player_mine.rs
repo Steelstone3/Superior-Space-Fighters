@@ -1,6 +1,7 @@
 use crate::{
     assets::{
-        images::starships::weapons::mines::MineSprite, sounds::starships::weapons::mines::MineSound,
+        images::starships::weapons::mines::MineSprite,
+        sounds::starships::weapons::{impacts::ImpactSound, mines::MineSound},
     },
     components::{mine::Mine, player_mine::PlayerMine, player_starship::PlayerStarship},
     resources::projectile_ammunition::ProjectileAmmunition,
@@ -42,8 +43,9 @@ pub fn spawn_player_mine(
 
         let mine = PlayerMine {
             mine: Mine {
-                mine: MineSprite::Mine1,
-                sound: MineSound::Mine1,
+                mine: MineSprite::default(),
+                firing_sound: MineSound::default(),
+                impact_sound: ImpactSound::default(),
                 velocity: -5.0,
                 size: Vec2::new(100.0, 100.0),
                 lifetime: Timer::from_seconds(10.0, TimerMode::Once),
@@ -51,7 +53,7 @@ pub fn spawn_player_mine(
         };
 
         let image_path = mine.mine.mine.to_string();
-        let sound_path = mine.mine.sound.to_string();
+        let sound_path = mine.mine.firing_sound.to_string();
 
         let texture = asset_server.load(image_path);
 

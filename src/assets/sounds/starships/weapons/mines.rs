@@ -1,8 +1,9 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(RandGen)]
+#[derive(Default, RandGen)]
 pub enum MineSound {
+    #[default]
     Mine1,
     Mine2,
     Mine3,

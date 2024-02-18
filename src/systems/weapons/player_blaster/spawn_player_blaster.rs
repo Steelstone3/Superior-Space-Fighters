@@ -1,7 +1,7 @@
 use crate::{
     assets::{
         images::starships::weapons::blasters::BlasterSprite,
-        sounds::starships::weapons::blasters::BlasterSound,
+        sounds::starships::weapons::{blasters::BlasterSound, impacts::ImpactSound},
     },
     components::{
         blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
@@ -42,8 +42,9 @@ pub fn spawn_player_blaster(
 
         let blaster = PlayerBlaster {
             blaster: Blaster {
-                blaster: BlasterSprite::Blaster1,
-                sound: BlasterSound::Blaster1,
+                blaster: BlasterSprite::default(),
+                firing_sound: BlasterSound::default(),
+                impact_sound: ImpactSound::default(),
                 weapon: Weapon {
                     original_position: Vec3::new(
                         player_transform.translation.x,
@@ -58,7 +59,7 @@ pub fn spawn_player_blaster(
         };
 
         let image_path = blaster.blaster.blaster.to_string();
-        let sound_path = blaster.blaster.sound.to_string();
+        let sound_path = blaster.blaster.firing_sound.to_string();
 
         let texture = asset_server.load(image_path);
 
