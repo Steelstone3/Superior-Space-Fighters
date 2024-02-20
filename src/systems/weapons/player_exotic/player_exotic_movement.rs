@@ -1,7 +1,8 @@
 use bevy::prelude::{Query, Res, Transform, Vec3};
 use bevy::time::Time;
 
-use crate::components::player_exotic::PlayerExotic;
+use crate::components::weapons::player_exotic::PlayerExotic;
+
 
 pub fn player_exotic_movement(mut exotic: Query<(&mut Transform, &PlayerExotic)>, time: Res<Time>) {
     for (mut exotic_transform, exotic) in &mut exotic {

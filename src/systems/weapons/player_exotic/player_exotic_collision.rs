@@ -1,4 +1,3 @@
-use crate::components::{player_exotic::PlayerExotic, starship::Starship};
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
@@ -7,6 +6,8 @@ use bevy::{
     transform::components::Transform,
     utils::tracing,
 };
+
+use crate::components::{starship::Starship, weapons::player_exotic::PlayerExotic};
 
 // TODO multi-thread
 pub fn player_exotic_collision_with_starship(

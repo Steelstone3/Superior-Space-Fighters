@@ -1,13 +1,13 @@
 use crate::assets::sounds::starships::weapons::impacts::ImpactSound;
-use crate::components::weapon::Weapon;
+use crate::components::player_starship::PlayerStarship;
+use crate::components::weapons::exotic::Exotic;
+use crate::components::weapons::player_exotic::PlayerExotic;
+use crate::components::weapons::weapon::Weapon;
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
-use crate::{
-    assets::{
+use crate::assets::{
         images::starships::weapons::exotics::ExoticSprite,
         sounds::starships::weapons::exotics::ExoticSound,
-    },
-    components::{exotic::Exotic, player_exotic::PlayerExotic, player_starship::PlayerStarship},
-};
+    };
 use bevy::input::ButtonInput;
 use bevy::math::Vec3;
 use bevy::{

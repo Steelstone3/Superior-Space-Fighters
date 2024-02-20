@@ -16,8 +16,8 @@ impl PlayerBlaster {
 
 #[cfg(test)]
 mod blaster_should {
+    use crate::components::weapons::weapon::Weapon;
     use super::*;
-    use crate::components::weapon::Weapon;
     use bevy::math::Vec2;
 
     #[test]

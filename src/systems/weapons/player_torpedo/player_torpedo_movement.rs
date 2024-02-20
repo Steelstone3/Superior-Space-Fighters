@@ -1,6 +1,7 @@
-use crate::components::player_torpedo::PlayerTorpedo;
 use bevy::prelude::{Query, Res, Transform, Vec3};
 use bevy::time::Time;
+
+use crate::components::weapons::player_torpedo::PlayerTorpedo;
 
 pub fn player_torpedo_movement(
     mut torpedos: Query<(&mut Transform, &PlayerTorpedo)>,
