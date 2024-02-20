@@ -62,7 +62,7 @@ impl Display for ImpactSound {
 }
 
 #[cfg(test)]
-mod impacts_should {
+mod impact_sound_should {
     use super::*;
     use rstest::rstest;
 

@@ -70,7 +70,7 @@ impl Display for EngineSound {
 }
 
 #[cfg(test)]
-mod engines_should {
+mod engine_sound_should {
     use super::*;
     use rstest::rstest;
 

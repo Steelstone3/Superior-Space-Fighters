@@ -50,4 +50,12 @@ impl Display for MineSprite {
 }
 
 #[cfg(test)]
-mod blaster_sound_should {}
+mod mine_sprite_should {
+    #[test]
+    #[ignore]
+    fn have_a_default() {}
+
+    #[test]
+    #[ignore]
+    fn return_the_expected_file_path() {}
+}
