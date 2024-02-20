@@ -29,12 +29,13 @@ pub fn spawn_player_exotic(
         return;
     }
 
-    let player_transform = *player.get_single().unwrap();
+    let mut player_transform = *player.get_single().unwrap();
+    player_transform.translation.z = 3.0;
 
     let exotic = PlayerExotic::new(Vec3::new(
         player_transform.translation.x,
         player_transform.translation.y,
-        3.0,
+        player_transform.translation.z,
     ));
 
     let image_path = exotic.exotic.exotic.to_string();

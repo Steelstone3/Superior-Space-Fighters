@@ -36,11 +36,12 @@ pub fn spawn_player_torpedo(
     let torpedo_spawn_position =
         player_transform.translation + player_transform.up() * (torpedo_size / 1.5);
     player_transform.translation = torpedo_spawn_position;
+    player_transform.translation.z = 3.0;
 
     let torpedo = PlayerTorpedo::new(Vec3::new(
         player_transform.translation.x,
         player_transform.translation.y,
-        3.0,
+        player_transform.translation.z,
     ));
 
     let image_path = torpedo.torpedo.torpedo.to_string();

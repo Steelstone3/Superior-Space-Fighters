@@ -30,12 +30,13 @@ pub fn spawn_player_blaster(
         return;
     }
 
-    let player_transform = *player_query.get_single().unwrap();
+    let mut player_transform = *player_query.get_single().unwrap();
+    player_transform.translation.z = 3.0;
 
     let blaster = PlayerBlaster::new(Vec3::new(
         player_transform.translation.x,
         player_transform.translation.y,
-        3.0,
+        player_transform.translation.z,
     ));
 
     let image_path = blaster.blaster.blaster.to_string();
