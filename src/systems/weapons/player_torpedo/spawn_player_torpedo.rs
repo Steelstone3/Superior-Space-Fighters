@@ -1,20 +1,11 @@
 use crate::{
-    assets::{
-        images::starships::weapons::torpedos::TorpedoSprite,
-        sounds::starships::weapons::{impacts::ImpactSound, torpedos::TorpedoSound},
-    },
-    components::{
-        player_starship::PlayerStarship,
-        weapons::{player_torpedo::PlayerTorpedo, torpedo::Torpedo, weapon::Weapon},
-    },
+    components::{player_starship::PlayerStarship, weapons::player_torpedo::PlayerTorpedo},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     input::ButtonInput,
     math::Vec3,
-    prelude::{
-        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -39,31 +30,18 @@ pub fn spawn_player_torpedo(
         return;
     }
 
-    let mut player_transform = *player.get_single().unwrap();
     let torpedo_size = 80.0;
+    let mut player_transform = *player.get_single().unwrap();
 
     let torpedo_spawn_position =
         player_transform.translation + player_transform.up() * (torpedo_size / 1.5);
     player_transform.translation = torpedo_spawn_position;
-    player_transform.translation.z = 3.0;
 
-    let torpedo = PlayerTorpedo {
-        torpedo: Torpedo {
-            torpedo: TorpedoSprite::default(),
-            firing_sound: TorpedoSound::default(),
-            impact_sound: ImpactSound::default(),
-            weapon: Weapon {
-                original_position: Vec3::new(
-                    player_transform.translation.x,
-                    player_transform.translation.y,
-                    player_transform.translation.z,
-                ),
-                velocity: 125.0,
-                size: Vec2::new(torpedo_size, torpedo_size),
-                range: 1500.0,
-            },
-        },
-    };
+    let torpedo = PlayerTorpedo::new(Vec3::new(
+        player_transform.translation.x,
+        player_transform.translation.y,
+        3.0,
+    ));
 
     let image_path = torpedo.torpedo.torpedo.to_string();
     let sound_path = torpedo.torpedo.firing_sound.to_string();
