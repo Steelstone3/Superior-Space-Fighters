@@ -1,7 +1,7 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(Default, RandGen)]
+#[derive(Default, RandGen, Debug, PartialEq)]
 pub enum BlasterSprite {
     #[default]
     Blaster1,

@@ -1,20 +1,11 @@
 use crate::{
-    assets::{
-        images::starships::weapons::blasters::BlasterSprite,
-        sounds::starships::weapons::{blasters::BlasterSound, impacts::ImpactSound},
-    },
-    components::{
-        blaster::Blaster, player_blaster::PlayerBlaster, player_starship::PlayerStarship,
-        weapon::Weapon,
-    },
+    components::{player_blaster::PlayerBlaster, player_starship::PlayerStarship},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     input::ButtonInput,
     math::Vec3,
-    prelude::{
-        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -26,64 +17,52 @@ pub fn spawn_player_blaster(
     mut ammunition: ResMut<ProjectileAmmunition>,
     player_query: Query<&Transform, With<PlayerStarship>>,
 ) {
+    if ammunition.selected_weapon != 1 {
+        return;
+    }
+
     if !input.just_pressed(KeyCode::Space) {
         return;
     }
 
-    if ammunition.selected_weapon == 1 {
-        let mut player_transform = *player_query.get_single().unwrap();
-        player_transform.translation.z = 3.0;
-        let blaster_size = 100.0;
-
-        if ammunition.blaster_ammunition < 1 {
-            tracing::info!("Out of blaster ammunition");
-            return;
-        }
-
-        let blaster = PlayerBlaster {
-            blaster: Blaster {
-                blaster: BlasterSprite::default(),
-                firing_sound: BlasterSound::default(),
-                impact_sound: ImpactSound::default(),
-                weapon: Weapon {
-                    original_position: Vec3::new(
-                        player_transform.translation.x,
-                        player_transform.translation.y,
-                        player_transform.translation.z,
-                    ),
-                    velocity: 100.0,
-                    size: Vec2::new(blaster_size, blaster_size),
-                    range: 750.0,
-                },
-            },
-        };
-
-        let image_path = blaster.blaster.blaster.to_string();
-        let sound_path = blaster.blaster.firing_sound.to_string();
-
-        let texture = asset_server.load(image_path);
-
-        commands
-            .spawn(SpriteBundle {
-                sprite: Sprite {
-                    custom_size: Some(blaster.blaster.weapon.size),
-                    ..Default::default()
-                },
-                transform: player_transform,
-                texture,
-                ..Default::default()
-            })
-            .insert(blaster);
-
-        commands.spawn(AudioBundle {
-            source: asset_server.load(sound_path),
-            ..Default::default()
-        });
-
-        ammunition.blaster_ammunition -= 1;
-        tracing::info!(
-            "Fired 1 blaster shot. {:?} blaster shots remaining",
-            ammunition.blaster_ammunition
-        );
+    if ammunition.blaster_ammunition < 1 {
+        tracing::info!("Out of blaster ammunition");
+        return;
     }
+
+    let player_transform = *player_query.get_single().unwrap();
+
+    let blaster = PlayerBlaster::new(Vec3::new(
+        player_transform.translation.x,
+        player_transform.translation.y,
+        3.0,
+    ));
+
+    let image_path = blaster.blaster.blaster.to_string();
+
+    let texture = asset_server.load(image_path);
+    let sound_path = blaster.blaster.firing_sound.to_string();
+
+    commands
+        .spawn(SpriteBundle {
+            sprite: Sprite {
+                custom_size: Some(blaster.blaster.weapon.size),
+                ..Default::default()
+            },
+            transform: player_transform,
+            texture,
+            ..Default::default()
+        })
+        .insert(blaster);
+
+    commands.spawn(AudioBundle {
+        source: asset_server.load(sound_path),
+        ..Default::default()
+    });
+
+    ammunition.blaster_ammunition -= 1;
+    tracing::info!(
+        "Fired 1 blaster shot. {:?} blaster shots remaining",
+        ammunition.blaster_ammunition
+    );
 }
