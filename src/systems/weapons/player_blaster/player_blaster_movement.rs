@@ -3,7 +3,6 @@ use bevy::time::Time;
 
 use crate::components::weapons::player_blaster::PlayerBlaster;
 
-
 pub fn player_blaster_movement(
     mut blasters: Query<(&mut Transform, &PlayerBlaster)>,
     time: Res<Time>,

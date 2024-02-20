@@ -1,5 +1,6 @@
 use crate::{
-    components::weapons::player_torpedo::PlayerTorpedo, resources::projectile_ammunition::ProjectileAmmunition
+    components::weapons::player_torpedo::PlayerTorpedo,
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     prelude::{Commands, Entity, Query, ResMut},

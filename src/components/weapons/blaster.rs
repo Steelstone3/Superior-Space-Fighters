@@ -3,10 +3,7 @@ use crate::assets::{
     images::starships::weapons::blasters::BlasterSprite,
     sounds::starships::weapons::{blasters::BlasterSound, impacts::ImpactSound},
 };
-use bevy::{
-    ecs::component::Component,
-    math::Vec3,
-};
+use bevy::{ecs::component::Component, math::Vec3};
 
 #[derive(Component, Debug, PartialEq)]
 pub struct Blaster {
@@ -29,9 +26,9 @@ impl Blaster {
 
 #[cfg(test)]
 mod blaster_should {
-    use bevy::math::Vec2;
     use super::*;
-    
+    use bevy::math::Vec2;
+
     #[test]
     fn create_new() {
         // Given

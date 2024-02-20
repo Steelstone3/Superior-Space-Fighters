@@ -3,7 +3,6 @@ use bevy::time::Time;
 
 use crate::components::weapons::player_exotic::PlayerExotic;
 
-
 pub fn player_exotic_movement(mut exotic: Query<(&mut Transform, &PlayerExotic)>, time: Res<Time>) {
     for (mut exotic_transform, exotic) in &mut exotic {
         let blaster_speed = exotic.exotic.weapon.velocity * time.delta_seconds();

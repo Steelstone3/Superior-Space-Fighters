@@ -2,7 +2,12 @@ use crate::{
     assets::{
         images::starships::weapons::mines::MineSprite,
         sounds::starships::weapons::{impacts::ImpactSound, mines::MineSound},
-    }, components::{player_starship::PlayerStarship, weapons::{mine::Mine, player_mine::PlayerMine}}, resources::projectile_ammunition::ProjectileAmmunition
+    },
+    components::{
+        player_starship::PlayerStarship,
+        weapons::{mine::Mine, player_mine::PlayerMine},
+    },
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     input::ButtonInput,

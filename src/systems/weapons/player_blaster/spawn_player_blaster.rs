@@ -1,5 +1,6 @@
 use crate::{
-    components::{player_starship::PlayerStarship, weapons::player_blaster::PlayerBlaster}, resources::projectile_ammunition::ProjectileAmmunition
+    components::{player_starship::PlayerStarship, weapons::player_blaster::PlayerBlaster},
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     input::ButtonInput,

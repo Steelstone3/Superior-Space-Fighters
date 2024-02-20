@@ -3,7 +3,10 @@ use crate::{
         images::starships::weapons::torpedos::TorpedoSprite,
         sounds::starships::weapons::{impacts::ImpactSound, torpedos::TorpedoSound},
     },
-    components::{player_starship::PlayerStarship, weapons::{player_torpedo::PlayerTorpedo, torpedo::Torpedo, weapon::Weapon}},
+    components::{
+        player_starship::PlayerStarship,
+        weapons::{player_torpedo::PlayerTorpedo, torpedo::Torpedo, weapon::Weapon},
+    },
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
