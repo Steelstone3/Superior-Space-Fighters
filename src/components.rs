@@ -1,14 +1,6 @@
-pub mod blaster;
-pub mod exotic;
-pub mod mine;
 pub mod planet;
-pub mod player_blaster;
-pub mod player_exotic;
-pub mod player_mine;
 pub mod player_starship;
-pub mod player_torpedo;
 pub mod space;
 pub mod starship;
 pub mod station;
-pub mod torpedo;
-pub mod weapon;
+pub mod weapons;

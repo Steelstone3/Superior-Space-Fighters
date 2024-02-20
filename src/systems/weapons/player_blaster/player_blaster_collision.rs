@@ -1,4 +1,4 @@
-use crate::components::{player_blaster::PlayerBlaster, starship::Starship};
+use crate::components::{starship::Starship, weapons::player_blaster::PlayerBlaster};
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,

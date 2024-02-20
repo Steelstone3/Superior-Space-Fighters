@@ -1,5 +1,6 @@
 use crate::{
-    components::player_mine::PlayerMine, resources::projectile_ammunition::ProjectileAmmunition,
+    components::weapons::player_mine::PlayerMine,
+    resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     prelude::{Commands, Entity, Query, Res, ResMut},

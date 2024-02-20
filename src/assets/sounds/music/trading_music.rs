@@ -34,4 +34,12 @@ impl Display for TradingMusicSound {
 }
 
 #[cfg(test)]
-mod blaster_sound_should {}
+mod trading_music_should {
+    #[test]
+    #[ignore]
+    fn have_a_default() {}
+
+    #[test]
+    #[ignore]
+    fn return_the_expected_file_path() {}
+}

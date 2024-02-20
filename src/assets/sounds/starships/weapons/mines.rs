@@ -1,7 +1,7 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(Default, RandGen)]
+#[derive(Default, RandGen, Debug, PartialEq)]
 pub enum MineSound {
     #[default]
     Mine1,
@@ -38,4 +38,12 @@ impl Display for MineSound {
 }
 
 #[cfg(test)]
-mod blaster_sound_should {}
+mod mine_sound_should {
+    #[test]
+    #[ignore]
+    fn have_a_default() {}
+
+    #[test]
+    #[ignore]
+    fn return_the_expected_file_path() {}
+}

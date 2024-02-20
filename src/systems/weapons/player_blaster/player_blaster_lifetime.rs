@@ -1,5 +1,5 @@
 use crate::{
-    components::player_blaster::PlayerBlaster,
+    components::weapons::player_blaster::PlayerBlaster,
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{

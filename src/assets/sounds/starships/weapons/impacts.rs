@@ -1,7 +1,7 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(Default, RandGen)]
+#[derive(Default, RandGen, Debug, PartialEq, Eq)]
 pub enum ImpactSound {
     #[default]
     Impact1,
@@ -62,7 +62,7 @@ impl Display for ImpactSound {
 }
 
 #[cfg(test)]
-mod impacts_should {
+mod impact_sound_should {
     use super::*;
     use rstest::rstest;
 

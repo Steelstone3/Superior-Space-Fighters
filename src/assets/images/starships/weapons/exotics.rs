@@ -1,7 +1,7 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(Default, RandGen)]
+#[derive(Default, RandGen, Debug, PartialEq)]
 pub enum ExoticSprite {
     #[default]
     Exotic1,
@@ -126,4 +126,12 @@ impl Display for ExoticSprite {
 }
 
 #[cfg(test)]
-mod blaster_sound_should {}
+mod exotic_sprite_should {
+    #[test]
+    #[ignore]
+    fn have_a_default() {}
+
+    #[test]
+    #[ignore]
+    fn return_the_expected_file_path() {}
+}

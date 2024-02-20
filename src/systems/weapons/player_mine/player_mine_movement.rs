@@ -1,7 +1,7 @@
 use bevy::prelude::{Query, Res, Transform, Vec3};
 use bevy::time::Time;
 
-use crate::components::player_mine::PlayerMine;
+use crate::components::weapons::player_mine::PlayerMine;
 
 pub fn player_mine_movement(mut mines: Query<(&mut Transform, &PlayerMine)>, time: Res<Time>) {
     for (mut mine_transform, mine) in &mut mines {
