@@ -1,19 +1,10 @@
-use crate::assets::sounds::starships::weapons::impacts::ImpactSound;
 use crate::components::player_starship::PlayerStarship;
-use crate::components::weapons::exotic::Exotic;
 use crate::components::weapons::player_exotic::PlayerExotic;
-use crate::components::weapons::weapon::Weapon;
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
-use crate::assets::{
-        images::starships::weapons::exotics::ExoticSprite,
-        sounds::starships::weapons::exotics::ExoticSound,
-    };
 use bevy::input::ButtonInput;
 use bevy::math::Vec3;
 use bevy::{
-    prelude::{
-        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -38,27 +29,13 @@ pub fn spawn_player_exotic(
         return;
     }
 
-    let mut player_transform = *player.get_single().unwrap();
-    player_transform.translation.z = 3.0;
-    let exotic_size = 80.0;
+    let player_transform = *player.get_single().unwrap();
 
-    let exotic = PlayerExotic {
-        exotic: Exotic {
-            exotic: ExoticSprite::default(),
-            firing_sound: ExoticSound::default(),
-            impact_sound: ImpactSound::default(),
-            weapon: Weapon {
-                original_position: Vec3::new(
-                    player_transform.translation.x,
-                    player_transform.translation.y,
-                    player_transform.translation.z,
-                ),
-                size: Vec2::new(exotic_size, exotic_size),
-                velocity: 75.0,
-                range: 500.0,
-            },
-        },
-    };
+    let exotic = PlayerExotic::new(Vec3::new(
+        player_transform.translation.x,
+        player_transform.translation.y,
+        3.0,
+    ));
 
     let image_path = exotic.exotic.exotic.to_string();
     let sound_path = exotic.exotic.firing_sound.to_string();

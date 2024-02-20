@@ -22,7 +22,7 @@ impl Blaster {
             blaster: BlasterSprite::default(),
             firing_sound: BlasterSound::default(),
             impact_sound: ImpactSound::default(),
-            weapon: Weapon::new(original_position),
+            weapon: Weapon::new(original_position, 100.0, 100.0, 750.0),
         }
     }
 }
