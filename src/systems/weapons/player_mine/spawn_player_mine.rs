@@ -1,21 +1,11 @@
 use crate::{
-    assets::{
-        images::starships::weapons::mines::MineSprite,
-        sounds::starships::weapons::{impacts::ImpactSound, mines::MineSound},
-    },
-    components::{
-        player_starship::PlayerStarship,
-        weapons::{mine::Mine, player_mine::PlayerMine},
-    },
+    components::{player_starship::PlayerStarship, weapons::player_mine::PlayerMine},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
     input::ButtonInput,
-    prelude::{
-        AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, Vec2, With,
-    },
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
     sprite::{Sprite, SpriteBundle},
-    time::{Timer, TimerMode},
     utils::tracing,
 };
 
@@ -47,16 +37,7 @@ pub fn spawn_player_mine(
     player_transform.translation = mine_spawn_position;
     player_transform.translation.z = 3.0;
 
-    let mine = PlayerMine {
-        mine: Mine {
-            mine: MineSprite::default(),
-            firing_sound: MineSound::default(),
-            impact_sound: ImpactSound::default(),
-            velocity: -5.0,
-            size: Vec2::new(100.0, 100.0),
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
-        },
-    };
+    let mine = PlayerMine::default();
 
     let image_path = mine.mine.mine.to_string();
     let sound_path = mine.mine.firing_sound.to_string();
