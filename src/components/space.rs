@@ -5,6 +5,13 @@ use bevy::{ecs::component::Component, math::Vec3, prelude::Vec2};
 pub struct Space {
     pub asset: SpaceSprite,
     pub size: Vec2,
-    pub space_grid_position: Vec2,
-    pub space_location: Vec3,
+    pub grid_position: Vec2,
+    pub location: Vec3,
+}
+
+#[cfg(test)]
+mod space_should {
+    #[test]
+    #[ignore]
+    fn create_new() {}
 }

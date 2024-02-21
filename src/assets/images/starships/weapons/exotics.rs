@@ -127,11 +127,116 @@ impl Display for ExoticSprite {
 
 #[cfg(test)]
 mod exotic_sprite_should {
-    #[test]
-    #[ignore]
-    fn have_a_default() {}
+    use super::*;
+    use rstest::rstest;
 
     #[test]
-    #[ignore]
-    fn return_the_expected_file_path() {}
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "images/starships/weapons/exotics/exotic_1.png";
+        let exotic_sprite = ExoticSprite::default();
+
+        // When
+        let file_path = exotic_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(ExoticSprite::Exotic1, "images/starships/weapons/exotics/exotic_1.png")]
+    #[case(ExoticSprite::Exotic2, "images/starships/weapons/exotics/exotic_2.png")]
+    #[case(ExoticSprite::Exotic3, "images/starships/weapons/exotics/exotic_3.png")]
+    #[case(ExoticSprite::Exotic4, "images/starships/weapons/exotics/exotic_4.png")]
+    #[case(ExoticSprite::Exotic5, "images/starships/weapons/exotics/exotic_5.png")]
+    #[case(ExoticSprite::Exotic6, "images/starships/weapons/exotics/exotic_6.png")]
+    #[case(ExoticSprite::Exotic7, "images/starships/weapons/exotics/exotic_7.png")]
+    #[case(ExoticSprite::Exotic8, "images/starships/weapons/exotics/exotic_8.png")]
+    #[case(ExoticSprite::Exotic9, "images/starships/weapons/exotics/exotic_9.png")]
+    #[case(
+        ExoticSprite::Exotic10,
+        "images/starships/weapons/exotics/exotic_10.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic11,
+        "images/starships/weapons/exotics/exotic_11.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic12,
+        "images/starships/weapons/exotics/exotic_12.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic13,
+        "images/starships/weapons/exotics/exotic_13.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic14,
+        "images/starships/weapons/exotics/exotic_14.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic15,
+        "images/starships/weapons/exotics/exotic_15.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic16,
+        "images/starships/weapons/exotics/exotic_16.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic17,
+        "images/starships/weapons/exotics/exotic_17.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic18,
+        "images/starships/weapons/exotics/exotic_18.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic19,
+        "images/starships/weapons/exotics/exotic_19.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic20,
+        "images/starships/weapons/exotics/exotic_20.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic21,
+        "images/starships/weapons/exotics/exotic_21.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic22,
+        "images/starships/weapons/exotics/exotic_22.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic23,
+        "images/starships/weapons/exotics/exotic_23.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic24,
+        "images/starships/weapons/exotics/exotic_24.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic25,
+        "images/starships/weapons/exotics/exotic_25.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic26,
+        "images/starships/weapons/exotics/exotic_26.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic27,
+        "images/starships/weapons/exotics/exotic_27.png"
+    )]
+    #[case(
+        ExoticSprite::Exotic28,
+        "images/starships/weapons/exotics/exotic_28.png"
+    )]
+    fn return_the_expected_file_path(
+        #[case] exotic_sprite: ExoticSprite,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = exotic_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
 }

@@ -143,11 +143,63 @@ impl Display for SpaceSprite {
 
 #[cfg(test)]
 mod space_sprite_should {
-    #[test]
-    #[ignore]
-    fn have_a_default() {}
+    use super::*;
+    use rstest::rstest;
 
     #[test]
-    #[ignore]
-    fn return_the_expected_file_path() {}
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "images/space/space/space_1.png";
+        let space_sprite = SpaceSprite::default();
+
+        // When
+        let file_path = space_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(SpaceSprite::Space1, "images/space/space/space_1.png")]
+    #[case(SpaceSprite::Space2, "images/space/space/space_2.png")]
+    #[case(SpaceSprite::Space3, "images/space/space/space_3.png")]
+    #[case(SpaceSprite::Space4, "images/space/space/space_4.png")]
+    #[case(SpaceSprite::Space5, "images/space/space/space_5.png")]
+    #[case(SpaceSprite::Space6, "images/space/space/space_6.png")]
+    #[case(SpaceSprite::Space7, "images/space/space/space_7.png")]
+    #[case(SpaceSprite::Space8, "images/space/space/space_8.png")]
+    #[case(SpaceSprite::Space9, "images/space/purple_nebula/purple_nebula_1.png")]
+    #[case(SpaceSprite::Space10, "images/space/purple_nebula/purple_nebula_2.png")]
+    #[case(SpaceSprite::Space11, "images/space/purple_nebula/purple_nebula_3.png")]
+    #[case(SpaceSprite::Space12, "images/space/purple_nebula/purple_nebula_4.png")]
+    #[case(SpaceSprite::Space13, "images/space/purple_nebula/purple_nebula_5.png")]
+    #[case(SpaceSprite::Space14, "images/space/purple_nebula/purple_nebula_6.png")]
+    #[case(SpaceSprite::Space15, "images/space/purple_nebula/purple_nebula_7.png")]
+    #[case(SpaceSprite::Space16, "images/space/purple_nebula/purple_nebula_8.png")]
+    #[case(SpaceSprite::Space17, "images/space/green_nebula/green_nebula_1.png")]
+    #[case(SpaceSprite::Space18, "images/space/green_nebula/green_nebula_2.png")]
+    #[case(SpaceSprite::Space19, "images/space/green_nebula/green_nebula_3.png")]
+    #[case(SpaceSprite::Space20, "images/space/green_nebula/green_nebula_4.png")]
+    #[case(SpaceSprite::Space21, "images/space/green_nebula/green_nebula_5.png")]
+    #[case(SpaceSprite::Space22, "images/space/green_nebula/green_nebula_6.png")]
+    #[case(SpaceSprite::Space23, "images/space/green_nebula/green_nebula_7.png")]
+    #[case(SpaceSprite::Space24, "images/space/green_nebula/green_nebula_8.png")]
+    #[case(SpaceSprite::Space25, "images/space/blue_nebula/blue_nebula_1.png")]
+    #[case(SpaceSprite::Space26, "images/space/blue_nebula/blue_nebula_2.png")]
+    #[case(SpaceSprite::Space27, "images/space/blue_nebula/blue_nebula_3.png")]
+    #[case(SpaceSprite::Space28, "images/space/blue_nebula/blue_nebula_4.png")]
+    #[case(SpaceSprite::Space29, "images/space/blue_nebula/blue_nebula_5.png")]
+    #[case(SpaceSprite::Space30, "images/space/blue_nebula/blue_nebula_6.png")]
+    #[case(SpaceSprite::Space31, "images/space/blue_nebula/blue_nebula_7.png")]
+    #[case(SpaceSprite::Space32, "images/space/blue_nebula/blue_nebula_8.png")]
+    fn return_the_expected_file_path(
+        #[case] space_sprite: SpaceSprite,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = space_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
 }
