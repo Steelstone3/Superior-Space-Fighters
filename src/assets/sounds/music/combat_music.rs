@@ -27,11 +27,40 @@ impl Display for CombatMusicSound {
 
 #[cfg(test)]
 mod combat_music_should {
-    #[test]
-    #[ignore]
-    fn have_a_default() {}
+    use super::*;
+    use rstest::rstest;
 
     #[test]
-    #[ignore]
-    fn return_the_expected_file_path() {}
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "sounds/music/combat/pirate_combat.ogg";
+        let combat_music_sound = CombatMusicSound::default();
+
+        // When
+        let file_path = combat_music_sound.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(
+        CombatMusicSound::AstralSovereign,
+        "sounds/music/combat/astral_sovereign_combat.ogg"
+    )]
+    #[case(CombatMusicSound::Pirate, "sounds/music/combat/pirate_combat.ogg")]
+    #[case(
+        CombatMusicSound::SolarisUnion,
+        "sounds/music/combat/solaris_union_combat.ogg"
+    )]
+    fn return_the_expected_file_path(
+        #[case] combat_music_sound: CombatMusicSound,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = combat_music_sound.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path)
+    }
 }
