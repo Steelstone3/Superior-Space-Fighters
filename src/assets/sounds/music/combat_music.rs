@@ -34,10 +34,9 @@ mod combat_music_should {
     fn have_a_default() {
         // Given
         let expected_file_path = "sounds/music/combat/pirate_combat.ogg";
-        let combat_music_sound = CombatMusicSound::default();
 
         // When
-        let file_path = combat_music_sound.to_string();
+        let file_path = CombatMusicSound::default().to_string();
 
         // Then
         assert_eq!(expected_file_path, file_path);
