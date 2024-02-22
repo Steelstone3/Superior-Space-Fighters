@@ -1,7 +1,7 @@
 use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[derive(RandGen)]
+#[derive(RandGen, Debug, PartialEq)]
 pub enum PlanetSprite {
     Planet1,
     Planet2,
