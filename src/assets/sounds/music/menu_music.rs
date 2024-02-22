@@ -23,11 +23,32 @@ impl Display for MenuMusicSound {
 
 #[cfg(test)]
 mod menu_music_should {
-    #[test]
-    #[ignore]
-    fn have_a_default() {}
+    use super::*;
+    use rstest::rstest;
 
     #[test]
-    #[ignore]
-    fn return_the_expected_file_path() {}
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "sounds/music/menu/menu.ogg";
+
+        // When
+        let file_path = MenuMusicSound::default().to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(MenuMusicSound::Menu, "sounds/music/menu/menu.ogg")]
+    #[case(MenuMusicSound::Credits, "sounds/music/menu/credits.ogg")]
+    fn return_the_expected_file_path(
+        #[case] menu_music_sound: MenuMusicSound,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = menu_music_sound.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path)
+    }
 }
