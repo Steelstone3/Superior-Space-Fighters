@@ -1,7 +1,7 @@
 use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[derive(RandGen, Default)]
+#[derive(RandGen, Copy, Clone, Default, Debug, PartialEq)]
 pub enum SpaceSprite {
     #[default]
     Space1,
