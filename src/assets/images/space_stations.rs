@@ -74,7 +74,54 @@ impl Display for SpaceStationSprite {
 
 #[cfg(test)]
 mod space_station_sprite_should {
-    #[test]
-    #[ignore]
-    fn return_the_expected_file_path() {}
+    use super::*;
+    use rstest::rstest;
+
+    #[rstest]
+    #[case(
+        SpaceStationSprite::AstralSovereignStation1,
+        "images/space_stations/astral_sovereign_station_1.png"
+    )]
+    #[case(
+        SpaceStationSprite::AstralSovereignStation2,
+        "images/space_stations/astral_sovereign_station_2.png"
+    )]
+    #[case(
+        SpaceStationSprite::AstralSovereignStation3,
+        "images/space_stations/astral_sovereign_station_3.png"
+    )]
+    #[case(
+        SpaceStationSprite::GeneralStation1,
+        "images/space_stations/general_station_1.png"
+    )]
+    #[case(
+        SpaceStationSprite::OuterReachMiningGuildStation1,
+        "images/space_stations/outer_reach_mining_guild_station_1.png"
+    )]
+    #[case(
+        SpaceStationSprite::SiliconFangTechnocracyStation1,
+        "images/space_stations/silicon_fang_technocracy_station_1.png"
+    )]
+    #[case(
+        SpaceStationSprite::SiliconFangTechnocracyStation2,
+        "images/space_stations/silicon_fang_technocracy_station_2.png"
+    )]
+    #[case(
+        SpaceStationSprite::SiliconFangTechnocracyStation3,
+        "images/space_stations/silicon_fang_technocracy_station_3.png"
+    )]
+    #[case(
+        SpaceStationSprite::SolarisUnionStation1,
+        "images/space_stations/solaris_union_station_1.png"
+    )]
+    fn return_the_expected_file_path(
+        #[case] space_station_sprite: SpaceStationSprite,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = space_station_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
 }
