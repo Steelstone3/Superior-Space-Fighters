@@ -12,7 +12,9 @@ use bevy::{
     transform::components::Transform,
 };
 
-use crate::components::{player_starship::PlayerStarship, starship::Starship, target::Target};
+use crate::components::{
+    player_starship::PlayerStarship, starship::Starship, weapons::target::Target,
+};
 
 pub fn spawn_player_targeting(
     input: Res<ButtonInput<KeyCode>>,

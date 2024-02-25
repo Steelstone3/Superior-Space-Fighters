@@ -6,7 +6,7 @@ use bevy::{
     transform::components::Transform,
 };
 
-use crate::components::{starship::Starship, target::Target};
+use crate::components::{starship::Starship, weapons::target::Target};
 
 pub fn update_player_targeting(
     mut player_target: Query<(&mut Transform, &mut Target), Without<Starship>>,
