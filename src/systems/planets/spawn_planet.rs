@@ -3,7 +3,7 @@ use crate::{
     systems::controllers::random_generator::{generate_seed, random_value_f32, random_value_i32},
 };
 use bevy::{
-    prelude::{AssetServer, Commands, Res, Vec2, Vec3},
+    prelude::{AssetServer, Commands, Res, Vec3},
     sprite::{Sprite, SpriteBundle},
 };
 use rand::random;
@@ -12,10 +12,7 @@ pub fn spawn_random_planets(mut commands: Commands, asset_server: Res<AssetServe
     for _ in 0..random_value_i32(generate_seed(), 1..10) {
         let size = random_value_f32(generate_seed(), 25.0..500.0);
 
-        let planet = Planet {
-            planet: random(),
-            size: Vec2 { x: size, y: size },
-        };
+        let planet = Planet::new(random(), size);
 
         let texture = asset_server.load(planet.planet.to_string());
 

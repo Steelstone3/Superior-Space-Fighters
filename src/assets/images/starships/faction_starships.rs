@@ -1,7 +1,7 @@
 use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[derive(Default, RandGen)]
+#[derive(Default, RandGen, Debug, PartialEq)]
 pub enum FactionStarshipSprite {
     AstralSovereignAllRounder,
     AstralSovereignExplorer,

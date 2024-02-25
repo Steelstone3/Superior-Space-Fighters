@@ -39,11 +39,36 @@ impl Display for ExoticSound {
 
 #[cfg(test)]
 mod exotic_sound_should {
-    #[test]
-    #[ignore]
-    fn have_a_default() {}
+    use super::*;
+    use rstest::rstest;
 
     #[test]
-    #[ignore]
-    fn return_the_expected_file_path() {}
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "sounds/starships/weapons/exotics/exotic_1.ogg";
+
+        // When
+        let file_path = ExoticSound::default().to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(ExoticSound::Exotic1, "sounds/starships/weapons/exotics/exotic_1.ogg")]
+    #[case(ExoticSound::Exotic2, "sounds/starships/weapons/exotics/exotic_2.ogg")]
+    #[case(ExoticSound::Exotic3, "sounds/starships/weapons/exotics/exotic_3.ogg")]
+    #[case(ExoticSound::Exotic4, "sounds/starships/weapons/exotics/exotic_4.ogg")]
+    #[case(ExoticSound::Exotic5, "sounds/starships/weapons/exotics/exotic_5.ogg")]
+    #[case(ExoticSound::Exotic6, "sounds/starships/weapons/exotics/exotic_6.ogg")]
+    fn return_the_expected_file_path(
+        #[case] exotic_sound: ExoticSound,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = exotic_sound.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path)
+    }
 }

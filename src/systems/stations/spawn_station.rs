@@ -3,16 +3,13 @@ use crate::{
     systems::controllers::random_generator::{generate_seed, random_value_f32},
 };
 use bevy::{
-    prelude::{AssetServer, Commands, Res, Vec2, Vec3},
+    prelude::{AssetServer, Commands, Res, Vec3},
     sprite::{Sprite, SpriteBundle},
 };
 use rand::random;
 
 pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let station = Station {
-        station: random(),
-        size: Vec2 { x: 500.0, y: 500.0 },
-    };
+    let station = Station::new(random(), 500.0);
 
     let texture = asset_server.load(station.station.to_string());
 

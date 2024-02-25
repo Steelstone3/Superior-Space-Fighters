@@ -3,43 +3,14 @@ use crate::{
     systems::controllers::random_generator::{generate_seed, random_value_f32, random_value_i32},
 };
 use bevy::{
-    prelude::{AssetServer, Commands, Quat, Res, Vec2, Vec3},
+    prelude::{AssetServer, Commands, Quat, Res, Vec3},
     sprite::{Sprite, SpriteBundle},
-    transform::components::Transform,
 };
 use rand::random;
 
 pub fn spawn_random_ships(mut commands: Commands, asset_server: Res<AssetServer>) {
     for _ in 0..random_value_i32(generate_seed(), 1..10) {
-        let ship = Starship {
-            faction_starship: random(),
-            engine: random(),
-            velocity: 30.0,
-            rotation: f32::to_radians(10.0),
-            size: Vec2 { x: 100.0, y: 100.0 },
-            acceleration: 0.1,
-            current_velocity: 0.0,
-            transform: Transform {
-                translation: Vec3 {
-                    x: 0.,
-                    y: 0.,
-                    z: 0.,
-                },
-                rotation: Quat::from_axis_angle(
-                    Vec3 {
-                        x: 0.,
-                        y: 0.,
-                        z: 0.,
-                    },
-                    0.,
-                ),
-                scale: Vec3 {
-                    x: 1.,
-                    y: 1.,
-                    z: 1.,
-                },
-            },
-        };
+        let ship = Starship::new(random(), random());
 
         let texture = asset_server.load(ship.faction_starship.to_string());
 
