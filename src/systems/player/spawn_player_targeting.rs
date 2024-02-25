@@ -23,7 +23,8 @@ pub fn spawn_player_targeting(
     mut existing_target: Query<&mut Target>,
 ) {
     if input.just_pressed(KeyCode::KeyT) {
-        for other_ship in &mut other_ships {
+        // for other_ship in &mut other_ships {
+        if let Some(other_ship) = (&mut other_ships).into_iter().next() {
             let Ok(mut target) = existing_target.get_single_mut() else {
                 let target = Target {
                     target_entity: other_ship.2,
@@ -51,8 +52,6 @@ pub fn spawn_player_targeting(
             target.target_entity = other_ship.2;
 
             log::info!("Target Locked");
-
-            return;
         }
     }
 }
