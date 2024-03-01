@@ -16,7 +16,7 @@ use crate::components::{
     player_starship::PlayerStarship, starship::Starship, weapons::target::Target,
 };
 
-pub fn spawn_player_targeting<'a>(
+pub fn spawn_player_targeting(
     input: Res<ButtonInput<KeyCode>>,
     mut commands: Commands,
     other_ships: Query<(&Transform, &Starship, Entity), Without<PlayerStarship>>,
@@ -46,45 +46,35 @@ pub fn spawn_player_targeting<'a>(
         log::info!("{ship_count} ships to target");
         log::info!("Closest ship is {distance} units away");
 
-        match closest_ship {
-            Some(closest_target) => {
-                //if target already exists update target else create new target
-                let Ok(mut existing_target) = existing_target.get_single_mut() else {
-                    let target = Target {
-                        target_entity: closest_target.2,
-                    };
-
-                    let sprite = Sprite {
-                        color: Color::rgba(1.0, 1.0, 1.0, 0.1),
-                        flip_x: false,
-                        flip_y: false,
-                        custom_size: Some(Vec2::new(100.0, 100.0)),
-                        ..Default::default()
-                    };
-                    let sprite = Sprite {
-                        color: Color::rgba(1.0, 1.0, 1.0, 0.1),
-                        flip_x: false,
-                        flip_y: false,
-                        custom_size: Some(Vec2::new(100.0, 100.0)),
-                        ..Default::default()
-                    };
-
-                    commands
-                        .spawn(SpriteBundle {
-                            sprite,
-                            transform: *closest_target.0,
-                            ..Default::default()
-                        })
-                        .insert(target);
-
-                    return;
+        if let Some(closest_target) = closest_ship {
+            //if target already exists update target else create new target
+            let Ok(mut existing_target) = existing_target.get_single_mut() else {
+                let target = Target {
+                    target_entity: closest_target.2,
                 };
 
-                existing_target.target_entity = closest_target.2;
+                let sprite = Sprite {
+                    color: Color::rgba(1.0, 1.0, 1.0, 0.1),
+                    flip_x: false,
+                    flip_y: false,
+                    custom_size: Some(Vec2::new(100.0, 100.0)),
+                    ..Default::default()
+                };
 
-                log::info!("Target Locked");
-            }
-            None => {}
+                commands
+                    .spawn(SpriteBundle {
+                        sprite,
+                        transform: *closest_target.0,
+                        ..Default::default()
+                    })
+                    .insert(target);
+
+                return;
+            };
+
+            existing_target.target_entity = closest_target.2;
+
+            log::info!("Target Locked");
         }
     }
 }
