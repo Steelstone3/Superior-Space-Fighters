@@ -2,7 +2,6 @@ use bevy::{
     ecs::{
         entity::Entity,
         query::{With, Without},
-        query::{With, Without},
         system::{Commands, Query, Res},
     },
     input::{keyboard::KeyCode, ButtonInput},
@@ -18,13 +17,10 @@ use crate::components::{
 };
 
 pub fn spawn_player_targeting<'a>(
-pub fn spawn_player_targeting<'a>(
     input: Res<ButtonInput<KeyCode>>,
     mut commands: Commands,
     other_ships: Query<(&Transform, &Starship, Entity), Without<PlayerStarship>>,
-    other_ships: Query<(&Transform, &Starship, Entity), Without<PlayerStarship>>,
     mut existing_target: Query<&mut Target>,
-    player_location: Query<&Transform, (With<PlayerStarship>, Without<Starship>)>,
     player_location: Query<&Transform, (With<PlayerStarship>, Without<Starship>)>,
 ) {
     if input.just_pressed(KeyCode::KeyT) {
@@ -80,25 +76,12 @@ pub fn spawn_player_targeting<'a>(
                             ..Default::default()
                         })
                         .insert(target);
-                    commands
-                        .spawn(SpriteBundle {
-                            sprite,
-                            transform: *closest_target.0,
-                            ..Default::default()
-                        })
-                        .insert(target);
 
-                    return;
-                };
                     return;
                 };
 
                 existing_target.target_entity = closest_target.2;
-                existing_target.target_entity = closest_target.2;
 
-                log::info!("Target Locked");
-            }
-            None => {}
                 log::info!("Target Locked");
             }
             None => {}
