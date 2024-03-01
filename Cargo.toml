@@ -16,7 +16,7 @@ bevy = { version = "0.13", features = ["wayland", "x11"] }
 wayland-sys = "0.31"
 float-lerp = "0"
 rand = "0"
-rand_derive2 ="0"
+rand_derive2 = "0"
 rayon = "1"
 rstest = "0"
 # bevy_iced = "0.4"
@@ -31,3 +31,6 @@ opt-level = 0
 # Enable high optimizations for dependencies (incl. Bevy), but not for our code:
 [profile.dev.package."*"]
 opt-level = 3
+
+[build]
+rustflags = ["-Z", "threads=24"]
