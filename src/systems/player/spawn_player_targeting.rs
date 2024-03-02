@@ -37,7 +37,9 @@ pub fn spawn_player_targeting(
             let new_distance = (other_ship.0.translation - player_location.translation).length();
             if new_distance < distance {
                 distance = new_distance;
-                closest_ship = Some(other_ship);
+                if distance <= 500.0 {
+                    closest_ship = Some(other_ship);
+                }
             } else {
                 continue;
             }
@@ -69,6 +71,7 @@ pub fn spawn_player_targeting(
                     })
                     .insert(target);
 
+                log::info!("Target Locked");
                 return;
             };
 
