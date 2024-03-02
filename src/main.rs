@@ -7,6 +7,7 @@ use plugins::{
 mod assets;
 mod components;
 mod plugins;
+mod query_data;
 mod resources;
 mod systems;
 

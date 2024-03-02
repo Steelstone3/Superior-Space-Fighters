@@ -1,6 +1,5 @@
 use bevy::{
     ecs::{
-        entity::Entity,
         query::{With, Without},
         system::{Commands, Query, Res},
     },
@@ -12,14 +11,15 @@ use bevy::{
     transform::components::Transform,
 };
 
-use crate::components::{
-    player_starship::PlayerStarship, starship::Starship, weapons::target::Target,
+use crate::{
+    components::{player_starship::PlayerStarship, starship::Starship, weapons::target::Target},
+    query_data::starship_query::{StarshipQuery, StarshipQueryItem},
 };
 
 pub fn spawn_player_targeting(
     input: Res<ButtonInput<KeyCode>>,
     mut commands: Commands,
-    other_ships: Query<(&Transform, &Starship, Entity), Without<PlayerStarship>>,
+    other_ships: Query<StarshipQuery>,
     mut existing_target: Query<&mut Target>,
     player_location: Query<&Transform, (With<PlayerStarship>, Without<Starship>)>,
 ) {
@@ -28,13 +28,14 @@ pub fn spawn_player_targeting(
             return;
         };
 
-        let mut closest_ship: Option<(&Transform, &Starship, Entity)> = None;
-        let mut distance = 999.0;
+        let mut closest_ship: Option<StarshipQueryItem> = None;
+        let mut distance = 999.0; //init value never used
         let mut ship_count = 0;
         //get closest target ship
         for other_ship in other_ships.into_iter() {
             ship_count += 1;
-            let new_distance = (other_ship.0.translation - player_location.translation).length();
+            let new_distance =
+                (other_ship.transform.translation - player_location.translation).length();
             if new_distance < distance {
                 distance = new_distance;
                 if distance <= 500.0 {
@@ -45,15 +46,17 @@ pub fn spawn_player_targeting(
             }
         }
 
-        log::info!("{ship_count} ships to target");
-        log::info!("Closest ship is {distance} units away");
+        if let Some(closest_ship) = closest_ship {
+            log::info!("{ship_count} ships to target");
+            log::info!("Closest ship is {distance} units away");
 
-        if let Some(closest_target) = closest_ship {
             //if target already exists update target else create new target
             let Ok(mut existing_target) = existing_target.get_single_mut() else {
                 let target = Target {
-                    target_entity: closest_target.2,
+                    target_entity: closest_ship.entity,
                 };
+
+                log::info!("Targeting");
 
                 let sprite = Sprite {
                     color: Color::rgba(1.0, 1.0, 1.0, 0.1),
@@ -66,7 +69,7 @@ pub fn spawn_player_targeting(
                 commands
                     .spawn(SpriteBundle {
                         sprite,
-                        transform: *closest_target.0,
+                        transform: *closest_ship.transform,
                         ..Default::default()
                     })
                     .insert(target);
@@ -75,9 +78,11 @@ pub fn spawn_player_targeting(
                 return;
             };
 
-            existing_target.target_entity = closest_target.2;
+            existing_target.target_entity = closest_ship.entity;
 
             log::info!("Target Locked");
+        } else {
+            log::info!("No valid targets")
         }
     }
 }
