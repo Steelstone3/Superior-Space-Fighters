@@ -1,6 +1,6 @@
 use bevy::{
     ecs::{
-        query::{With, Without},
+        query::With,
         system::{Commands, Query},
     },
     log,
@@ -8,13 +8,14 @@ use bevy::{
 };
 
 use crate::{
-    components::{player_starship::PlayerStarship, starship::Starship},
+    components::starship::Starship,
     query_data::target_query::TargetQuery,
+    query_filters::{player_starship_filter::PlayerStarshipFilter, target_filter::TargetFilter},
 };
 
 pub fn update_player_targeting(
-    player_transform: Query<&Transform, (With<PlayerStarship>, Without<Starship>)>,
-    mut player_target: Query<TargetQuery, (Without<Starship>, Without<PlayerStarship>)>,
+    player_transform: Query<&Transform, PlayerStarshipFilter>,
+    mut player_target: Query<TargetQuery, TargetFilter>,
     other_starships: Query<&mut Transform, With<Starship>>,
     mut commands: Commands,
 ) {

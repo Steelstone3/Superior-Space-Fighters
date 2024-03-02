@@ -12,8 +12,9 @@ use bevy::{
 };
 
 use crate::{
-    components::{player_starship::PlayerStarship, starship::Starship, weapons::target::Target},
+    components::weapons::target::Target,
     query_data::starship_query::{StarshipQuery, StarshipQueryItem},
+    query_filters::player_starship_filter::PlayerStarshipFilter,
 };
 
 pub fn spawn_player_targeting(
@@ -21,7 +22,7 @@ pub fn spawn_player_targeting(
     mut commands: Commands,
     other_ships: Query<StarshipQuery>,
     mut existing_target: Query<&mut Target>,
-    player_location: Query<&Transform, (With<PlayerStarship>, Without<Starship>)>,
+    player_location: Query<&Transform, PlayerStarshipFilter>,
 ) {
     if input.just_pressed(KeyCode::KeyT) {
         let Ok(player_location) = player_location.get_single() else {

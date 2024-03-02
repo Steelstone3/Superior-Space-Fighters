@@ -8,6 +8,7 @@ mod assets;
 mod components;
 mod plugins;
 mod query_data;
+mod query_filters;
 mod resources;
 mod systems;
 
