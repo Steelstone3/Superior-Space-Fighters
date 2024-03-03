@@ -4,3 +4,4 @@ pub mod guild_reputation;
 pub mod music;
 pub mod projectile_ammunition;
 pub mod sector_size;
+pub mod targeting_settings;

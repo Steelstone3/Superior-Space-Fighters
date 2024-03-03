@@ -1,11 +1,7 @@
 use bevy::{
-    ecs::{
-        query::{With, Without},
-        system::{Commands, Query, Res},
-    },
+    ecs::system::{Commands, Query, Res},
     input::{keyboard::KeyCode, ButtonInput},
     log,
-    math::Vec2,
     render::color::Color,
     sprite::{Sprite, SpriteBundle},
     transform::components::Transform,
@@ -15,6 +11,7 @@ use crate::{
     components::weapons::target::Target,
     query_data::starship_query::{StarshipQuery, StarshipQueryItem},
     query_filters::player_starship_filter::PlayerStarshipFilter,
+    resources::targeting_settings::TargetingSettings,
 };
 
 pub fn spawn_player_targeting(
@@ -23,6 +20,7 @@ pub fn spawn_player_targeting(
     other_ships: Query<StarshipQuery>,
     mut existing_target: Query<&mut Target>,
     player_location: Query<&Transform, PlayerStarshipFilter>,
+    targeting_settings: Res<TargetingSettings>,
 ) {
     if input.just_pressed(KeyCode::KeyT) {
         let Ok(player_location) = player_location.get_single() else {
@@ -30,7 +28,7 @@ pub fn spawn_player_targeting(
         };
 
         let mut closest_ship: Option<StarshipQueryItem> = None;
-        let mut distance = 999.0; //init value never used
+        let mut distance = targeting_settings.auto_target_max_distance;
         let mut ship_count = 0;
         //get closest target ship
         for other_ship in other_ships.into_iter() {
@@ -39,7 +37,7 @@ pub fn spawn_player_targeting(
                 (other_ship.transform.translation - player_location.translation).length();
             if new_distance < distance {
                 distance = new_distance;
-                if distance <= 500.0 {
+                if distance <= targeting_settings.auto_target_max_distance {
                     closest_ship = Some(other_ship);
                 }
             } else {
@@ -63,7 +61,7 @@ pub fn spawn_player_targeting(
                     color: Color::rgba(1.0, 1.0, 1.0, 0.1),
                     flip_x: false,
                     flip_y: false,
-                    custom_size: Some(Vec2::new(100.0, 100.0)),
+                    custom_size: Some(closest_ship.starship.size),
                     ..Default::default()
                 };
 

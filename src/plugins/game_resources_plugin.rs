@@ -7,6 +7,7 @@ use crate::{
         camera_settings::CameraSettings, fleet_credits::FleetCredits,
         guild_reputation::GuildReputation, music::Music,
         projectile_ammunition::ProjectileAmmunition, sector_size::SectorSize,
+        targeting_settings::TargetingSettings,
     },
 };
 use bevy::prelude::{App, Plugin};
@@ -47,6 +48,10 @@ impl Plugin for GameResourcesPlugin {
             exploration_music: ExplorationMusicSound::default(),
             trading_music: TradingMusicSound::default(),
             menu_music: MenuMusicSound::default(),
+        })
+        .insert_resource(TargetingSettings {
+            max_distance: 1000.0,
+            auto_target_max_distance: 500.0,
         });
     }
 }
