@@ -1,12 +1,12 @@
 use bevy::ecs::query::{QueryFilter, Without};
 
 use crate::components::{
-    player_starship::PlayerStarship, starship::Starship, weapons::target_arrow::TargetArrow,
+    player_starship::PlayerStarship, starship::Starship, weapons::target::Target,
 };
 
 #[derive(QueryFilter)]
-pub struct TargetFilter {
+pub struct TargetArrowFilter {
     without_a: Without<Starship>,
     without_b: Without<PlayerStarship>,
-    without_c: Without<TargetArrow>,
+    without_c: Without<Target>,
 }

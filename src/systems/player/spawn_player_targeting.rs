@@ -1,4 +1,5 @@
 use bevy::{
+    asset::AssetServer,
     ecs::system::{Commands, Query, Res},
     input::{keyboard::KeyCode, ButtonInput},
     log,
@@ -8,7 +9,8 @@ use bevy::{
 };
 
 use crate::{
-    components::weapons::target::Target,
+    assets::images::starships::weapons::targeting::TargetingSprite,
+    components::weapons::{target::Target, target_arrow::TargetArrow},
     query_data::starship_query::{StarshipQuery, StarshipQueryItem},
     query_filters::player_starship_filter::PlayerStarshipFilter,
     resources::targeting_settings::TargetingSettings,
@@ -21,6 +23,7 @@ pub fn spawn_player_targeting(
     mut existing_target: Query<&mut Target>,
     player_location: Query<&Transform, PlayerStarshipFilter>,
     targeting_settings: Res<TargetingSettings>,
+    asset_server: Res<AssetServer>,
 ) {
     if input.just_pressed(KeyCode::KeyT) {
         let Ok(player_location) = player_location.get_single() else {
@@ -57,7 +60,7 @@ pub fn spawn_player_targeting(
 
                 log::info!("Targeting");
 
-                let sprite = Sprite {
+                let target_sprite = Sprite {
                     color: Color::rgba(1.0, 1.0, 1.0, 0.1),
                     flip_x: false,
                     flip_y: false,
@@ -67,11 +70,32 @@ pub fn spawn_player_targeting(
 
                 commands
                     .spawn(SpriteBundle {
-                        sprite,
+                        sprite: target_sprite,
                         transform: *closest_ship.transform,
                         ..Default::default()
                     })
                     .insert(target);
+
+                let target_arrow = TargetArrow {
+                    target_entity: closest_ship.entity,
+                };
+
+                let arrow_sprite = Sprite {
+                    color: Color::rgba(1.0, 0.0, 0.0, 1.0),
+                    flip_x: false,
+                    flip_y: false,
+                    custom_size: Some(closest_ship.starship.size),
+                    ..Default::default()
+                };
+
+                commands
+                    .spawn(SpriteBundle {
+                        sprite: arrow_sprite,
+                        transform: *closest_ship.transform,
+                        texture: asset_server.load(TargetingSprite::TargetArrow.to_string()),
+                        ..Default::default()
+                    })
+                    .insert(target_arrow);
 
                 log::info!("Target Locked");
                 return;
