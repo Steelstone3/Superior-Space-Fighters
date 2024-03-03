@@ -6,6 +6,5 @@ pub mod player_exotic;
 pub mod player_mine;
 pub mod player_torpedo;
 pub mod target;
-mod target_arrow;
 pub mod torpedo;
 pub mod weapon;
