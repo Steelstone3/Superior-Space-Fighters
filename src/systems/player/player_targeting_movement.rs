@@ -61,7 +61,7 @@ pub fn update_player_targeting(
                 .translation
                 .clamp(Vec3::new(left, bottom, 3.0), Vec3::new(right, top, 3.0));
 
-            let angle = (other_starship_transform.translation - player_transform.translation)
+            let angle = (other_starship_transform.translation - player_target_arrow.transform.translation)
                 .angle_between(player_transform.translation);
             player_target_arrow.transform.rotation = Quat::from_rotation_z(angle);
 
