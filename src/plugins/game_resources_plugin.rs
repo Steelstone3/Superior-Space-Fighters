@@ -50,8 +50,8 @@ impl Plugin for GameResourcesPlugin {
             menu_music: MenuMusicSound::default(),
         })
         .insert_resource(TargetingSettings {
-            max_distance: 1000.0,
-            auto_target_max_distance: 500.0,
+            max_distance: 2000.0,
+            auto_target_max_distance: 2000.0,
         });
     }
 }

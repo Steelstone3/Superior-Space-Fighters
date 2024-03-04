@@ -2,11 +2,7 @@ use bevy::{
     ecs::{
         query::With,
         system::{Commands, Query, Res},
-    },
-    log,
-    math::{Quat, Vec3},
-    render::camera::{Camera, OrthographicProjection},
-    transform::components::{GlobalTransform, Transform},
+    }, log, math::{Quat, Vec3}, render::{camera::{Camera, OrthographicProjection}, view::Visibility}, transform::components::{GlobalTransform, Transform}
 };
 
 use crate::{
@@ -20,7 +16,7 @@ use crate::{
 };
 
 pub fn update_player_targeting(
-    player_transform: Query<&Transform, PlayerStarshipFilter>,
+    mut player_transform: Query<&Transform, PlayerStarshipFilter>,
     mut player_target: Query<TargetQuery, TargetFilter>,
     mut player_target_arrow: Query<TargetArrowQuery, TargetArrowFilter>,
     other_starships: Query<&mut Transform, With<Starship>>,
@@ -37,7 +33,7 @@ pub fn update_player_targeting(
         return;
     };
 
-    let Ok(player_transform) = player_transform.get_single() else {
+    let Ok(player_transform) = player_transform.get_single_mut() else {
         log::info!("player transform is not valid");
         return;
     };
@@ -59,13 +55,28 @@ pub fn update_player_targeting(
 
             player_target_arrow.transform.translation = other_starship_transform
                 .translation
-                .clamp(Vec3::new(left, bottom, 3.0), Vec3::new(right, top, 3.0));
+                .clamp(Vec3::new(left, bottom, 5.0), Vec3::new(right, top, 5.0));
 
-            let angle = (other_starship_transform.translation - player_target_arrow.transform.translation)
-                .angle_between(player_transform.translation);
-            player_target_arrow.transform.rotation = Quat::from_rotation_z(angle);
 
-            log::info!("{:?}", player_target_arrow.transform.rotation);
+            log::info!("{:?}",player_target_arrow.transform.translation.y);
+            if player_target_arrow.transform.translation.x >= right || player_target_arrow.transform.translation.x <= left || player_target_arrow.transform.translation.y >= top || player_target_arrow.transform.translation.y <= bottom{
+                *player_target_arrow.visible = Visibility::Visible;
+            }
+            else{
+                *player_target_arrow.visible = Visibility::Hidden;
+
+            }
+
+            let pos = player_transform.translation.truncate();
+            let target = other_starship_transform.translation.truncate();
+            let angle = (pos - target).angle_between(pos);
+
+            //due to 0,0 being the middle of screen need to offset the arrow angle depending on wether player is pos y or neg y otherwise arrow flips round when player goes down
+            if player_transform.translation.y >= 0.0{
+                player_target_arrow.transform.rotation = Quat::from_rotation_z(135.0 - angle);
+            }else{
+                player_target_arrow.transform.rotation = Quat::from_rotation_z(270.0 - angle);
+            }
 
             player_target.transform.rotation = other_starship_transform.rotation;
             player_target.transform.translation = other_starship_transform.translation;

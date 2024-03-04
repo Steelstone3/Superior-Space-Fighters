@@ -1,6 +1,5 @@
 use bevy::{
-    ecs::{entity::Entity, query::QueryData},
-    transform::components::Transform,
+    ecs::{entity::Entity, query::QueryData}, render::view::Visibility, transform::components::Transform
 };
 
 use crate::components::weapons::target_arrow::TargetArrow;
@@ -11,4 +10,5 @@ pub struct TargetArrowQuery {
     pub transform: &'static mut Transform,
     pub target: &'static TargetArrow,
     pub entity: Entity,
+    pub visible: &'static mut Visibility
 }
