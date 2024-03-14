@@ -45,8 +45,8 @@ mod exotic_should {
             impact_sound: Default::default(),
             ranged_weapon: RangedWeapon {
                 range: 500.0,
+                original_position,
                 weapon: Weapon {
-                    original_position,
                     velocity: 75.0,
                     size: Vec2 { x: 80.0, y: 80.0 },
                     damage: Damage {

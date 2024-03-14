@@ -4,6 +4,7 @@ use bevy::{ecs::component::Component, math::Vec3};
 #[derive(Component, Debug, PartialEq)]
 pub struct RangedWeapon {
     pub range: f32,
+    pub original_position: Vec3,
     pub weapon: Weapon,
 }
 
@@ -11,7 +12,8 @@ impl RangedWeapon {
     pub fn new(original_position: Vec3, size: f32, velocity: f32, range: f32) -> Self {
         Self {
             range,
-            weapon: Weapon::new(original_position, size, velocity),
+            original_position,
+            weapon: Weapon::new(size, velocity),
         }
     }
 }
@@ -36,8 +38,8 @@ mod weapon_should {
         let range = 750.0;
         let expected_ranged_weapon = RangedWeapon {
             range,
+            original_position,
             weapon: Weapon {
-                original_position,
                 velocity,
                 size: Vec2 { x: size, y: size },
                 damage: Damage {

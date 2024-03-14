@@ -45,8 +45,8 @@ mod blaster_should {
             impact_sound: Default::default(),
             ranged_weapon: RangedWeapon {
                 range: 750.0,
+                original_position,
                 weapon: Weapon {
-                    original_position,
                     velocity: 100.0,
                     size: Vec2 { x: 100.0, y: 100.0 },
                     damage: Damage {

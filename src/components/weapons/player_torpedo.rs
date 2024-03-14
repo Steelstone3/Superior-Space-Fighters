@@ -36,8 +36,8 @@ mod player_torpedo_should {
                 impact_sound: Default::default(),
                 ranged_weapon: RangedWeapon {
                     range: 1500.0,
+                    original_position,
                     weapon: Weapon {
-                        original_position,
                         velocity: 125.0,
                         size: Vec2 { x: 80.0, y: 80.0 },
                         damage: Damage {

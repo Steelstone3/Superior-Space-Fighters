@@ -15,7 +15,7 @@ pub fn player_blaster_lifetime(
 ) {
     for (blaster_entity, blaster_transform, blaster) in &mut blasters {
         let is_past_maximum_range = (blaster_transform.translation
-            - blaster.blaster.ranged_weapon.weapon.original_position)
+            - blaster.blaster.ranged_weapon.original_position)
             .length()
             > blaster.blaster.ranged_weapon.range;
 
