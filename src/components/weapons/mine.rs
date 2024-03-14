@@ -32,10 +32,9 @@ impl Default for Mine {
 
 #[cfg(test)]
 mod mine_should {
-    use crate::components::weapons::damage::Damage;
-
     use super::*;
-    use bevy::time::TimerMode;
+    use crate::components::weapons::damage::Damage;
+    use bevy::{math::Vec2, time::TimerMode};
 
     #[test]
     fn create_new() {

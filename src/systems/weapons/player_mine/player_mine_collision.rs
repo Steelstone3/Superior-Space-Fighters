@@ -16,8 +16,8 @@ pub fn player_mine_collision_with_starship(
     mut mines: Query<(Entity, &mut Transform, &mut PlayerMine), Without<Starship>>,
     mut starships: Query<(Entity, &mut Transform, &mut Starship)>,
 ) {
-    for (mine_entity, mine_transform, mine) in &mut mines {
-        for (starship_entity, starship_transform, starship) in &mut starships {
+    for (mine_entity, mine_transform, mut mine) in &mut mines {
+        for (starship_entity, starship_transform, mut starship) in &mut starships {
             let distance_to_starship =
                 (mine_transform.translation - starship_transform.translation).length();
 
@@ -32,7 +32,8 @@ pub fn player_mine_collision_with_starship(
                     ..Default::default()
                 });
 
-                // starship.take_damage(mine.mine.weapon.damage);
+                mine.mine.weapon.damage.calculate_damage();
+                starship.take_damage(mine.mine.weapon.damage);
 
                 if starship.is_destroyed() {
                     commands.entity(mine_entity).despawn();

@@ -1,6 +1,6 @@
 use bevy::ecs::component::Component;
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Copy, Clone, Debug, PartialEq)]
 pub struct Damage {
     pub base_damage: u32,
     pub damage: u32,
