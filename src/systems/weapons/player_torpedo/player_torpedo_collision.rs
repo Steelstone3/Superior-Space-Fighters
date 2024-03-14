@@ -7,7 +7,7 @@ use bevy::{
     utils::tracing,
 };
 
-use crate::components::{starship::Starship, weapons::player_torpedo::PlayerTorpedo};
+use crate::components::{starships::starship::Starship, weapons::player_torpedo::PlayerTorpedo};
 
 // TODO multi-thread
 pub fn player_torpedo_collision_with_starship(

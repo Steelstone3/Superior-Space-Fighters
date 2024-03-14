@@ -1,4 +1,3 @@
-use crate::components::{starship::Starship, weapons::player_blaster::PlayerBlaster};
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
@@ -7,6 +6,8 @@ use bevy::{
     transform::components::Transform,
     utils::tracing,
 };
+
+use crate::components::{starships::starship::Starship, weapons::player_blaster::PlayerBlaster};
 
 // TODO multi-thread
 pub fn player_blaster_collision_with_starship(

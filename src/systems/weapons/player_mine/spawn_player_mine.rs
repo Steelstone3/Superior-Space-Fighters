@@ -1,5 +1,5 @@
 use crate::{
-    components::{player_starship::PlayerStarship, weapons::player_mine::PlayerMine},
+    components::{starships::player_starship::PlayerStarship, weapons::player_mine::PlayerMine},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{

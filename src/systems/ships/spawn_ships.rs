@@ -1,5 +1,5 @@
 use crate::{
-    components::starship::Starship,
+    components::starships::starship::Starship,
     systems::controllers::random_generator::{generate_seed, random_value_f32, random_value_i32},
 };
 use bevy::{

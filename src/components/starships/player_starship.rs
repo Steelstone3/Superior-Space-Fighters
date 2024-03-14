@@ -1,5 +1,6 @@
-use super::starship::Starship;
 use bevy::ecs::component::Component;
+
+use super::starship::Starship;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct PlayerStarship {

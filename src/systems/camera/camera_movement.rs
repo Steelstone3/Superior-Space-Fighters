@@ -1,3 +1,4 @@
+use crate::components::starships::player_starship::PlayerStarship;
 use bevy::{
     ecs::{
         query::{With, Without},
@@ -6,8 +7,6 @@ use bevy::{
     render::camera::Camera,
     transform::components::Transform,
 };
-
-use crate::components::player_starship::PlayerStarship;
 
 pub fn camera_movement(
     player: Query<&Transform, With<PlayerStarship>>,

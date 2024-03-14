@@ -1,4 +1,5 @@
 pub mod blaster;
+pub mod damage;
 pub mod exotic;
 pub mod mine;
 pub mod player_blaster;

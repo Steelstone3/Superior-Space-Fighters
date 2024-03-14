@@ -1,9 +1,10 @@
-use crate::components::player_starship::PlayerStarship;
 use bevy::{
     input::ButtonInput,
     prelude::{KeyCode, Query, Res, Transform, Vec3},
     time::Time,
 };
+
+use crate::components::starships::player_starship::PlayerStarship;
 
 pub fn player_movement(
     mut players: Query<(&mut Transform, &mut PlayerStarship)>,

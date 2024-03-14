@@ -7,7 +7,7 @@ use bevy::{
     utils::tracing,
 };
 
-use crate::components::{starship::Starship, weapons::player_mine::PlayerMine};
+use crate::components::{starships::starship::Starship, weapons::player_mine::PlayerMine};
 
 // TODO multi-thread
 pub fn player_mine_collision_with_starship(

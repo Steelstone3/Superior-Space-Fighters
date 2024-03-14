@@ -1,5 +1,5 @@
 use crate::{
-    components::starship::Starship,
+    components::starships::starship::Starship,
     resources::sector_size::SectorSize,
     systems::controllers::random_generator::{generate_seed, random_value_f32},
 };

@@ -1,4 +1,4 @@
-use crate::components::player_starship::PlayerStarship;
+use crate::components::starships::player_starship::PlayerStarship;
 use crate::components::weapons::player_exotic::PlayerExotic;
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
 use bevy::input::ButtonInput;

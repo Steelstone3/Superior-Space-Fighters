@@ -1,5 +1,7 @@
 use crate::{
-    components::{player_starship::PlayerStarship, weapons::player_torpedo::PlayerTorpedo},
+    components::{
+        starships::player_starship::PlayerStarship, weapons::player_torpedo::PlayerTorpedo,
+    },
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{

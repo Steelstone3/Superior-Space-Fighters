@@ -1,6 +1,9 @@
-use crate::assets::{
-    images::starships::faction_starships::FactionStarshipSprite,
-    sounds::starships::engines::EngineSound,
+use crate::{
+    assets::{
+        images::starships::faction_starships::FactionStarshipSprite,
+        sounds::starships::engines::EngineSound,
+    },
+    components::weapons::damage::Damage,
 };
 use bevy::{ecs::component::Component, prelude::Vec2};
 
@@ -32,6 +35,9 @@ impl Starship {
             size: Vec2::new(100.0, 100.0),
         }
     }
+
+    #[allow(dead_code)]
+    pub fn take_damage(&mut self, _damage: Damage) {}
 }
 
 #[cfg(test)]

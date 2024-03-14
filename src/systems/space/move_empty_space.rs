@@ -1,5 +1,5 @@
 use crate::{
-    components::{player_starship::PlayerStarship, space::Space},
+    components::{space::Space, starships::player_starship::PlayerStarship},
     resources::sector_size::SectorSize,
 };
 use bevy::{
