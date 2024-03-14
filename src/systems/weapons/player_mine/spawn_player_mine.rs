@@ -46,7 +46,7 @@ pub fn spawn_player_mine(
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
-                custom_size: Some(mine.mine.size),
+                custom_size: Some(mine.mine.weapon.size),
                 ..Default::default()
             },
             transform: player_transform,

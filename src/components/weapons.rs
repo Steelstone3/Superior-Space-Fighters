@@ -1,6 +1,7 @@
 pub mod blaster;
 pub mod damage;
 pub mod exotic;
+pub mod lock_on_weapon;
 pub mod mine;
 pub mod player_blaster;
 pub mod player_exotic;
@@ -9,4 +10,3 @@ pub mod player_torpedo;
 pub mod ranged_weapon;
 pub mod torpedo;
 pub mod weapon;
-pub mod lock_on_weapon;

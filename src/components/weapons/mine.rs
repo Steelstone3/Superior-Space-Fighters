@@ -4,17 +4,17 @@ use crate::assets::{
 };
 use bevy::{
     ecs::component::Component,
-    math::Vec2,
     time::{Timer, TimerMode},
 };
+
+use super::weapon::Weapon;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct Mine {
     pub mine: MineSprite,
     pub firing_sound: MineSound,
     pub impact_sound: ImpactSound,
-    pub velocity: f32,
-    pub size: Vec2,
+    pub weapon: Weapon,
     pub lifetime: Timer,
 }
 
@@ -24,8 +24,7 @@ impl Default for Mine {
             mine: MineSprite::default(),
             firing_sound: MineSound::default(),
             impact_sound: ImpactSound::default(),
-            velocity: -5.0,
-            size: Vec2::new(100.0, 100.0),
+            weapon: Weapon::new(100.0, -5.0),
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         }
     }
@@ -33,6 +32,8 @@ impl Default for Mine {
 
 #[cfg(test)]
 mod mine_should {
+    use crate::components::weapons::damage::Damage;
+
     use super::*;
     use bevy::time::TimerMode;
 
@@ -43,8 +44,14 @@ mod mine_should {
             mine: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            velocity: -5.0,
-            size: Vec2 { x: 100.0, y: 100.0 },
+            weapon: Weapon {
+                velocity: -5.0,
+                size: Vec2 { x: 100.0, y: 100.0 },
+                damage: Damage {
+                    base_damage: 10,
+                    damage: Default::default(),
+                },
+            },
             lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
