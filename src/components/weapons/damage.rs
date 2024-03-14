@@ -4,7 +4,7 @@ use bevy::ecs::component::Component;
 #[allow(dead_code)]
 pub struct Damage {
     pub base_damage: u32,
-    pub calculated_damage: u32,
+    pub damage: u32,
 }
 //TODO implement a more complex damage system that randomly varies the damage
 
@@ -12,16 +12,14 @@ impl Default for Damage {
     fn default() -> Self {
         Self {
             base_damage: 10,
-            calculated_damage: Default::default(),
+            damage: Default::default(),
         }
     }
 }
 
 impl Damage {
     #[allow(dead_code)]
-    pub fn calculate_damage(&mut self) {
-        
-    }
+    pub fn calculate_damage(&mut self) {}
 }
 
 #[cfg(test)]
@@ -33,7 +31,7 @@ mod damage_should {
         // Given
         let expected_damage = Damage {
             base_damage: 10,
-            calculated_damage: Default::default(),
+            damage: Default::default(),
         };
 
         // When
@@ -48,11 +46,11 @@ mod damage_should {
         // Given
         let expected_damage = Damage {
             base_damage: 10,
-            calculated_damage: Default::default(),
+            damage: Default::default(),
         };
         let mut damage = Damage {
             base_damage: 10,
-            calculated_damage: Default::default(),
+            damage: Default::default(),
         };
 
         // When

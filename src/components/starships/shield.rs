@@ -24,13 +24,19 @@ impl Default for Shield {
 impl Shield {
     #[allow(dead_code)]
     pub fn take_damage(&mut self, damage: Damage) {
-        self.current -= damage.calculated_damage;
+        if damage.damage >= self.current {
+            self.current = 0;
+            return;
+        }
+
+        self.current -= damage.damage;
     }
 }
 
 #[cfg(test)]
 mod shield_should {
     use super::*;
+    use rstest::rstest;
 
     #[test]
     fn create_new() {
@@ -48,22 +54,63 @@ mod shield_should {
         assert_eq!(expected_shield, shield);
     }
 
-    #[test]
-    fn take_damage() {
-        // Given
-        let expected_shield = Shield {
+    #[rstest]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 11,
+        },
+        Shield {
             maximum: 100,
             current: 89,
             regeneration: 5,
-        };
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 20,
+        },
+        Shield {
+            maximum: 100,
+            current: 80,
+            regeneration: 5,
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 0,
+        },
+        Shield {
+            maximum: 100,
+            current: 100,
+            regeneration: 5,
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 101,
+        },
+        Shield {
+            maximum: 100,
+            current: 0,
+            regeneration: 5,
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 100,
+        },
+        Shield {
+            maximum: 100,
+            current: 0,
+            regeneration: 5,
+    })]
+    fn take_damage(#[case] damage: Damage, #[case] expected_shield: Shield) {
+        // Given
         let mut shield = Shield {
             maximum: 100,
             current: 100,
             regeneration: 5,
-        };
-        let damage = Damage {
-            base_damage: 10,
-            calculated_damage: 11,
         };
 
         // When
