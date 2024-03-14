@@ -23,13 +23,24 @@ impl Default for Shield {
 
 impl Shield {
     #[allow(dead_code)]
-    pub fn take_damage(&mut self, damage: Damage) {
+    pub fn take_damage(&mut self, damage: Damage) -> Damage {
         if damage.damage >= self.current {
+            let updated_damage = Damage {
+                base_damage: damage.base_damage,
+                damage: damage.damage - self.current,
+            };
+
             self.current = 0;
-            return;
+
+            return updated_damage;
         }
 
         self.current -= damage.damage;
+
+        return Damage {
+            base_damage: damage.base_damage,
+            damage: Default::default(),
+        };
     }
 }
 
@@ -60,6 +71,10 @@ mod shield_should {
             base_damage: 10,
             damage: 11,
         },
+        Damage {
+            base_damage: 10,
+            damage: 0,
+        },
         Shield {
             maximum: 100,
             current: 89,
@@ -70,12 +85,20 @@ mod shield_should {
             base_damage: 10,
             damage: 20,
         },
+        Damage {
+            base_damage: 10,
+            damage: 0,
+        },
         Shield {
             maximum: 100,
             current: 80,
             regeneration: 5,
     })]
     #[case(
+        Damage {
+            base_damage: 10,
+            damage: 0,
+        },
         Damage {
             base_damage: 10,
             damage: 0,
@@ -90,6 +113,10 @@ mod shield_should {
             base_damage: 10,
             damage: 101,
         },
+        Damage {
+            base_damage: 10,
+            damage: 1,
+        },
         Shield {
             maximum: 100,
             current: 0,
@@ -100,12 +127,20 @@ mod shield_should {
             base_damage: 10,
             damage: 100,
         },
+        Damage {
+            base_damage: 10,
+            damage: 0,
+        },
         Shield {
             maximum: 100,
             current: 0,
             regeneration: 5,
     })]
-    fn take_damage(#[case] damage: Damage, #[case] expected_shield: Shield) {
+    fn take_damage(
+        #[case] damage: Damage,
+        #[case] expected_damage: Damage,
+        #[case] expected_shield: Shield,
+    ) {
         // Given
         let mut shield = Shield {
             maximum: 100,
@@ -114,9 +149,10 @@ mod shield_should {
         };
 
         // When
-        shield.take_damage(damage);
+        let damage = shield.take_damage(damage);
 
         // Then
         assert_eq!(expected_shield, shield);
+        assert_eq!(expected_damage, damage);
     }
 }

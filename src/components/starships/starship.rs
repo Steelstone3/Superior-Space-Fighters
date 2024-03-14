@@ -45,7 +45,15 @@ impl Starship {
     }
 
     #[allow(dead_code)]
-    pub fn take_damage(&mut self, _damage: Damage) {}
+    pub fn take_damage(&mut self, damage: Damage) {
+        let updated_damage = self.shield.take_damage(damage);
+        self.hull.take_damage(updated_damage);
+    }
+
+    #[allow(dead_code)]
+    pub fn is_destroyed(&self) -> bool {
+        todo!()
+    }
 }
 
 #[cfg(test)]
@@ -127,6 +135,96 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 100,
+                regeneration: 5,
+            },
+            ..Default::default()
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 11,
+        },
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 89,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
+            ..Default::default()
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 100,
+        },
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
+            ..Default::default()
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 101,
+        },
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 99,
+                regeneration: 5,
+            },
+            ..Default::default()
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 200,
+        },
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            ..Default::default()
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 201,
+        },
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 0,
                 regeneration: 5,
             },
             ..Default::default()
