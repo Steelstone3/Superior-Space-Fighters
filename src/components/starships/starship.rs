@@ -52,7 +52,7 @@ impl Starship {
 
     #[allow(dead_code)]
     pub fn is_destroyed(&self) -> bool {
-        return self.hull.current == 0;
+        self.hull.current == 0
     }
 }
 
