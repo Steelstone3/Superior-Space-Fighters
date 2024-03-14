@@ -37,10 +37,10 @@ impl Shield {
 
         self.current -= damage.damage;
 
-        return Damage {
+        Damage {
             base_damage: damage.base_damage,
             damage: Default::default(),
-        };
+        }
     }
 }
 
