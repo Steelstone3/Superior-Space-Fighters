@@ -2,8 +2,7 @@ use crate::{
     assets::{
         images::starships::faction_starships::FactionStarshipSprite,
         sounds::starships::engines::EngineSound,
-    },
-    components::weapons::damage::Damage,
+    }, components::weapons::weapon_types::damage::Damage,
 };
 use bevy::{ecs::component::Component, prelude::Vec2};
 

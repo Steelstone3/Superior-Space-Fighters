@@ -32,8 +32,8 @@ pub fn player_mine_collision_with_starship(
                     ..Default::default()
                 });
 
-                mine.mine.weapon.damage.calculate_damage();
-                starship.take_damage(mine.mine.weapon.damage);
+                mine.mine.lifetime_weapon.weapon.damage.calculate_damage();
+                starship.take_damage(mine.mine.lifetime_weapon.weapon.damage);
 
                 tracing::info!(
                     "Enemy Starship | Shield: {:?} | Health: {:?} |",

@@ -2,20 +2,16 @@ use crate::assets::{
     images::starships::weapons::mines::MineSprite,
     sounds::starships::weapons::{impacts::ImpactSound, mines::MineSound},
 };
-use bevy::{
-    ecs::component::Component,
-    time::{Timer, TimerMode},
-};
+use bevy::ecs::component::Component;
 
-use super::weapon::Weapon;
+use super::weapon_types::lifetime_weapon::LifetimeWeapon;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct Mine {
     pub mine: MineSprite,
     pub firing_sound: MineSound,
     pub impact_sound: ImpactSound,
-    pub weapon: Weapon,
-    pub lifetime: Timer,
+    pub lifetime_weapon: LifetimeWeapon,
 }
 
 impl Default for Mine {
@@ -24,17 +20,17 @@ impl Default for Mine {
             mine: MineSprite::default(),
             firing_sound: MineSound::default(),
             impact_sound: ImpactSound::default(),
-            weapon: Weapon::new(100.0, -5.0),
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
+            lifetime_weapon: LifetimeWeapon::new(100.0, -5.0),
         }
     }
 }
 
 #[cfg(test)]
 mod mine_should {
+    use crate::components::weapons::weapon_types::{damage::Damage, weapon::Weapon};
+
     use super::*;
-    use crate::components::weapons::damage::Damage;
-    use bevy::{math::Vec2, time::TimerMode};
+    use bevy::{math::Vec2, time::{Timer, TimerMode}};
 
     #[test]
     fn create_new() {
@@ -43,15 +39,17 @@ mod mine_should {
             mine: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            weapon: Weapon {
-                velocity: -5.0,
-                size: Vec2 { x: 100.0, y: 100.0 },
-                damage: Damage {
-                    base_damage: 10,
-                    damage: Default::default(),
+            lifetime_weapon: LifetimeWeapon {
+                weapon: Weapon {
+                    velocity: -5.0,
+                    size: Vec2 { x: 100.0, y: 100.0 },
+                    damage: Damage {
+                        base_damage: 10,
+                        damage: Default::default(),
+                    },
                 },
+                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             },
-            lifetime: Timer::from_seconds(10.0, TimerMode::Once),
         };
 
         // When

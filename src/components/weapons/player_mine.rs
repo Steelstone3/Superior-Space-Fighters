@@ -8,7 +8,7 @@ pub struct PlayerMine {
 
 #[cfg(test)]
 mod player_mine_should {
-    use crate::components::weapons::{damage::Damage, weapon::Weapon};
+    use crate::components::weapons::weapon_types::{damage::Damage, lifetime_weapon::LifetimeWeapon, weapon::Weapon};
 
     use super::*;
     use bevy::{
@@ -24,15 +24,17 @@ mod player_mine_should {
                 mine: Default::default(),
                 firing_sound: Default::default(),
                 impact_sound: Default::default(),
-                weapon: Weapon {
-                    velocity: -5.0,
-                    size: Vec2 { x: 100.0, y: 100.0 },
-                    damage: Damage {
-                        base_damage: 10,
-                        damage: Default::default(),
+                lifetime_weapon: LifetimeWeapon {
+                    weapon: Weapon {
+                        velocity: -5.0,
+                        size: Vec2 { x: 100.0, y: 100.0 },
+                        damage: Damage {
+                            base_damage: 10,
+                            damage: Default::default(),
+                        },
                     },
+                    lifetime: Timer::from_seconds(10.0, TimerMode::Once),
                 },
-                lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             },
         };
 

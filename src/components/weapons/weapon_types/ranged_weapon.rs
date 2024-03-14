@@ -22,7 +22,7 @@ impl RangedWeapon {
 mod weapon_should {
     use bevy::math::Vec2;
 
-    use crate::components::weapons::damage::Damage;
+    use crate::components::weapons::weapon_types::damage::Damage;
 
     use super::*;
     #[test]

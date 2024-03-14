@@ -1,5 +1,6 @@
-use crate::components::weapons::damage::Damage;
 use bevy::ecs::component::Component;
+
+use crate::components::weapons::weapon_types::damage::Damage;
 
 // TODO implement regenerative hull when shield is 100
 #[derive(Component, Debug, PartialEq)]

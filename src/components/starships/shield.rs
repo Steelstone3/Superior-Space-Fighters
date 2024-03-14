@@ -1,6 +1,6 @@
 use bevy::ecs::component::Component;
 
-use crate::components::weapons::damage::Damage;
+use crate::components::weapons::weapon_types::damage::Damage;
 
 // TODO implement regenerative shields
 #[derive(Component, Debug, PartialEq)]

@@ -1,9 +1,10 @@
-use super::ranged_weapon::RangedWeapon;
 use crate::assets::{
     images::starships::weapons::torpedos::TorpedoSprite,
     sounds::starships::weapons::{impacts::ImpactSound, torpedos::TorpedoSound},
 };
 use bevy::{ecs::component::Component, math::Vec3};
+
+use super::weapon_types::ranged_weapon::RangedWeapon;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct Torpedo {
@@ -26,7 +27,7 @@ impl Torpedo {
 
 #[cfg(test)]
 mod torpedo_should {
-    use crate::components::weapons::{damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon};
+    use crate::components::weapons::weapon_types::{damage::Damage, weapon::Weapon};
 
     use super::*;
     use bevy::math::Vec2;
