@@ -52,7 +52,7 @@ impl Starship {
 
     #[allow(dead_code)]
     pub fn is_destroyed(&self) -> bool {
-        todo!()
+        return self.hull.current == 0;
     }
 }
 
@@ -135,7 +135,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 100,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
     })]
@@ -153,7 +153,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 100,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
     })]
@@ -171,7 +171,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 100,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
     })]
@@ -189,7 +189,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 99,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
     })]
@@ -207,7 +207,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 0,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
     })]
@@ -225,7 +225,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 0,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
     })]
@@ -240,7 +240,7 @@ mod starship_should {
             hull: Hull {
                 maximum: 100,
                 current: 100,
-                regeneration: 5,
+                regeneration: 1,
             },
             ..Default::default()
         };
@@ -250,5 +250,78 @@ mod starship_should {
 
         // Then
         assert_eq!(expected_starship, starship);
+    }
+
+    #[rstest]
+    #[case(
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 100,
+                regeneration: 1,
+            },
+            ..Default::default()
+        },
+        false
+    )]
+    #[case(
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 100,
+                regeneration: 1,
+            },
+            ..Default::default()
+        },
+        false
+    )]
+    #[case(
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 0,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 0,
+                regeneration: 1,
+            },
+            ..Default::default()
+        },
+        true
+    )]
+    #[case(
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 10,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 0,
+                regeneration: 1,
+            },
+            ..Default::default()
+        },
+        true
+    )]
+    fn is_destroyed(#[case] starship: Starship, #[case] expected_is_destroyed: bool) {
+        // When
+        let is_destoryed = starship.is_destroyed();
+
+        // Then
+        assert_eq!(expected_is_destroyed, is_destoryed);
     }
 }
