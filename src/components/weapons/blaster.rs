@@ -1,16 +1,17 @@
-use super::weapon::Weapon;
 use crate::assets::{
     images::starships::weapons::blasters::BlasterSprite,
     sounds::starships::weapons::{blasters::BlasterSound, impacts::ImpactSound},
 };
 use bevy::{ecs::component::Component, math::Vec3};
 
+use super::weapon_types::ranged_weapon::RangedWeapon;
+
 #[derive(Component, Debug, PartialEq)]
 pub struct Blaster {
     pub blaster: BlasterSprite,
     pub firing_sound: BlasterSound,
     pub impact_sound: ImpactSound,
-    pub weapon: Weapon,
+    pub ranged_weapon: RangedWeapon,
 }
 
 impl Blaster {
@@ -19,13 +20,15 @@ impl Blaster {
             blaster: BlasterSprite::default(),
             firing_sound: BlasterSound::default(),
             impact_sound: ImpactSound::default(),
-            weapon: Weapon::new(original_position, 100.0, 100.0, 750.0),
+            ranged_weapon: RangedWeapon::new(original_position, 100.0, 100.0, 750.0),
         }
     }
 }
 
 #[cfg(test)]
 mod blaster_should {
+    use crate::components::weapons::weapon_types::{damage::Damage, weapon::Weapon};
+
     use super::*;
     use bevy::math::Vec2;
 
@@ -41,11 +44,17 @@ mod blaster_should {
             blaster: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            weapon: Weapon {
-                original_position,
-                velocity: 100.0,
-                size: Vec2 { x: 100.0, y: 100.0 },
+            ranged_weapon: RangedWeapon {
                 range: 750.0,
+                original_position,
+                weapon: Weapon {
+                    velocity: 100.0,
+                    size: Vec2 { x: 100.0, y: 100.0 },
+                    damage: Damage {
+                        base_damage: 10,
+                        damage: Default::default(),
+                    },
+                },
             },
         };
 

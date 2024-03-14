@@ -1,5 +1,7 @@
 use crate::{
-    components::{player_starship::PlayerStarship, weapons::player_torpedo::PlayerTorpedo},
+    components::{
+        starships::player_starship::PlayerStarship, weapons::player_torpedo::PlayerTorpedo,
+    },
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
@@ -52,7 +54,7 @@ pub fn spawn_player_torpedo(
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
-                custom_size: Some(torpedo.torpedo.weapon.size),
+                custom_size: Some(torpedo.torpedo.ranged_weapon.weapon.size),
                 ..Default::default()
             },
             transform: player_transform,

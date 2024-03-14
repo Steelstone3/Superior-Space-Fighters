@@ -14,9 +14,10 @@ pub fn player_torpedo_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (torpedo_entity, torpedo_transform, torpedo) in &mut torpedoes {
-        let is_past_maximum_range =
-            (torpedo_transform.translation - torpedo.torpedo.weapon.original_position).length()
-                > torpedo.torpedo.weapon.range;
+        let is_past_maximum_range = (torpedo_transform.translation
+            - torpedo.torpedo.ranged_weapon.original_position)
+            .length()
+            > torpedo.torpedo.ranged_weapon.range;
 
         if is_past_maximum_range {
             commands.entity(torpedo_entity).despawn();

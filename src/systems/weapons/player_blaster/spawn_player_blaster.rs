@@ -1,5 +1,7 @@
 use crate::{
-    components::{player_starship::PlayerStarship, weapons::player_blaster::PlayerBlaster},
+    components::{
+        starships::player_starship::PlayerStarship, weapons::player_blaster::PlayerBlaster,
+    },
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
@@ -47,7 +49,7 @@ pub fn spawn_player_blaster(
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
-                custom_size: Some(blaster.blaster.weapon.size),
+                custom_size: Some(blaster.blaster.ranged_weapon.weapon.size),
                 ..Default::default()
             },
             transform: player_transform,

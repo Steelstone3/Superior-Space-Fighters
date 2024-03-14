@@ -1,5 +1,5 @@
 use crate::{
-    components::{player_starship::PlayerStarship, weapons::player_mine::PlayerMine},
+    components::{starships::player_starship::PlayerStarship, weapons::player_mine::PlayerMine},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{
@@ -46,7 +46,7 @@ pub fn spawn_player_mine(
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
-                custom_size: Some(mine.mine.size),
+                custom_size: Some(mine.mine.lifetime_weapon.weapon.size),
                 ..Default::default()
             },
             transform: player_transform,

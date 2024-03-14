@@ -5,7 +5,7 @@ use bevy::{
     input::{keyboard::KeyCode, ButtonInput},
 };
 
-use crate::components::player_starship::PlayerStarship;
+use crate::components::starships::player_starship::PlayerStarship;
 
 pub fn player_engine_rumble_sound(
     mut commands: Commands,

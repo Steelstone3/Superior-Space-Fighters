@@ -1,4 +1,4 @@
-use crate::components::player_starship::PlayerStarship;
+use crate::components::starships::player_starship::PlayerStarship;
 use crate::components::weapons::player_exotic::PlayerExotic;
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
 use bevy::input::ButtonInput;
@@ -45,7 +45,7 @@ pub fn spawn_player_exotic(
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
-                custom_size: Some(exotic.exotic.weapon.size),
+                custom_size: Some(exotic.exotic.ranged_weapon.weapon.size),
                 ..Default::default()
             },
             transform: player_transform,

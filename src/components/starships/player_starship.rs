@@ -1,5 +1,6 @@
-use super::starship::Starship;
 use bevy::ecs::component::Component;
+
+use super::starship::Starship;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct PlayerStarship {
@@ -25,6 +26,8 @@ mod player_starship_should {
     use super::*;
     use crate::assets::images::starships::faction_starships::FactionStarshipSprite;
     use crate::assets::sounds::starships::engines::EngineSound;
+    use crate::components::starships::hull::Hull;
+    use crate::components::starships::shield::Shield;
     use bevy::math::Vec2;
 
     #[test]
@@ -34,6 +37,16 @@ mod player_starship_should {
             ship: Starship {
                 faction_starship: FactionStarshipSprite::OuterReachMiningGuildAllRounder,
                 engine: EngineSound::Engine1,
+                shield: Shield {
+                    maximum: 100,
+                    current: 100,
+                    regeneration: 5,
+                },
+                hull: Hull {
+                    maximum: 100,
+                    current: 100,
+                    regeneration: 1,
+                },
                 velocity: 30.0,
                 size: Vec2 { x: 100.0, y: 100.0 },
             },

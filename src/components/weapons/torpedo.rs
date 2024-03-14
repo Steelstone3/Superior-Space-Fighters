@@ -1,16 +1,17 @@
-use super::weapon::Weapon;
 use crate::assets::{
     images::starships::weapons::torpedos::TorpedoSprite,
     sounds::starships::weapons::{impacts::ImpactSound, torpedos::TorpedoSound},
 };
 use bevy::{ecs::component::Component, math::Vec3};
 
+use super::weapon_types::ranged_weapon::RangedWeapon;
+
 #[derive(Component, Debug, PartialEq)]
 pub struct Torpedo {
     pub torpedo: TorpedoSprite,
     pub firing_sound: TorpedoSound,
     pub impact_sound: ImpactSound,
-    pub weapon: Weapon,
+    pub ranged_weapon: RangedWeapon,
 }
 
 impl Torpedo {
@@ -19,13 +20,15 @@ impl Torpedo {
             torpedo: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            weapon: Weapon::new(original_position, 80.0, 125.0, 1500.0),
+            ranged_weapon: RangedWeapon::new(original_position, 80.0, 125.0, 1500.0),
         }
     }
 }
 
 #[cfg(test)]
 mod torpedo_should {
+    use crate::components::weapons::weapon_types::{damage::Damage, weapon::Weapon};
+
     use super::*;
     use bevy::math::Vec2;
 
@@ -41,11 +44,17 @@ mod torpedo_should {
             torpedo: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            weapon: Weapon {
-                original_position,
-                velocity: 125.0,
-                size: Vec2 { x: 80.0, y: 80.0 },
+            ranged_weapon: RangedWeapon {
                 range: 1500.0,
+                original_position,
+                weapon: Weapon {
+                    velocity: 125.0,
+                    size: Vec2 { x: 80.0, y: 80.0 },
+                    damage: Damage {
+                        base_damage: 10,
+                        damage: Default::default(),
+                    },
+                },
             },
         };
 
