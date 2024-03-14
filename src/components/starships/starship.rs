@@ -44,13 +44,11 @@ impl Starship {
         }
     }
 
-    #[allow(dead_code)]
     pub fn take_damage(&mut self, damage: Damage) {
         let updated_damage = self.shield.take_damage(damage);
         self.hull.take_damage(updated_damage);
     }
 
-    #[allow(dead_code)]
     pub fn is_destroyed(&self) -> bool {
         self.hull.current == 0
     }

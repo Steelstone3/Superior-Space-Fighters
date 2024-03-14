@@ -3,7 +3,6 @@ use bevy::ecs::component::Component;
 use crate::components::weapons::damage::Damage;
 
 // TODO implement regenerative shields
-#[allow(dead_code)]
 #[derive(Component, Debug, PartialEq)]
 pub struct Shield {
     pub maximum: u32,
@@ -22,7 +21,6 @@ impl Default for Shield {
 }
 
 impl Shield {
-    #[allow(dead_code)]
     pub fn take_damage(&mut self, damage: Damage) -> Damage {
         if damage.damage >= self.current {
             let updated_damage = Damage {

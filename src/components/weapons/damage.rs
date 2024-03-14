@@ -1,7 +1,6 @@
 use bevy::ecs::component::Component;
 
 #[derive(Component, Debug, PartialEq)]
-#[allow(dead_code)]
 pub struct Damage {
     pub base_damage: u32,
     pub damage: u32,
@@ -18,7 +17,6 @@ impl Default for Damage {
 }
 
 impl Damage {
-    #[allow(dead_code)]
     pub fn calculate_damage(&mut self) {}
 }
 

@@ -2,7 +2,6 @@ use crate::components::weapons::damage::Damage;
 use bevy::ecs::component::Component;
 
 // TODO implement regenerative hull when shield is 100
-#[allow(dead_code)]
 #[derive(Component, Debug, PartialEq)]
 pub struct Hull {
     pub maximum: u32,
@@ -21,7 +20,6 @@ impl Default for Hull {
 }
 
 impl Hull {
-    #[allow(dead_code)]
     pub fn take_damage(&mut self, damage: Damage) {
         if damage.damage >= self.current {
             self.current = 0;
