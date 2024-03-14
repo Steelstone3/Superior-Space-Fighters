@@ -1,8 +1,5 @@
-use bevy::ecs::component::Component;
-
 use crate::components::weapons::damage::Damage;
-
-use super::shield::Shield;
+use bevy::ecs::component::Component;
 
 // TODO implement regenerative hull when shield is 100
 #[allow(dead_code)]
@@ -25,14 +22,20 @@ impl Default for Hull {
 
 impl Hull {
     #[allow(dead_code)]
-    pub fn take_damage(&mut self, _shield: Shield, _damage: Damage) {
-        todo!()
+    pub fn take_damage(&mut self, damage: Damage) {
+        if damage.damage >= self.current {
+            self.current = 0;
+            return;
+        }
+
+        self.current -= damage.damage;
     }
 }
 
 #[cfg(test)]
 mod shield_should {
     use super::*;
+    use rstest::rstest;
 
     #[test]
     fn create_new() {
@@ -45,6 +48,62 @@ mod shield_should {
 
         // When
         let hull = Hull::default();
+
+        // Then
+        assert_eq!(expected_hull, hull);
+    }
+
+    #[rstest]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 0,
+        },
+        Hull {
+            maximum: 100,
+            current: 100,
+            regeneration: 1,
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 10,
+        },
+        Hull {
+            maximum: 100,
+            current: 90,
+            regeneration: 1,
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 100,
+        },
+        Hull {
+            maximum: 100,
+            current: 0,
+            regeneration: 1,
+    })]
+    #[case(
+        Damage {
+            base_damage: 10,
+            damage: 101,
+        },
+        Hull {
+            maximum: 100,
+            current: 0,
+            regeneration: 1,
+    })]
+    fn take_damage(#[case] damage: Damage, #[case] expected_hull: Hull) {
+        // Given
+        let mut hull = Hull {
+            maximum: 100,
+            current: 100,
+            regeneration: 1,
+        };
+
+        // When
+        hull.take_damage(damage);
 
         // Then
         assert_eq!(expected_hull, hull);
