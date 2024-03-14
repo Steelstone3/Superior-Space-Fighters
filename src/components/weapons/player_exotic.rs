@@ -16,7 +16,7 @@ impl PlayerExotic {
 
 #[cfg(test)]
 mod player_exotic_should {
-    use crate::components::weapons::weapon::Weapon;
+    use crate::components::weapons::{damage::Damage, weapon::Weapon};
     use bevy::math::{Vec2, Vec3};
 
     use super::*;
@@ -39,6 +39,10 @@ mod player_exotic_should {
                     velocity: 75.0,
                     size: Vec2 { x: 80.0, y: 80.0 },
                     range: 500.0,
+                    damage: Damage {
+                        base_damage: 10,
+                        damage: Default::default(),
+                    },
                 },
             },
         };

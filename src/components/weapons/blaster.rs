@@ -26,6 +26,8 @@ impl Blaster {
 
 #[cfg(test)]
 mod blaster_should {
+    use crate::components::weapons::damage::Damage;
+
     use super::*;
     use bevy::math::Vec2;
 
@@ -46,6 +48,10 @@ mod blaster_should {
                 velocity: 100.0,
                 size: Vec2 { x: 100.0, y: 100.0 },
                 range: 750.0,
+                damage: Damage {
+                    base_damage: 10,
+                    damage: Default::default(),
+                },
             },
         };
 

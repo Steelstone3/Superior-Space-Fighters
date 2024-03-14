@@ -3,12 +3,15 @@ use bevy::{
     math::{Vec2, Vec3},
 };
 
+use super::damage::Damage;
+
 #[derive(Component, Debug, PartialEq)]
 pub struct Weapon {
     pub original_position: Vec3,
     pub velocity: f32,
     pub size: Vec2,
     pub range: f32,
+    pub damage: Damage,
 }
 
 impl Weapon {
@@ -18,6 +21,7 @@ impl Weapon {
             velocity,
             size: Vec2::new(size, size),
             range,
+            damage: Damage::default(),
         }
     }
 }
@@ -41,6 +45,10 @@ mod weapon_should {
             velocity,
             size: Vec2 { x: size, y: size },
             range,
+            damage: Damage {
+                base_damage: 10,
+                damage: Default::default(),
+            },
         };
 
         // When
