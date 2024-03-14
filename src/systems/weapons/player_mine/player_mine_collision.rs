@@ -40,9 +40,10 @@ pub fn player_mine_collision_with_starship(
                     starship.shield.current,
                     starship.hull.current,
                 );
+                
+                commands.entity(mine_entity).despawn();
 
                 if starship.is_destroyed() {
-                    commands.entity(mine_entity).despawn();
                     commands.entity(starship_entity).despawn();
                 }
             }

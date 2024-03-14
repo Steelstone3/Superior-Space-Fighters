@@ -17,7 +17,9 @@ impl Default for Damage {
 }
 
 impl Damage {
-    pub fn calculate_damage(&mut self) {}
+    pub fn calculate_damage(&mut self) {
+        self.damage = self.base_damage + 1
+    }
 }
 
 #[cfg(test)]
@@ -44,7 +46,7 @@ mod damage_should {
         // Given
         let expected_damage = Damage {
             base_damage: 10,
-            damage: Default::default(),
+            damage: 11,
         };
         let mut damage = Damage {
             base_damage: 10,
