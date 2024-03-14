@@ -1,13 +1,19 @@
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
-    ecs::{query::Without, system::{Res, ResMut}},
+    ecs::{
+        query::Without,
+        system::{Res, ResMut},
+    },
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
 
-use crate::{components::{starships::starship::Starship, weapons::player_torpedo::PlayerTorpedo}, resources::projectile_ammunition::ProjectileAmmunition};
+use crate::{
+    components::{starships::starship::Starship, weapons::player_torpedo::PlayerTorpedo},
+    resources::projectile_ammunition::ProjectileAmmunition,
+};
 
 // TODO multi-thread
 pub fn player_torpedo_collision_with_starship(
@@ -33,7 +39,12 @@ pub fn player_torpedo_collision_with_starship(
                     ..Default::default()
                 });
 
-                torpedo.torpedo.ranged_weapon.weapon.damage.calculate_damage();
+                torpedo
+                    .torpedo
+                    .ranged_weapon
+                    .weapon
+                    .damage
+                    .calculate_damage();
                 starship.take_damage(torpedo.torpedo.ranged_weapon.weapon.damage);
 
                 tracing::info!(
@@ -47,9 +58,7 @@ pub fn player_torpedo_collision_with_starship(
 
                 if starship.is_destroyed() {
                     commands.entity(starship_entity).despawn();
-                    tracing::info!(
-                        "Enemy Starship Destroyed"
-                    );
+                    tracing::info!("Enemy Starship Destroyed");
                 }
             }
         }
