@@ -1,23 +1,24 @@
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
-    ecs::{query::Without, system::Res},
+    ecs::{query::Without, system::{Res, ResMut}},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
 
-use crate::components::{starships::starship::Starship, weapons::player_torpedo::PlayerTorpedo};
+use crate::{components::{starships::starship::Starship, weapons::player_torpedo::PlayerTorpedo}, resources::projectile_ammunition::ProjectileAmmunition};
 
 // TODO multi-thread
 pub fn player_torpedo_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     mut torpedoes: Query<(Entity, &mut Transform, &mut PlayerTorpedo), Without<Starship>>,
     mut starships: Query<(Entity, &mut Transform, &mut Starship)>,
 ) {
-    for (torpedo_entity, torpedo_transform, torpedo) in &mut torpedoes {
-        for (starship_entity, starship_transform, starship) in &mut starships {
+    for (torpedo_entity, torpedo_transform, mut torpedo) in &mut torpedoes {
+        for (starship_entity, starship_transform, mut starship) in &mut starships {
             let distance_to_starship =
                 (torpedo_transform.translation - starship_transform.translation).length();
 
@@ -32,8 +33,24 @@ pub fn player_torpedo_collision_with_starship(
                     ..Default::default()
                 });
 
+                torpedo.torpedo.ranged_weapon.weapon.damage.calculate_damage();
+                starship.take_damage(torpedo.torpedo.ranged_weapon.weapon.damage);
+
+                tracing::info!(
+                    "Enemy Starship | Shield: {:?} | Health: {:?} |",
+                    starship.shield.current,
+                    starship.hull.current,
+                );
+
                 commands.entity(torpedo_entity).despawn();
-                commands.entity(starship_entity).despawn();
+                ammunition.torpedo_ammunition += 1;
+
+                if starship.is_destroyed() {
+                    commands.entity(starship_entity).despawn();
+                    tracing::info!(
+                        "Enemy Starship Destroyed"
+                    );
+                }
             }
         }
     }
