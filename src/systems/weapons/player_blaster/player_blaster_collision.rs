@@ -1,23 +1,24 @@
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
-    ecs::{query::Without, system::Res},
+    ecs::{query::Without, system::{Res, ResMut}},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
 
-use crate::components::{starships::starship::Starship, weapons::player_blaster::PlayerBlaster};
+use crate::{components::{starships::starship::Starship, weapons::player_blaster::PlayerBlaster}, resources::projectile_ammunition::ProjectileAmmunition};
 
 // TODO multi-thread
 pub fn player_blaster_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     mut blasters: Query<(Entity, &mut Transform, &mut PlayerBlaster), Without<Starship>>,
     mut starships: Query<(Entity, &mut Transform, &mut Starship)>,
 ) {
-    for (blaster_entity, blaster_transform, blaster) in &mut blasters {
-        for (starship_entity, starship_transform, starship) in &mut starships {
+    for (blaster_entity, blaster_transform, mut blaster) in &mut blasters {
+        for (starship_entity, starship_transform, mut starship) in &mut starships {
             let distance_to_starship =
                 (blaster_transform.translation - starship_transform.translation).length();
 
@@ -32,8 +33,21 @@ pub fn player_blaster_collision_with_starship(
                     ..Default::default()
                 });
 
+                blaster.blaster.ranged_weapon.weapon.damage.calculate_damage();
+                starship.take_damage(blaster.blaster.ranged_weapon.weapon.damage);
+
+                tracing::info!(
+                    "Enemy Starship | Shield: {:?} | Health: {:?} |",
+                    starship.shield.current,
+                    starship.hull.current,
+                );
+
                 commands.entity(blaster_entity).despawn();
-                commands.entity(starship_entity).despawn();
+                ammunition.blaster_ammunition += 1;
+
+                if starship.is_destroyed() {
+                    commands.entity(starship_entity).despawn();
+                }
             }
         }
     }
