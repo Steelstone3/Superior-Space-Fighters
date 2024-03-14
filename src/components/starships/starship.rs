@@ -118,35 +118,32 @@ mod starship_should {
             base_damage: 10,
             damage: 0,
         },
-        Shield {
-            maximum: 100,
-            current: 100,
-            regeneration: 5,
-        },
-        Hull {
-            maximum: 100,
-            current: 100,
-            regeneration: 5,
-        })]
-    fn take_damage(
-        #[case] damage: Damage,
-        #[case] expected_shield: Shield,
-        #[case] expected_hull: Hull,
-    ) {
+        Starship{
+            shield: Shield {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
+            ..Default::default()
+    })]
+    fn take_damage(#[case] damage: Damage, #[case] expected_starship: Starship) {
         // Given
-        let shield = Shield {
-            maximum: 100,
-            current: 100,
-            regeneration: 5,
-        };
-        let hull = Hull {
-            maximum: 100,
-            current: 100,
-            regeneration: 5,
-        };
         let mut starship = Starship {
-            shield,
-            hull,
+            shield: Shield {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
+            hull: Hull {
+                maximum: 100,
+                current: 100,
+                regeneration: 5,
+            },
             ..Default::default()
         };
 
@@ -154,7 +151,6 @@ mod starship_should {
         starship.take_damage(damage);
 
         // Then
-        assert_eq!(expected_shield, starship.shield);
-        assert_eq!(expected_hull, starship.hull);
+        assert_eq!(expected_starship, starship);
     }
 }
