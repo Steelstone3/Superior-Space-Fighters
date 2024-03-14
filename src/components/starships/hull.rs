@@ -67,11 +67,11 @@ mod shield_should {
     #[case(
         Damage {
             base_damage: 10,
-            damage: 10,
+            damage: 11,
         },
         Hull {
             maximum: 100,
-            current: 90,
+            current: 89,
             regeneration: 1,
     })]
     #[case(
