@@ -32,8 +32,12 @@ pub fn player_mine_collision_with_starship(
                     ..Default::default()
                 });
 
-                commands.entity(mine_entity).despawn();
-                commands.entity(starship_entity).despawn();
+                // starship.take_damage(mine.mine.weapon.damage);
+
+                if starship.is_destroyed() {
+                    commands.entity(mine_entity).despawn();
+                    commands.entity(starship_entity).despawn();
+                }
             }
         }
     }

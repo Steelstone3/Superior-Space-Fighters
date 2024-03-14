@@ -16,7 +16,7 @@ impl PlayerExotic {
 
 #[cfg(test)]
 mod player_exotic_should {
-    use crate::components::weapons::{damage::Damage, weapon::Weapon};
+    use crate::components::weapons::{damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon};
     use bevy::math::{Vec2, Vec3};
 
     use super::*;
@@ -34,14 +34,16 @@ mod player_exotic_should {
                 exotic: Default::default(),
                 firing_sound: Default::default(),
                 impact_sound: Default::default(),
-                weapon: Weapon {
-                    original_position,
-                    velocity: 75.0,
-                    size: Vec2 { x: 80.0, y: 80.0 },
+                ranged_weapon: RangedWeapon {
                     range: 500.0,
-                    damage: Damage {
-                        base_damage: 10,
-                        damage: Default::default(),
+                    weapon: Weapon {
+                        original_position,
+                        velocity: 75.0,
+                        size: Vec2 { x: 80.0, y: 80.0 },
+                        damage: Damage {
+                            base_damage: 10,
+                            damage: Default::default(),
+                        },
                     },
                 },
             },

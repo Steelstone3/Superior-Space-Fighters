@@ -17,7 +17,7 @@ impl PlayerBlaster {
 #[cfg(test)]
 mod player_blaster_should {
     use super::*;
-    use crate::components::weapons::{damage::Damage, weapon::Weapon};
+    use crate::components::weapons::{damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon};
     use bevy::math::Vec2;
 
     #[test]
@@ -33,14 +33,16 @@ mod player_blaster_should {
                 blaster: Default::default(),
                 firing_sound: Default::default(),
                 impact_sound: Default::default(),
-                weapon: Weapon {
-                    original_position,
-                    velocity: 100.0,
-                    size: Vec2 { x: 100.0, y: 100.0 },
+                ranged_weapon: RangedWeapon {
                     range: 750.0,
-                    damage: Damage {
-                        base_damage: 10,
-                        damage: Default::default(),
+                    weapon: Weapon {
+                        original_position,
+                        velocity: 100.0,
+                        size: Vec2 { x: 100.0, y: 100.0 },
+                        damage: Damage {
+                            base_damage: 10,
+                            damage: Default::default(),
+                        },
                     },
                 },
             },

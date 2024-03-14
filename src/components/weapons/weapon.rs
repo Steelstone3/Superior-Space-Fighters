@@ -10,17 +10,15 @@ pub struct Weapon {
     pub original_position: Vec3,
     pub velocity: f32,
     pub size: Vec2,
-    pub range: f32,
     pub damage: Damage,
 }
 
 impl Weapon {
-    pub fn new(original_position: Vec3, size: f32, velocity: f32, range: f32) -> Self {
-        Weapon {
+    pub fn new(original_position: Vec3, size: f32, velocity: f32) -> Self {
+        Self {
             original_position,
             velocity,
             size: Vec2::new(size, size),
-            range,
             damage: Damage::default(),
         }
     }
@@ -39,12 +37,10 @@ mod weapon_should {
         };
         let velocity = 100.0;
         let size = 100.0;
-        let range = 750.0;
         let expected_weapon = Weapon {
             original_position,
             velocity,
             size: Vec2 { x: size, y: size },
-            range,
             damage: Damage {
                 base_damage: 10,
                 damage: Default::default(),
@@ -52,7 +48,7 @@ mod weapon_should {
         };
 
         // When
-        let weapon = Weapon::new(original_position, size, velocity, range);
+        let weapon = Weapon::new(original_position, size, velocity);
 
         // Then
         assert_eq!(expected_weapon, weapon);

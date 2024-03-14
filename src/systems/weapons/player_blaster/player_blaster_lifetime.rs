@@ -14,9 +14,10 @@ pub fn player_blaster_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (blaster_entity, blaster_transform, blaster) in &mut blasters {
-        let is_past_maximum_range =
-            (blaster_transform.translation - blaster.blaster.weapon.original_position).length()
-                > blaster.blaster.weapon.range;
+        let is_past_maximum_range = (blaster_transform.translation
+            - blaster.blaster.ranged_weapon.weapon.original_position)
+            .length()
+            > blaster.blaster.ranged_weapon.range;
 
         if is_past_maximum_range {
             commands.entity(blaster_entity).despawn();

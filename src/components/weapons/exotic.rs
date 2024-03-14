@@ -1,4 +1,4 @@
-use super::weapon::Weapon;
+use super::ranged_weapon::RangedWeapon;
 use crate::assets::{
     images::starships::weapons::exotics::ExoticSprite,
     sounds::starships::weapons::{exotics::ExoticSound, impacts::ImpactSound},
@@ -10,7 +10,7 @@ pub struct Exotic {
     pub exotic: ExoticSprite,
     pub firing_sound: ExoticSound,
     pub impact_sound: ImpactSound,
-    pub weapon: Weapon,
+    pub ranged_weapon: RangedWeapon,
 }
 
 impl Exotic {
@@ -19,7 +19,7 @@ impl Exotic {
             exotic: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            weapon: Weapon::new(original_position, 80.0, 75.0, 500.0),
+            ranged_weapon: RangedWeapon::new(original_position, 80.0, 75.0, 500.0),
         }
     }
 }
@@ -43,14 +43,16 @@ mod exotic_should {
             exotic: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            weapon: Weapon {
-                original_position,
-                velocity: 75.0,
-                size: Vec2 { x: 80.0, y: 80.0 },
+            ranged_weapon: RangedWeapon {
                 range: 500.0,
-                damage: Damage {
-                    base_damage: 10,
-                    damage: Default::default(),
+                weapon: Weapon {
+                    original_position,
+                    velocity: 75.0,
+                    size: Vec2 { x: 80.0, y: 80.0 },
+                    damage: Damage {
+                        base_damage: 10,
+                        damage: Default::default(),
+                    },
                 },
             },
         };

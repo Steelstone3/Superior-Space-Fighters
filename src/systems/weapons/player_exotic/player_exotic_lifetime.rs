@@ -14,9 +14,10 @@ pub fn player_exotic_lifetime(
     mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (exotic_entity, exotic_transform, exotic) in &mut exotics {
-        let is_past_maximum_range =
-            (exotic_transform.translation - exotic.exotic.weapon.original_position).length()
-                > exotic.exotic.weapon.range;
+        let is_past_maximum_range = (exotic_transform.translation
+            - exotic.exotic.ranged_weapon.weapon.original_position)
+            .length()
+            > exotic.exotic.ranged_weapon.range;
 
         if is_past_maximum_range {
             commands.entity(exotic_entity).despawn();

@@ -5,7 +5,7 @@ use crate::{
     },
     components::weapons::damage::Damage,
 };
-use bevy::{ecs::component::Component, prelude::Vec2, utils::default};
+use bevy::{ecs::component::Component, prelude::Vec2};
 
 use super::{hull::Hull, shield::Shield};
 
@@ -38,7 +38,7 @@ impl Starship {
             faction_starship,
             engine,
             shield: Shield::default(),
-            hull: default(),
+            hull: Hull::default(),
             velocity: 30.0,
             size: Vec2::new(100.0, 100.0),
         }
