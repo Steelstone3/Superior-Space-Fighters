@@ -18,7 +18,9 @@ impl PlayerExotic {
 mod player_exotic_should {
     use bevy::math::{Vec2, Vec3};
 
-    use crate::components::weapons::weapon_types::{damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon};
+    use crate::components::weapons::weapon_types::{
+        damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon,
+    };
 
     use super::*;
 

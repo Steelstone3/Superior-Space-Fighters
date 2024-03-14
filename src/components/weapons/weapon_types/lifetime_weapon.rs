@@ -1,5 +1,8 @@
 use super::weapon::Weapon;
-use bevy::{ecs::component::Component, time::{Timer, TimerMode}};
+use bevy::{
+    ecs::component::Component,
+    time::{Timer, TimerMode},
+};
 
 // TODO Add in a lifetime
 #[derive(Component, Debug, PartialEq)]

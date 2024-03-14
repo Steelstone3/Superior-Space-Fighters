@@ -8,7 +8,9 @@ pub struct PlayerMine {
 
 #[cfg(test)]
 mod player_mine_should {
-    use crate::components::weapons::weapon_types::{damage::Damage, lifetime_weapon::LifetimeWeapon, weapon::Weapon};
+    use crate::components::weapons::weapon_types::{
+        damage::Damage, lifetime_weapon::LifetimeWeapon, weapon::Weapon,
+    };
 
     use super::*;
     use bevy::{

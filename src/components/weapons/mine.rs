@@ -30,7 +30,10 @@ mod mine_should {
     use crate::components::weapons::weapon_types::{damage::Damage, weapon::Weapon};
 
     use super::*;
-    use bevy::{math::Vec2, time::{Timer, TimerMode}};
+    use bevy::{
+        math::Vec2,
+        time::{Timer, TimerMode},
+    };
 
     #[test]
     fn create_new() {

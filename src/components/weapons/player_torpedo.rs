@@ -16,7 +16,9 @@ impl PlayerTorpedo {
 
 #[cfg(test)]
 mod player_torpedo_should {
-    use crate::components::weapons::weapon_types::{damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon};
+    use crate::components::weapons::weapon_types::{
+        damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon,
+    };
 
     use super::*;
     use bevy::math::{Vec2, Vec3};
