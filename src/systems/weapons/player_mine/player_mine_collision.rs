@@ -1,18 +1,25 @@
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
-    ecs::{query::Without, system::Res},
+    ecs::{
+        query::Without,
+        system::{Res, ResMut},
+    },
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
 
-use crate::components::{starships::starship::Starship, weapons::player_mine::PlayerMine};
+use crate::{
+    components::{starships::starship::Starship, weapons::player_mine::PlayerMine},
+    resources::projectile_ammunition::ProjectileAmmunition,
+};
 
 // TODO multi-thread
 pub fn player_mine_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
+    mut ammunition: ResMut<ProjectileAmmunition>,
     mut mines: Query<(Entity, &mut Transform, &mut PlayerMine), Without<Starship>>,
     mut starships: Query<(Entity, &mut Transform, &mut Starship)>,
 ) {
@@ -40,8 +47,9 @@ pub fn player_mine_collision_with_starship(
                     starship.shield.current,
                     starship.hull.current,
                 );
-                
+
                 commands.entity(mine_entity).despawn();
+                ammunition.mine_ammunition += 1;
 
                 if starship.is_destroyed() {
                     commands.entity(starship_entity).despawn();
