@@ -9,3 +9,4 @@ pub mod player_torpedo;
 pub mod ranged_weapon;
 pub mod torpedo;
 pub mod weapon;
+pub mod lock_on_weapon;

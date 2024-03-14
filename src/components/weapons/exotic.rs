@@ -26,7 +26,7 @@ impl Exotic {
 
 #[cfg(test)]
 mod exotic_should {
-    use crate::components::weapons::damage::Damage;
+    use crate::components::weapons::{damage::Damage, weapon::Weapon};
 
     use super::*;
     use bevy::math::{Vec2, Vec3};
