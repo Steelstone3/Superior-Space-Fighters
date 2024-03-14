@@ -35,6 +35,12 @@ pub fn player_mine_collision_with_starship(
                 mine.mine.weapon.damage.calculate_damage();
                 starship.take_damage(mine.mine.weapon.damage);
 
+                tracing::info!(
+                    "Enemy Starship | Shield: {:?} | Health: {:?} |",
+                    starship.shield.current,
+                    starship.hull.current,
+                );
+
                 if starship.is_destroyed() {
                     commands.entity(mine_entity).despawn();
                     commands.entity(starship_entity).despawn();
