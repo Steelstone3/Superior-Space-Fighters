@@ -37,7 +37,9 @@ impl Starship {
     }
 
     #[allow(dead_code)]
-    pub fn take_damage(&mut self, _damage: Damage) {}
+    pub fn take_damage(&mut self, _damage: Damage) {
+        todo!()
+    }
 }
 
 #[cfg(test)]

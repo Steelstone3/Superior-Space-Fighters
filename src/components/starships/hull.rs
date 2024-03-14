@@ -1,5 +1,10 @@
 use bevy::ecs::component::Component;
 
+use crate::components::weapons::damage::Damage;
+
+use super::shield::Shield;
+
+// TODO implement regenerative hull when shield is 100
 #[allow(dead_code)]
 #[derive(Component, Debug, PartialEq)]
 pub struct Hull {
@@ -15,6 +20,13 @@ impl Default for Hull {
             current: 100,
             regeneration: 1,
         }
+    }
+}
+
+impl Hull {
+    #[allow(dead_code)]
+    pub fn take_damage(&mut self, _shield: Shield, _damage: Damage) {
+        todo!()
     }
 }
 

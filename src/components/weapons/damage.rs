@@ -3,12 +3,24 @@ use bevy::ecs::component::Component;
 #[derive(Component, Debug, PartialEq)]
 #[allow(dead_code)]
 pub struct Damage {
-    pub damage: u32,
+    pub base_damage: u32,
+    pub calculated_damage: u32,
 }
+//TODO implement a more complex damage system that randomly varies the damage
 
 impl Default for Damage {
     fn default() -> Self {
-        Self { damage: 10 }
+        Self {
+            base_damage: 10,
+            calculated_damage: Default::default(),
+        }
+    }
+}
+
+impl Damage {
+    #[allow(dead_code)]
+    pub fn calculate_damage(&mut self) {
+        
     }
 }
 
@@ -19,10 +31,32 @@ mod damage_should {
     #[test]
     fn create_new() {
         // Given
-        let expected_damage = Damage { damage: 10 };
+        let expected_damage = Damage {
+            base_damage: 10,
+            calculated_damage: Default::default(),
+        };
 
         // When
         let damage = Damage::default();
+
+        // Then
+        assert_eq!(expected_damage, damage);
+    }
+
+    #[test]
+    fn calculate_damage() {
+        // Given
+        let expected_damage = Damage {
+            base_damage: 10,
+            calculated_damage: Default::default(),
+        };
+        let mut damage = Damage {
+            base_damage: 10,
+            calculated_damage: Default::default(),
+        };
+
+        // When
+        damage.calculate_damage();
 
         // Then
         assert_eq!(expected_damage, damage);
