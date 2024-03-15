@@ -30,27 +30,24 @@ pub fn spawn_target(
         random_starship = Some(starship)
     }
 
-    match random_starship {
-        Some(random_starship) => {
-            if !targetting_setting.is_targetting {
-                let target = Target::default();
-                let texture = asset_server.load(target.lock_on_target.to_string());
+    if let Some(random_starship) = random_starship {
+        if !targetting_setting.is_targetting {
+            let target = Target::default();
+            let texture = asset_server.load(target.lock_on_target.to_string());
 
-                tracing::info!("Spawning Target");
-                commands
-                    .spawn(SpriteBundle {
-                        sprite: Sprite {
-                            custom_size: Some(target.lock_on_target_size),
-                            ..Default::default()
-                        },
-                        transform: *random_starship.0,
-                        texture,
+            tracing::info!("Spawning Target");
+            commands
+                .spawn(SpriteBundle {
+                    sprite: Sprite {
+                        custom_size: Some(target.lock_on_target_size),
                         ..Default::default()
-                    })
-                    .insert(target);
-            }
+                    },
+                    transform: *random_starship.0,
+                    texture,
+                    ..Default::default()
+                })
+                .insert(target);
         }
-        None => {}
     }
 
     targetting_setting.is_targetting = true;
