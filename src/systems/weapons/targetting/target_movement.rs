@@ -2,7 +2,7 @@ use crate::components::{
     starships::{player_starship::PlayerStarship, starship::Starship},
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
-use bevy::{ecs::query::Without, prelude::{Query, Transform}};
+use bevy::prelude::{Query, Transform};
 
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
@@ -47,6 +47,6 @@ pub fn target_movement(
         Some(target_starship) => {
             *target.0 = *target_starship.0;
         }
-        None => todo!(),
+        None => {}
     }
 }
