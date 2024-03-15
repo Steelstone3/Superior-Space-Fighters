@@ -8,9 +8,9 @@ use bevy::{
         system::{Commands, Query, Res},
     },
     input::{keyboard::KeyCode, ButtonInput},
+    utils::tracing,
 };
 
-#[allow(dead_code)]
 pub fn despawn_target(
     mut commands: Commands,
     input: Res<ButtonInput<KeyCode>>,
@@ -26,10 +26,13 @@ pub fn despawn_target(
         return;
     };
 
-    if !input.just_pressed(KeyCode::Tab) {
+    if input.just_pressed(KeyCode::Tab) {
         commands.entity(target.0).despawn();
 
         targetting_setting.is_targetting = false;
+
+        tracing::info!("Despawning Target: Cancel Target Key Pressed");
+
         return;
     }
 
@@ -44,6 +47,7 @@ pub fn despawn_target(
         None => {
             commands.entity(target.0).despawn();
             targetting_setting.is_targetting = false;
+            tracing::info!("Despawning Target: No Targets Exist");
         }
     }
 }
