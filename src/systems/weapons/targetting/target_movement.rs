@@ -4,6 +4,7 @@ use crate::components::{
 };
 use bevy::prelude::{Commands, Query, Transform};
 
+#[allow(dead_code)]
 pub fn target_movement(
     _commands: Commands,
     targetting_settings: Query<&TargettingSettings>,
