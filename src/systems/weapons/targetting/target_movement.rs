@@ -43,10 +43,7 @@ pub fn target_movement(
     }
 
     // tracing::info!("Update Target Location");
-    match closest_ship {
-        Some(target_starship) => {
-            *target.0 = *target_starship.0;
-        }
-        None => {}
+    if let Some(target_starship) = closest_ship {
+        *target.0 = *target_starship.0;
     }
 }
