@@ -1,22 +1,17 @@
-// use crate::components::{
-//     starships::{
-//         player_starship::PlayerStarship, starship::Starship, target_starship::TargetStarship,
-//     },
-//     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
-// };
-// use bevy::{
-//     ecs::entity::Entity,
-//     input::ButtonInput,
-//     prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
-//     sprite::{Sprite, SpriteBundle},
-//     utils::tracing,
-// };
+use crate::components::{
+    starships::{player_starship::PlayerStarship, starship::Starship},
+    weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
+};
+use bevy::prelude::{Commands, Query, Transform};
 
-// pub fn target_movement(
-//     targetting_settings: Query<&TargettingSettings>,
-//     mut targets: Query<(&mut Transform, &Target)>,
-//     player_starships: Query<(&Transform, &PlayerStarship)>,
-//     starships: Query<(&Transform, &Starship)>,
-// ) {
-
-// }
+pub fn target_movement(
+    _commands: Commands,
+    targetting_settings: Query<&TargettingSettings>,
+    _targets: Query<(&mut Transform, &Target)>,
+    _player_starships: Query<(&Transform, &PlayerStarship)>,
+    _starships: Query<(&Transform, &Starship)>,
+) {
+    let Ok(_targetting_setting) = targetting_settings.get_single() else {
+        return;
+    };
+}
