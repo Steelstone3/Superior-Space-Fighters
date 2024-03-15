@@ -54,7 +54,7 @@ pub fn spawn_player_torpedo(
     commands
         .spawn(SpriteBundle {
             sprite: Sprite {
-                custom_size: Some(torpedo.torpedo.ranged_weapon.weapon.size),
+                custom_size: Some(torpedo.torpedo.lock_on_weapon.ranged_weapon.weapon.size),
                 ..Default::default()
             },
             transform: player_transform,
