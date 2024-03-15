@@ -52,20 +52,17 @@ pub fn spawn_target(
 
     let texture = asset_server.load(target.lock_on_target.to_string());
 
-    match closest_ship {
-        Some(closest_ship) => {
-            commands
-                .spawn(SpriteBundle {
-                    sprite: Sprite {
-                        custom_size: Some(closest_ship.1.size),
-                        ..Default::default()
-                    },
-                    transform: *closest_ship.0,
-                    texture,
+    if let Some(closest_ship) = closest_ship {
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(closest_ship.1.size),
                     ..Default::default()
-                })
-                .insert(target);
-        }
-        None => {}
+                },
+                transform: *closest_ship.0,
+                texture,
+                ..Default::default()
+            })
+            .insert(target);
     }
 }
