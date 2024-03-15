@@ -69,6 +69,6 @@ pub fn spawn_target(
             // targetting_setting.starship_target = *starship.1;
         }
     }
-    
+
     targetting_setting.is_targetting = true;
 }
