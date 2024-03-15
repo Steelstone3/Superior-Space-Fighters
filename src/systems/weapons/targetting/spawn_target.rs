@@ -1,12 +1,9 @@
 use crate::components::{
-    starships::starship::Starship,
+    starships::{player_starship::PlayerStarship, starship::Starship},
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
 use bevy::{
-    input::ButtonInput,
-    prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
-    sprite::{Sprite, SpriteBundle},
-    utils::tracing,
+    ecs::query::Without, input::ButtonInput, prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform}, sprite::{Sprite, SpriteBundle}, utils::tracing
 };
 
 pub fn spawn_target(

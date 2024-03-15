@@ -2,7 +2,7 @@ use crate::components::{
     starships::{player_starship::PlayerStarship, starship::Starship},
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
-use bevy::prelude::{Query, Transform};
+use bevy::{ecs::query::Without, prelude::{Query, Transform}};
 
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
@@ -14,11 +14,11 @@ pub fn target_movement(
         return;
     };
 
-    let Ok(mut target) = targets.get_single_mut() else {
+    let Ok(player_starship) = player_starships.get_single() else {
         return;
     };
 
-    let Ok(player_starship) = player_starships.get_single() else {
+    let Ok(mut target) = targets.get_single_mut() else {
         return;
     };
 
