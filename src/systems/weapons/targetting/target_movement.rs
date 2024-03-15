@@ -2,24 +2,27 @@ use crate::components::{
     starships::{player_starship::PlayerStarship, starship::Starship},
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
-use bevy::prelude::{Query, Transform};
+use bevy::{
+    ecs::query::With,
+    prelude::{Query, Transform},
+};
 
 #[allow(dead_code)]
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
-    mut targets: Query<(&mut Transform, &Target)>,
-    player_starships: Query<(&Transform, &PlayerStarship)>,
-    starships: Query<(&Transform, &Starship)>,
+    mut target_transforms: Query<&mut Transform, With<Target>>,
+    player_starship_transforms: Query<&Transform, With<PlayerStarship>>,
+    starship_transforms: Query<&Transform, With<Starship>>,
 ) {
     let Ok(targetting_setting) = targetting_settings.get_single() else {
         return;
     };
 
-    let Ok(player_starship) = player_starships.get_single() else {
+    let Ok(player_starship_transform) = player_starship_transforms.get_single() else {
         return;
     };
 
-    let Ok(mut target) = targets.get_single_mut() else {
+    let Ok(mut target) = target_transforms.get_single_mut() else {
         return;
     };
 
@@ -28,14 +31,15 @@ pub fn target_movement(
     let mut closest_ship = None;
     let mut distance = targetting_setting.maximum_distance;
 
-    for starship in starships.into_iter() {
-        let new_distance = (starship.0.translation - player_starship.0.translation).length();
+    for starship_transform in starship_transforms.into_iter() {
+        let new_distance =
+            (starship_transform.translation - player_starship_transform.translation).length();
 
         if new_distance < distance {
             distance = new_distance;
 
             if distance <= targetting_setting.maximum_distance {
-                closest_ship = Some(starship);
+                closest_ship = Some(starship_transform);
                 // tracing::info!("Closest Ship Found");
             }
         } else {
@@ -45,6 +49,6 @@ pub fn target_movement(
 
     // tracing::info!("Update Target Location");
     if let Some(target_starship) = closest_ship {
-        *target.0 = *target_starship.0;
+        *target = *target_starship;
     }
 }
