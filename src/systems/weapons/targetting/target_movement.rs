@@ -4,6 +4,7 @@ use crate::components::{
 };
 use bevy::prelude::{Query, Transform};
 
+#[allow(dead_code)]
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
     mut targets: Query<(&mut Transform, &Target)>,
