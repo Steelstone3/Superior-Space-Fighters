@@ -1,13 +1,8 @@
 use crate::components::{
-    starships::{
-        player_starship::PlayerStarship,
-        starship::{self, Starship},
-        target_starship::TargetStarship,
-    },
+    starships::starship::Starship,
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
 use bevy::{
-    ecs::entity::Entity,
     input::ButtonInput,
     prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
     sprite::{Sprite, SpriteBundle},

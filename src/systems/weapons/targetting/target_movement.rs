@@ -1,11 +1,8 @@
 use crate::components::{
-    starships::{player_starship::PlayerStarship, starship::Starship, target_starship},
+    starships::{player_starship::PlayerStarship, starship::Starship},
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
-use bevy::{
-    prelude::{Commands, Query, Transform},
-    utils::tracing,
-};
+use bevy::prelude::{Query, Transform};
 
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
@@ -49,7 +46,7 @@ pub fn target_movement(
     match closest_ship {
         Some(target_starship) => {
             *target.0 = *target_starship.0;
-        },
+        }
         None => todo!(),
     }
 }
