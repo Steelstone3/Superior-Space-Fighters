@@ -1,12 +1,12 @@
 use bevy::ecs::component::Component;
 
-use crate::components::starships::starship::Starship;
+use crate::components::starships::target_starship::TargetStarship;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct TargettingSettings {
     pub maximum_distance: f32,
     pub is_targetting: bool,
-    pub starship_target: Option<Starship>,
+    pub starship_target: Option<TargetStarship>,
 }
 
 impl Default for TargettingSettings {

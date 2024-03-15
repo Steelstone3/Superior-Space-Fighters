@@ -1,8 +1,11 @@
 use crate::components::{
-    starships::{player_starship::PlayerStarship, starship::Starship},
+    starships::{
+        player_starship::PlayerStarship, starship::Starship, target_starship::TargetStarship,
+    },
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
 use bevy::{
+    ecs::entity::Entity,
     input::ButtonInput,
     prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
     sprite::{Sprite, SpriteBundle},
@@ -15,7 +18,7 @@ pub fn spawn_target(
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_settings: Query<&mut TargettingSettings>,
     player_starships: Query<(&Transform, &PlayerStarship)>,
-    starships: Query<(&Transform, &Starship)>,
+    starships: Query<(Entity, &Transform, &Starship)>,
 ) {
     if !input.just_pressed(KeyCode::KeyT) {
         return;
@@ -35,7 +38,7 @@ pub fn spawn_target(
     let mut distance = 2000.0;
 
     for starship in starships.into_iter() {
-        let new_distance = (starship.0.translation - player_starship.0.translation).length();
+        let new_distance = (starship.1.translation - player_starship.0.translation).length();
 
         if new_distance < distance {
             distance = new_distance;
@@ -60,13 +63,15 @@ pub fn spawn_target(
                         custom_size: Some(target.lock_on_target_size),
                         ..Default::default()
                     },
-                    transform: *starship.0,
+                    transform: *starship.1,
                     texture,
                     ..Default::default()
                 })
                 .insert(target);
 
-            // targetting_setting.starship_target = *starship.1;
+            targetting_setting.starship_target = Some(TargetStarship {
+                starship_target: starship.0,
+            });
         }
     }
 
