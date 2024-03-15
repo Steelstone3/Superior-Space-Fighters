@@ -32,10 +32,10 @@ pub fn spawn_target(
         return;
     };
 
-    tracing::info!("Find Closest Ship",);
+    tracing::info!("Find Closest Starship",);
 
     let mut closest_ship = None;
-    let mut distance = 2000.0;
+    let mut distance = targetting_setting.maximum_distance;
 
     for starship in starships.into_iter() {
         let new_distance = (starship.1.translation - player_starship.0.translation).length();
