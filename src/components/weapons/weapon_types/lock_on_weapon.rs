@@ -9,7 +9,7 @@ use bevy::{ecs::component::Component, transform::components::Transform};
 #[derive(Component, Debug, PartialEq)]
 pub struct LockOnWeapon {
     pub lock_on_target: Targetting,
-    pub starship_target: (Transform, Starship),
+    pub starship_target: Option<(Transform, Starship)>,
     pub weapon: RangedWeapon,
 }
 
