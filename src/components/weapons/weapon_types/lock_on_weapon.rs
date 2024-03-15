@@ -1,15 +1,9 @@
-use super::ranged_weapon::RangedWeapon;
-use crate::{
-    assets::images::starships::weapons::targetting::Targetting,
-    components::starships::starship::Starship,
-};
-use bevy::{ecs::component::Component, math::Vec3, transform::components::Transform};
+use super::{ranged_weapon::RangedWeapon, target::Target};
+use bevy::{ecs::component::Component, math::Vec3};
 
 #[derive(Component, Debug, PartialEq)]
 pub struct LockOnWeapon {
-    pub lock_on_target: Targetting,
-    pub lock_on_target_off_screen: Targetting,
-    pub starship_target: Option<(Transform, Starship)>,
+    pub target: Target,
     pub ranged_weapon: RangedWeapon,
 }
 
@@ -17,20 +11,20 @@ impl LockOnWeapon {
     pub fn new(original_position: Vec3, size: f32, velocity: f32, range: f32) -> Self {
         Self {
             ranged_weapon: RangedWeapon::new(original_position, size, velocity, range),
-            lock_on_target: Targetting::LockOnTarget,
-            lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
-            starship_target: None,
+            target: Target::default(),
         }
     }
 }
 
 #[cfg(test)]
 mod lock_on_weapon_should {
+    use super::*;
+    use crate::{
+        assets::images::starships::weapons::targetting::Targetting,
+        components::weapons::weapon_types::{damage::Damage, weapon::Weapon},
+    };
     use bevy::math::Vec2;
 
-    use crate::components::weapons::weapon_types::{damage::Damage, weapon::Weapon};
-
-    use super::*;
     #[test]
     fn create_weapon() {
         // Given
@@ -43,9 +37,6 @@ mod lock_on_weapon_should {
         let size = 100.0;
         let range = 750.0;
         let expected_lock_on_weapon = LockOnWeapon {
-            lock_on_target: Targetting::LockOnTarget,
-            lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
-            starship_target: None,
             ranged_weapon: RangedWeapon {
                 range,
                 original_position,
@@ -57,6 +48,13 @@ mod lock_on_weapon_should {
                         damage: Default::default(),
                     },
                 },
+            },
+            target: Target {
+                lock_on_target: Targetting::LockOnTarget,
+                lock_on_target_size: Vec2 { x: 100.0, y: 100.0 },
+                lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
+                lock_on_target_off_screen_size: Vec2 { x: 10.0, y: 10.0 },
+                starship_target: None,
             },
         };
 

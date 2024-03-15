@@ -31,7 +31,7 @@ mod torpedo_should {
     use crate::{
         assets::images::starships::weapons::targetting::Targetting,
         components::weapons::weapon_types::{
-            damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon,
+            damage::Damage, ranged_weapon::RangedWeapon, target::Target, weapon::Weapon,
         },
     };
     use bevy::math::Vec2;
@@ -49,9 +49,6 @@ mod torpedo_should {
             firing_sound: Default::default(),
             impact_sound: Default::default(),
             lock_on_weapon: LockOnWeapon {
-                lock_on_target: Targetting::LockOnTarget,
-                lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
-                starship_target: None,
                 ranged_weapon: RangedWeapon {
                     range: 1500.0,
                     original_position,
@@ -63,6 +60,13 @@ mod torpedo_should {
                             damage: Default::default(),
                         },
                     },
+                },
+                target: Target {
+                    lock_on_target: Targetting::LockOnTarget,
+                    lock_on_target_size: Vec2 { x: 100.0, y: 100.0 },
+                    lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
+                    lock_on_target_off_screen_size: Vec2 { x: 10.0, y: 10.0 },
+                    starship_target: None,
                 },
             },
         };
