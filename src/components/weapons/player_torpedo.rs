@@ -16,12 +16,8 @@ impl PlayerTorpedo {
 
 #[cfg(test)]
 mod player_torpedo_should {
-    use crate::{
-        assets::images::starships::weapons::targetting::Targetting,
-        components::weapons::weapon_types::{
-            damage::Damage, lock_on_weapon::LockOnWeapon, ranged_weapon::RangedWeapon,
-            target::Target, weapon::Weapon,
-        },
+    use crate::components::weapons::weapon_types::{
+        damage::Damage, lock_on_weapon::LockOnWeapon, ranged_weapon::RangedWeapon, weapon::Weapon,
     };
 
     use super::*;
@@ -41,13 +37,6 @@ mod player_torpedo_should {
                 firing_sound: Default::default(),
                 impact_sound: Default::default(),
                 lock_on_weapon: LockOnWeapon {
-                    target: Target {
-                        lock_on_target: Targetting::LockOnTarget,
-                        lock_on_target_size: Vec2 { x: 100.0, y: 100.0 },
-                        lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
-                        lock_on_target_off_screen_size: Vec2 { x: 10.0, y: 10.0 },
-                        starship_target: None,
-                    },
                     ranged_weapon: RangedWeapon {
                         range: 1500.0,
                         original_position,
