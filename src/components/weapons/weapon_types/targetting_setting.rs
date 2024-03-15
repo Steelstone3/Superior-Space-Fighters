@@ -17,7 +17,20 @@ impl Default for TargettingSettings {
 
 #[cfg(test)]
 mod targetting_settings_should {
+    use super::*;
+
     #[test]
-    #[ignore = "later"]
-    fn create_new() {}
+    fn create_new() {
+        // Given
+        let expected_targetting_settings = TargettingSettings {
+            maximum_distance: 2000.0,
+            is_targetting: false,
+        };
+
+        // When
+        let targetting_settings = TargettingSettings::default();
+
+        // Then
+        assert_eq!(expected_targetting_settings, targetting_settings);
+    }
 }
