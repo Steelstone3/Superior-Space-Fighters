@@ -31,7 +31,7 @@ pub fn spawn_target(
 
     tracing::info!("Spawning Target");
 
-    let mut closest_ship: Option<(&Transform, &Starship)> = None;
+    let mut closest_ship = None;
     let mut distance = 2000.0;
 
     for starship in starships.into_iter() {
@@ -42,10 +42,7 @@ pub fn spawn_target(
 
             if distance <= targetting_setting.maximum_distance {
                 closest_ship = Some(starship);
-                tracing::info!(
-                    "Closest Ship {:?}",
-                    closest_ship.unwrap().1.faction_starship.to_string()
-                );
+                tracing::info!("Closest Ship Found",);
             }
         } else {
             continue;
@@ -53,23 +50,25 @@ pub fn spawn_target(
     }
 
     if !targetting_setting.is_targetting {
-        if let Some(closest_ship) = closest_ship {
+        if let Some(starship) = closest_ship {
             let target = Target::default();
             let texture = asset_server.load(target.lock_on_target.to_string());
 
             commands
                 .spawn(SpriteBundle {
                     sprite: Sprite {
-                        custom_size: Some(closest_ship.1.size),
+                        custom_size: Some(target.lock_on_target_size),
                         ..Default::default()
                     },
-                    transform: *closest_ship.0,
+                    transform: *starship.0,
                     texture,
                     ..Default::default()
                 })
                 .insert(target);
+
+            // targetting_setting.starship_target = *starship.1;
         }
     }
-
+    
     targetting_setting.is_targetting = true;
 }

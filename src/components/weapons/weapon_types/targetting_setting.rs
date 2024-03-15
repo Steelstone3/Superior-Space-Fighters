@@ -1,9 +1,12 @@
 use bevy::ecs::component::Component;
 
+use crate::components::starships::starship::Starship;
+
 #[derive(Component, Debug, PartialEq)]
 pub struct TargettingSettings {
     pub maximum_distance: f32,
     pub is_targetting: bool,
+    pub starship_target: Option<Starship>,
 }
 
 impl Default for TargettingSettings {
@@ -11,6 +14,7 @@ impl Default for TargettingSettings {
         Self {
             maximum_distance: 2000.0,
             is_targetting: false,
+            starship_target: None,
         }
     }
 }
@@ -25,6 +29,7 @@ mod targetting_settings_should {
         let expected_targetting_settings = TargettingSettings {
             maximum_distance: 2000.0,
             is_targetting: false,
+            starship_target: None,
         };
 
         // When

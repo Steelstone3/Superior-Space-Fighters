@@ -1,9 +1,5 @@
-use bevy::{ecs::component::Component, math::Vec2, transform::components::Transform};
-
-use crate::{
-    assets::images::starships::weapons::targetting::Targetting,
-    components::starships::starship::Starship,
-};
+use crate::assets::images::starships::weapons::targetting::Targetting;
+use bevy::{ecs::component::Component, math::Vec2};
 
 #[derive(Component, Debug, PartialEq)]
 pub struct Target {
@@ -11,7 +7,6 @@ pub struct Target {
     pub lock_on_target_size: Vec2,
     pub lock_on_target_off_screen: Targetting,
     pub lock_on_target_off_screen_size: Vec2,
-    pub starship_target: Option<(Transform, Starship)>,
 }
 
 impl Default for Target {
@@ -21,7 +16,6 @@ impl Default for Target {
             lock_on_target_size: Vec2::new(100.0, 100.0),
             lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
-            starship_target: None,
         }
     }
 }
@@ -38,7 +32,6 @@ mod target_should {
             lock_on_target_size: Vec2::new(100.0, 100.0),
             lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
-            starship_target: None,
         };
 
         // When
