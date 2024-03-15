@@ -1,6 +1,6 @@
 use crate::components::{
     starships::{player_starship::PlayerStarship, starship::Starship},
-    weapons::weapon_types::target::Target,
+    weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
 use bevy::{
     input::ButtonInput,
@@ -13,6 +13,7 @@ pub fn spawn_target(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
+    mut targetting_settings: Query<&mut TargettingSettings>,
     player_starships: Query<(&Transform, &PlayerStarship)>,
     starships: Query<(&Transform, &Starship)>,
 ) {
@@ -24,9 +25,12 @@ pub fn spawn_target(
         return;
     };
 
+    let Ok(mut targetting_setting) = targetting_settings.get_single_mut() else {
+        return;
+    };
+
     tracing::info!("Spawning Target");
 
-    let maximum_distance = 2000.0;
     let mut closest_ship: Option<(&Transform, &Starship)> = None;
     let mut distance = 2000.0;
 
@@ -36,7 +40,7 @@ pub fn spawn_target(
         if new_distance < distance {
             distance = new_distance;
 
-            if distance <= maximum_distance {
+            if distance <= targetting_setting.maximum_distance {
                 closest_ship = Some(starship);
                 tracing::info!(
                     "Closest Ship {:?}",
@@ -48,21 +52,24 @@ pub fn spawn_target(
         }
     }
 
-    let target = Target::default();
+    if !targetting_setting.is_targetting {
+        if let Some(closest_ship) = closest_ship {
+            let target = Target::default();
+            let texture = asset_server.load(target.lock_on_target.to_string());
 
-    let texture = asset_server.load(target.lock_on_target.to_string());
-
-    if let Some(closest_ship) = closest_ship {
-        commands
-            .spawn(SpriteBundle {
-                sprite: Sprite {
-                    custom_size: Some(closest_ship.1.size),
+            commands
+                .spawn(SpriteBundle {
+                    sprite: Sprite {
+                        custom_size: Some(closest_ship.1.size),
+                        ..Default::default()
+                    },
+                    transform: *closest_ship.0,
+                    texture,
                     ..Default::default()
-                },
-                transform: *closest_ship.0,
-                texture,
-                ..Default::default()
-            })
-            .insert(target);
+                })
+                .insert(target);
+        }
     }
+
+    targetting_setting.is_targetting = true;
 }

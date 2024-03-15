@@ -25,3 +25,10 @@ impl Default for Target {
         }
     }
 }
+
+#[cfg(test)]
+mod target_should {
+    #[test]
+    #[ignore = "later"]
+    fn create_new() {}
+}
