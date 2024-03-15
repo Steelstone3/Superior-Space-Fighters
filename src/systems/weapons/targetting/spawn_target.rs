@@ -32,7 +32,7 @@ pub fn spawn_target(
         return;
     };
 
-    tracing::info!("Spawning Target");
+    tracing::info!("Find Closest Ship",);
 
     let mut closest_ship = None;
     let mut distance = 2000.0;
@@ -57,6 +57,7 @@ pub fn spawn_target(
             let target = Target::default();
             let texture = asset_server.load(target.lock_on_target.to_string());
 
+            tracing::info!("Spawning Target");
             commands
                 .spawn(SpriteBundle {
                     sprite: Sprite {

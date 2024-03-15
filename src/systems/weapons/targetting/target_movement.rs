@@ -1,18 +1,22 @@
-// use bevy::prelude::{Query, Res, Transform, Vec3};
-// use bevy::time::Time;
+// use crate::components::{
+//     starships::{
+//         player_starship::PlayerStarship, starship::Starship, target_starship::TargetStarship,
+//     },
+//     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
+// };
+// use bevy::{
+//     ecs::entity::Entity,
+//     input::ButtonInput,
+//     prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
+//     sprite::{Sprite, SpriteBundle},
+//     utils::tracing,
+// };
 
-// use crate::components::weapons::player_torpedo::PlayerTorpedo;
-
-// #[allow(dead_code)]
 // pub fn target_movement(
-//     mut torpedos: Query<(&mut Transform, &PlayerTorpedo)>,
-//     time: Res<Time>,
+//     targetting_settings: Query<&TargettingSettings>,
+//     mut targets: Query<(&mut Transform, &Target)>,
+//     player_starships: Query<(&Transform, &PlayerStarship)>,
+//     starships: Query<(&Transform, &Starship)>,
 // ) {
-//     for (mut torpedo_transform, torpedo) in &mut torpedos {
-//         let blaster_speed =
-//             torpedo.torpedo.lock_on_weapon.ranged_weapon.weapon.velocity * time.delta_seconds();
-//         let movement_direction = torpedo_transform.rotation * Vec3::Y;
-//         let translation_delta = movement_direction * blaster_speed;
-//         torpedo_transform.translation += translation_delta;
-//     }
+
 // }
