@@ -1,23 +1,18 @@
 use crate::components::{
-    starships::{player_starship::PlayerStarship, starship::Starship},
-    weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
+    queries::{
+        mutable_target_query::MutableTargetQuery, player_starship_filter::PlayerStarshipFilter,
+        player_starship_query::PlayerStarshipQuery, starship_filter::StarshipFilter,
+        starship_query::StarshipQuery, target_filter::TargetFilter,
+    },
+    weapons::weapon_types::targetting_setting::TargettingSettings,
 };
-use bevy::{
-    ecs::query::Without,
-    prelude::{Query, Transform},
-};
+use bevy::prelude::Query;
 
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
-    mut target_transforms: Query<
-        (&mut Transform, &Target),
-        (Without<Starship>, Without<PlayerStarship>),
-    >,
-    player_starship_transforms: Query<
-        (&Transform, &PlayerStarship),
-        (Without<Starship>, Without<Target>),
-    >,
-    starship_transforms: Query<(&Transform, &Starship), (Without<PlayerStarship>, Without<Target>)>,
+    mut target_transforms: Query<MutableTargetQuery, TargetFilter>,
+    player_starship_transforms: Query<PlayerStarshipQuery, PlayerStarshipFilter>,
+    starship_transforms: Query<StarshipQuery, StarshipFilter>,
 ) {
     let Ok(targetting_setting) = targetting_settings.get_single() else {
         return;
@@ -37,8 +32,9 @@ pub fn target_movement(
     let mut distance = targetting_setting.maximum_distance;
 
     for starship_transform in starship_transforms.into_iter() {
-        let new_distance =
-            (starship_transform.0.translation - player_starship_transform.0.translation).length();
+        let new_distance = (starship_transform.transform.translation
+            - player_starship_transform.transform.translation)
+            .length();
 
         if new_distance < distance {
             distance = new_distance;
@@ -54,6 +50,6 @@ pub fn target_movement(
 
     // tracing::info!("Update Target Location");
     if let Some(target_starship) = closest_ship {
-        *target.0 = *target_starship.0;
+        *target.transform = *target_starship.transform;
     }
 }

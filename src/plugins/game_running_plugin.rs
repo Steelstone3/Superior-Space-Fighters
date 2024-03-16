@@ -33,7 +33,10 @@ use crate::systems::{
             player_torpedo_movement::player_torpedo_movement,
             spawn_player_torpedo::spawn_player_torpedo,
         },
-        targetting::{despawn_target::despawn_target, spawn_target::spawn_target, target_movement::target_movement},
+        targetting::{
+            despawn_target::despawn_target, spawn_target::spawn_target,
+            target_movement::target_movement,
+        },
     },
 };
 use bevy::prelude::{App, Plugin, Update};
