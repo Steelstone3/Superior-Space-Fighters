@@ -41,11 +41,12 @@ pub fn player_torpedo_collision_with_starship(
 
                 torpedo
                     .torpedo
+                    .lock_on_weapon
                     .ranged_weapon
                     .weapon
                     .damage
                     .calculate_damage();
-                starship.take_damage(torpedo.torpedo.ranged_weapon.weapon.damage);
+                starship.take_damage(torpedo.torpedo.lock_on_weapon.ranged_weapon.weapon.damage);
 
                 tracing::info!(
                     "Enemy Starship | Shield: {:?} | Health: {:?} |",

@@ -4,8 +4,7 @@ use crate::{
         menu_music::MenuMusicSound, trading_music::TradingMusicSound,
     },
     resources::{
-        camera_settings::CameraSettings, fleet_credits::FleetCredits,
-        guild_reputation::GuildReputation, music::Music,
+        camera_settings::CameraSettings, fleet_credits::FleetCredits, music::Music,
         projectile_ammunition::ProjectileAmmunition, sector_size::SectorSize,
     },
 };
@@ -28,11 +27,6 @@ impl Plugin for GameResourcesPlugin {
             mine_ammunition: 7,
             exotic_ammunition: 2,
             selected_weapon: 1,
-        })
-        .insert_resource(GuildReputation {
-            trading_guild_reputation: 1,
-            exploration_guild_reputation: 1,
-            combat_guild_reputation: 1,
         })
         .insert_resource(CameraSettings {
             zoom_speed: 1.5,

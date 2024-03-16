@@ -19,12 +19,11 @@ impl RangedWeapon {
 }
 
 #[cfg(test)]
-mod weapon_should {
+mod ranged_weapon_should {
+    use super::*;
+    use crate::components::weapons::weapon_types::damage::Damage;
     use bevy::math::Vec2;
 
-    use crate::components::weapons::weapon_types::damage::Damage;
-
-    use super::*;
     #[test]
     fn create_weapon() {
         // Given

@@ -17,7 +17,7 @@ impl PlayerTorpedo {
 #[cfg(test)]
 mod player_torpedo_should {
     use crate::components::weapons::weapon_types::{
-        damage::Damage, ranged_weapon::RangedWeapon, weapon::Weapon,
+        damage::Damage, lock_on_weapon::LockOnWeapon, ranged_weapon::RangedWeapon, weapon::Weapon,
     };
 
     use super::*;
@@ -36,15 +36,17 @@ mod player_torpedo_should {
                 torpedo: Default::default(),
                 firing_sound: Default::default(),
                 impact_sound: Default::default(),
-                ranged_weapon: RangedWeapon {
-                    range: 1500.0,
-                    original_position,
-                    weapon: Weapon {
-                        velocity: 125.0,
-                        size: Vec2 { x: 80.0, y: 80.0 },
-                        damage: Damage {
-                            base_damage: 10,
-                            damage: Default::default(),
+                lock_on_weapon: LockOnWeapon {
+                    ranged_weapon: RangedWeapon {
+                        range: 1500.0,
+                        original_position,
+                        weapon: Weapon {
+                            velocity: 125.0,
+                            size: Vec2 { x: 80.0, y: 80.0 },
+                            damage: Damage {
+                                base_damage: 10,
+                                damage: Default::default(),
+                            },
                         },
                     },
                 },
