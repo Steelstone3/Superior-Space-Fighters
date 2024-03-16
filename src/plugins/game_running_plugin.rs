@@ -33,7 +33,7 @@ use crate::systems::{
             player_torpedo_movement::player_torpedo_movement,
             spawn_player_torpedo::spawn_player_torpedo,
         },
-        targetting::{despawn_target::despawn_target, spawn_target::spawn_target},
+        targetting::{despawn_target::despawn_target, spawn_target::spawn_target, target_movement::target_movement},
     },
 };
 use bevy::prelude::{App, Plugin, Update};
@@ -60,7 +60,7 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, player_torpedo_collision_with_starship)
             .add_systems(Update, spawn_target)
             .add_systems(Update, despawn_target)
-            // .add_systems(Update, target_movement)
+            .add_systems(Update, target_movement)
             .add_systems(Update, spawn_player_mine)
             .add_systems(Update, player_mine_movement)
             .add_systems(Update, player_mine_lifetime)

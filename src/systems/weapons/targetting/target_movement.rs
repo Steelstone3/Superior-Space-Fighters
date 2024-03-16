@@ -3,16 +3,21 @@ use crate::components::{
     weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
 };
 use bevy::{
-    ecs::query::With,
+    ecs::query::Without,
     prelude::{Query, Transform},
 };
 
-#[allow(dead_code)]
 pub fn target_movement(
     targetting_settings: Query<&TargettingSettings>,
-    mut target_transforms: Query<&mut Transform, With<Target>>,
-    player_starship_transforms: Query<&Transform, With<PlayerStarship>>,
-    starship_transforms: Query<&Transform, With<Starship>>,
+    mut target_transforms: Query<
+        (&mut Transform, &Target),
+        (Without<Starship>, Without<PlayerStarship>),
+    >,
+    player_starship_transforms: Query<
+        (&Transform, &PlayerStarship),
+        (Without<Starship>, Without<Target>),
+    >,
+    starship_transforms: Query<(&Transform, &Starship), (Without<PlayerStarship>, Without<Target>)>,
 ) {
     let Ok(targetting_setting) = targetting_settings.get_single() else {
         return;
@@ -33,7 +38,7 @@ pub fn target_movement(
 
     for starship_transform in starship_transforms.into_iter() {
         let new_distance =
-            (starship_transform.translation - player_starship_transform.translation).length();
+            (starship_transform.0.translation - player_starship_transform.0.translation).length();
 
         if new_distance < distance {
             distance = new_distance;
@@ -49,6 +54,6 @@ pub fn target_movement(
 
     // tracing::info!("Update Target Location");
     if let Some(target_starship) = closest_ship {
-        *target = *target_starship;
+        *target.0 = *target_starship.0;
     }
 }
