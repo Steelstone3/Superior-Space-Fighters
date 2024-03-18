@@ -12,17 +12,17 @@ pub struct Target {
 impl Target {
     pub fn create_combat_target() -> Self {
         Self {
-            lock_on_target: Targetting::LockOnCombatTarget,
+            lock_on_target: Targetting::CombatTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
-            lock_on_target_off_screen: Targetting::LockOnCombatTargetOffScreen,
+            lock_on_target_off_screen: Targetting::CombatTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
         }
     }
     pub fn create_trading_target() -> Self {
         Self {
-            lock_on_target: Targetting::LockOnTradingTarget,
+            lock_on_target: Targetting::TradingTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
-            lock_on_target_off_screen: Targetting::LockOnTradingTargetOffScreen,
+            lock_on_target_off_screen: Targetting::TradingTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
         }
     }
@@ -36,9 +36,9 @@ mod target_should {
     fn create_new_combat_target() {
         // Given
         let expected_targetting_settings = Target {
-            lock_on_target: Targetting::LockOnCombatTarget,
+            lock_on_target: Targetting::CombatTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
-            lock_on_target_off_screen: Targetting::LockOnCombatTargetOffScreen,
+            lock_on_target_off_screen: Targetting::CombatTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
         };
 
@@ -53,9 +53,9 @@ mod target_should {
     fn create_new_trading_target() {
         // Given
         let expected_targetting_settings = Target {
-            lock_on_target: Targetting::LockOnTradingTarget,
+            lock_on_target: Targetting::TradingTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
-            lock_on_target_off_screen: Targetting::LockOnTradingTargetOffScreen,
+            lock_on_target_off_screen: Targetting::TradingTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
         };
 

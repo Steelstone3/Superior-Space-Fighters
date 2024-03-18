@@ -3,34 +3,34 @@ use rand_derive2::RandGen;
 
 #[derive(RandGen, Debug, PartialEq)]
 pub enum Targetting {
-    LockOnCombatTarget,
-    LockOnTradingTarget,
-    LockOnCombatTargetOffScreen,
-    LockOnTradingTargetOffScreen,
+    CombatTarget,
+    TradingTarget,
+    CombatTargetOffScreen,
+    TradingTargetOffScreen,
 }
 
 impl Display for Targetting {
     fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
-            Targetting::LockOnCombatTarget => {
+            Targetting::CombatTarget => {
                 write!(
                     formatter,
                     "images/user_interface/targetting/lock_on_combat_target.png"
                 )
             }
-            Targetting::LockOnCombatTargetOffScreen => {
+            Targetting::CombatTargetOffScreen => {
                 write!(
                     formatter,
                     "images/user_interface/targetting/lock_on_combat_target_off_screen_indicator.png"
                 )
             }
-            Targetting::LockOnTradingTarget => {
+            Targetting::TradingTarget => {
                 write!(
                     formatter,
                     "images/user_interface/targetting/lock_on_trading_target.png"
                 )
             }
-            Targetting::LockOnTradingTargetOffScreen => {
+            Targetting::TradingTargetOffScreen => {
                 write!(
                     formatter,
                     "images/user_interface/targetting/lock_on_trading_target_off_screen_indicator.png"
@@ -47,19 +47,19 @@ mod targetting_sprite_should {
 
     #[rstest]
     #[case(
-        Targetting::LockOnCombatTarget,
+        Targetting::CombatTarget,
         "images/user_interface/targetting/lock_on_combat_target.png"
     )]
     #[case(
-        Targetting::LockOnCombatTargetOffScreen,
+        Targetting::CombatTargetOffScreen,
         "images/user_interface/targetting/lock_on_combat_target_off_screen_indicator.png"
     )]
     #[case(
-        Targetting::LockOnTradingTarget,
+        Targetting::TradingTarget,
         "images/user_interface/targetting/lock_on_trading_target.png"
     )]
     #[case(
-        Targetting::LockOnTradingTargetOffScreen,
+        Targetting::TradingTargetOffScreen,
         "images/user_interface/targetting/lock_on_trading_target_off_screen_indicator.png"
     )]
     fn return_the_expected_file_path(
