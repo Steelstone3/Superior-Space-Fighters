@@ -1,23 +1,19 @@
-use crate::components::{
-    queries::{
+use crate::{
+    components::queries::{
         mutable_target_query::MutableTargetQuery, player_starship_filter::PlayerStarshipFilter,
         player_starship_query::PlayerStarshipQuery, starship_filter::StarshipFilter,
         starship_query::StarshipQuery, target_filter::TargetFilter,
     },
-    weapons::weapon_types::targetting_setting::TargettingSettings,
+    resources::targetting_settings::TargettingSettings,
 };
-use bevy::prelude::Query;
+use bevy::{ecs::system::Res, prelude::Query};
 
 pub fn target_movement(
-    targetting_settings: Query<&TargettingSettings>,
+    targetting_setting: Res<TargettingSettings>,
     mut target_transforms: Query<MutableTargetQuery, TargetFilter>,
     player_starship_transforms: Query<PlayerStarshipQuery, PlayerStarshipFilter>,
     starship_transforms: Query<StarshipQuery, StarshipFilter>,
 ) {
-    let Ok(targetting_setting) = targetting_settings.get_single() else {
-        return;
-    };
-
     let Ok(player_starship_transform) = player_starship_transforms.get_single() else {
         return;
     };
@@ -27,7 +23,6 @@ pub fn target_movement(
     };
 
     // tracing::info!("Find Closest Starship",);
-
     let mut closest_ship = None;
     let mut distance = targetting_setting.maximum_distance;
 

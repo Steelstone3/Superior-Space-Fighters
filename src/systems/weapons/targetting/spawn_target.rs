@@ -1,9 +1,8 @@
-use crate::components::{
-    starships::starship::Starship,
-    weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
-};
+use crate::{components::{
+    starships::starship::Starship, weapons::weapon_types::combat_target::CombatTarget,
+}, resources::targetting_settings::TargettingSettings};
 use bevy::{
-    ecs::query::With,
+    ecs::{query::With, system::ResMut},
     input::ButtonInput,
     prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
     sprite::{Sprite, SpriteBundle},
@@ -14,16 +13,12 @@ pub fn spawn_target(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
-    mut targetting_settings: Query<&mut TargettingSettings>,
+    mut targetting_setting: ResMut<TargettingSettings>,
     starship_transforms: Query<&Transform, With<Starship>>,
 ) {
     if !input.just_pressed(KeyCode::KeyT) {
         return;
     }
-
-    let Ok(mut targetting_setting) = targetting_settings.get_single_mut() else {
-        return;
-    };
 
     let mut random_starship_transform = None;
 
@@ -33,7 +28,7 @@ pub fn spawn_target(
 
     if let Some(random_starship) = random_starship_transform {
         if !targetting_setting.is_targetting {
-            let target = Target::default();
+            let target = CombatTarget::default();
             let texture = asset_server.load(target.lock_on_target.to_string());
 
             tracing::info!("Spawning Target");

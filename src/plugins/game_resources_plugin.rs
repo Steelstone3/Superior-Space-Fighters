@@ -6,6 +6,7 @@ use crate::{
     resources::{
         camera_settings::CameraSettings, fleet_credits::FleetCredits, music::Music,
         projectile_ammunition::ProjectileAmmunition, sector_size::SectorSize,
+        targetting_settings::TargettingSettings,
     },
 };
 use bevy::prelude::{App, Plugin};
@@ -14,7 +15,11 @@ pub struct GameResourcesPlugin;
 
 impl Plugin for GameResourcesPlugin {
     fn build(&self, app: &mut App) {
-        app.insert_resource(SectorSize {
+        app.insert_resource(TargettingSettings {
+            maximum_distance: 2000.0,
+            is_targetting: false,
+        })
+        .insert_resource(SectorSize {
             top_border: 1000.0,
             left_border: -1000.0,
             bottom_border: -1000.0,

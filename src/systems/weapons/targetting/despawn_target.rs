@@ -1,11 +1,13 @@
-use crate::components::{
-    starships::starship::Starship,
-    weapons::weapon_types::{target::Target, targetting_setting::TargettingSettings},
+use crate::{
+    components::{
+        starships::starship::Starship, weapons::weapon_types::combat_target::CombatTarget,
+    },
+    resources::targetting_settings::TargettingSettings,
 };
 use bevy::{
     ecs::{
         entity::Entity,
-        system::{Commands, Query, Res},
+        system::{Commands, Query, Res, ResMut},
     },
     input::{keyboard::KeyCode, ButtonInput},
     utils::tracing,
@@ -14,14 +16,10 @@ use bevy::{
 pub fn despawn_target(
     mut commands: Commands,
     input: Res<ButtonInput<KeyCode>>,
-    mut targetting_settings: Query<&mut TargettingSettings>,
-    targets: Query<(Entity, &Target)>,
+    mut targetting_setting: ResMut<TargettingSettings>,
+    targets: Query<(Entity, &CombatTarget)>,
     starships: Query<&Starship>,
 ) {
-    let Ok(mut targetting_setting) = targetting_settings.get_single_mut() else {
-        return;
-    };
-
     let Ok(target) = targets.get_single() else {
         return;
     };
