@@ -20,13 +20,13 @@ impl Display for WeaponSelectedIcon {
             WeaponSelectedIcon::BlastersSelected => {
                 write!(
                     formatter,
-                    "images/user_interface/icons/weapons/blaster_selected.png"
+                    "images/user_interface/icons/weapons/blasters_selected.png"
                 )
             }
             WeaponSelectedIcon::BlastersUnselected => {
                 write!(
                     formatter,
-                    "images/user_interface/icons/weapons/blaster_unselected.png"
+                    "images/user_interface/icons/weapons/blasters_unselected.png"
                 )
             }
             WeaponSelectedIcon::TorpedoesSelected => {
