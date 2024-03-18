@@ -1,7 +1,7 @@
-use crate::assets::images::user_interface::weapon_selected::WeaponSelectedIcon;
+use crate::assets::images::user_interface::weapon_selection::WeaponSelectedIcon;
 use bevy::{ecs::component::Component, math::Vec2};
 
-const SIZE: f32 = 10.0;
+const SIZE: f32 = 1000.0;
 
 #[derive(Component, Debug, PartialEq)]
 pub struct WeaponIcon {

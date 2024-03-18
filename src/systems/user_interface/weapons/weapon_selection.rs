@@ -1,5 +1,5 @@
 use crate::{
-    assets::images::user_interface::weapon_selected::WeaponSelectedIcon,
+    assets::images::user_interface::weapon_selection::WeaponSelectedIcon,
     components::user_interface::weapon_icon::WeaponIcon,
 };
 use bevy::{
@@ -9,7 +9,7 @@ use bevy::{
         system::{Commands, Query, Res},
     },
     input::{keyboard::KeyCode, ButtonInput},
-    math::{Vec2, Vec3},
+    math::Vec3,
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -30,70 +30,84 @@ pub fn weapon_selection(
 
     tracing::info!("Reset weapon selected icon UI");
     for weapon_icon in weapon_icons.into_iter() {
-        if weapon_icon.1.icon == WeaponSelectedIcon::BlastersSelected {
-            tracing::info!("Despawn selected blaster icon");
-            commands.entity(weapon_icon.0).despawn();
+        tracing::info!("Despawn icons");
+        commands.entity(weapon_icon.0).despawn();
 
-            tracing::info!("Spawn unselected blaster icon");
-            let weapon_icon = WeaponIcon::new_unselected_blaster_icon();
-            let texture = asset_server.load(weapon_icon.icon.to_string());
+        tracing::info!("Spawn unselected blaster icon");
+        let weapon_icon = WeaponIcon::new_unselected_blaster_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
 
-            commands
-                .spawn(weapon_icon_sprite_bundle(
-                    &weapon_icon,
-                    texture,
-                    Vec2::new(100.0, 100.0),
-                ))
-                .insert(weapon_icon);
-        }
-        if weapon_icon.1.icon == WeaponSelectedIcon::TorpedoesSelected {
-            tracing::info!("Despawn selected torpedo icon");
-            commands.entity(weapon_icon.0).despawn();
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
+                texture,
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(100.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
+            .insert(weapon_icon);
 
-            tracing::info!("Spawn unselected torpedo icon");
-            let weapon_icon = WeaponIcon::new_unselected_torpedo_icon();
-            let texture = asset_server.load(weapon_icon.icon.to_string());
+        tracing::info!("Spawn unselected torpedo icon");
+        let weapon_icon = WeaponIcon::new_unselected_torpedo_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
 
-            commands
-                .spawn(weapon_icon_sprite_bundle(
-                    &weapon_icon,
-                    texture,
-                    Vec2::new(200.0, 100.0),
-                ))
-                .insert(weapon_icon);
-        }
-        if weapon_icon.1.icon == WeaponSelectedIcon::MinesSelected {
-            tracing::info!("Despawn selected mine icon");
-            commands.entity(weapon_icon.0).despawn();
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
+                texture,
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(200.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
+            .insert(weapon_icon);
 
-            tracing::info!("Spawn unselected mine icon");
-            let weapon_icon = WeaponIcon::new_unselected_mine_icon();
-            let texture = asset_server.load(weapon_icon.icon.to_string());
+        tracing::info!("Spawn unselected mine icon");
+        let weapon_icon = WeaponIcon::new_unselected_mine_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
 
-            commands
-                .spawn(weapon_icon_sprite_bundle(
-                    &weapon_icon,
-                    texture,
-                    Vec2::new(300.0, 100.0),
-                ))
-                .insert(weapon_icon);
-        }
-        if weapon_icon.1.icon == WeaponSelectedIcon::ExoticsSelected {
-            tracing::info!("Despawn selected mine icon");
-            commands.entity(weapon_icon.0).despawn();
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
+                texture,
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(300.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
+            .insert(weapon_icon);
 
-            tracing::info!("Spawn unselected mine icon");
-            let weapon_icon = WeaponIcon::new_unselected_exotic_icon();
-            let texture = asset_server.load(weapon_icon.icon.to_string());
+        tracing::info!("Spawn unselected mine icon");
+        let weapon_icon = WeaponIcon::new_unselected_exotic_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
 
-            commands
-                .spawn(weapon_icon_sprite_bundle(
-                    &weapon_icon,
-                    texture,
-                    Vec2::new(400.0, 100.0),
-                ))
-                .insert(weapon_icon);
-        }
+        commands
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
+                texture,
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(400.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
+            .insert(weapon_icon);
     }
 
     if input.just_pressed(KeyCode::Numpad1) {
@@ -109,11 +123,18 @@ pub fn weapon_selection(
         let texture = asset_server.load(weapon_icon.icon.to_string());
 
         commands
-            .spawn(weapon_icon_sprite_bundle(
-                &weapon_icon,
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
                 texture,
-                Vec2::new(100.0, 100.0),
-            ))
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(100.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
             .insert(weapon_icon);
     }
 
@@ -130,11 +151,18 @@ pub fn weapon_selection(
         let texture = asset_server.load(weapon_icon.icon.to_string());
 
         commands
-            .spawn(weapon_icon_sprite_bundle(
-                &weapon_icon,
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
                 texture,
-                Vec2::new(200.0, 100.0),
-            ))
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(200.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
             .insert(weapon_icon);
     }
 
@@ -151,11 +179,18 @@ pub fn weapon_selection(
         let texture = asset_server.load(weapon_icon.icon.to_string());
 
         commands
-            .spawn(weapon_icon_sprite_bundle(
-                &weapon_icon,
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
                 texture,
-                Vec2::new(200.0, 100.0),
-            ))
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(300.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
             .insert(weapon_icon);
     }
     if input.just_pressed(KeyCode::Numpad4) {
@@ -171,30 +206,18 @@ pub fn weapon_selection(
         let texture = asset_server.load(weapon_icon.icon.to_string());
 
         commands
-            .spawn(weapon_icon_sprite_bundle(
-                &weapon_icon,
+            .spawn(SpriteBundle {
+                sprite: Sprite {
+                    custom_size: Some(weapon_icon.size),
+                    ..Default::default()
+                },
                 texture,
-                Vec2::new(200.0, 100.0),
-            ))
+                transform: bevy::prelude::Transform {
+                    translation: Vec3::new(400.0, 100.0, 10.0),
+                    ..Default::default()
+                },
+                ..Default::default()
+            })
             .insert(weapon_icon);
-    }
-}
-
-fn weapon_icon_sprite_bundle(
-    weapon_icon: &WeaponIcon,
-    texture: bevy::prelude::Handle<bevy::prelude::Image>,
-    position: Vec2,
-) -> SpriteBundle {
-    SpriteBundle {
-        sprite: Sprite {
-            custom_size: Some(weapon_icon.size),
-            ..Default::default()
-        },
-        texture,
-        transform: bevy::prelude::Transform {
-            translation: Vec3::new(position.x, position.y, 100.0),
-            ..Default::default()
-        },
-        ..Default::default()
     }
 }
