@@ -98,15 +98,17 @@ pub fn weapon_selection(
     }
 
     if input.just_pressed(KeyCode::Numpad1) {
-        tracing::info!("Spawn selected blaster icon");
-        let weapon_icon = WeaponIcon::new_selected_blaster_icon();
-        let texture = asset_server.load(weapon_icon.icon.to_string());
-
+        tracing::info!("Despawn unselected blaster icon");
         for weapon_icon in weapon_icons.into_iter() {
             if weapon_icon.1.icon == WeaponSelectedIcon::BlastersUnselected {
                 commands.entity(weapon_icon.0).despawn();
             }
         }
+
+        tracing::info!("Spawn selected blaster icon");
+        let weapon_icon = WeaponIcon::new_selected_blaster_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
+
 
         commands
             .spawn(weapon_icon_sprite_bundle(
@@ -118,15 +120,16 @@ pub fn weapon_selection(
     }
 
     if input.just_pressed(KeyCode::Numpad2) {
-        tracing::info!("Spawn selected torpedo icon");
-        let weapon_icon = WeaponIcon::new_selected_torpedo_icon();
-        let texture = asset_server.load(weapon_icon.icon.to_string());
-
+        tracing::info!("Despawn unselected torpedo icon");
         for weapon_icon in weapon_icons.into_iter() {
             if weapon_icon.1.icon == WeaponSelectedIcon::TorpedoesUnselected {
                 commands.entity(weapon_icon.0).despawn();
             }
         }
+
+        tracing::info!("Spawn selected torpedo icon");
+        let weapon_icon = WeaponIcon::new_selected_torpedo_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
 
         commands
             .spawn(weapon_icon_sprite_bundle(
@@ -138,14 +141,35 @@ pub fn weapon_selection(
     }
 
     if input.just_pressed(KeyCode::Numpad3) {
+        tracing::info!("Despawn unselected mine icon");
         for weapon_icon in weapon_icons.into_iter() {
             if weapon_icon.1.icon == WeaponSelectedIcon::MinesUnselected {
                 commands.entity(weapon_icon.0).despawn();
             }
         }
 
-        tracing::info!("Spawn selected torpedo icon");
+        tracing::info!("Spawn selected mine icon");
         let weapon_icon = WeaponIcon::new_selected_mine_icon();
+        let texture = asset_server.load(weapon_icon.icon.to_string());
+
+        commands
+            .spawn(weapon_icon_sprite_bundle(
+                &weapon_icon,
+                texture,
+                Vec2::new(200.0, 100.0),
+            ))
+            .insert(weapon_icon);
+    }
+    if input.just_pressed(KeyCode::Numpad4) {
+        tracing::info!("Despawn unselected exotic icon");
+        for weapon_icon in weapon_icons.into_iter() {
+            if weapon_icon.1.icon == WeaponSelectedIcon::ExoticsUnselected {
+                commands.entity(weapon_icon.0).despawn();
+            }
+        }
+
+        tracing::info!("Spawn selected exotic icon");
+        let weapon_icon = WeaponIcon::new_selected_exotic_icon();
         let texture = asset_server.load(weapon_icon.icon.to_string());
 
         commands

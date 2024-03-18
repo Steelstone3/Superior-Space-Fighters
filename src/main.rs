@@ -3,7 +3,7 @@ use std::env;
 use bevy::prelude::*;
 use plugins::{
     game_resources_plugin::GameResourcesPlugin, game_running_plugin::GameRunningPlugin,
-    game_start_plugin::GameStartPlugin,
+    game_start_plugin::GameStartPlugin, game_user_interface_plugin::GameUserInterfacePlugin,
 };
 
 mod assets;
@@ -28,6 +28,7 @@ fn main() {
                 }),
             GameResourcesPlugin,
             GameStartPlugin,
+            GameUserInterfacePlugin,
             GameRunningPlugin,
         ))
         .run();
