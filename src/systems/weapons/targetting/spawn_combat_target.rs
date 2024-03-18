@@ -1,8 +1,13 @@
-use crate::{components::{
-    starships::starship::Starship, targetting::target::Target,
-}, resources::targetting_settings::TargettingSettings};
+use crate::{
+    components::{starships::starship::Starship, targetting::target::Target},
+    resources::targetting_settings::TargettingSettings,
+};
 use bevy::{
-    ecs::{query::With, system::ResMut}, input::ButtonInput, prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform}, sprite::{Sprite, SpriteBundle}, utils::tracing
+    ecs::{query::With, system::ResMut},
+    input::ButtonInput,
+    prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
+    sprite::{Sprite, SpriteBundle},
+    utils::tracing,
 };
 
 pub fn spawn_combat_target(
