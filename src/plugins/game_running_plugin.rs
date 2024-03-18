@@ -9,6 +9,10 @@ use crate::systems::{
     },
     ships::ship_movement::ai_movement,
     space::move_empty_space::move_empty_space,
+    trading::targetting::{
+        despawn_trading_target::despawn_trading_target, spawn_trading_target::spawn_trading_target,
+        trading_target_movement::trading_target_movement,
+    },
     weapons::{
         player_blaster::{
             player_blaster_collision::player_blaster_collision_with_starship,
@@ -34,8 +38,8 @@ use crate::systems::{
             spawn_player_torpedo::spawn_player_torpedo,
         },
         targetting::{
-            despawn_target::despawn_target, spawn_target::spawn_target,
-            target_movement::target_movement,
+            combat_target_movement::combat_target_movement,
+            despawn_combat_target::despawn_combat_target, spawn_combat_target::spawn_combat_target,
         },
     },
 };
@@ -50,6 +54,9 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, scroll_camera)
             .add_systems(Update, increment_camera)
             .add_systems(Update, move_empty_space)
+            .add_systems(Update, spawn_trading_target)
+            .add_systems(Update, despawn_trading_target)
+            .add_systems(Update, trading_target_movement)
             .add_systems(Update, player_movement)
             .add_systems(Update, player_engine_rumble_sound)
             .add_systems(Update, player_weapon_select)
@@ -61,9 +68,9 @@ impl Plugin for GameRunningPlugin {
             .add_systems(Update, player_torpedo_movement)
             .add_systems(Update, player_torpedo_lifetime)
             .add_systems(Update, player_torpedo_collision_with_starship)
-            .add_systems(Update, spawn_target)
-            .add_systems(Update, despawn_target)
-            .add_systems(Update, target_movement)
+            .add_systems(Update, spawn_combat_target)
+            .add_systems(Update, despawn_combat_target)
+            .add_systems(Update, combat_target_movement)
             .add_systems(Update, spawn_player_mine)
             .add_systems(Update, player_mine_movement)
             .add_systems(Update, player_mine_lifetime)

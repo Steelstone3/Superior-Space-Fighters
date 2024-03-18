@@ -1,5 +1,6 @@
-use crate::components::weapons::weapon_types::target::Target;
 use bevy::{ecs::query::QueryData, transform::components::Transform};
+
+use crate::components::targetting::target::Target;
 
 #[derive(QueryData)]
 #[query_data(mutable)]

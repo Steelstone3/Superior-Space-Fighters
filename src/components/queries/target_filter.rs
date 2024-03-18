@@ -2,7 +2,7 @@ use bevy::ecs::query::{QueryFilter, With, Without};
 
 use crate::components::{
     starships::{player_starship::PlayerStarship, starship::Starship},
-    weapons::weapon_types::target::Target,
+    targetting::target::Target,
 };
 
 #[derive(QueryFilter)]
