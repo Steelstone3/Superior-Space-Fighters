@@ -45,9 +45,9 @@ use crate::systems::{
 };
 use bevy::prelude::{App, Plugin, Update};
 
-pub struct GameRunningPlugin;
+pub struct RunningPlugin;
 
-impl Plugin for GameRunningPlugin {
+impl Plugin for RunningPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Update, ai_movement)
             .add_systems(Update, camera_movement)

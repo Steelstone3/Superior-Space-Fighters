@@ -7,9 +7,9 @@ use crate::systems::{
 };
 use bevy::prelude::{App, Plugin, Startup};
 
-pub struct GameStartPlugin;
+pub struct StartPlugin;
 
-impl Plugin for GameStartPlugin {
+impl Plugin for StartPlugin {
     fn build(&self, app: &mut App) {
         app.add_systems(Startup, play_exploration_music)
             .add_systems(Startup, spawn_random_empty_space_background)
