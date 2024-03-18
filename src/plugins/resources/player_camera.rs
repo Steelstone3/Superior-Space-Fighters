@@ -2,9 +2,9 @@ use bevy::app::Plugin;
 
 use crate::resources::camera_settings::CameraSettings;
 
-pub struct CameraResources;
+pub struct PlayerCamera;
 
-impl Plugin for CameraResources {
+impl Plugin for PlayerCamera {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.insert_resource(CameraSettings {
             zoom_speed: 1.5,

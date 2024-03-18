@@ -2,9 +2,9 @@ use bevy::app::Plugin;
 
 use crate::resources::{sector_size::SectorSize, targetting_settings::TargettingSettings};
 
-pub struct WorldResources;
+pub struct World;
 
-impl Plugin for WorldResources {
+impl Plugin for World {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.insert_resource(SectorSize {
             top_border: 1000.0,

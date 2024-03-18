@@ -2,9 +2,9 @@ use bevy::app::Plugin;
 
 use crate::resources::projectile_ammunition::ProjectileAmmunition;
 
-pub struct CombatResources;
+pub struct Combat;
 
-impl Plugin for CombatResources {
+impl Plugin for Combat {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.insert_resource(ProjectileAmmunition {
             blaster_ammunition: 20,
