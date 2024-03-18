@@ -1,19 +1,13 @@
-use crate::{
-    assets::images::user_interface::weapon_selected::WeaponSelectedIcon,
-    components::user_interface::weapon_icon::{self, WeaponIcon},
-};
+use crate::components::user_interface::weapon_icon::WeaponIcon;
 use bevy::{
     asset::AssetServer,
-    ecs::{
-        entity::Entity,
-        system::{Commands, Query, Res},
-    },
-    input::{keyboard::KeyCode, ButtonInput},
+    ecs::system::{Commands, Res},
     math::{Vec2, Vec3},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
 
+#[allow(dead_code)]
 pub fn spawn_weapon_selection_icons(mut commands: Commands, asset_server: Res<AssetServer>) {
     tracing::info!("Spawn selected blaster icon");
     let weapon_icon = WeaponIcon::new_unselected_blaster_icon();
@@ -64,6 +58,7 @@ pub fn spawn_weapon_selection_icons(mut commands: Commands, asset_server: Res<As
         .insert(weapon_icon);
 }
 
+#[allow(dead_code)]
 fn weapon_icon_sprite_bundle(
     weapon_icon: &WeaponIcon,
     texture: bevy::prelude::Handle<bevy::prelude::Image>,
