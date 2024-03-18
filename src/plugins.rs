@@ -1,3 +1,3 @@
-pub mod game_resources_plugin;
-pub mod game_running_plugin;
-pub mod game_start_plugin;
+pub mod resources;
+pub mod running;
+pub mod start;

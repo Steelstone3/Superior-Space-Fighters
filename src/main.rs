@@ -2,8 +2,8 @@ use std::env;
 
 use bevy::prelude::*;
 use plugins::{
-    game_resources_plugin::GameResourcesPlugin, game_running_plugin::GameRunningPlugin,
-    game_start_plugin::GameStartPlugin,
+    resources::game_resources::ResourcesPlugin, running::game_running::RunningPlugin,
+    start::game_start::StartPlugin,
 };
 
 mod assets;
@@ -26,9 +26,9 @@ fn main() {
                     }),
                     ..Default::default()
                 }),
-            GameResourcesPlugin,
-            GameStartPlugin,
-            GameRunningPlugin,
+            ResourcesPlugin,
+            StartPlugin,
+            RunningPlugin,
         ))
         .run();
 }
