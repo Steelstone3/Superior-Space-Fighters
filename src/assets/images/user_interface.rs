@@ -1,1 +1,1 @@
-pub mod weapon_selected;
+pub mod weapon_selection;
