@@ -8,7 +8,7 @@ use crate::{
 };
 use bevy::{ecs::system::Res, prelude::Query};
 
-pub fn target_movement(
+pub fn trading_target_movement(
     targetting_setting: Res<TargettingSettings>,
     mut target_transforms: Query<MutableTargetQuery, TargetFilter>,
     player_starship_transforms: Query<PlayerStarshipQuery, PlayerStarshipFilter>,

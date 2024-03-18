@@ -2,15 +2,15 @@ use crate::assets::images::starships::weapons::targetting::Targetting;
 use bevy::{ecs::component::Component, math::Vec2};
 
 #[derive(Component, Debug, PartialEq)]
-pub struct CombatTarget {
+pub struct Target {
     pub lock_on_target: Targetting,
     pub lock_on_target_size: Vec2,
     pub lock_on_target_off_screen: Targetting,
     pub lock_on_target_off_screen_size: Vec2,
 }
 
-impl Default for CombatTarget {
-    fn default() -> Self {
+impl Target {
+    pub fn create_combat_target() -> Self {
         Self {
             lock_on_target: Targetting::LockOnTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
@@ -25,9 +25,9 @@ mod target_should {
     use super::*;
 
     #[test]
-    fn create_new() {
+    fn create_new_combat_target() {
         // Given
-        let expected_targetting_settings = CombatTarget {
+        let expected_targetting_settings = Target {
             lock_on_target: Targetting::LockOnTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
             lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
@@ -35,7 +35,7 @@ mod target_should {
         };
 
         // When
-        let targetting_settings = CombatTarget::default();
+        let targetting_settings = Target::create_combat_target();
 
         // Then
         assert_eq!(expected_targetting_settings, targetting_settings);

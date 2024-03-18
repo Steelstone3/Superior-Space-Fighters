@@ -1,6 +1,6 @@
 use crate::{
     components::{
-        starships::starship::Starship, weapons::weapon_types::combat_target::CombatTarget,
+        starships::starship::Starship, targetting::target::Target,
     },
     resources::targetting_settings::TargettingSettings,
 };
@@ -13,11 +13,11 @@ use bevy::{
     utils::tracing,
 };
 
-pub fn despawn_target(
+pub fn despawn_combat_target(
     mut commands: Commands,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettings>,
-    targets: Query<(Entity, &CombatTarget)>,
+    targets: Query<(Entity, &Target)>,
     starships: Query<&Starship>,
 ) {
     let Ok(target) = targets.get_single() else {
@@ -29,7 +29,7 @@ pub fn despawn_target(
 
         targetting_setting.is_targetting = false;
 
-        tracing::info!("Despawning Target: Cancel Target Key Pressed");
+        tracing::info!("Despawning Combat Target: Cancel Target Key Pressed");
 
         return;
     }
@@ -45,7 +45,7 @@ pub fn despawn_target(
         None => {
             commands.entity(target.0).despawn();
             targetting_setting.is_targetting = false;
-            tracing::info!("Despawning Target: No Targets Exist");
+            tracing::info!("Despawning Combat Target: No Targets Exist");
         }
     }
 }
