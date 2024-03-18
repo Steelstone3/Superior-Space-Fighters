@@ -12,9 +12,17 @@ pub struct Target {
 impl Target {
     pub fn create_combat_target() -> Self {
         Self {
-            lock_on_target: Targetting::LockOnTarget,
+            lock_on_target: Targetting::LockOnCombatTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
-            lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
+            lock_on_target_off_screen: Targetting::LockOnCombatTargetOffScreen,
+            lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
+        }
+    }
+    pub fn create_trading_target() -> Self {
+        Self {
+            lock_on_target: Targetting::LockOnTradingTarget,
+            lock_on_target_size: Vec2::new(100.0, 100.0),
+            lock_on_target_off_screen: Targetting::LockOnTradingTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
         }
     }
@@ -28,14 +36,31 @@ mod target_should {
     fn create_new_combat_target() {
         // Given
         let expected_targetting_settings = Target {
-            lock_on_target: Targetting::LockOnTarget,
+            lock_on_target: Targetting::LockOnCombatTarget,
             lock_on_target_size: Vec2::new(100.0, 100.0),
-            lock_on_target_off_screen: Targetting::LockOnTargetOffScreen,
+            lock_on_target_off_screen: Targetting::LockOnCombatTargetOffScreen,
             lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
         };
 
         // When
         let targetting_settings = Target::create_combat_target();
+
+        // Then
+        assert_eq!(expected_targetting_settings, targetting_settings);
+    }
+
+    #[test]
+    fn create_new_trading_target() {
+        // Given
+        let expected_targetting_settings = Target {
+            lock_on_target: Targetting::LockOnTradingTarget,
+            lock_on_target_size: Vec2::new(100.0, 100.0),
+            lock_on_target_off_screen: Targetting::LockOnTradingTargetOffScreen,
+            lock_on_target_off_screen_size: Vec2::new(10.0, 10.0),
+        };
+
+        // When
+        let targetting_settings = Target::create_trading_target();
 
         // Then
         assert_eq!(expected_targetting_settings, targetting_settings);

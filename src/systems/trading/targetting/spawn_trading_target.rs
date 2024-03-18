@@ -29,8 +29,7 @@ pub fn spawn_trading_target(
 
     if let Some(random_starship) = random_starship_transform {
         if !targetting_setting.is_targetting {
-            // TODO let target = Target::create_trading_target();
-            let target = Target::create_combat_target();
+            let target = Target::create_trading_target();
             let texture = asset_server.load(target.lock_on_target.to_string());
 
             tracing::info!("Spawning Trading Target");
