@@ -6,5 +6,5 @@ pub mod player;
 pub mod ships;
 pub mod space;
 pub mod stations;
-pub mod trading;
+pub mod user_interface;
 pub mod weapons;
