@@ -17,8 +17,8 @@ pub fn spawn_weapon_selection_icons(mut commands: Commands, asset_server: Res<As
                 grid_template_columns: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
                 grid_template_rows: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
                 //Must set specific width + height otherwise images wont know what size to display
-                width: Val::Percent(20.0),
-                height: Val::Percent(25.0),
+                width: Val::Px(100.0),
+                height: Val::Px(100.0),
                 position_type: PositionType::Absolute,
                 right: Val::Percent(0.0),
                 bottom: Val::Percent(0.0),
