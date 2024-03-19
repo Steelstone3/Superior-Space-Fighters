@@ -20,13 +20,13 @@ impl Display for WeaponIcon {
             WeaponIcon::BlastersSelected => {
                 write!(
                     formatter,
-                    "images/user_interface/weapons/blaster_selected.png"
+                    "images/user_interface/weapons/blasters_selected.png"
                 )
             }
             WeaponIcon::BlastersUnselected => {
                 write!(
                     formatter,
-                    "images/user_interface/weapons/blaster_unselected.png"
+                    "images/user_interface/weapons/blasters_unselected.png"
                 )
             }
             WeaponIcon::TorpedoesSelected => {
@@ -77,7 +77,7 @@ mod blaster_sprite_should {
     #[test]
     fn have_a_default() {
         // Given
-        let expected_file_path = "images/user_interface/weapons/blaster_selected.png";
+        let expected_file_path = "images/user_interface/weapons/blasters_selected.png";
         let blaster_sprite = WeaponIcon::default();
 
         // When
@@ -90,11 +90,11 @@ mod blaster_sprite_should {
     #[rstest]
     #[case(
         WeaponIcon::BlastersSelected,
-        "images/user_interface/weapons/blaster_selected.png"
+        "images/user_interface/weapons/blasters_selected.png"
     )]
     #[case(
         WeaponIcon::BlastersUnselected,
-        "images/user_interface/weapons/blaster_unselected.png"
+        "images/user_interface/weapons/blasters_unselected.png"
     )]
     #[case(
         WeaponIcon::TorpedoesSelected,
