@@ -1,5 +1,5 @@
 use crate::{
-    components::{starships::starship::Starship, targetting::target::Target},
+    components::{starships::starship::Starship, user_interface::targetting::target::Target},
     resources::targetting_settings::TargettingSettings,
 };
 use bevy::{
