@@ -1,6 +1,6 @@
 use bevy::{
     asset::AssetServer,
-    audio::AudioBundle,
+    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
     ecs::{query::Without, system::Res},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
@@ -28,10 +28,13 @@ pub fn player_mine_collision_with_starship(
 
             if is_collision {
                 tracing::info!("Mine collision with starship");
-
                 commands.spawn(AudioBundle {
                     source: asset_server.load(mine.mine.impact_sound.to_string()),
-                    ..Default::default()
+                    settings: PlaybackSettings {
+                        mode: PlaybackMode::Once,
+                        volume: Volume::new(0.5),
+                        ..Default::default()
+                    },
                 });
 
                 mine.mine.lifetime_weapon.weapon.damage.calculate_damage();

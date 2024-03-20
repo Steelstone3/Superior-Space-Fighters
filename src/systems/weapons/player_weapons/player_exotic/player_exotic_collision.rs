@@ -1,6 +1,6 @@
 use bevy::{
     asset::AssetServer,
-    audio::AudioBundle,
+    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
     ecs::{query::Without, system::Res},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
@@ -28,10 +28,13 @@ pub fn player_exotic_collision_with_starship(
 
             if is_collision {
                 tracing::info!("Exotic collision with starship");
-
                 commands.spawn(AudioBundle {
                     source: asset_server.load(exotic.exotic.impact_sound.to_string()),
-                    ..Default::default()
+                    settings: PlaybackSettings {
+                        mode: PlaybackMode::Once,
+                        volume: Volume::new(0.5),
+                        ..Default::default()
+                    },
                 });
 
                 exotic.exotic.ranged_weapon.weapon.damage.calculate_damage();
