@@ -1,6 +1,6 @@
 use bevy::{
     asset::AssetServer,
-    audio::AudioBundle,
+    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
     ecs::system::{Commands, Query, Res},
     input::{keyboard::KeyCode, ButtonInput},
 };
@@ -13,7 +13,7 @@ pub fn player_engine_rumble_sound(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
 ) {
-    if !input.just_pressed(KeyCode::KeyW) {
+    if !input.pressed(KeyCode::KeyW) {
         return;
     }
 
@@ -23,6 +23,11 @@ pub fn player_engine_rumble_sound(
 
     commands.spawn(AudioBundle {
         source: asset_server.load(player.ship.engine.to_string()),
-        ..Default::default()
+        settings: PlaybackSettings {
+            mode: PlaybackMode::Loop,
+            volume: Volume::new(0.5),
+            paused: false,
+            ..Default::default()
+        },
     });
 }
