@@ -1,6 +1,6 @@
 use crate::systems::{
     player::player_weapon_select::player_weapon_select,
-    weapons::{
+    weapons::player_weapons::{
         player_blaster::spawn_player_blaster::spawn_player_blaster,
         player_exotic::spawn_player_exotic::spawn_player_exotic,
         player_mine::spawn_player_mine::spawn_player_mine,

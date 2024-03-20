@@ -1,6 +1,6 @@
 use bevy::app::{Plugin, Update};
 
-use crate::systems::weapons::{
+use crate::systems::weapons::player_weapons::{
     player_blaster::player_blaster_lifetime::player_blaster_lifetime,
     player_exotic::player_exotic_lifetime::player_exotic_lifetime,
     player_mine::player_mine_lifetime::player_mine_lifetime,
