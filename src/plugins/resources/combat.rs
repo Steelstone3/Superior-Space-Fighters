@@ -6,6 +6,7 @@ use bevy::{
 use crate::resources::{
     projectile_ammunition::ProjectileAmmunition,
     projectile_ammunition_maximum::ProjectileAmmunitionMaximum,
+    projectile_ammunition_recharge::ProjectileAmmunitionRecovery,
     projectile_fire_rate::ProjectileFireRate, weapon_selection::WeaponSelection,
 };
 
@@ -30,6 +31,12 @@ impl Plugin for Combat {
             torpedo_fire_rate: Timer::from_seconds(5.0, TimerMode::Once),
             mine_fire_rate: Timer::from_seconds(2.0, TimerMode::Once),
             exotic_fire_rate: Timer::from_seconds(10.0, TimerMode::Once),
+        })
+        .insert_resource(ProjectileAmmunitionRecovery {
+            blaster_recovery_rate: Timer::from_seconds(5.0, TimerMode::Once),
+            torpedo_recovery_rate: Timer::from_seconds(15.0, TimerMode::Once),
+            mine_recovery_rate: Timer::from_seconds(5.0, TimerMode::Once),
+            exotic_recovery_rate: Timer::from_seconds(15.0, TimerMode::Once),
         })
         .insert_resource(WeaponSelection { selected_weapon: 1 });
     }
