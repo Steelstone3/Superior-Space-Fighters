@@ -1,5 +1,5 @@
 use crate::{
-    components::{starships::starship::Starship, targetting::target::Target},
+    components::{starships::starship::Starship, user_interface::targetting::target::Target},
     resources::targetting_settings::TargettingSettings,
 };
 use bevy::{
@@ -10,14 +10,14 @@ use bevy::{
     utils::tracing,
 };
 
-pub fn spawn_combat_target(
+pub fn spawn_trading_target(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettings>,
     starship_transforms: Query<&Transform, With<Starship>>,
 ) {
-    if !input.just_pressed(KeyCode::KeyT) {
+    if !input.just_pressed(KeyCode::KeyH) {
         return;
     }
 
@@ -29,10 +29,10 @@ pub fn spawn_combat_target(
 
     if let Some(random_starship) = random_starship_transform {
         if !targetting_setting.is_targetting {
-            let target = Target::create_combat_target();
+            let target = Target::create_trading_target();
             let texture = asset_server.load(target.lock_on_target.to_string());
 
-            tracing::info!("Spawning Combat Target");
+            tracing::info!("Spawning Trading Target");
             commands
                 .spawn(SpriteBundle {
                     sprite: Sprite {
