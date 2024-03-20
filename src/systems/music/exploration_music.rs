@@ -1,5 +1,5 @@
 use bevy::{
-    audio::PlaybackSettings,
+    audio::{PlaybackMode, PlaybackSettings, Volume},
     prelude::{AssetServer, AudioBundle, Commands, Res},
 };
 
@@ -12,6 +12,10 @@ pub fn play_exploration_music(
 ) {
     commands.spawn(AudioBundle {
         source: asset_server.load(music.exploration_music.to_string()),
-        settings: PlaybackSettings::LOOP,
+        settings: PlaybackSettings {
+            mode: PlaybackMode::Loop,
+            volume: Volume::new(0.75),
+            ..Default::default()
+        },
     });
 }

@@ -32,7 +32,7 @@ pub fn player_torpedo_collision_with_starship(
                     source: asset_server.load(torpedo.torpedo.impact_sound.to_string()),
                     settings: PlaybackSettings {
                         mode: PlaybackMode::Once,
-                        volume: Volume::new(0.5),
+                        volume: Volume::new(0.2),
                         ..Default::default()
                     },
                 });

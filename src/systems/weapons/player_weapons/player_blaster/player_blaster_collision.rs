@@ -32,7 +32,7 @@ pub fn player_blaster_collision_with_starship(
                     source: asset_server.load(blaster.blaster.impact_sound.to_string()),
                     settings: PlaybackSettings {
                         mode: PlaybackMode::Once,
-                        volume: Volume::new(0.5),
+                        volume: Volume::new(0.2),
                         ..Default::default()
                     },
                 });

@@ -1,31 +1,20 @@
 use bevy::{
     asset::AssetServer,
     audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
-    ecs::system::{Commands, Query, Res},
-    input::{keyboard::KeyCode, ButtonInput},
+    ecs::system::{Commands, Res},
+    utils::tracing,
 };
 
-use crate::components::starships::player_starship::PlayerStarship;
+use crate::assets::sounds::starships::engines::EngineSound;
 
-pub fn player_engine_rumble_sound(
-    mut commands: Commands,
-    players: Query<&PlayerStarship>,
-    asset_server: Res<AssetServer>,
-    input: Res<ButtonInput<KeyCode>>,
-) {
-    if !input.pressed(KeyCode::KeyW) {
-        return;
-    }
-
-    let Ok(player) = players.get_single() else {
-        return;
-    };
-
+pub fn player_engine_rumble_sound(mut commands: Commands, asset_server: Res<AssetServer>) {
+    tracing::info!("Engine rumble sound playing");
+    let source = asset_server.load(EngineSound::default().to_string());
     commands.spawn(AudioBundle {
-        source: asset_server.load(player.ship.engine.to_string()),
+        source,
         settings: PlaybackSettings {
             mode: PlaybackMode::Loop,
-            volume: Volume::new(0.5),
+            volume: Volume::new(0.75),
             paused: false,
             ..Default::default()
         },
