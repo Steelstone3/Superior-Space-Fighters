@@ -4,7 +4,7 @@ use crate::systems::{
     player::player_movement::player_movement,
     ships::ship_movement::ai_movement,
     space::move_empty_space::move_empty_space,
-    weapons::{
+    weapons::player_weapons::{
         player_blaster::player_blaster_movement::player_blaster_movement,
         player_exotic::player_exotic_movement::player_exotic_movement,
         player_mine::player_mine_movement::player_mine_movement,

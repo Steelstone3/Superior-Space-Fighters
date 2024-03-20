@@ -6,5 +6,4 @@ pub struct ProjectileAmmunition {
     pub torpedo_ammunition: u32,
     pub mine_ammunition: u32,
     pub exotic_ammunition: u32,
-    pub selected_weapon: u32,
 }
