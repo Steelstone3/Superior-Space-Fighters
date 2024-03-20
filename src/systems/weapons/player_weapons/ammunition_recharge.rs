@@ -15,6 +15,14 @@ pub fn ammunition_recharge(
     maximum_ammunition: Res<ProjectileAmmunitionMaximum>,
     mut ammunition_recharge: ResMut<ProjectileAmmunitionRecharge>,
 ) {
+    if current_ammunition.blaster_ammunition == maximum_ammunition.maximum_blaster_ammunition
+        && current_ammunition.torpedo_ammunition == maximum_ammunition.maximum_torpedo_ammunition
+        && current_ammunition.mine_ammunition == maximum_ammunition.maximum_mine_ammunition
+        && current_ammunition.exotic_ammunition == maximum_ammunition.maximum_exotic_ammunition
+    {
+        return;
+    }
+
     if current_ammunition.blaster_ammunition < maximum_ammunition.maximum_blaster_ammunition {
         ammunition_recharge.blaster_recovery_rate.tick(time.delta());
 
