@@ -1,26 +1,47 @@
+use std::time::Duration;
+
 use crate::{
     components::{
         starships::player_starship::PlayerStarship,
         weapons::player_weapons::player_mine::PlayerMine,
     },
-    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        projectile_fire_rate::ProjectileFireRate,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
 };
 use bevy::{
     input::ButtonInput,
     prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
     sprite::{Sprite, SpriteBundle},
+    time::Time,
     utils::tracing,
 };
 
+//TODO Find proper fix for this
+#[allow(clippy::too_many_arguments)]
 pub fn spawn_player_mine(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
+    weapon_selection: Res<SelectedWeapon>,
     player: Query<&Transform, With<PlayerStarship>>,
+    mut weapon_fire_rate: ResMut<ProjectileFireRate>,
+    time: Res<Time>,
 ) {
-    if weapon_selection.selected_weapon != 3 {
+    //weapon still on cooldown
+    if weapon_fire_rate.mine_fire_rate.remaining_secs() != 0.0 {
+        weapon_fire_rate.mine_fire_rate.tick(time.delta());
+        tracing::info!(
+            "Mine time remaining {:?}",
+            weapon_fire_rate.mine_fire_rate.remaining_secs()
+        );
+        return;
+    }
+
+    if weapon_selection.selected_weapon != SelectedWeaponEnum::Mine as u32 {
         return;
     }
 
@@ -64,7 +85,18 @@ pub fn spawn_player_mine(
         ..Default::default()
     });
 
+    //init cooldown timer
+    if weapon_fire_rate.mine_fire_rate.duration() == Duration::from_secs(0) {
+        weapon_fire_rate
+            .mine_fire_rate
+            .set_duration(Duration::from_secs(4));
+    }
+
     ammunition.mine_ammunition -= 1;
+
+    //reset cooldown
+    weapon_fire_rate.mine_fire_rate.reset();
+
     tracing::info!(
         "Fired 1 mine. {:?} mines remaining",
         ammunition.mine_ammunition
