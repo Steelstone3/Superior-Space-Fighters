@@ -1,6 +1,6 @@
 use bevy::{
     asset::AssetServer,
-    audio::AudioBundle,
+    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
     ecs::{query::Without, system::Res},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
@@ -28,10 +28,13 @@ pub fn player_blaster_collision_with_starship(
 
             if is_collision {
                 tracing::info!("Blaster collision with starship");
-
                 commands.spawn(AudioBundle {
                     source: asset_server.load(blaster.blaster.impact_sound.to_string()),
-                    ..Default::default()
+                    settings: PlaybackSettings {
+                        mode: PlaybackMode::Once,
+                        volume: Volume::new(0.2),
+                        ..Default::default()
+                    },
                 });
 
                 blaster
