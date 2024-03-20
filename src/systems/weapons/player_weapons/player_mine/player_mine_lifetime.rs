@@ -1,9 +1,6 @@
-use crate::{
-    components::weapons::player_weapons::player_mine::PlayerMine,
-    resources::projectile_ammunition::ProjectileAmmunition,
-};
+use crate::components::weapons::player_weapons::player_mine::PlayerMine;
 use bevy::{
-    prelude::{Commands, Entity, Query, Res, ResMut},
+    prelude::{Commands, Entity, Query, Res},
     time::Time,
     utils::tracing,
 };
@@ -12,7 +9,6 @@ pub fn player_mine_lifetime(
     mut commands: Commands,
     time: Res<Time>,
     mut mines: Query<(Entity, &mut PlayerMine)>,
-    mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (mine_entity, mut mine) in &mut mines {
         mine.mine.lifetime_weapon.lifetime.tick(time.delta());
@@ -20,12 +16,7 @@ pub fn player_mine_lifetime(
         if mine.mine.lifetime_weapon.lifetime.finished() {
             commands.entity(mine_entity).despawn();
 
-            ammunition.mine_ammunition += 1;
-
-            tracing::info!(
-                "Mine recovered. Current mines: {:?}",
-                ammunition.mine_ammunition
-            );
+            tracing::info!("Mine despawn",);
         }
     }
 }

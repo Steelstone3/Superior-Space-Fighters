@@ -1,9 +1,6 @@
-use crate::{
-    components::weapons::player_weapons::player_exotic::PlayerExotic,
-    resources::projectile_ammunition::ProjectileAmmunition,
-};
+use crate::components::weapons::player_weapons::player_exotic::PlayerExotic;
 use bevy::{
-    prelude::{Commands, Entity, Query, ResMut},
+    prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
@@ -11,7 +8,6 @@ use bevy::{
 pub fn player_exotic_lifetime(
     mut commands: Commands,
     mut exotics: Query<(Entity, &mut Transform, &mut PlayerExotic)>,
-    mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (exotic_entity, exotic_transform, exotic) in &mut exotics {
         let is_past_maximum_range =
@@ -21,12 +17,7 @@ pub fn player_exotic_lifetime(
         if is_past_maximum_range {
             commands.entity(exotic_entity).despawn();
 
-            ammunition.exotic_ammunition += 1;
-
-            tracing::info!(
-                "Exotic ammunition recovered. Current exotic ammunition: {:?}",
-                ammunition.exotic_ammunition
-            );
+            tracing::info!("Exotic despawned",);
         }
     }
 }

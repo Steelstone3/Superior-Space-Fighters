@@ -1,29 +1,22 @@
 use bevy::{
     asset::AssetServer,
     audio::AudioBundle,
-    ecs::{
-        query::Without,
-        system::{Res, ResMut},
-    },
+    ecs::{query::Without, system::Res},
     prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
 
-use crate::{
-    components::{
-        starships::starship::Starship, weapons::player_weapons::player_torpedo::PlayerTorpedo,
-    },
-    resources::projectile_ammunition::ProjectileAmmunition,
+use crate::components::{
+    starships::starship::Starship, weapons::player_weapons::player_torpedo::PlayerTorpedo,
 };
 
 // TODO multi-thread
 pub fn player_torpedo_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    mut ammunition: ResMut<ProjectileAmmunition>,
     mut torpedoes: Query<(Entity, &mut Transform, &mut PlayerTorpedo), Without<Starship>>,
-    mut starships: Query<(Entity, &mut Transform, &mut Starship)>,
+    mut starships: Query<(Entity, &mut Transform, &mut Starship), Without<PlayerTorpedo>>,
 ) {
     for (torpedo_entity, torpedo_transform, mut torpedo) in &mut torpedoes {
         for (starship_entity, starship_transform, mut starship) in &mut starships {
@@ -57,7 +50,6 @@ pub fn player_torpedo_collision_with_starship(
                 );
 
                 commands.entity(torpedo_entity).despawn();
-                ammunition.torpedo_ammunition += 1;
 
                 if starship.is_destroyed() {
                     commands.entity(starship_entity).despawn();

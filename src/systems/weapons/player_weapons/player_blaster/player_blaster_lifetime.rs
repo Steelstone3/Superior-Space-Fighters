@@ -1,9 +1,6 @@
-use crate::{
-    components::weapons::player_weapons::player_blaster::PlayerBlaster,
-    resources::projectile_ammunition::ProjectileAmmunition,
-};
+use crate::components::weapons::player_weapons::player_blaster::PlayerBlaster;
 use bevy::{
-    prelude::{Commands, Entity, Query, ResMut},
+    prelude::{Commands, Entity, Query},
     transform::components::Transform,
     utils::tracing,
 };
@@ -11,7 +8,6 @@ use bevy::{
 pub fn player_blaster_lifetime(
     mut commands: Commands,
     mut blasters: Query<(Entity, &mut Transform, &mut PlayerBlaster)>,
-    mut ammunition: ResMut<ProjectileAmmunition>,
 ) {
     for (blaster_entity, blaster_transform, blaster) in &mut blasters {
         let is_past_maximum_range = (blaster_transform.translation
@@ -22,12 +18,7 @@ pub fn player_blaster_lifetime(
         if is_past_maximum_range {
             commands.entity(blaster_entity).despawn();
 
-            ammunition.blaster_ammunition += 1;
-
-            tracing::info!(
-                "Blasters ammunition recovered. Current blaster ammunition: {:?}",
-                ammunition.blaster_ammunition
-            );
+            tracing::info!("Blasters despawned",);
         }
     }
 }
