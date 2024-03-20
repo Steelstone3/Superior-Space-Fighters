@@ -1,7 +1,8 @@
+use bevy::reflect::Reflect;
 use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[derive(RandGen, Copy, Clone, Default, Debug, PartialEq)]
+#[derive(RandGen, Copy, Clone, Default, Debug, PartialEq, Reflect)]
 pub enum SpaceSprite {
     #[default]
     Space1,

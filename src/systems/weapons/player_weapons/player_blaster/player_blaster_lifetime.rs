@@ -1,22 +1,25 @@
-use crate::components::weapons::player_weapons::player_blaster::PlayerBlaster;
+use crate::queries::player_blaster_queries::PlayerBlasterEntityTransformQuery;
 use bevy::{
-    prelude::{Commands, Entity, Query},
-    transform::components::Transform,
+    prelude::{Commands, Query},
     utils::tracing,
 };
 
 pub fn player_blaster_lifetime(
     mut commands: Commands,
-    mut blasters: Query<(Entity, &mut Transform, &mut PlayerBlaster)>,
+    mut player_blasters: Query<PlayerBlasterEntityTransformQuery>,
 ) {
-    for (blaster_entity, blaster_transform, blaster) in &mut blasters {
-        let is_past_maximum_range = (blaster_transform.translation
-            - blaster.blaster.ranged_weapon.original_position)
+    for player_blaster in &mut player_blasters {
+        let is_past_maximum_range = (player_blaster.transform.translation
+            - player_blaster
+                .player_blaster
+                .blaster
+                .ranged_weapon
+                .original_position)
             .length()
-            > blaster.blaster.ranged_weapon.range;
+            > player_blaster.player_blaster.blaster.ranged_weapon.range;
 
         if is_past_maximum_range {
-            commands.entity(blaster_entity).despawn();
+            commands.entity(player_blaster.entity).despawn();
 
             tracing::info!("Blasters despawned",);
         }
