@@ -1,7 +1,9 @@
+use std::env;
+
 use bevy::prelude::*;
 use plugins::{
-    game_resources_plugin::GameResourcesPlugin, game_running_plugin::GameRunningPlugin,
-    game_start_plugin::GameStartPlugin,
+    resources::game_resources::ResourcesPlugin, running::game_running::RunningPlugin,
+    start::game_start::StartPlugin, user_interface::game_user_interface::UserInterfacePlugin,
 };
 
 mod assets;
@@ -11,6 +13,7 @@ mod resources;
 mod systems;
 
 fn main() {
+    env::set_var("RUST_BACKTRACE", "1");
     App::new()
         .add_plugins((
             DefaultPlugins
@@ -23,9 +26,10 @@ fn main() {
                     }),
                     ..Default::default()
                 }),
-            GameResourcesPlugin,
-            GameStartPlugin,
-            GameRunningPlugin,
+            ResourcesPlugin,
+            UserInterfacePlugin,
+            StartPlugin,
+            RunningPlugin,
         ))
         .run();
 }

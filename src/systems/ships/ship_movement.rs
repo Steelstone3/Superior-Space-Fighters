@@ -1,12 +1,11 @@
+use crate::{
+    components::starships::starship::Starship,
+    resources::sector_size::SectorSize,
+    systems::controllers::random_generator::{generate_seed, random_value_f32},
+};
 use bevy::{
     prelude::{Quat, Query, Res, Transform, Vec3},
     time::Time,
-};
-
-use crate::{
-    components::starship::Starship,
-    resources::sector_size::SectorSize,
-    systems::controllers::random_generator::{generate_seed, random_value_f32},
 };
 
 pub fn ai_movement(
@@ -16,12 +15,8 @@ pub fn ai_movement(
 ) {
     characters
         .par_iter_mut()
-        .for_each(|(mut transform, mut ai_ship)| {
-            let ship_speed = ai_ship.current_velocity * time.delta_seconds();
-
-            ai_ship.current_velocity = (ai_ship.current_velocity + ai_ship.acceleration)
-                .clamp(-ai_ship.velocity, ai_ship.velocity);
-
+        .for_each(|(mut transform, ai_ship)| {
+            let ship_speed = ai_ship.velocity * time.delta_seconds();
             let movement_direction = transform.rotation * Vec3::Y;
             let translation_delta = movement_direction * ship_speed;
 

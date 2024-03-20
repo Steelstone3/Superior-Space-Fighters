@@ -1,18 +1,19 @@
 use crate::resources::camera_settings::CameraSettings;
 use bevy::{
-    prelude::{Camera, Input, KeyCode, OrthographicProjection, Query, Res, ResMut, With},
+    input::ButtonInput,
+    prelude::{Camera, KeyCode, OrthographicProjection, Query, Res, ResMut, With},
     utils::tracing,
 };
 use float_lerp::lerp;
 
 pub fn increment_camera(
-    input: Res<Input<KeyCode>>,
+    input: Res<ButtonInput<KeyCode>>,
     mut camera_projection_query: Query<&mut OrthographicProjection, With<Camera>>,
     mut camera_settings: ResMut<CameraSettings>,
 ) {
     let mut camera_projection = camera_projection_query.single_mut();
 
-    if input.just_pressed(KeyCode::Equals) {
+    if input.just_pressed(KeyCode::Equal) {
         camera_settings.current_zoom = (camera_settings.current_zoom * camera_settings.zoom_out
             / camera_settings.zoom_speed)
             .clamp(camera_settings.minimum_zoom, camera_settings.maximum_zoom);

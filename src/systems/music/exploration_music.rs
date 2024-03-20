@@ -1,4 +1,7 @@
-use bevy::prelude::{AssetServer, AudioBundle, Commands, Res};
+use bevy::{
+    audio::{PlaybackMode, PlaybackSettings, Volume},
+    prelude::{AssetServer, AudioBundle, Commands, Res},
+};
 
 use crate::resources::music::Music;
 
@@ -9,6 +12,10 @@ pub fn play_exploration_music(
 ) {
     commands.spawn(AudioBundle {
         source: asset_server.load(music.exploration_music.to_string()),
-        ..Default::default()
+        settings: PlaybackSettings {
+            mode: PlaybackMode::Loop,
+            volume: Volume::new(0.75),
+            ..Default::default()
+        },
     });
 }

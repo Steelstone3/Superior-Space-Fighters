@@ -1,8 +1,9 @@
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(RandGen)]
+#[derive(Default, RandGen, Debug, PartialEq)]
 pub enum BlasterSprite {
+    #[default]
     Blaster1,
     Blaster2,
     Blaster3,
@@ -122,5 +123,116 @@ impl Display for BlasterSprite {
                 )
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod blaster_sprite_should {
+    use super::*;
+    use rstest::rstest;
+
+    #[test]
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "images/starships/weapons/blasters/blaster_1.png";
+        let blaster_sprite = BlasterSprite::default();
+
+        // When
+        let file_path = blaster_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(
+        BlasterSprite::Blaster1,
+        "images/starships/weapons/blasters/blaster_1.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster2,
+        "images/starships/weapons/blasters/blaster_2.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster3,
+        "images/starships/weapons/blasters/blaster_3.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster4,
+        "images/starships/weapons/blasters/blaster_4.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster5,
+        "images/starships/weapons/blasters/blaster_5.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster6,
+        "images/starships/weapons/blasters/blaster_6.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster7,
+        "images/starships/weapons/blasters/blaster_7.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster8,
+        "images/starships/weapons/blasters/blaster_8.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster9,
+        "images/starships/weapons/blasters/blaster_9.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster10,
+        "images/starships/weapons/blasters/blaster_10.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster11,
+        "images/starships/weapons/blasters/blaster_11.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster12,
+        "images/starships/weapons/blasters/blaster_12.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster13,
+        "images/starships/weapons/blasters/blaster_13.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster14,
+        "images/starships/weapons/blasters/blaster_14.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster15,
+        "images/starships/weapons/blasters/blaster_15.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster16,
+        "images/starships/weapons/blasters/blaster_16.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster17,
+        "images/starships/weapons/blasters/blaster_17.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster18,
+        "images/starships/weapons/blasters/blaster_18.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster19,
+        "images/starships/weapons/blasters/blaster_19.png"
+    )]
+    #[case(
+        BlasterSprite::Blaster20,
+        "images/starships/weapons/blasters/blaster_20.png"
+    )]
+    fn return_the_expected_file_path(
+        #[case] blaster_sprite: BlasterSprite,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = blaster_sprite.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
     }
 }

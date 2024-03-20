@@ -49,3 +49,61 @@ impl Display for ExplorationMusicSound {
         }
     }
 }
+
+#[cfg(test)]
+mod exploration_music_should {
+    use super::*;
+    use rstest::rstest;
+
+    #[test]
+    fn have_a_default() {
+        // Given
+        let expected_file_path = "sounds/music/exploration/deep_space_1.ogg";
+
+        // When
+        let file_path = ExplorationMusicSound::default().to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path);
+    }
+
+    #[rstest]
+    #[case(
+        ExplorationMusicSound::AlienContact,
+        "sounds/music/exploration/alien_contact.ogg"
+    )]
+    #[case(
+        ExplorationMusicSound::DeepSpace1,
+        "sounds/music/exploration/deep_space_1.ogg"
+    )]
+    #[case(
+        ExplorationMusicSound::DeepSpace2,
+        "sounds/music/exploration/deep_space_2.ogg"
+    )]
+    #[case(
+        ExplorationMusicSound::DeepSpace3,
+        "sounds/music/exploration/deep_space_3.ogg"
+    )]
+    #[case(
+        ExplorationMusicSound::NebulaExploration1,
+        "sounds/music/exploration/nebula_exploration_1.ogg"
+    )]
+    #[case(
+        ExplorationMusicSound::NebulaExploration2,
+        "sounds/music/exploration/nebula_exploration_2.ogg"
+    )]
+    #[case(
+        ExplorationMusicSound::NebulaExplorationScary,
+        "sounds/music/exploration/nebula_exploration_scary.ogg"
+    )]
+    fn return_the_expected_file_path(
+        #[case] exploration_music_sound: ExplorationMusicSound,
+        #[case] expected_file_path: String,
+    ) {
+        // When
+        let file_path = exploration_music_sound.to_string();
+
+        // Then
+        assert_eq!(expected_file_path, file_path)
+    }
+}
