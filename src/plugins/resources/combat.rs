@@ -1,6 +1,9 @@
 use bevy::app::Plugin;
 
-use crate::resources::projectile_ammunition::ProjectileAmmunition;
+use crate::resources::{
+    projectile_ammunition::ProjectileAmmunition, projectile_fire_rate::ProjectileFireRate,
+    weapon_selection::WeaponSelection,
+};
 
 pub struct Combat;
 
@@ -11,7 +14,8 @@ impl Plugin for Combat {
             torpedo_ammunition: 5,
             mine_ammunition: 7,
             exotic_ammunition: 2,
-            selected_weapon: 1,
-        });
+        })
+        .insert_resource(ProjectileFireRate {})
+        .insert_resource(WeaponSelection { selected_weapon: 1 });
     }
 }

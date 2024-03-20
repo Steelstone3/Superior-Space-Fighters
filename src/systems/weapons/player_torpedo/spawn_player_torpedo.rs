@@ -2,7 +2,7 @@ use crate::{
     components::{
         starships::player_starship::PlayerStarship, weapons::player_torpedo::PlayerTorpedo,
     },
-    resources::projectile_ammunition::ProjectileAmmunition,
+    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
 };
 use bevy::{
     input::ButtonInput,
@@ -17,9 +17,10 @@ pub fn spawn_player_torpedo(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
+    weapon_selection: Res<WeaponSelection>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
-    if ammunition.selected_weapon != 2 {
+    if weapon_selection.selected_weapon != 2 {
         return;
     }
 
