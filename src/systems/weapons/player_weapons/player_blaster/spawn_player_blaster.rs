@@ -3,13 +3,17 @@ use crate::{
         starships::player_starship::PlayerStarship,
         weapons::player_weapons::player_blaster::PlayerBlaster,
     },
-    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
+    events::spawn_sprite_event::SpawnSpriteEvent,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
 };
 use bevy::{
+    ecs::event::EventWriter,
     input::ButtonInput,
     math::Vec3,
     prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
-    sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
 
@@ -18,10 +22,11 @@ pub fn spawn_player_blaster(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
+    weapon_selection: Res<SelectedWeapon>,
     player_query: Query<&Transform, With<PlayerStarship>>,
+    mut ev_spawn_sprite: EventWriter<SpawnSpriteEvent>,
 ) {
-    if weapon_selection.selected_weapon != 1 {
+    if weapon_selection.selected_weapon != SelectedWeaponEnum::Blaster as u32 {
         return;
     }
 
@@ -44,21 +49,19 @@ pub fn spawn_player_blaster(
     ));
 
     let image_path = blaster.blaster.blaster.to_string();
-
-    let texture = asset_server.load(image_path);
     let sound_path = blaster.blaster.firing_sound.to_string();
+    let size = blaster.blaster.ranged_weapon.weapon.size;
+    let entity = commands.spawn(blaster).id();
 
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(blaster.blaster.ranged_weapon.weapon.size),
-                ..Default::default()
-            },
-            transform: player_transform,
-            texture,
-            ..Default::default()
-        })
-        .insert(blaster);
+    let event = SpawnSpriteEvent {
+        sprite_path: image_path,
+        size,
+        translation: player_transform.translation,
+        entity,
+        rotation: player_transform.rotation,
+    };
+
+    ev_spawn_sprite.send(event);
 
     commands.spawn(AudioBundle {
         source: asset_server.load(sound_path),

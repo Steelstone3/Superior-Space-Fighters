@@ -1,12 +1,18 @@
-use crate::components::starships::player_starship::PlayerStarship;
-use crate::components::weapons::player_weapons::player_exotic::PlayerExotic;
-use crate::resources::projectile_ammunition::ProjectileAmmunition;
-use crate::resources::weapon_selection::WeaponSelection;
-use bevy::input::ButtonInput;
+use crate::{
+    components::{
+        starships::player_starship::PlayerStarship,
+        weapons::player_weapons::player_exotic::PlayerExotic,
+    },
+    events::spawn_sprite_event::SpawnSpriteEvent,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
+};
 use bevy::math::Vec3;
+use bevy::{ecs::event::EventWriter, input::ButtonInput};
 use bevy::{
     prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
-    sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
 
@@ -15,10 +21,11 @@ pub fn spawn_player_exotic(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
+    selected_weapon: Res<SelectedWeapon>,
     player: Query<&Transform, With<PlayerStarship>>,
+    mut ev_spawn_sprite: EventWriter<SpawnSpriteEvent>,
 ) {
-    if weapon_selection.selected_weapon != 4 {
+    if selected_weapon.selected_weapon != SelectedWeaponEnum::Exotic as u32 {
         return;
     }
 
@@ -42,19 +49,18 @@ pub fn spawn_player_exotic(
 
     let image_path = exotic.exotic.exotic.to_string();
     let sound_path = exotic.exotic.firing_sound.to_string();
-    let texture = asset_server.load(image_path);
+    let size = exotic.exotic.ranged_weapon.weapon.size;
+    let entity = commands.spawn(exotic).id();
 
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(exotic.exotic.ranged_weapon.weapon.size),
-                ..Default::default()
-            },
-            transform: player_transform,
-            texture,
-            ..Default::default()
-        })
-        .insert(exotic);
+    let event = SpawnSpriteEvent {
+        sprite_path: image_path,
+        size,
+        translation: player_transform.translation,
+        entity,
+        rotation: player_transform.rotation,
+    };
+
+    ev_spawn_sprite.send(event);
 
     commands.spawn(AudioBundle {
         source: asset_server.load(sound_path),

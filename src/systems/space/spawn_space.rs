@@ -1,13 +1,17 @@
-use crate::{assets::images::space::SpaceSprite, components::space::Space};
-use bevy::{
-    math::{Vec2, Vec3},
-    prelude::{AssetServer, Commands, Res},
-    sprite::{Sprite, SpriteBundle},
+use crate::{
+    assets::images::space::SpaceSprite, components::space::Space,
+    events::spawn_sprite_event::SpawnSpriteEvent,
 };
-use rand::random;
+use bevy::{
+    ecs::{event::EventWriter, system::Commands},
+    math::{Quat, Vec2, Vec3},
+};
 
-pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let space = random::<SpaceSprite>();
+pub fn spawn_random_empty_space_background(
+    mut ev_spawn_space: EventWriter<SpawnSpriteEvent>,
+    mut commands: Commands,
+) {
+    let space = SpaceSprite::generate_random();
     let tile_size = 1920.0;
 
     for x in 0..5 {
@@ -20,23 +24,18 @@ pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server:
             );
 
             let space = Space::new(space, tile_size, grid_position, location);
+            let texture = space.space.to_string();
+            let size = space.size;
+            let entity = commands.spawn(space).id();
 
-            let texture = asset_server.load(space.space.to_string());
-
-            commands
-                .spawn(SpriteBundle {
-                    sprite: Sprite {
-                        custom_size: Some(space.size),
-                        ..Default::default()
-                    },
-                    texture,
-                    transform: bevy::prelude::Transform {
-                        translation: space.location,
-                        ..Default::default()
-                    },
-                    ..Default::default()
-                })
-                .insert(space);
+            let space_event = SpawnSpriteEvent {
+                sprite_path: texture,
+                size,
+                translation: location,
+                entity,
+                rotation: Quat::default(),
+            };
+            ev_spawn_space.send(space_event);
         }
     }
 }

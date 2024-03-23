@@ -3,13 +3,17 @@ use crate::{
         starships::player_starship::PlayerStarship,
         weapons::player_weapons::player_torpedo::PlayerTorpedo,
     },
-    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
+    events::spawn_sprite_event::SpawnSpriteEvent,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
 };
 use bevy::{
+    ecs::event::EventWriter,
     input::ButtonInput,
     math::Vec3,
     prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
-    sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
 
@@ -18,10 +22,11 @@ pub fn spawn_player_torpedo(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
+    weapon_selection: Res<SelectedWeapon>,
     player: Query<&Transform, With<PlayerStarship>>,
+    mut ev_spawn_sprite: EventWriter<SpawnSpriteEvent>,
 ) {
-    if weapon_selection.selected_weapon != 2 {
+    if weapon_selection.selected_weapon != SelectedWeaponEnum::Torpedo as u32 {
         return;
     }
 
@@ -50,20 +55,18 @@ pub fn spawn_player_torpedo(
 
     let image_path = torpedo.torpedo.torpedo.to_string();
     let sound_path = torpedo.torpedo.firing_sound.to_string();
+    let size = torpedo.torpedo.lock_on_weapon.ranged_weapon.weapon.size;
+    let entity = commands.spawn(torpedo).id();
 
-    let texture = asset_server.load(image_path);
+    let event = SpawnSpriteEvent {
+        sprite_path: image_path,
+        size,
+        translation: player_transform.translation,
+        entity,
+        rotation: player_transform.rotation,
+    };
 
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(torpedo.torpedo.lock_on_weapon.ranged_weapon.weapon.size),
-                ..Default::default()
-            },
-            transform: player_transform,
-            texture,
-            ..Default::default()
-        })
-        .insert(torpedo);
+    ev_spawn_sprite.send(event);
 
     commands.spawn(AudioBundle {
         source: asset_server.load(sound_path),
