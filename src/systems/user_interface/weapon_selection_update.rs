@@ -52,45 +52,45 @@ pub fn update_weapon_selection_icons(
             })
             .insert(WeaponSelectionParent {})
             .with_children(|parent| {
-                let weapon_icon: WeaponSelection;
-                if selected_weapon.selected_weapon == SelectedWeaponEnum::Blaster as u32 {
-                    weapon_icon = WeaponSelection::new_selected_blaster_icon();
-                } else {
-                    weapon_icon = WeaponSelection::new_unselected_blaster_icon();
-                }
+                let weapon_icon: WeaponSelection =
+                    if selected_weapon.selected_weapon == SelectedWeaponEnum::Blaster as u32 {
+                        WeaponSelection::new_selected_blaster_icon()
+                    } else {
+                        WeaponSelection::new_unselected_blaster_icon()
+                    };
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
                     .insert(weapon_icon);
 
-                let weapon_icon: WeaponSelection;
-                if selected_weapon.selected_weapon == SelectedWeaponEnum::Torpedo as u32 {
-                    weapon_icon = WeaponSelection::new_selected_torpedo_icon();
-                } else {
-                    weapon_icon = WeaponSelection::new_unselected_torpedo_icon();
-                }
+                let weapon_icon: WeaponSelection =
+                    if selected_weapon.selected_weapon == SelectedWeaponEnum::Torpedo as u32 {
+                        WeaponSelection::new_selected_torpedo_icon()
+                    } else {
+                        WeaponSelection::new_unselected_torpedo_icon()
+                    };
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
                     .insert(weapon_icon);
 
-                let weapon_icon: WeaponSelection;
-                if selected_weapon.selected_weapon == SelectedWeaponEnum::Mine as u32 {
-                    weapon_icon = WeaponSelection::new_selected_mine_icon();
-                } else {
-                    weapon_icon = WeaponSelection::new_unselected_mine_icon();
-                }
+                let weapon_icon: WeaponSelection =
+                    if selected_weapon.selected_weapon == SelectedWeaponEnum::Mine as u32 {
+                        WeaponSelection::new_selected_mine_icon()
+                    } else {
+                        WeaponSelection::new_unselected_mine_icon()
+                    };
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
                     .insert(weapon_icon);
 
-                let weapon_icon: WeaponSelection;
-                if selected_weapon.selected_weapon == SelectedWeaponEnum::Exotic as u32 {
-                    weapon_icon = WeaponSelection::new_selected_exotic_icon();
-                } else {
-                    weapon_icon = WeaponSelection::new_unselected_exotic_icon();
-                }
+                let weapon_icon: WeaponSelection =
+                    if selected_weapon.selected_weapon == SelectedWeaponEnum::Exotic as u32 {
+                        WeaponSelection::new_selected_exotic_icon()
+                    } else {
+                        WeaponSelection::new_unselected_exotic_icon()
+                    };
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
