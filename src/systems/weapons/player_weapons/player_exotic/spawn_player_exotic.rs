@@ -1,7 +1,13 @@
-use crate::components::starships::player_starship::PlayerStarship;
-use crate::components::weapons::player_weapons::player_exotic::PlayerExotic;
-use crate::resources::projectile_ammunition::ProjectileAmmunition;
-use crate::resources::weapon_selection::WeaponSelection;
+use crate::{
+    components::{
+        starships::player_starship::PlayerStarship,
+        weapons::player_weapons::player_exotic::PlayerExotic,
+    },
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
+};
 use bevy::input::ButtonInput;
 use bevy::math::Vec3;
 use bevy::{
@@ -15,10 +21,10 @@ pub fn spawn_player_exotic(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
+    selected_weapon: Res<SelectedWeapon>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
-    if weapon_selection.selected_weapon != 4 {
+    if selected_weapon.selected_weapon != SelectedWeaponEnum::Exotic as u32 {
         return;
     }
 

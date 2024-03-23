@@ -3,7 +3,10 @@ use crate::{
         starships::player_starship::PlayerStarship,
         weapons::player_weapons::player_mine::PlayerMine,
     },
-    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
 };
 use bevy::{
     input::ButtonInput,
@@ -17,10 +20,10 @@ pub fn spawn_player_mine(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
+    weapon_selection: Res<SelectedWeapon>,
     player: Query<&Transform, With<PlayerStarship>>,
 ) {
-    if weapon_selection.selected_weapon != 3 {
+    if weapon_selection.selected_weapon != SelectedWeaponEnum::Mine as u32 {
         return;
     }
 
