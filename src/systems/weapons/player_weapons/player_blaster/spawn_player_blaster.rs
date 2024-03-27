@@ -1,3 +1,5 @@
+use std::time::Duration;
+
 use crate::{
     components::{
         starships::player_starship::PlayerStarship,
@@ -5,6 +7,7 @@ use crate::{
     },
     resources::{
         projectile_ammunition::ProjectileAmmunition,
+        projectile_fire_rate::ProjectileFireRate,
         selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
     },
 };
@@ -13,6 +16,7 @@ use bevy::{
     math::Vec3,
     prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
     sprite::{Sprite, SpriteBundle},
+    time::Time,
     utils::tracing,
 };
 
@@ -23,7 +27,19 @@ pub fn spawn_player_blaster(
     mut ammunition: ResMut<ProjectileAmmunition>,
     weapon_selection: Res<SelectedWeapon>,
     player_query: Query<&Transform, With<PlayerStarship>>,
+    mut weapon_fire_rate: ResMut<ProjectileFireRate>,
+    time: Res<Time>,
 ) {
+    //weapon still on cooldown
+    if weapon_fire_rate.blaster_fire_rate.remaining_secs() != 0.0 {
+        weapon_fire_rate.blaster_fire_rate.tick(time.delta());
+        tracing::info!(
+            "Blaster time remaining {:?}",
+            weapon_fire_rate.blaster_fire_rate.remaining_secs()
+        );
+        return;
+    }
+
     if weapon_selection.selected_weapon != SelectedWeaponEnum::Blaster as u32 {
         return;
     }
@@ -68,7 +84,18 @@ pub fn spawn_player_blaster(
         ..Default::default()
     });
 
+    //init cooldown timer
+    if weapon_fire_rate.blaster_fire_rate.duration() == Duration::from_secs(0) {
+        weapon_fire_rate
+            .blaster_fire_rate
+            .set_duration(Duration::from_secs(2));
+    }
+
     ammunition.blaster_ammunition -= 1;
+
+    //reset cooldown
+    weapon_fire_rate.blaster_fire_rate.reset();
+
     tracing::info!(
         "Fired 1 blaster shot. {:?} blaster shots remaining",
         ammunition.blaster_ammunition

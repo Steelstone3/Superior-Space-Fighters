@@ -28,10 +28,11 @@ impl Plugin for Combat {
             maximum_exotic_ammunition: 2,
         })
         .insert_resource(ProjectileFireRate {
-            blaster_fire_rate: Timer::from_seconds(1.0, TimerMode::Once),
-            torpedo_fire_rate: Timer::from_seconds(5.0, TimerMode::Once),
-            mine_fire_rate: Timer::from_seconds(2.0, TimerMode::Once),
-            exotic_fire_rate: Timer::from_seconds(10.0, TimerMode::Once),
+            //Timers need to start at 0 as they start imedietly causing all weapons to have to wait one cooldown before fireing
+            blaster_fire_rate: Timer::from_seconds(0.0, TimerMode::Once),
+            torpedo_fire_rate: Timer::from_seconds(0.0, TimerMode::Once),
+            mine_fire_rate: Timer::from_seconds(0.0, TimerMode::Once),
+            exotic_fire_rate: Timer::from_seconds(0.0, TimerMode::Once),
         })
         .insert_resource(ProjectileAmmunitionRecharge {
             blaster_recovery_rate: Timer::from_seconds(5.0, TimerMode::Repeating),

@@ -1,3 +1,20 @@
+use std::time::Duration;
+
+use bevy::{
+    asset::AssetServer,
+    audio::AudioBundle,
+    ecs::{
+        query::With,
+        system::{Commands, Query, Res, ResMut},
+    },
+    input::{keyboard::KeyCode, ButtonInput},
+    math::Vec3,
+    sprite::{Sprite, SpriteBundle},
+    time::Time,
+    transform::components::Transform,
+    utils::tracing,
+};
+
 use crate::{
     components::{
         starships::player_starship::PlayerStarship,
@@ -5,15 +22,9 @@ use crate::{
     },
     resources::{
         projectile_ammunition::ProjectileAmmunition,
+        projectile_fire_rate::ProjectileFireRate,
         selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
     },
-};
-use bevy::input::ButtonInput;
-use bevy::math::Vec3;
-use bevy::{
-    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
-    sprite::{Sprite, SpriteBundle},
-    utils::tracing,
 };
 
 pub fn spawn_player_exotic(
@@ -23,7 +34,19 @@ pub fn spawn_player_exotic(
     mut ammunition: ResMut<ProjectileAmmunition>,
     selected_weapon: Res<SelectedWeapon>,
     player: Query<&Transform, With<PlayerStarship>>,
+    mut weapon_fire_rate: ResMut<ProjectileFireRate>,
+    time: Res<Time>,
 ) {
+    //weapon still on cooldown
+    if weapon_fire_rate.exotic_fire_rate.remaining_secs() != 0.0 {
+        weapon_fire_rate.exotic_fire_rate.tick(time.delta());
+        tracing::info!(
+            "Exotic time remaining {:?}",
+            weapon_fire_rate.exotic_fire_rate.remaining_secs()
+        );
+        return;
+    }
+
     if selected_weapon.selected_weapon != SelectedWeaponEnum::Exotic as u32 {
         return;
     }
@@ -67,7 +90,18 @@ pub fn spawn_player_exotic(
         ..Default::default()
     });
 
+    //init cooldown duration
+    if weapon_fire_rate.exotic_fire_rate.duration() == Duration::from_secs(0) {
+        weapon_fire_rate
+            .exotic_fire_rate
+            .set_duration(Duration::from_secs(8));
+    }
+
     ammunition.exotic_ammunition -= 1;
+
+    //reset cooldown
+    weapon_fire_rate.exotic_fire_rate.reset();
+
     tracing::info!(
         "Fired 1 exotic shot. {:?} exotic shots remaining",
         ammunition.exotic_ammunition
