@@ -19,6 +19,8 @@ use bevy::{
     utils::tracing,
 };
 
+//TODO Find proper fix for this
+#[allow(clippy::too_many_arguments)]
 pub fn spawn_player_mine(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
