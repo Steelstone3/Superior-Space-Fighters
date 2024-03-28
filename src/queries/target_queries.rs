@@ -11,7 +11,7 @@ use bevy::{
 };
 
 #[derive(QueryData)]
-pub struct TargetQuery {
+pub struct TargetEntityQuery {
     pub entity: Entity,
     pub target: &'static Target,
 }
