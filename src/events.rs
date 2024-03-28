@@ -1,1 +1,4 @@
-pub mod ui_selected_weapon_event;
+use bevy::ecs::event::Event;
+
+#[derive(Event)]
+pub struct UserInterfaceEvent;
