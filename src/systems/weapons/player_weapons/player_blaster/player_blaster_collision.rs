@@ -1,14 +1,13 @@
+use crate::queries::{
+    player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
+    starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
+};
 use bevy::{
     asset::AssetServer,
     audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
     ecs::system::Res,
     prelude::{Commands, Query},
     utils::tracing,
-};
-
-use crate::queries::{
-    player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
-    starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
 };
 
 // TODO multi-thread
