@@ -20,8 +20,12 @@ pub fn move_empty_space(
     let total_area_around_player = 1920.0 * 2.5;
     let half_space_tile_size = 1920.0 * 0.5;
 
+    let Ok(player) = player_translation_query.get_single() else {
+        return;
+    };
+
     //use player location to determine what chunks to load
-    let player_translation = player_translation_query.single().translation;
+    let player_translation = player.translation;
     let space_tile_size = 1920.0;
 
     let mut x_start = 0;
