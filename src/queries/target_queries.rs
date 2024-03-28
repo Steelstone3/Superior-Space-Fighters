@@ -9,7 +9,7 @@ use bevy::{
 
 #[derive(QueryData)]
 #[query_data(mutable)]
-pub struct MutableTargetTransformQuery {
+pub struct TargetMutableTransformQuery {
     pub transform: &'static mut Transform,
     pub target: &'static Target,
 }

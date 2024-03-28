@@ -8,14 +8,14 @@ use crate::components::starships::player_starship::PlayerStarship;
 
 #[derive(QueryData)]
 #[query_data(mutable)]
-pub struct MutableCameraTransformQuery {
+pub struct CameraMutableTransformQuery {
     pub transform: &'static mut Transform,
     pub camera: &'static Camera,
 }
 
 #[derive(QueryData)]
 #[query_data(mutable)]
-pub struct MutableCameraOrthographicProjectionQuery {
+pub struct CameraMutableOrthographicProjectionQuery {
     pub projection: &'static mut OrthographicProjection,
     pub camera: &'static Camera,
 }

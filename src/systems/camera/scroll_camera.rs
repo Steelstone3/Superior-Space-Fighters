@@ -1,5 +1,5 @@
 use crate::{
-    queries::camera_queries::MutableCameraOrthographicProjectionQuery,
+    queries::camera_queries::CameraMutableOrthographicProjectionQuery,
     resources::camera_settings::CameraSettings,
 };
 use bevy::{
@@ -13,7 +13,7 @@ use float_lerp::lerp;
 
 pub fn scroll_camera(
     mut scroll_event_reader: EventReader<MouseWheel>,
-    mut cameras: Query<MutableCameraOrthographicProjectionQuery>,
+    mut cameras: Query<CameraMutableOrthographicProjectionQuery>,
     mut camera_settings: ResMut<CameraSettings>,
 ) {
     let mut camera = cameras.single_mut();

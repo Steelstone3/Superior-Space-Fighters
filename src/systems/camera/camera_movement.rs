@@ -1,12 +1,12 @@
 use crate::queries::{
-    camera_queries::{CameraFilter, MutableCameraTransformQuery},
+    camera_queries::{CameraFilter, CameraMutableTransformQuery},
     player_starship_queries::PlayerStarshipTransformQuery,
 };
 use bevy::ecs::system::Query;
 
 pub fn camera_movement(
     player: Query<PlayerStarshipTransformQuery>,
-    mut cameras: Query<MutableCameraTransformQuery, CameraFilter>,
+    mut cameras: Query<CameraMutableTransformQuery, CameraFilter>,
 ) {
     let Ok(player) = player.get_single() else {
         return;

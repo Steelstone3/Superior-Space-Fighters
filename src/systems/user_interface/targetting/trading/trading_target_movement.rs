@@ -2,7 +2,7 @@ use crate::{
     queries::{
         player_starship_queries::{PlayerStarshipFilter, PlayerStarshipTransformQuery},
         starship_queries::{StarshipFilter, StarshipTransformQuery},
-        target_queries::{MutableTargetTransformQuery, TargetFilter},
+        target_queries::{TargetFilter, TargetMutableTransformQuery},
     },
     resources::targetting_settings::TargettingSettings,
 };
@@ -10,7 +10,7 @@ use bevy::{ecs::system::Res, prelude::Query};
 
 pub fn trading_target_movement(
     targetting_setting: Res<TargettingSettings>,
-    mut target_transforms: Query<MutableTargetTransformQuery, TargetFilter>,
+    mut target_transforms: Query<TargetMutableTransformQuery, TargetFilter>,
     player_starship_transforms: Query<PlayerStarshipTransformQuery, PlayerStarshipFilter>,
     starship_transforms: Query<StarshipTransformQuery, StarshipFilter>,
 ) {
