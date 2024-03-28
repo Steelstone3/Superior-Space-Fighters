@@ -19,6 +19,13 @@ pub struct MutablePlayerMineEntityTransformQuery {
 
 #[derive(QueryData)]
 #[query_data(mutable)]
+pub struct MutablePlayerMineEntityQuery {
+    pub entity: Entity,
+    pub player_mine: &'static mut PlayerMine,
+}
+
+#[derive(QueryData)]
+#[query_data(mutable)]
 pub struct MutablePlayerMineTransformQuery {
     pub transform: &'static mut Transform,
     pub player_mine: &'static PlayerMine,
