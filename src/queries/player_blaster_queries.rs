@@ -17,6 +17,13 @@ pub struct MutablePlayerBlasterEntityTransformQuery {
     pub player_blaster: &'static mut PlayerBlaster,
 }
 
+#[derive(QueryData)]
+#[query_data(mutable)]
+pub struct MutablePlayerBlasterTransformQuery {
+    pub transform: &'static mut Transform,
+    pub player_blaster: &'static mut PlayerBlaster,
+}
+
 #[derive(QueryFilter)]
 pub struct PlayerBlasterFilter {
     with_blaster: With<PlayerBlaster>,
