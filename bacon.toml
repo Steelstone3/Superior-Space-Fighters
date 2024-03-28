@@ -8,43 +8,76 @@
 default_job = "check"
 
 [jobs.check]
-command = ["cargo", "check", "--color", "always"]
+command = [
+    "cargo",
+    "check",
+    "--color",
+    "always"
+]
 need_stdout = false
 
 [jobs.check-all]
-command = ["cargo", "check", "--all-targets", "--color", "always"]
+command = [
+    "cargo",
+    "check",
+    "--all-targets",
+    "--color",
+    "always"
+]
 need_stdout = false
 
 [jobs.clippy]
 command = [
-    "cargo", "clippy",
+    "cargo", 
+    "clippy",
     "--all-targets",
     "--fix",
     "--allow-dirty",
-    "--color", "always",
+    "--color", 
+    "always",
 ]
 need_stdout = false
 
 [jobs.test]
 command = [
-    "cargo", "test", "--color", "always",
-    "--", "--color", "always", # see https://github.com/Canop/bacon/issues/124
+    "cargo",
+    "test",
+    "--color",
+    "always",
+    "--",
+    "--color",
+    "always", # see https://github.com/Canop/bacon/issues/124
 ]
 need_stdout = true
 
 [jobs.doc]
-command = ["cargo", "doc", "--color", "always", "--no-deps"]
+command = [
+    "cargo",
+    "doc",
+    "--color",
+    "always",
+    "--no-deps"
+]
 need_stdout = false
 
 [jobs.doc-open]
-command = ["cargo", "doc", "--color", "always", "--no-deps", "--open"]
+command = [
+    "cargo",
+    "doc",
+    "--color",
+    "always",
+    "--no-deps",
+    "--open"
+]
 need_stdout = false
 on_success = "back" # so that we don't open the browser at each change
 
 [jobs.run]
 command = [
-    "cargo", "run",
-    "--color", "always",
+    "cargo",
+    "run",
+    "--color",
+    "always",
     # put launch parameters for your program behind a `--` separator
 ]
 need_stdout = true
@@ -53,8 +86,8 @@ background = true
 
 [jobs.format]
 command = [
-    "cargo", 
-    "fmt", 
+    "cargo",
+    "fmt",
 ]
 need_stdout = true
 allow_warnings = true
