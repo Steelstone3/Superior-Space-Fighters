@@ -1,5 +1,6 @@
 use crate::queries::{
-    camera_queries::MutableCameraTransformQuery, filters::camera_filters::CameraWithoutPlayerStarshipFilter,
+    camera_queries::MutableCameraTransformQuery,
+    filters::camera_filters::CameraWithoutPlayerStarshipFilter,
     player_starship_queries::PlayerStarshipTransformQuery,
 };
 use bevy::ecs::system::Query;
