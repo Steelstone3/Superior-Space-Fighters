@@ -1,8 +1,9 @@
 use crate::{
-    components::queries::{
-        mutable_target_query::MutableTargetQuery, player_starship_filter::PlayerStarshipFilter,
-        player_starship_query::PlayerStarshipQuery, starship_filter::StarshipFilter,
-        starship_query::StarshipQuery, target_filter::TargetFilter,
+    queries::{
+        filters::{
+            player_starship_filters::PlayerStarshipFilter, starship_filters::StarshipFilter,
+            target_filters::TargetFilter,
+        }, player_starship_queries::PlayerStarshipTransformQuery, starship_queries::StarshipTransformQuery, target_queries::MutableTargetTransformQuery
     },
     resources::targetting_settings::TargettingSettings,
 };
@@ -10,9 +11,9 @@ use bevy::{ecs::system::Res, prelude::Query};
 
 pub fn combat_target_movement(
     targetting_setting: Res<TargettingSettings>,
-    mut target_transforms: Query<MutableTargetQuery, TargetFilter>,
-    player_starship_transforms: Query<PlayerStarshipQuery, PlayerStarshipFilter>,
-    starship_transforms: Query<StarshipQuery, StarshipFilter>,
+    mut target_transforms: Query<MutableTargetTransformQuery, TargetFilter>,
+    player_starship_transforms: Query<PlayerStarshipTransformQuery, PlayerStarshipFilter>,
+    starship_transforms: Query<StarshipTransformQuery, StarshipFilter>,
 ) {
     let Ok(player_starship_transform) = player_starship_transforms.get_single() else {
         return;
