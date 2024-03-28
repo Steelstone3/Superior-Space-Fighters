@@ -3,12 +3,16 @@ use crate::components::{
     user_interface::targetting::target::Target,
 };
 use bevy::{
-    ecs::query::{QueryData, QueryFilter, With, Without},
+    ecs::{
+        entity::Entity,
+        query::{QueryData, QueryFilter, With, Without},
+    },
     transform::components::Transform,
 };
 
 #[derive(QueryData)]
 pub struct TargetQuery {
+    pub entity: Entity,
     pub target: &'static Target,
 }
 

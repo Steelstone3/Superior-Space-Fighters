@@ -3,10 +3,7 @@ use crate::{
     resources::targetting_settings::TargettingSettings,
 };
 use bevy::{
-    ecs::{
-        entity::Entity,
-        system::{Commands, Query, Res, ResMut},
-    },
+    ecs::system::{Commands, Query, Res, ResMut},
     input::{keyboard::KeyCode, ButtonInput},
     utils::tracing,
 };
@@ -15,7 +12,7 @@ pub fn despawn_combat_target(
     mut commands: Commands,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettings>,
-    targets: Query<(Entity, TargetQuery)>,
+    targets: Query<TargetQuery>,
     starships: Query<StarshipQuery>,
 ) {
     let Ok(target) = targets.get_single() else {
@@ -23,7 +20,7 @@ pub fn despawn_combat_target(
     };
 
     if input.just_pressed(KeyCode::Tab) {
-        commands.entity(target.0).despawn();
+        commands.entity(target.entity).despawn();
 
         targetting_setting.is_targetting = false;
 
@@ -41,7 +38,7 @@ pub fn despawn_combat_target(
     match random_starship {
         Some(_) => {}
         None => {
-            commands.entity(target.0).despawn();
+            commands.entity(target.entity).despawn();
             targetting_setting.is_targetting = false;
             tracing::info!("Despawning Combat Target: No Targets Exist");
         }
