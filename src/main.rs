@@ -2,13 +2,16 @@ use std::env;
 
 use bevy::prelude::*;
 use plugins::{
-    resources::game_resources::ResourcesPlugin, running::game_running::RunningPlugin,
-    start::game_start::StartPlugin, user_interface::game_user_interface::UserInterfacePlugin,
+    events::game_events_plugin::GameEventsPlugin, resources::game_resources::ResourcesPlugin,
+    running::game_running::RunningPlugin, start::game_start::StartPlugin,
+    user_interface::game_user_interface::UserInterfacePlugin,
 };
 
 mod assets;
 mod components;
+mod events;
 mod plugins;
+mod queries;
 mod resources;
 mod systems;
 
@@ -30,6 +33,7 @@ fn main() {
             UserInterfacePlugin,
             StartPlugin,
             RunningPlugin,
+            GameEventsPlugin,
         ))
         .run();
 }

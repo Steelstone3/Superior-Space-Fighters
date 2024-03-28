@@ -7,7 +7,8 @@ use crate::resources::{
     projectile_ammunition::ProjectileAmmunition,
     projectile_ammunition_maximum::ProjectileAmmunitionMaximum,
     projectile_ammunition_recharge::ProjectileAmmunitionRecharge,
-    projectile_fire_rate::ProjectileFireRate, weapon_selection::WeaponSelection,
+    projectile_fire_rate::ProjectileFireRate,
+    selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
 };
 
 pub struct Combat;
@@ -38,6 +39,8 @@ impl Plugin for Combat {
             mine_recovery_rate: Timer::from_seconds(5.0, TimerMode::Repeating),
             exotic_recovery_rate: Timer::from_seconds(15.0, TimerMode::Repeating),
         })
-        .insert_resource(WeaponSelection { selected_weapon: 1 });
+        .insert_resource(SelectedWeapon {
+            selected_weapon: SelectedWeaponEnum::Blaster as u32,
+        });
     }
 }

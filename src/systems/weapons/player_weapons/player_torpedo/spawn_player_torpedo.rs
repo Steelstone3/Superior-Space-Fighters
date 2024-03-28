@@ -1,14 +1,15 @@
 use crate::{
-    components::{
-        starships::player_starship::PlayerStarship,
-        weapons::player_weapons::player_torpedo::PlayerTorpedo,
+    components::weapons::player_weapons::player_torpedo::PlayerTorpedo,
+    queries::player_starship_queries::PlayerStarshipTransformQuery,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
     },
-    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
 };
 use bevy::{
     input::ButtonInput,
     math::Vec3,
-    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -18,10 +19,14 @@ pub fn spawn_player_torpedo(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
-    player: Query<&Transform, With<PlayerStarship>>,
+    weapon_selection: Res<SelectedWeapon>,
+    player_starships: Query<PlayerStarshipTransformQuery>,
 ) {
-    if weapon_selection.selected_weapon != 2 {
+    let Ok(player_starship) = player_starships.get_single() else {
+        return;
+    };
+
+    if weapon_selection.selected_weapon != SelectedWeaponEnum::Torpedo as u32 {
         return;
     }
 
@@ -35,7 +40,7 @@ pub fn spawn_player_torpedo(
     }
 
     let torpedo_size = 80.0;
-    let mut player_transform = *player.get_single().unwrap();
+    let mut player_transform = *player_starship.transform;
 
     let torpedo_spawn_position =
         player_transform.translation + player_transform.up() * (torpedo_size / 1.5);

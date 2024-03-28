@@ -1,14 +1,15 @@
 use crate::{
-    components::{
-        starships::player_starship::PlayerStarship,
-        weapons::player_weapons::player_blaster::PlayerBlaster,
+    components::weapons::player_weapons::player_blaster::PlayerBlaster,
+    queries::player_starship_queries::PlayerStarshipTransformQuery,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
     },
-    resources::{projectile_ammunition::ProjectileAmmunition, weapon_selection::WeaponSelection},
 };
 use bevy::{
     input::ButtonInput,
     math::Vec3,
-    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -18,10 +19,14 @@ pub fn spawn_player_blaster(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
-    player_query: Query<&Transform, With<PlayerStarship>>,
+    weapon_selection: Res<SelectedWeapon>,
+    player_starships: Query<PlayerStarshipTransformQuery>,
 ) {
-    if weapon_selection.selected_weapon != 1 {
+    let Ok(player_starship) = player_starships.get_single() else {
+        return;
+    };
+
+    if weapon_selection.selected_weapon != SelectedWeaponEnum::Blaster as u32 {
         return;
     }
 
@@ -34,7 +39,7 @@ pub fn spawn_player_blaster(
         return;
     }
 
-    let mut player_transform = *player_query.get_single().unwrap();
+    let mut player_transform = *player_starship.transform;
     player_transform.translation.z = 3.0;
 
     let blaster = PlayerBlaster::new(Vec3::new(

@@ -1,21 +1,25 @@
-use crate::components::weapons::player_weapons::player_exotic::PlayerExotic;
+use crate::queries::player_exotic_queries::MutablePlayerExoticEntityTransformQuery;
 use bevy::{
-    prelude::{Commands, Entity, Query},
-    transform::components::Transform,
+    prelude::{Commands, Query},
     utils::tracing,
 };
 
 pub fn player_exotic_lifetime(
     mut commands: Commands,
-    mut exotics: Query<(Entity, &mut Transform, &mut PlayerExotic)>,
+    mut player_exotics: Query<MutablePlayerExoticEntityTransformQuery>,
 ) {
-    for (exotic_entity, exotic_transform, exotic) in &mut exotics {
-        let is_past_maximum_range =
-            (exotic_transform.translation - exotic.exotic.ranged_weapon.original_position).length()
-                > exotic.exotic.ranged_weapon.range;
+    for player_exotic in &mut player_exotics {
+        let is_past_maximum_range = (player_exotic.transform.translation
+            - player_exotic
+                .player_exotic
+                .exotic
+                .ranged_weapon
+                .original_position)
+            .length()
+            > player_exotic.player_exotic.exotic.ranged_weapon.range;
 
         if is_past_maximum_range {
-            commands.entity(exotic_entity).despawn();
+            commands.entity(player_exotic.entity).despawn();
 
             tracing::info!("Exotic despawned",);
         }

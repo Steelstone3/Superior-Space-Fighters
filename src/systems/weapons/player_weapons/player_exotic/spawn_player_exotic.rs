@@ -1,11 +1,15 @@
-use crate::components::starships::player_starship::PlayerStarship;
-use crate::components::weapons::player_weapons::player_exotic::PlayerExotic;
-use crate::resources::projectile_ammunition::ProjectileAmmunition;
-use crate::resources::weapon_selection::WeaponSelection;
+use crate::{
+    components::weapons::player_weapons::player_exotic::PlayerExotic,
+    queries::player_starship_queries::PlayerStarshipTransformQuery,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
+};
 use bevy::input::ButtonInput;
 use bevy::math::Vec3;
 use bevy::{
-    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -15,10 +19,14 @@ pub fn spawn_player_exotic(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<WeaponSelection>,
-    player: Query<&Transform, With<PlayerStarship>>,
+    selected_weapon: Res<SelectedWeapon>,
+    player_starships: Query<PlayerStarshipTransformQuery>,
 ) {
-    if weapon_selection.selected_weapon != 4 {
+    let Ok(player_starship) = player_starships.get_single() else {
+        return;
+    };
+
+    if selected_weapon.selected_weapon != SelectedWeaponEnum::Exotic as u32 {
         return;
     }
 
@@ -31,7 +39,7 @@ pub fn spawn_player_exotic(
         return;
     }
 
-    let mut player_transform = *player.get_single().unwrap();
+    let mut player_transform = *player_starship.transform;
     player_transform.translation.z = 3.0;
 
     let exotic = PlayerExotic::new(Vec3::new(
