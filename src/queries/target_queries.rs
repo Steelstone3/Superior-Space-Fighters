@@ -8,6 +8,11 @@ use bevy::{
 };
 
 #[derive(QueryData)]
+pub struct TargetQuery {
+    pub target: &'static Target,
+}
+
+#[derive(QueryData)]
 #[query_data(mutable)]
 pub struct TargetMutableTransformQuery {
     pub transform: &'static mut Transform,

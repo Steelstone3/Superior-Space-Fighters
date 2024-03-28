@@ -8,6 +8,11 @@ use bevy::{
 };
 
 #[derive(QueryData)]
+pub struct StarshipQuery {
+    pub starship: &'static Starship,
+}
+
+#[derive(QueryData)]
 pub struct StarshipTransformQuery {
     pub transform: &'static Transform,
     pub starship: &'static Starship,

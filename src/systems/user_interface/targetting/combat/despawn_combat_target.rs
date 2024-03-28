@@ -1,5 +1,5 @@
 use crate::{
-    components::{starships::starship::Starship, user_interface::targetting::target::Target},
+    queries::{starship_queries::StarshipQuery, target_queries::TargetQuery},
     resources::targetting_settings::TargettingSettings,
 };
 use bevy::{
@@ -15,8 +15,8 @@ pub fn despawn_combat_target(
     mut commands: Commands,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettings>,
-    targets: Query<(Entity, &Target)>,
-    starships: Query<&Starship>,
+    targets: Query<(Entity, TargetQuery)>,
+    starships: Query<StarshipQuery>,
 ) {
     let Ok(target) = targets.get_single() else {
         return;

@@ -15,7 +15,7 @@ pub fn spawn_trading_target(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettings>,
-    starship_transforms: Query<&Transform, With<Starship>>,
+    starships: Query<&Transform, With<Starship>>,
 ) {
     if !input.just_pressed(KeyCode::KeyH) {
         return;
@@ -23,8 +23,8 @@ pub fn spawn_trading_target(
 
     let mut random_starship_transform = None;
 
-    for starship_transform in starship_transforms.into_iter() {
-        random_starship_transform = Some(starship_transform)
+    for starship in starships.into_iter() {
+        random_starship_transform = Some(starship)
     }
 
     if let Some(random_starship) = random_starship_transform {
