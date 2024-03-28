@@ -1,13 +1,8 @@
 use crate::{
     queries::{
-        filters::{
-            player_starship_filters::PlayerStarshipWithoutStarshipAndTargetFilter,
-            starship_filters::StarshipWithoutPlayerStarshipAndTargetFilter,
-            target_filters::TargetWithoutPlayerStarshipAndStarshipFilter,
-        },
-        player_starship_queries::PlayerStarshipTransformQuery,
-        starship_queries::StarshipTransformQuery,
-        target_queries::MutableTargetTransformQuery,
+        player_starship_queries::{PlayerStarshipFilter, PlayerStarshipTransformQuery},
+        starship_queries::{StarshipFilter, StarshipTransformQuery},
+        target_queries::{MutableTargetTransformQuery, TargetFilter},
     },
     resources::targetting_settings::TargettingSettings,
 };
@@ -15,18 +10,9 @@ use bevy::{ecs::system::Res, prelude::Query};
 
 pub fn trading_target_movement(
     targetting_setting: Res<TargettingSettings>,
-    mut target_transforms: Query<
-        MutableTargetTransformQuery,
-        TargetWithoutPlayerStarshipAndStarshipFilter,
-    >,
-    player_starship_transforms: Query<
-        PlayerStarshipTransformQuery,
-        PlayerStarshipWithoutStarshipAndTargetFilter,
-    >,
-    starship_transforms: Query<
-        StarshipTransformQuery,
-        StarshipWithoutPlayerStarshipAndTargetFilter,
-    >,
+    mut target_transforms: Query<MutableTargetTransformQuery, TargetFilter>,
+    player_starship_transforms: Query<PlayerStarshipTransformQuery, PlayerStarshipFilter>,
+    starship_transforms: Query<StarshipTransformQuery, StarshipFilter>,
 ) {
     let Ok(player_starship_transform) = player_starship_transforms.get_single() else {
         return;
