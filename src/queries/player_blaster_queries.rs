@@ -21,7 +21,7 @@ pub struct MutablePlayerBlasterEntityTransformQuery {
 #[query_data(mutable)]
 pub struct MutablePlayerBlasterTransformQuery {
     pub transform: &'static mut Transform,
-    pub player_blaster: &'static mut PlayerBlaster,
+    pub player_blaster: &'static PlayerBlaster,
 }
 
 #[derive(QueryFilter)]

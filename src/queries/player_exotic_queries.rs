@@ -21,7 +21,7 @@ pub struct MutablePlayerExoticEntityTransformQuery {
 #[query_data(mutable)]
 pub struct MutablePlayerExoticTransformQuery {
     pub transform: &'static mut Transform,
-    pub player_exotic: &'static mut PlayerExotic,
+    pub player_exotic: &'static PlayerExotic,
 }
 
 #[derive(QueryFilter)]
