@@ -1,11 +1,12 @@
 use crate::{
-    components::{starships::starship::Starship, user_interface::targetting::target::Target},
+    components::user_interface::targetting::target::Target,
+    queries::starship_queries::StarshipTransformQuery,
     resources::targetting_settings::TargettingSettings,
 };
 use bevy::{
-    ecs::{query::With, system::ResMut},
+    ecs::system::ResMut,
     input::ButtonInput,
-    prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
+    prelude::{AssetServer, Commands, KeyCode, Query, Res},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -15,7 +16,7 @@ pub fn spawn_trading_target(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettings>,
-    starship_transforms: Query<&Transform, With<Starship>>,
+    starships: Query<StarshipTransformQuery>,
 ) {
     if !input.just_pressed(KeyCode::KeyH) {
         return;
@@ -23,8 +24,8 @@ pub fn spawn_trading_target(
 
     let mut random_starship_transform = None;
 
-    for starship_transform in starship_transforms.into_iter() {
-        random_starship_transform = Some(starship_transform)
+    for starship in starships.into_iter() {
+        random_starship_transform = Some(starship.transform)
     }
 
     if let Some(random_starship) = random_starship_transform {

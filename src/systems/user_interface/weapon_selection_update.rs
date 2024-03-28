@@ -1,9 +1,15 @@
+use crate::{
+    components::user_interface::{
+        weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
+    },
+    events::UserInterfaceEvent,
+    queries::weapon_selection_parent_queries::WeaponSelectionParentEntityQuery,
+    resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+};
 use bevy::{
     asset::{AssetServer, Handle},
     ecs::{
-        entity::Entity,
         event::EventReader,
-        query::With,
         system::{Commands, Query, Res},
     },
     hierarchy::{BuildChildren, DespawnRecursiveExt},
@@ -12,25 +18,19 @@ use bevy::{
     utils::default,
 };
 
-use crate::{
-    components::user_interface::{
-        weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
-    },
-    events::ui_selected_weapon_event::UISelectedWeaponEvent,
-    resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
-};
-
 pub fn update_weapon_selection_icons(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    icons_root: Query<Entity, With<WeaponSelectionParent>>,
+    weapon_selection_parents: Query<WeaponSelectionParentEntityQuery>,
     selected_weapon: Res<SelectedWeapon>,
-    mut ev_selected_weapon: EventReader<UISelectedWeaponEvent>,
+    mut selected_weapon_event: EventReader<UserInterfaceEvent>,
 ) {
     //event called whenever selected weapon changes
-    for _ev in ev_selected_weapon.read() {
-        if let Ok(icons_root) = icons_root.get_single() {
-            commands.entity(icons_root).despawn_recursive();
+    for _ev in selected_weapon_event.read() {
+        if let Ok(weapon_selection_parent) = weapon_selection_parents.get_single() {
+            commands
+                .entity(weapon_selection_parent.entity)
+                .despawn_recursive();
         }
 
         commands

@@ -11,6 +11,7 @@ mod assets;
 mod components;
 mod events;
 mod plugins;
+mod queries;
 mod resources;
 mod systems;
 

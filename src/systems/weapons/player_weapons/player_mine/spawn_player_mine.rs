@@ -1,8 +1,6 @@
 use crate::{
-    components::{
-        starships::player_starship::PlayerStarship,
-        weapons::player_weapons::player_mine::PlayerMine,
-    },
+    components::weapons::player_weapons::player_mine::PlayerMine,
+    queries::player_starship_queries::PlayerStarshipTransformQuery,
     resources::{
         projectile_ammunition::ProjectileAmmunition,
         selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
@@ -10,7 +8,7 @@ use crate::{
 };
 use bevy::{
     input::ButtonInput,
-    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut, Transform, With},
+    prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -21,8 +19,12 @@ pub fn spawn_player_mine(
     input: Res<ButtonInput<KeyCode>>,
     mut ammunition: ResMut<ProjectileAmmunition>,
     weapon_selection: Res<SelectedWeapon>,
-    player: Query<&Transform, With<PlayerStarship>>,
+    player_starships: Query<PlayerStarshipTransformQuery>,
 ) {
+    let Ok(player_starship) = player_starships.get_single() else {
+        return;
+    };
+
     if weapon_selection.selected_weapon != SelectedWeaponEnum::Mine as u32 {
         return;
     }
@@ -36,7 +38,7 @@ pub fn spawn_player_mine(
         return;
     }
 
-    let mut player_transform = *player.get_single().unwrap();
+    let mut player_transform = *player_starship.transform;
     let mine_size = 100.0;
 
     let mine_spawn_position =
