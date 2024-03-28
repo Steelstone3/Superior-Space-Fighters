@@ -1,4 +1,5 @@
 use crate::components::{
+    space::Space,
     starships::{player_starship::PlayerStarship, starship::Starship},
     user_interface::targetting::target::Target,
 };
@@ -25,4 +26,5 @@ pub struct PlayerStarshipFilter {
     with_player_starship: With<PlayerStarship>,
     without_starship: Without<Starship>,
     without_target: Without<Target>,
+    without_space: Without<Space>,
 }
