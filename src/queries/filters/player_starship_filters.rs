@@ -6,7 +6,7 @@ use crate::components::{
 };
 
 #[derive(QueryFilter)]
-pub struct PlayerStarshipFilter {
+pub struct PlayerStarshipWithoutStarshipAndTargetFilter {
     with_player_starship: With<PlayerStarship>,
     without_starship: Without<Starship>,
     without_target: Without<Target>,

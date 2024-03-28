@@ -5,7 +5,7 @@ use bevy::{
 };
 
 #[derive(QueryFilter)]
-pub struct CameraFilter {
+pub struct CameraWithoutPlayerStarshipFilter {
     with_camera: With<Camera>,
     without_player_starship: Without<PlayerStarship>,
 }
