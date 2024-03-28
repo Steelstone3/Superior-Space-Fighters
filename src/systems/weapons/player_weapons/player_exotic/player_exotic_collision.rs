@@ -1,15 +1,12 @@
-use crate::{
-    components::{
-        starships::starship::Starship, weapons::player_weapons::player_exotic::PlayerExotic,
-    },
-    queries::player_exotic_queries::{MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter},
+use crate::queries::{
+    player_exotic_queries::{MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter},
+    starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
 };
 use bevy::{
     asset::AssetServer,
     audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
-    ecs::{query::Without, system::Res},
-    prelude::{Commands, Entity, Query},
-    transform::components::Transform,
+    ecs::system::Res,
+    prelude::{Commands, Query},
     utils::tracing,
 };
 
@@ -18,15 +15,15 @@ pub fn player_exotic_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut player_exotics: Query<MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter>,
-    mut starships: Query<(Entity, &mut Transform, &mut Starship), Without<PlayerExotic>>,
+    mut starships: Query<MutableStarshipEntityTransformQuery, StarshipFilter>,
 ) {
     for mut player_exotic in &mut player_exotics {
-        for (starship_entity, starship_transform, mut starship) in &mut starships {
+        for mut starship in &mut starships {
             let distance_to_starship =
-                (player_exotic.transform.translation - starship_transform.translation).length();
+                (player_exotic.transform.translation - starship.transform.translation).length();
 
-            let is_collision =
-                distance_to_starship < starship.size.x || distance_to_starship < starship.size.y;
+            let is_collision = distance_to_starship < starship.starship.size.x
+                || distance_to_starship < starship.starship.size.y;
 
             if is_collision {
                 tracing::info!("Exotic collision with starship");
@@ -47,7 +44,7 @@ pub fn player_exotic_collision_with_starship(
                     .weapon
                     .damage
                     .calculate_damage();
-                starship.take_damage(
+                starship.starship.take_damage(
                     player_exotic
                         .player_exotic
                         .exotic
@@ -58,14 +55,14 @@ pub fn player_exotic_collision_with_starship(
 
                 tracing::info!(
                     "Enemy Starship | Shield: {:?} | Health: {:?} |",
-                    starship.shield.current,
-                    starship.hull.current,
+                    starship.starship.shield.current,
+                    starship.starship.hull.current,
                 );
 
                 commands.entity(player_exotic.entity).despawn();
 
-                if starship.is_destroyed() {
-                    commands.entity(starship_entity).despawn();
+                if starship.starship.is_destroyed() {
+                    commands.entity(starship.entity).despawn();
                     tracing::info!("Enemy Starship Destroyed");
                 }
             }
