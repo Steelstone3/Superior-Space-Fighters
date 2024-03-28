@@ -26,6 +26,6 @@ pub struct MutablePlayerBlasterTransformQuery {
 
 #[derive(QueryFilter)]
 pub struct PlayerBlasterFilter {
-    with_blaster: With<PlayerBlaster>,
+    with_player_blaster: With<PlayerBlaster>,
     without_starship: Without<Starship>,
 }
