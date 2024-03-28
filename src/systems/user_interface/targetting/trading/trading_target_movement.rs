@@ -1,4 +1,15 @@
-use crate::{queries::{filters::{player_starship_filters::PlayerStarshipFilter, starship_filters::StarshipFilter, target_filters::TargetFilter}, player_starship_queries::PlayerStarshipTransformQuery, starship_queries::StarshipTransformQuery, target_queries::MutableTargetTransformQuery}, resources::targetting_settings::TargettingSettings};
+use crate::{
+    queries::{
+        filters::{
+            player_starship_filters::PlayerStarshipFilter, starship_filters::StarshipFilter,
+            target_filters::TargetFilter,
+        },
+        player_starship_queries::PlayerStarshipTransformQuery,
+        starship_queries::StarshipTransformQuery,
+        target_queries::MutableTargetTransformQuery,
+    },
+    resources::targetting_settings::TargettingSettings,
+};
 use bevy::{ecs::system::Res, prelude::Query};
 
 pub fn trading_target_movement(

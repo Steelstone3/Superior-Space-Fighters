@@ -3,7 +3,10 @@ use crate::{
         filters::{
             player_starship_filters::PlayerStarshipFilter, starship_filters::StarshipFilter,
             target_filters::TargetFilter,
-        }, player_starship_queries::PlayerStarshipTransformQuery, starship_queries::StarshipTransformQuery, target_queries::MutableTargetTransformQuery
+        },
+        player_starship_queries::PlayerStarshipTransformQuery,
+        starship_queries::StarshipTransformQuery,
+        target_queries::MutableTargetTransformQuery,
     },
     resources::targetting_settings::TargettingSettings,
 };
