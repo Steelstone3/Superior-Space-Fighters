@@ -1,7 +1,10 @@
 use crate::components::{
     starships::{player_starship::PlayerStarship, starship::Starship},
     user_interface::targetting::target::Target,
-    weapons::player_weapons::player_blaster::PlayerBlaster,
+    weapons::player_weapons::{
+        player_blaster::PlayerBlaster, player_exotic::PlayerExotic, player_mine::PlayerMine,
+        player_torpedo::PlayerTorpedo,
+    },
 };
 use bevy::{
     ecs::{
@@ -43,4 +46,7 @@ pub struct StarshipFilter {
     without_player_starship: Without<PlayerStarship>,
     without_target: Without<Target>,
     without_player_blaster: Without<PlayerBlaster>,
+    without_player_torpedo: Without<PlayerTorpedo>,
+    without_player_mine: Without<PlayerMine>,
+    without_player_exotic: Without<PlayerExotic>,
 }
