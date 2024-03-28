@@ -1,19 +1,14 @@
 use bevy::{
     asset::AssetServer,
     audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
-    ecs::{query::Without, system::Res},
-    prelude::{Commands, Entity, Query},
-    transform::components::Transform,
+    ecs::system::Res,
+    prelude::{Commands, Query},
     utils::tracing,
 };
 
-use crate::{
-    components::{
-        starships::starship::Starship, weapons::player_weapons::player_blaster::PlayerBlaster,
-    },
-    queries::player_blaster_queries::{
-        MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter,
-    },
+use crate::queries::{
+    player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
+    starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
 };
 
 // TODO multi-thread
@@ -21,15 +16,15 @@ pub fn player_blaster_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     mut player_blasters: Query<MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter>,
-    mut starships: Query<(Entity, &mut Transform, &mut Starship), Without<PlayerBlaster>>,
+    mut starships: Query<MutableStarshipEntityTransformQuery, StarshipFilter>,
 ) {
     for mut player_blaster in &mut player_blasters {
-        for (starship_entity, starship_transform, mut starship) in &mut starships {
+        for mut starship in &mut starships {
             let distance_to_starship =
-                (player_blaster.transform.translation - starship_transform.translation).length();
+                (player_blaster.transform.translation - starship.transform.translation).length();
 
-            let is_collision =
-                distance_to_starship < starship.size.x || distance_to_starship < starship.size.y;
+            let is_collision = distance_to_starship < starship.starship.size.x
+                || distance_to_starship < starship.starship.size.y;
 
             if is_collision {
                 tracing::info!("Blaster collision with starship");
@@ -55,7 +50,7 @@ pub fn player_blaster_collision_with_starship(
                     .weapon
                     .damage
                     .calculate_damage();
-                starship.take_damage(
+                starship.starship.take_damage(
                     player_blaster
                         .player_blaster
                         .blaster
@@ -66,14 +61,14 @@ pub fn player_blaster_collision_with_starship(
 
                 tracing::info!(
                     "Enemy Starship | Shield: {:?} | Health: {:?} |",
-                    starship.shield.current,
-                    starship.hull.current,
+                    starship.starship.shield.current,
+                    starship.starship.hull.current,
                 );
 
                 commands.entity(player_blaster.entity).despawn();
 
-                if starship.is_destroyed() {
-                    commands.entity(starship_entity).despawn();
+                if starship.starship.is_destroyed() {
+                    commands.entity(starship.entity).despawn();
                     tracing::info!("Enemy Starship Destroyed");
                 }
             }
