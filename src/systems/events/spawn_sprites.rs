@@ -25,11 +25,7 @@ pub fn spawn_sprites(
                     ..Default::default()
                 },
                 texture,
-                transform: bevy::prelude::Transform {
-                    translation: spawn_sprite_event.translation,
-                    rotation: spawn_sprite_event.rotation,
-                    ..Default::default()
-                },
+                transform: spawn_sprite_event.transform,
                 ..Default::default()
             });
         }

@@ -61,9 +61,8 @@ pub fn spawn_player_torpedo(
     let event = SpawnSpriteEvent {
         sprite_path: image_path,
         size,
-        translation: player_transform.translation,
+        transform: player_transform,
         entity,
-        rotation: player_transform.rotation,
     };
 
     spawn_sprite_event.send(event);
