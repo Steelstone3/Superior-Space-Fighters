@@ -18,7 +18,7 @@ pub fn move_empty_space(
     let Ok(player_starship) = player_starships.get_single() else {
         return;
     };
-    
+
     let number_of_tiles = 5;
     let total_area_around_player = 1920.0 * 2.5;
     let half_space_tile_size = 1920.0 * 0.5;
