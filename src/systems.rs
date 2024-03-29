@@ -1,10 +1,11 @@
 pub mod camera;
 mod controllers;
+pub mod event_handlers;
 pub mod music;
 pub mod planets;
 pub mod player;
-pub mod ships;
 pub mod space;
+pub mod starships;
 pub mod stations;
 pub mod user_interface;
 pub mod weapons;
