@@ -1,5 +1,6 @@
 use crate::{
     components::weapons::player_weapons::player_mine::PlayerMine,
+    events::spawn_sprite_event::SpawnSpriteEvent,
     queries::player_starship_queries::PlayerStarshipTransformQuery,
     resources::{
         projectile_ammunition::ProjectileAmmunition,
@@ -7,9 +8,9 @@ use crate::{
     },
 };
 use bevy::{
+    ecs::event::EventWriter,
     input::ButtonInput,
     prelude::{AssetServer, AudioBundle, Commands, KeyCode, Query, Res, ResMut},
-    sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
 
@@ -20,6 +21,7 @@ pub fn spawn_player_mine(
     mut ammunition: ResMut<ProjectileAmmunition>,
     weapon_selection: Res<SelectedWeapon>,
     player_starships: Query<PlayerStarshipTransformQuery>,
+    mut spawn_sprite_event: EventWriter<SpawnSpriteEvent>,
 ) {
     let Ok(player_starship) = player_starships.get_single() else {
         return;
@@ -40,29 +42,26 @@ pub fn spawn_player_mine(
 
     let mut player_transform = *player_starship.transform;
     let mine_size = 100.0;
-
     let mine_spawn_position =
         player_transform.translation + player_transform.down() * (mine_size / 1.75);
     player_transform.translation = mine_spawn_position;
     player_transform.translation.z = 3.0;
-
     let mine = PlayerMine::default();
 
     let image_path = mine.mine.mine.to_string();
     let sound_path = mine.mine.firing_sound.to_string();
-    let texture = asset_server.load(image_path);
+    let size = mine.mine.lifetime_weapon.weapon.size;
+    let entity = commands.spawn(mine).id();
 
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(mine.mine.lifetime_weapon.weapon.size),
-                ..Default::default()
-            },
-            transform: player_transform,
-            texture,
-            ..Default::default()
-        })
-        .insert(mine);
+    let event = SpawnSpriteEvent {
+        sprite_path: image_path,
+        size,
+        translation: player_transform.translation,
+        entity,
+        rotation: player_transform.rotation,
+    };
+
+    spawn_sprite_event.send(event);
 
     commands.spawn(AudioBundle {
         source: asset_server.load(sound_path),

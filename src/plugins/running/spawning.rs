@@ -1,4 +1,5 @@
 use crate::systems::{
+    events::spawn_sprites::spawn_sprites,
     player::player_weapon_select::player_weapon_select,
     weapons::player_weapons::{
         player_blaster::spawn_player_blaster::spawn_player_blaster,
@@ -17,6 +18,7 @@ impl Plugin for Spawning {
             .add_systems(Update, spawn_player_blaster)
             .add_systems(Update, spawn_player_torpedo)
             .add_systems(Update, spawn_player_mine)
-            .add_systems(Update, spawn_player_exotic);
+            .add_systems(Update, spawn_player_exotic)
+            .add_systems(Update, spawn_sprites);
     }
 }
