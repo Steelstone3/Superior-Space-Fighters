@@ -1,4 +1,2 @@
-use bevy::ecs::event::Event;
-
-#[derive(Event)]
-pub struct UserInterfaceEvent;
+pub mod spawn_sprite_event;
+pub mod user_interface_event;

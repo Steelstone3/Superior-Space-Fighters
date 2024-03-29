@@ -1,5 +1,5 @@
 use crate::{
-    events::UserInterfaceEvent,
+    events::user_interface_event::UserInterfaceEvent,
     resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
 };
 use bevy::{

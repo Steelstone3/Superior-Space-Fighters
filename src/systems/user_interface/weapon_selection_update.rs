@@ -2,7 +2,7 @@ use crate::{
     components::user_interface::{
         weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
     },
-    events::UserInterfaceEvent,
+    events::user_interface_event::UserInterfaceEvent,
     queries::weapon_selection_parent_queries::WeaponSelectionParentEntityQuery,
     resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
 };
