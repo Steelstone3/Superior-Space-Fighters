@@ -11,7 +11,7 @@ use bevy::{
 use rand::random;
 
 pub fn spawn_random_ships(
-    mut spawn_starships_event: EventWriter<SpawnSpriteEvent>,
+    mut spawn_sprite_event: EventWriter<SpawnSpriteEvent>,
     mut commands: Commands,
 ) {
     for _ in 0..random_value_i32(generate_seed(), 1..10) {
@@ -42,6 +42,6 @@ pub fn spawn_random_ships(
             },
         };
 
-        spawn_starships_event.send(event);
+        spawn_sprite_event.send(event);
     }
 }
