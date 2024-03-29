@@ -5,7 +5,7 @@ pub mod planets;
 pub mod player;
 pub mod ships;
 pub mod space;
-pub mod spawn_sprite;
+pub mod events;
 pub mod stations;
 pub mod user_interface;
 pub mod weapons;
