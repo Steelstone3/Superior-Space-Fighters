@@ -21,7 +21,7 @@ impl Exotic {
             exotic: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            ranged_weapon: RangedWeapon::new(original_position, 80.0, 75.0, 500.0),
+            ranged_weapon: RangedWeapon::new(original_position, 80.0, 75.0, 500.0, 100),
         }
     }
 }
@@ -51,10 +51,7 @@ mod exotic_should {
                 weapon: Weapon {
                     velocity: 75.0,
                     size: Vec2 { x: 80.0, y: 80.0 },
-                    damage: Damage {
-                        base_damage: 10,
-                        damage: Default::default(),
-                    },
+                    damage: Damage { base_damage: 100 },
                 },
             },
         };

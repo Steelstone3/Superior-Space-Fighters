@@ -20,17 +20,15 @@ pub struct StarshipQuery {
 }
 
 #[derive(QueryData)]
-pub struct StarshipTransformQuery {
-    pub transform: &'static Transform,
+pub struct StarshipEntityQuery {
+    pub entity: Entity,
     pub starship: &'static Starship,
 }
 
 #[derive(QueryData)]
-#[query_data(mutable)]
-pub struct MutableStarshipEntityTransformQuery {
-    pub entity: Entity,
-    pub transform: &'static mut Transform,
-    pub starship: &'static mut Starship,
+pub struct StarshipTransformQuery {
+    pub transform: &'static Transform,
+    pub starship: &'static Starship,
 }
 
 #[derive(QueryData)]

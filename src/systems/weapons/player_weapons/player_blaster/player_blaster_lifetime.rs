@@ -1,4 +1,4 @@
-use crate::queries::player_blaster_queries::MutablePlayerBlasterEntityTransformQuery;
+use crate::queries::player_blaster_queries::PlayerBlasterEntityTransformQuery;
 use bevy::{
     prelude::{Commands, Query},
     utils::tracing,
@@ -6,7 +6,7 @@ use bevy::{
 
 pub fn player_blaster_lifetime(
     mut commands: Commands,
-    mut player_blasters: Query<MutablePlayerBlasterEntityTransformQuery>,
+    mut player_blasters: Query<PlayerBlasterEntityTransformQuery>,
 ) {
     for player_blaster in &mut player_blasters {
         let is_past_maximum_range = (player_blaster.transform.translation

@@ -1,23 +1,24 @@
-use crate::queries::{
-    player_exotic_queries::{MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter},
-    starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
+use crate::{
+    events::{
+        collision_events::PlayerExoticCollisionEvent, despawn_sprite_event::DespawnSpriteEvent,
+        logging_event::LoggingEvent,
+    },
+    queries::{
+        player_exotic_queries::{PlayerExoticEntityTransformQuery, PlayerExoticFilter},
+        starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
+    },
+    systems::controllers::random_generator::generate_seed,
 };
-use bevy::{
-    asset::AssetServer,
-    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
-    ecs::system::Res,
-    prelude::{Commands, Query},
-    utils::tracing,
-};
+use bevy::{ecs::event::EventWriter, prelude::Query};
 
-// TODO multi-thread
 pub fn player_exotic_collision_with_starship(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
-    mut player_exotics: Query<MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter>,
-    mut starships: Query<MutableStarshipEntityTransformQuery, StarshipFilter>,
+    player_exotics: Query<PlayerExoticEntityTransformQuery, PlayerExoticFilter>,
+    mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
+    mut player_exotic_collision_event: EventWriter<PlayerExoticCollisionEvent>,
+    mut logging_event: EventWriter<LoggingEvent>,
+    mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for mut player_exotic in &mut player_exotics {
+    for player_exotic in &player_exotics {
         for mut starship in &mut starships {
             let distance_to_starship =
                 (player_exotic.transform.translation - starship.transform.translation).length();
@@ -26,45 +27,31 @@ pub fn player_exotic_collision_with_starship(
                 || distance_to_starship < starship.starship.size.y;
 
             if is_collision {
-                tracing::info!("Exotic collision with starship");
-                commands.spawn(AudioBundle {
-                    source: asset_server
-                        .load(player_exotic.player_exotic.exotic.impact_sound.to_string()),
-                    settings: PlaybackSettings {
-                        mode: PlaybackMode::Once,
-                        volume: Volume::new(0.2),
-                        ..Default::default()
-                    },
+                player_exotic_collision_event.send(PlayerExoticCollisionEvent {});
+
+                logging_event.send(LoggingEvent {
+                    message: "Exotic collision with starship".to_string(),
                 });
 
-                player_exotic
+                let damage = player_exotic
                     .player_exotic
                     .exotic
                     .ranged_weapon
                     .weapon
                     .damage
-                    .calculate_damage();
-                starship.starship.take_damage(
-                    player_exotic
-                        .player_exotic
-                        .exotic
-                        .ranged_weapon
-                        .weapon
-                        .damage,
-                );
+                    .calculate_damage(generate_seed());
+                starship.starship.take_damage(damage);
 
-                tracing::info!(
-                    "Enemy Starship | Shield: {:?} | Health: {:?} |",
-                    starship.starship.shield.current,
-                    starship.starship.hull.current,
-                );
+                logging_event.send(LoggingEvent {
+                    message: format!(
+                        "Enemy Starship | Shield: {:?} | Health: {:?} |",
+                        starship.starship.shield.current, starship.starship.hull.current
+                    ),
+                });
 
-                commands.entity(player_exotic.entity).despawn();
-
-                if starship.starship.is_destroyed() {
-                    commands.entity(starship.entity).despawn();
-                    tracing::info!("Enemy Starship Destroyed");
-                }
+                despawn_sprite_event.send(DespawnSpriteEvent {
+                    entity: player_exotic.entity,
+                });
             }
         }
     }

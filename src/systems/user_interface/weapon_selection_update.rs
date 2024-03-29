@@ -2,7 +2,7 @@ use crate::{
     components::user_interface::{
         weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
     },
-    events::UserInterfaceEvent,
+    events::user_interface_event::UserInterfaceEvent,
     queries::weapon_selection_parent_queries::WeaponSelectionParentEntityQuery,
     resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
 };
@@ -23,10 +23,10 @@ pub fn update_weapon_selection_icons(
     asset_server: Res<AssetServer>,
     weapon_selection_parents: Query<WeaponSelectionParentEntityQuery>,
     selected_weapon: Res<SelectedWeapon>,
-    mut selected_weapon_event: EventReader<UserInterfaceEvent>,
+    mut user_interface_event: EventReader<UserInterfaceEvent>,
 ) {
     //event called whenever selected weapon changes
-    for _ev in selected_weapon_event.read() {
+    for _ in user_interface_event.read() {
         if let Ok(weapon_selection_parent) = weapon_selection_parents.get_single() {
             commands
                 .entity(weapon_selection_parent.entity)

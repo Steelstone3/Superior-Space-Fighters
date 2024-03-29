@@ -1,12 +1,19 @@
-use crate::{assets::images::space::SpaceSprite, components::space::Space};
+use crate::{
+    assets::images::space::SpaceSprite, components::space::Space,
+    events::spawn_sprite_event::SpawnSpriteEvent,
+};
 use bevy::{
+    ecs::event::EventWriter,
     math::{Vec2, Vec3},
-    prelude::{AssetServer, Commands, Res},
-    sprite::{Sprite, SpriteBundle},
+    prelude::Commands,
+    transform::components::Transform,
 };
 use rand::random;
 
-pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server: Res<AssetServer>) {
+pub fn spawn_random_empty_space_background(
+    mut commands: Commands,
+    mut spawn_sprite_event: EventWriter<SpawnSpriteEvent>,
+) {
     let space = random::<SpaceSprite>();
     let tile_size = 1920.0;
 
@@ -21,22 +28,19 @@ pub fn spawn_random_empty_space_background(mut commands: Commands, asset_server:
 
             let space = Space::new(space, tile_size, grid_position, location);
 
-            let texture = asset_server.load(space.space.to_string());
-
-            commands
-                .spawn(SpriteBundle {
-                    sprite: Sprite {
-                        custom_size: Some(space.size),
-                        ..Default::default()
-                    },
-                    texture,
-                    transform: bevy::prelude::Transform {
-                        translation: space.location,
-                        ..Default::default()
+            spawn_sprite_event.send(SpawnSpriteEvent {
+                sprite_path: space.space.to_string(),
+                size: space.size,
+                entity: commands.spawn(space).id(),
+                transform: Transform {
+                    translation: Vec3 {
+                        x: location.x,
+                        y: location.y,
+                        z: location.z,
                     },
                     ..Default::default()
-                })
-                .insert(space);
+                },
+            });
         }
     }
 }

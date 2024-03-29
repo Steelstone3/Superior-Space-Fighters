@@ -1,4 +1,4 @@
-use crate::queries::player_torpedo_queries::MutablePlayerTorpedoEntityTransformQuery;
+use crate::queries::player_torpedo_queries::PlayerTorpedoEntityTransformQuery;
 use bevy::{
     prelude::{Commands, Query},
     utils::tracing,
@@ -6,7 +6,7 @@ use bevy::{
 
 pub fn player_torpedo_lifetime(
     mut commands: Commands,
-    mut player_torpedoes: Query<MutablePlayerTorpedoEntityTransformQuery>,
+    mut player_torpedoes: Query<PlayerTorpedoEntityTransformQuery>,
 ) {
     for player_torpedo in &mut player_torpedoes {
         let is_past_maximum_range = (player_torpedo.transform.translation

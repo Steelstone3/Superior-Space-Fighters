@@ -11,16 +11,15 @@ use bevy::{
 
 #[derive(QueryData)]
 #[query_data(mutable)]
-pub struct MutablePlayerTorpedoEntityTransformQuery {
-    pub entity: Entity,
+pub struct MutablePlayerTorpedoTransformQuery {
     pub transform: &'static mut Transform,
-    pub player_torpedo: &'static mut PlayerTorpedo,
+    pub player_torpedo: &'static PlayerTorpedo,
 }
 
 #[derive(QueryData)]
-#[query_data(mutable)]
-pub struct MutablePlayerTorpedoTransformQuery {
-    pub transform: &'static mut Transform,
+pub struct PlayerTorpedoEntityTransformQuery {
+    pub entity: Entity,
+    pub transform: &'static Transform,
     pub player_torpedo: &'static PlayerTorpedo,
 }
 
