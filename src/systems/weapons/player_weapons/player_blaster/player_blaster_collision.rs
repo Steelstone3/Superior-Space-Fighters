@@ -26,6 +26,7 @@ pub fn player_blaster_collision_with_starship(
                 || distance_to_starship < starship.starship.size.y;
 
             if is_collision {
+                // Collision sound effect
                 tracing::info!("Blaster collision with starship");
                 commands.spawn(AudioBundle {
                     source: asset_server.load(
@@ -42,6 +43,7 @@ pub fn player_blaster_collision_with_starship(
                     },
                 });
 
+                // TODO Calculate damage
                 player_blaster
                     .player_blaster
                     .blaster
