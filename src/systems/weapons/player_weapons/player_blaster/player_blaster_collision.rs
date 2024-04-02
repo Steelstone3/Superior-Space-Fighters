@@ -65,11 +65,6 @@ pub fn player_blaster_collision_with_starship(
                 );
 
                 commands.entity(player_blaster.entity).despawn();
-
-                if starship.starship.is_destroyed() {
-                    commands.entity(starship.entity).despawn();
-                    tracing::info!("Enemy Starship Destroyed");
-                }
             }
         }
     }

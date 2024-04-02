@@ -10,7 +10,7 @@ use bevy::{
 };
 use rand::random;
 
-pub fn spawn_random_ships(
+pub fn spawn_random_starships(
     mut spawn_sprite_event: EventWriter<SpawnSpriteEvent>,
     mut commands: Commands,
 ) {
