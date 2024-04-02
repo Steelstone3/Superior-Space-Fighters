@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::blasters::BlasterSound,
-    events::{game_events::FirePlayerBlasterEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{combat_events::FirePlayerBlasterEvent, spawn_audio_event::SpawnAudioEvent},
 };
 use bevy::{
     audio::PlaybackSettings,

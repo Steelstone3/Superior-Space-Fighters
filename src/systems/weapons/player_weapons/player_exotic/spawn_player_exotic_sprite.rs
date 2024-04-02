@@ -1,6 +1,6 @@
 use crate::{
     components::weapons::player_weapons::player_exotic::PlayerExotic,
-    events::{game_events::FirePlayerExoticEvent, spawn_sprite_event::SpawnSpriteEvent},
+    events::{combat_events::FirePlayerExoticEvent, spawn_sprite_event::SpawnSpriteEvent},
     queries::player_starship_queries::PlayerStarshipTransformQuery,
 };
 use bevy::ecs::event::EventWriter;

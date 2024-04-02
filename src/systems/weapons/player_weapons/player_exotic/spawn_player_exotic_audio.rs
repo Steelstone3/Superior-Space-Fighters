@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::exotics::ExoticSound,
-    events::{game_events::FirePlayerExoticEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{combat_events::FirePlayerExoticEvent, spawn_audio_event::SpawnAudioEvent},
 };
 use bevy::{
     audio::PlaybackSettings,
