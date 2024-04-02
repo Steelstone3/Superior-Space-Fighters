@@ -1,6 +1,6 @@
 pub mod camera;
 mod controllers;
-pub mod events;
+pub mod event_handlers;
 pub mod music;
 pub mod planets;
 pub mod player;

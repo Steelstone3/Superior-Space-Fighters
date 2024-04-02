@@ -2,7 +2,7 @@ use std::env;
 
 use bevy::prelude::*;
 use plugins::{
-    events::game_events_plugin::GameEventsPlugin, resources::game_resources::ResourcesPlugin,
+    events::events_plugin::EventsPlugin, resources::game_resources::ResourcesPlugin,
     running::game_running::RunningPlugin, start::game_start::StartPlugin,
     user_interface::game_user_interface::UserInterfacePlugin,
 };
@@ -33,7 +33,7 @@ fn main() {
             UserInterfacePlugin,
             StartPlugin,
             RunningPlugin,
-            GameEventsPlugin,
+            EventsPlugin,
         ))
         .run();
 }

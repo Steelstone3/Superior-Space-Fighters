@@ -2,6 +2,7 @@ use bevy::{
     ecs::{event::EventWriter, system::Commands},
     math::Quat,
     prelude::Vec3,
+    transform::components::Transform,
 };
 
 use crate::{
@@ -21,9 +22,12 @@ pub fn spawn_player_ship(
     let event = SpawnSpriteEvent {
         sprite_path: texture,
         size,
-        translation: Vec3::new(0.0, 0.0, 4.0),
         entity,
-        rotation: Quat::default(),
+        transform: Transform {
+            translation: Vec3::new(0.0, 0.0, 4.0),
+            rotation: Quat::default(),
+            ..Default::default()
+        },
     };
 
     spawn_sprite_event.send(event);
