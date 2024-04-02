@@ -6,6 +6,7 @@ pub fn player_exotic_movement(
     mut player_exotics: Query<MutablePlayerExoticTransformQuery>,
     time: Res<Time>,
 ) {
+    // TODO Multi thread
     for mut player_exotic in &mut player_exotics {
         let blaster_speed = player_exotic
             .player_exotic

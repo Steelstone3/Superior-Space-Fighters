@@ -7,6 +7,7 @@ pub fn player_torpedo_movement(
     mut player_torpedoes: Query<MutablePlayerTorpedoTransformQuery>,
     time: Res<Time>,
 ) {
+    // TODO Multi thread
     for mut player_torpedo in &mut player_torpedoes {
         let blaster_speed = player_torpedo
             .player_torpedo
