@@ -12,12 +12,12 @@ use crate::systems::{
             spawn_player_exotic_sound::spawn_player_exotic_sound,
         },
         player_mine::{
-            spawn_player_mine_audio::spawn_player_mine_sound,
             spawn_player_mine_collision_sound::spawn_player_mine_collision_sound,
+            spawn_player_mine_sound::spawn_player_mine_sound,
         },
         player_torpedo::{
-            spawn_player_torpedo_audio::spawn_player_torpedo_sound,
             spawn_player_torpedo_collision_sound::spawn_player_torpedo_collision_sound,
+            spawn_player_torpedo_sound::spawn_player_torpedo_sound,
         },
     },
 };
