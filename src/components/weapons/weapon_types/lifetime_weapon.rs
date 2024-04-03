@@ -4,7 +4,6 @@ use bevy::{
     time::{Timer, TimerMode},
 };
 
-// TODO Add in a lifetime
 #[derive(Component, Debug, PartialEq)]
 pub struct LifetimeWeapon {
     pub lifetime: Timer,

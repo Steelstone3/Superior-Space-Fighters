@@ -4,7 +4,7 @@ use crate::{
     },
     queries::{
         player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
-        starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
+        starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
 };
 use bevy::{ecs::event::EventWriter, prelude::Query};
@@ -12,10 +12,24 @@ use bevy::{ecs::event::EventWriter, prelude::Query};
 // TODO multi-thread
 pub fn player_blaster_collision_with_starship(
     mut player_blasters: Query<MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter>,
-    mut starships: Query<MutableStarshipEntityTransformQuery, StarshipFilter>,
+    mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
     mut player_blaster_collision_event: EventWriter<PlayerBlasterCollisionEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
+    // TODO Multi-thread this way requires clone
+    // player_blasters
+    //     .par_iter_mut()
+    //     .for_each(|mut player_blaster| {
+    //         starships.par_iter_mut().for_each(|mut starship| {});
+    //     });
+
+    // TODO Multi-thread this way requires a rethink on how the collision is worked out
+    // player_blasters
+    //     .par_iter_mut()
+    //     .for_each(|mut player_blaster| {});
+
+    // starships.par_iter_mut().for_each(|mut starship| {});
+
     for mut player_blaster in &mut player_blasters {
         for mut starship in &mut starships {
             let distance_to_starship =

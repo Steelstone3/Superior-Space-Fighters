@@ -5,7 +5,6 @@ pub struct Damage {
     pub base_damage: u32,
     pub damage: u32,
 }
-//TODO implement a more complex damage system that randomly varies the damage
 
 impl Default for Damage {
     fn default() -> Self {
@@ -17,6 +16,7 @@ impl Default for Damage {
 }
 
 impl Damage {
+    //TODO implement a more complex damage system that randomly varies the damage
     pub fn calculate_damage(&mut self) {
         self.damage = self.base_damage + 1
     }
