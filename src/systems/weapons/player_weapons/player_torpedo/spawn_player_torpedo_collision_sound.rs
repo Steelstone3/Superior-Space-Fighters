@@ -9,19 +9,19 @@ use bevy::{
 
 use crate::{
     assets::sounds::starships::weapons::impacts::ImpactSound,
-    events::{collision_events::PlayerBlasterCollisionEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{collision_events::PlayerTorpedoCollisionEvent, spawn_audio_event::SpawnAudioEvent},
 };
 
 #[derive(Component)]
-struct PlayerBlasterCollisionSound;
+struct PlayerTorpedoCollisionSound;
 
-pub fn spawn_player_blaster_collision_sound(
+pub fn spawn_player_torpedo_collision_sound(
     mut commands: Commands,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,
-    mut player_blaster_collision_event: EventReader<PlayerBlasterCollisionEvent>,
+    mut player_torpedo_collision_event: EventReader<PlayerTorpedoCollisionEvent>,
 ) {
-    for _ in player_blaster_collision_event.read() {
-        let player_blaster_collision_sound = PlayerBlasterCollisionSound;
+    for _ in player_torpedo_collision_event.read() {
+        let player_blaster_collision_sound = PlayerTorpedoCollisionSound;
 
         spawn_audio_event.send(SpawnAudioEvent {
             audio_path: ImpactSound::default().to_string(),

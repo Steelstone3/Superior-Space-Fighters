@@ -1,6 +1,7 @@
 use crate::{
     events::{
         collision_events::PlayerBlasterCollisionEvent, despawn_sprite_event::DespawnSpriteEvent,
+        logging_event::LoggingEvent,
     },
     queries::{
         player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
@@ -9,27 +10,13 @@ use crate::{
 };
 use bevy::{ecs::event::EventWriter, prelude::Query};
 
-// TODO multi-thread
 pub fn player_blaster_collision_with_starship(
     mut player_blasters: Query<MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter>,
     mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
     mut player_blaster_collision_event: EventWriter<PlayerBlasterCollisionEvent>,
+    mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    // TODO Multi-thread this way requires clone
-    // player_blasters
-    //     .par_iter_mut()
-    //     .for_each(|mut player_blaster| {
-    //         starships.par_iter_mut().for_each(|mut starship| {});
-    //     });
-
-    // TODO Multi-thread this way requires a rethink on how the collision is worked out
-    // player_blasters
-    //     .par_iter_mut()
-    //     .for_each(|mut player_blaster| {});
-
-    // starships.par_iter_mut().for_each(|mut starship| {});
-
     for mut player_blaster in &mut player_blasters {
         for mut starship in &mut starships {
             let distance_to_starship =
@@ -40,6 +27,10 @@ pub fn player_blaster_collision_with_starship(
 
             if is_collision {
                 player_blaster_collision_event.send(PlayerBlasterCollisionEvent {});
+
+                logging_event.send(LoggingEvent {
+                    message: "Blaster collision with starship".to_string(),
+                });
 
                 player_blaster
                     .player_blaster
@@ -56,6 +47,13 @@ pub fn player_blaster_collision_with_starship(
                         .weapon
                         .damage,
                 );
+
+                logging_event.send(LoggingEvent {
+                    message: format!(
+                        "Enemy Starship | Shield: {:?} | Health: {:?} |",
+                        starship.starship.shield.current, starship.starship.hull.current
+                    ),
+                });
 
                 despawn_sprite_event.send(DespawnSpriteEvent {
                     entity: player_blaster.entity,
