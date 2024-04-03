@@ -9,7 +9,7 @@ pub struct RangedWeapon {
 }
 
 impl RangedWeapon {
-    pub fn new(original_position: Vec3, size: f32, velocity: f32, range: f32, damage:u32) -> Self {
+    pub fn new(original_position: Vec3, size: f32, velocity: f32, range: f32, damage: u32) -> Self {
         Self {
             range,
             original_position,
@@ -47,7 +47,8 @@ mod ranged_weapon_should {
         };
 
         // When
-        let ranged_weapon = RangedWeapon::new(original_position, size, velocity, range, base_damage);
+        let ranged_weapon =
+            RangedWeapon::new(original_position, size, velocity, range, base_damage);
 
         // Then
         assert_eq!(expected_ranged_weapon, ranged_weapon);

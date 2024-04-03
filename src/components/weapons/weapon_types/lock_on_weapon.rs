@@ -7,7 +7,13 @@ pub struct LockOnWeapon {
 }
 
 impl LockOnWeapon {
-    pub fn new(original_position: Vec3, size: f32, velocity: f32, range: f32, base_damage:u32) -> Self {
+    pub fn new(
+        original_position: Vec3,
+        size: f32,
+        velocity: f32,
+        range: f32,
+        base_damage: u32,
+    ) -> Self {
         Self {
             ranged_weapon: RangedWeapon::new(original_position, size, velocity, range, base_damage),
         }
@@ -45,7 +51,8 @@ mod lock_on_weapon_should {
         };
 
         // When
-        let lock_on_weapon = LockOnWeapon::new(original_position, size, velocity, range, base_damage);
+        let lock_on_weapon =
+            LockOnWeapon::new(original_position, size, velocity, range, base_damage);
 
         // Then
         assert_eq!(expected_lock_on_weapon, lock_on_weapon);
