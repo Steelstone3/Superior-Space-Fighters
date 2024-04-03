@@ -14,7 +14,7 @@ use bevy::{
 #[derive(Component)]
 struct PlayerMineSound;
 
-pub fn spawn_player_mine_audio(
+pub fn spawn_player_mine_sound(
     mut commands: Commands,
     mut fire_player_mine_event: EventReader<FirePlayerMineEvent>,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,

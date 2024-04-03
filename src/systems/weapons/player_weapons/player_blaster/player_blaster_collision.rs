@@ -1,21 +1,20 @@
-use crate::queries::{
-    player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
-    starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
+use crate::{
+    events::{
+        collision_events::PlayerBlasterCollisionEvent, despawn_sprite_event::DespawnSpriteEvent,
+    },
+    queries::{
+        player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
+        starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
+    },
 };
-use bevy::{
-    asset::AssetServer,
-    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
-    ecs::system::Res,
-    prelude::{Commands, Query},
-    utils::tracing,
-};
+use bevy::{ecs::event::EventWriter, prelude::Query};
 
 // TODO multi-thread
 pub fn player_blaster_collision_with_starship(
-    mut commands: Commands,
-    asset_server: Res<AssetServer>,
     mut player_blasters: Query<MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter>,
     mut starships: Query<MutableStarshipEntityTransformQuery, StarshipFilter>,
+    mut player_blaster_collision_event: EventWriter<PlayerBlasterCollisionEvent>,
+    mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
     for mut player_blaster in &mut player_blasters {
         for mut starship in &mut starships {
@@ -26,24 +25,8 @@ pub fn player_blaster_collision_with_starship(
                 || distance_to_starship < starship.starship.size.y;
 
             if is_collision {
-                // Collision sound effect
-                tracing::info!("Blaster collision with starship");
-                commands.spawn(AudioBundle {
-                    source: asset_server.load(
-                        player_blaster
-                            .player_blaster
-                            .blaster
-                            .impact_sound
-                            .to_string(),
-                    ),
-                    settings: PlaybackSettings {
-                        mode: PlaybackMode::Once,
-                        volume: Volume::new(0.2),
-                        ..Default::default()
-                    },
-                });
+                player_blaster_collision_event.send(PlayerBlasterCollisionEvent {});
 
-                // TODO Calculate damage
                 player_blaster
                     .player_blaster
                     .blaster
@@ -60,13 +43,9 @@ pub fn player_blaster_collision_with_starship(
                         .damage,
                 );
 
-                tracing::info!(
-                    "Enemy Starship | Shield: {:?} | Health: {:?} |",
-                    starship.starship.shield.current,
-                    starship.starship.hull.current,
-                );
-
-                commands.entity(player_blaster.entity).despawn();
+                despawn_sprite_event.send(DespawnSpriteEvent {
+                    entity: player_blaster.entity,
+                });
             }
         }
     }
