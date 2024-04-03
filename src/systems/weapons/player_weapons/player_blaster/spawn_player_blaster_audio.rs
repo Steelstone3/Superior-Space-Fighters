@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::blasters::BlasterSound,
-    events::{game_events::FirePlayerBlasterEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{combat_events::FirePlayerBlasterEvent, spawn_audio_event::SpawnAudioEvent},
 };
 use bevy::{
     audio::PlaybackSettings,
@@ -14,7 +14,7 @@ use bevy::{
 #[derive(Component)]
 struct PlayerBlasterSound;
 
-pub fn spawn_player_blaster_audio(
+pub fn spawn_player_blaster_sound(
     mut commands: Commands,
     mut fire_player_blaster_event: EventReader<FirePlayerBlasterEvent>,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,

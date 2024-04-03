@@ -4,4 +4,5 @@ pub mod player_blaster_collision;
 pub mod player_blaster_lifetime;
 pub mod player_blaster_movement;
 pub mod spawn_player_blaster_audio;
+pub mod spawn_player_blaster_collision_sound;
 pub mod spawn_player_blaster_sprite;

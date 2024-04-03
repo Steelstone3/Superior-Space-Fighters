@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::exotics::ExoticSound,
-    events::{game_events::FirePlayerExoticEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{combat_events::FirePlayerExoticEvent, spawn_audio_event::SpawnAudioEvent},
 };
 use bevy::{
     audio::PlaybackSettings,
@@ -14,7 +14,7 @@ use bevy::{
 #[derive(Component)]
 struct PlayerExoticSound;
 
-pub fn spawn_player_exotic_audio(
+pub fn spawn_player_exotic_sound(
     mut commands: Commands,
     mut fire_player_exotic_event: EventReader<FirePlayerExoticEvent>,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,

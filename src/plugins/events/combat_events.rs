@@ -1,4 +1,4 @@
-use crate::events::game_events::{
+use crate::events::combat_events::{
     FirePlayerBlasterEvent, FirePlayerExoticEvent, FirePlayerMineEvent, FirePlayerTorpedoEvent,
 };
 use bevy::app::Plugin;

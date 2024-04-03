@@ -8,7 +8,7 @@ use bevy::{
 };
 
 use crate::{
-    events::game_events::FirePlayerTorpedoEvent,
+    events::combat_events::FirePlayerTorpedoEvent,
     queries::player_starship_queries::PlayerStarshipTransformQuery,
     resources::{
         projectile_ammunition::ProjectileAmmunition,

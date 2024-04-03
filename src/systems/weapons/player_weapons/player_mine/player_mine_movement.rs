@@ -7,6 +7,7 @@ pub fn player_mine_movement(
     mut player_mines: Query<MutablePlayerMineTransformQuery>,
     time: Res<Time>,
 ) {
+    // TODO Multi thread
     for mut player_mine in &mut player_mines {
         let mine_speed =
             player_mine.player_mine.mine.lifetime_weapon.weapon.velocity * time.delta_seconds();

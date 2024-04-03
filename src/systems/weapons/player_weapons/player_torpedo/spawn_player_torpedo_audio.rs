@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::torpedos::TorpedoSound,
-    events::{game_events::FirePlayerTorpedoEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{combat_events::FirePlayerTorpedoEvent, spawn_audio_event::SpawnAudioEvent},
 };
 use bevy::{
     audio::PlaybackSettings,
@@ -14,7 +14,7 @@ use bevy::{
 #[derive(Component)]
 struct PlayerTorpedoSound;
 
-pub fn spawn_player_torpedo_audio(
+pub fn spawn_player_torpedo_sound(
     mut commands: Commands,
     mut fire_player_torpedo_event: EventReader<FirePlayerTorpedoEvent>,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,

@@ -1,5 +1,5 @@
 use crate::{
-    events::game_events::FirePlayerTorpedoEvent,
+    events::combat_events::FirePlayerTorpedoEvent,
     resources::projectile_ammunition::ProjectileAmmunition,
 };
 use bevy::{ecs::event::EventReader, prelude::ResMut, utils::tracing};
