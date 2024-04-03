@@ -21,7 +21,7 @@ impl Blaster {
             blaster: BlasterSprite::default(),
             firing_sound: BlasterSound::default(),
             impact_sound: ImpactSound::default(),
-            ranged_weapon: RangedWeapon::new(original_position, 100.0, 100.0, 750.0),
+            ranged_weapon: RangedWeapon::new(original_position, 100.0, 100.0, 750.0, 10),
         }
     }
 }

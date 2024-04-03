@@ -7,13 +7,11 @@ pub struct Damage {
     pub base_damage: u32,
 }
 
-impl Default for Damage {
-    fn default() -> Self {
-        Self { base_damage: 10 }
-    }
-}
-
 impl Damage {
+    pub fn new(base_damage: u32) -> Self {
+        Self { base_damage }
+    }
+
     pub fn calculate_damage(&self, seed: u64) -> u32 {
         (self.base_damage as i32 + random_value_i32(seed, -5..5)) as u32
     }
@@ -31,7 +29,7 @@ mod damage_should {
         let expected_damage = Damage { base_damage: 10 };
 
         // When
-        let damage = Damage::default();
+        let damage = Damage::new(10);
 
         // Then
         assert_eq!(expected_damage, damage);

@@ -21,7 +21,7 @@ impl Default for Mine {
             mine: MineSprite::default(),
             firing_sound: MineSound::default(),
             impact_sound: ImpactSound::default(),
-            lifetime_weapon: LifetimeWeapon::new(100.0, -5.0),
+            lifetime_weapon: LifetimeWeapon::new(100.0, -5.0, 75),
         }
     }
 }
@@ -47,7 +47,7 @@ mod mine_should {
                 weapon: Weapon {
                     velocity: -5.0,
                     size: Vec2 { x: 100.0, y: 100.0 },
-                    damage: Damage { base_damage: 10 },
+                    damage: Damage { base_damage: 75 },
                 },
                 lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             },
