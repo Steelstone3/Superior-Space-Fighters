@@ -4,11 +4,11 @@ use crate::systems::{
     player::player_engine_rumble_sound::player_engine_rumble_sound,
     weapons::player_weapons::{
         player_blaster::{
-            spawn_player_blaster_audio::spawn_player_blaster_sound,
+            spawn_player_blaster_sound::spawn_player_blaster_sound,
             spawn_player_blaster_collision_sound::spawn_player_blaster_collision_sound,
         },
         player_exotic::{
-            spawn_player_exotic_audio::spawn_player_exotic_sound,
+            spawn_player_exotic_sound::spawn_player_exotic_sound,
             spawn_player_exotic_collision_sound::spawn_player_exoitc_collision_sound,
         },
         player_mine::{
