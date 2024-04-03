@@ -1,7 +1,5 @@
 use bevy::ecs::component::Component;
 
-use crate::components::weapons::weapon_types::damage::Damage;
-
 // TODO implement regenerative hull when shield is 100
 #[derive(Component, Debug, PartialEq)]
 pub struct Hull {
@@ -21,13 +19,13 @@ impl Default for Hull {
 }
 
 impl Hull {
-    pub fn take_damage(&mut self, damage: Damage) {
-        if damage.damage >= self.current {
+    pub fn take_damage(&mut self, damage: u32) {
+        if damage >= self.current {
             self.current = 0;
             return;
         }
 
-        self.current -= damage.damage;
+        self.current -= damage;
     }
 }
 
@@ -54,46 +52,34 @@ mod shield_should {
 
     #[rstest]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
+       0,
         Hull {
             maximum: 100,
             current: 100,
             regeneration: 1,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 11,
-        },
+        11,
         Hull {
             maximum: 100,
             current: 89,
             regeneration: 1,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 100,
-        },
+        100,
         Hull {
             maximum: 100,
             current: 0,
             regeneration: 1,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 101,
-        },
+       101,
         Hull {
             maximum: 100,
             current: 0,
             regeneration: 1,
     })]
-    fn take_damage(#[case] damage: Damage, #[case] expected_hull: Hull) {
+    fn take_damage(#[case] damage: u32, #[case] expected_hull: Hull) {
         // Given
         let mut hull = Hull {
             maximum: 100,

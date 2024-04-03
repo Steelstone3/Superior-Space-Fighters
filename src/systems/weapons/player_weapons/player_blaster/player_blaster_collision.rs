@@ -7,6 +7,7 @@ use crate::{
         player_blaster_queries::{MutablePlayerBlasterEntityTransformQuery, PlayerBlasterFilter},
         starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
+    systems::controllers::random_generator::generate_seed,
 };
 use bevy::{ecs::event::EventWriter, prelude::Query};
 
@@ -17,7 +18,7 @@ pub fn player_blaster_collision_with_starship(
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for mut player_blaster in &mut player_blasters {
+    for player_blaster in &mut player_blasters {
         for mut starship in &mut starships {
             let distance_to_starship =
                 (player_blaster.transform.translation - starship.transform.translation).length();
@@ -32,21 +33,14 @@ pub fn player_blaster_collision_with_starship(
                     message: "Blaster collision with starship".to_string(),
                 });
 
-                player_blaster
+                let damage = player_blaster
                     .player_blaster
                     .blaster
                     .ranged_weapon
                     .weapon
                     .damage
-                    .calculate_damage();
-                starship.starship.take_damage(
-                    player_blaster
-                        .player_blaster
-                        .blaster
-                        .ranged_weapon
-                        .weapon
-                        .damage,
-                );
+                    .calculate_damage(generate_seed());
+                starship.starship.take_damage(damage);
 
                 logging_event.send(LoggingEvent {
                     message: format!(

@@ -7,6 +7,7 @@ use crate::{
         player_exotic_queries::{MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter},
         starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
+    systems::controllers::random_generator::generate_seed,
 };
 use bevy::{ecs::event::EventWriter, prelude::Query};
 
@@ -17,7 +18,7 @@ pub fn player_exotic_collision_with_starship(
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for mut player_exotic in &mut player_exotics {
+    for player_exotic in &mut player_exotics {
         for mut starship in &mut starships {
             let distance_to_starship =
                 (player_exotic.transform.translation - starship.transform.translation).length();
@@ -32,21 +33,14 @@ pub fn player_exotic_collision_with_starship(
                     message: "Exotic collision with starship".to_string(),
                 });
 
-                player_exotic
+                let damage = player_exotic
                     .player_exotic
                     .exotic
                     .ranged_weapon
                     .weapon
                     .damage
-                    .calculate_damage();
-                starship.starship.take_damage(
-                    player_exotic
-                        .player_exotic
-                        .exotic
-                        .ranged_weapon
-                        .weapon
-                        .damage,
-                );
+                    .calculate_damage(generate_seed());
+                starship.starship.take_damage(damage);
 
                 logging_event.send(LoggingEvent {
                     message: format!(

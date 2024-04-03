@@ -1,9 +1,6 @@
-use crate::{
-    assets::{
-        images::starships::faction_starships::FactionStarshipSprite,
-        sounds::starships::engines::EngineSound,
-    },
-    components::weapons::weapon_types::damage::Damage,
+use crate::assets::{
+    images::starships::faction_starships::FactionStarshipSprite,
+    sounds::starships::engines::EngineSound,
 };
 use bevy::{ecs::component::Component, prelude::Vec2};
 
@@ -44,7 +41,7 @@ impl Starship {
         }
     }
 
-    pub fn take_damage(&mut self, damage: Damage) {
+    pub fn take_damage(&mut self, damage: u32) {
         let updated_damage = self.shield.take_damage(damage);
         self.hull.take_damage(updated_damage);
     }
@@ -120,10 +117,7 @@ mod starship_should {
 
     #[rstest]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
+        0,
         Starship{
             shield: Shield {
                 maximum: 100,
@@ -138,10 +132,7 @@ mod starship_should {
             ..Default::default()
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 11,
-        },
+        11,
         Starship{
             shield: Shield {
                 maximum: 100,
@@ -156,10 +147,7 @@ mod starship_should {
             ..Default::default()
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 100,
-        },
+        100,
         Starship{
             shield: Shield {
                 maximum: 100,
@@ -168,34 +156,28 @@ mod starship_should {
             },
             hull: Hull {
                 maximum: 100,
-                current: 100,
+                current: 50,
                 regeneration: 1,
             },
+            ..Default::default()
+        })]
+    #[case(
+            101,
+            Starship{
+                shield: Shield {
+                    maximum: 100,
+                    current: 0,
+                    regeneration: 5,
+                },
+                hull: Hull {
+                    maximum: 100,
+                    current: 50,
+                    regeneration: 1,
+                },
             ..Default::default()
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 101,
-        },
-        Starship{
-            shield: Shield {
-                maximum: 100,
-                current: 0,
-                regeneration: 5,
-            },
-            hull: Hull {
-                maximum: 100,
-                current: 99,
-                regeneration: 1,
-            },
-            ..Default::default()
-    })]
-    #[case(
-        Damage {
-            base_damage: 10,
-            damage: 200,
-        },
+        200,
         Starship{
             shield: Shield {
                 maximum: 100,
@@ -209,25 +191,7 @@ mod starship_should {
             },
             ..Default::default()
     })]
-    #[case(
-        Damage {
-            base_damage: 10,
-            damage: 201,
-        },
-        Starship{
-            shield: Shield {
-                maximum: 100,
-                current: 0,
-                regeneration: 5,
-            },
-            hull: Hull {
-                maximum: 100,
-                current: 0,
-                regeneration: 1,
-            },
-            ..Default::default()
-    })]
-    fn take_damage(#[case] damage: Damage, #[case] expected_starship: Starship) {
+    fn take_damage(#[case] damage: u32, #[case] expected_starship: Starship) {
         // Given
         let mut starship = Starship {
             shield: Shield {
