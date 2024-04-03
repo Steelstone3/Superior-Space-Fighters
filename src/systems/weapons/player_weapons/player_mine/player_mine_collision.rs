@@ -11,7 +11,6 @@ use crate::queries::{
     starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
 };
 
-// TODO multi-thread
 pub fn player_mine_collision_with_starship(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
