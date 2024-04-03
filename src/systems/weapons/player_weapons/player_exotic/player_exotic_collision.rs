@@ -5,14 +5,14 @@ use crate::{
     },
     queries::{
         player_exotic_queries::{MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter},
-        starship_queries::{MutableStarshipEntityTransformQuery, StarshipFilter},
+        starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
 };
 use bevy::{ecs::event::EventWriter, prelude::Query};
 
 pub fn player_exotic_collision_with_starship(
     mut player_exotics: Query<MutablePlayerExoticEntityTransformQuery, PlayerExoticFilter>,
-    mut starships: Query<MutableStarshipEntityTransformQuery, StarshipFilter>,
+    mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
     mut player_exotic_collision_event: EventWriter<PlayerExoticCollisionEvent>,
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,

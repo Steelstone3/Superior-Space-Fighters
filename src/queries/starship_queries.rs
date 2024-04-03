@@ -31,15 +31,6 @@ pub struct StarshipTransformQuery {
     pub starship: &'static Starship,
 }
 
-// TODO Remove this once refactored collisions
-#[derive(QueryData)]
-#[query_data(mutable)]
-pub struct MutableStarshipEntityTransformQuery {
-    pub entity: Entity,
-    pub transform: &'static mut Transform,
-    pub starship: &'static mut Starship,
-}
-
 #[derive(QueryData)]
 #[query_data(mutable)]
 pub struct MutableStarshipTransformQuery {
