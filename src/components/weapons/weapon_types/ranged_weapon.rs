@@ -41,10 +41,7 @@ mod ranged_weapon_should {
             weapon: Weapon {
                 velocity,
                 size: Vec2 { x: size, y: size },
-                damage: Damage {
-                    base_damage: 10,
-                    damage: Default::default(),
-                },
+                damage: Damage { base_damage: 10 },
             },
         };
 

@@ -9,6 +9,7 @@ use crate::{
         player_torpedo_queries::{MutablePlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter},
         starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
+    systems::controllers::random_generator::generate_seed,
 };
 
 pub fn player_torpedo_collision_with_starship(
@@ -18,7 +19,7 @@ pub fn player_torpedo_collision_with_starship(
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for mut player_torpedo in &mut player_torpedoes {
+    for player_torpedo in &mut player_torpedoes {
         for mut starship in &mut starships {
             let distance_to_starship =
                 (player_torpedo.transform.translation - starship.transform.translation).length();
@@ -33,23 +34,15 @@ pub fn player_torpedo_collision_with_starship(
                     message: "Torpedo collision with starship".to_string(),
                 });
 
-                player_torpedo
+                let damage = player_torpedo
                     .player_torpedo
                     .torpedo
                     .lock_on_weapon
                     .ranged_weapon
                     .weapon
                     .damage
-                    .calculate_damage();
-                starship.starship.take_damage(
-                    player_torpedo
-                        .player_torpedo
-                        .torpedo
-                        .lock_on_weapon
-                        .ranged_weapon
-                        .weapon
-                        .damage,
-                );
+                    .calculate_damage(generate_seed());
+                starship.starship.take_damage(damage);
 
                 logging_event.send(LoggingEvent {
                     message: format!(

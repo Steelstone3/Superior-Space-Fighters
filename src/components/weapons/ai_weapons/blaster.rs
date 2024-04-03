@@ -51,10 +51,7 @@ mod blaster_should {
                 weapon: Weapon {
                     velocity: 100.0,
                     size: Vec2 { x: 100.0, y: 100.0 },
-                    damage: Damage {
-                        base_damage: 10,
-                        damage: Default::default(),
-                    },
+                    damage: Damage { base_damage: 10 },
                 },
             },
         };

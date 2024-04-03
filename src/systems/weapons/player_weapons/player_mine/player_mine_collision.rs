@@ -7,6 +7,7 @@ use crate::{
         player_mine_queries::{MutablePlayerMineEntityTransformQuery, PlayerMineFilter},
         starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
+    systems::controllers::random_generator::generate_seed,
 };
 use bevy::{ecs::event::EventWriter, prelude::Query};
 
@@ -17,7 +18,7 @@ pub fn player_mine_collision_with_starship(
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for mut player_mine in &mut player_mines {
+    for player_mine in &mut player_mines {
         for mut starship in &mut starships {
             let distance_to_starship =
                 (player_mine.transform.translation - starship.transform.translation).length();
@@ -32,16 +33,14 @@ pub fn player_mine_collision_with_starship(
                     message: "Mine collision with starship".to_string(),
                 });
 
-                player_mine
+                let damage = player_mine
                     .player_mine
                     .mine
                     .lifetime_weapon
                     .weapon
                     .damage
-                    .calculate_damage();
-                starship
-                    .starship
-                    .take_damage(player_mine.player_mine.mine.lifetime_weapon.weapon.damage);
+                    .calculate_damage(generate_seed());
+                starship.starship.take_damage(damage);
 
                 logging_event.send(LoggingEvent {
                     message: format!(

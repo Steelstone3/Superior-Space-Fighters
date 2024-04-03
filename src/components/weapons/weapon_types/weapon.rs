@@ -30,10 +30,7 @@ mod weapon_should {
         let expected_weapon = Weapon {
             velocity,
             size: Vec2 { x: size, y: size },
-            damage: Damage {
-                base_damage: 10,
-                damage: Default::default(),
-            },
+            damage: Damage { base_damage: 10 },
         };
 
         // When
