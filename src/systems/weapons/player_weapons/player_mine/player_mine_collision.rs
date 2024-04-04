@@ -18,8 +18,8 @@ pub fn player_mine_collision_with_starship(
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for mut starship in &mut starships {
-        for player_mine in &player_mines {
+    for player_mine in &player_mines {
+        for mut starship in &mut starships {
             let distance_to_starship =
                 (player_mine.transform.translation - starship.transform.translation).length();
 
