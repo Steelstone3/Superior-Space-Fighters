@@ -6,20 +6,20 @@ use crate::{
         logging_event::LoggingEvent,
     },
     queries::{
-        player_torpedo_queries::{MutablePlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter},
+        player_torpedo_queries::{PlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter},
         starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
     systems::controllers::random_generator::generate_seed,
 };
 
 pub fn player_torpedo_collision_with_starship(
-    mut player_torpedoes: Query<MutablePlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter>,
+    player_torpedoes: Query<PlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter>,
     mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
     mut player_torpedo_collision_event: EventWriter<PlayerTorpedoCollisionEvent>,
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for player_torpedo in &mut player_torpedoes {
+    for player_torpedo in &player_torpedoes {
         for mut starship in &mut starships {
             let distance_to_starship =
                 (player_torpedo.transform.translation - starship.transform.translation).length();
