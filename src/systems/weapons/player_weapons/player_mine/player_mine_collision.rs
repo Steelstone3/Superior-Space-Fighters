@@ -4,7 +4,7 @@ use crate::{
         logging_event::LoggingEvent,
     },
     queries::{
-        player_mine_queries::{MutablePlayerMineEntityTransformQuery, PlayerMineFilter},
+        player_mine_queries::{PlayerMineEntityTransformQuery, PlayerMineFilter},
         starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
     },
     systems::controllers::random_generator::generate_seed,
@@ -12,14 +12,14 @@ use crate::{
 use bevy::{ecs::event::EventWriter, prelude::Query};
 
 pub fn player_mine_collision_with_starship(
-    mut player_mines: Query<MutablePlayerMineEntityTransformQuery, PlayerMineFilter>,
+    player_mines: Query<PlayerMineEntityTransformQuery, PlayerMineFilter>,
     mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
     mut player_mine_collision_event: EventWriter<PlayerMineCollisionEvent>,
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,
 ) {
-    for player_mine in &mut player_mines {
-        for mut starship in &mut starships {
+    for mut starship in &mut starships {
+        for player_mine in &player_mines {
             let distance_to_starship =
                 (player_mine.transform.translation - starship.transform.translation).length();
 
