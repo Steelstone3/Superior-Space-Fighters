@@ -69,8 +69,8 @@ impl Plugin for Spawning {
             .add_systems(Update, spawn_sprite.run_if(run_if_not_paused))
             .add_systems(Update, despawn_sprite.run_if(run_if_not_paused))
             .add_systems(Update, spawn_audio.run_if(run_if_not_paused))
+            .add_systems(Update, play_audio.run_if(run_if_not_paused))
             .add_systems(Update, pause_audio)
-            .add_systems(Update, play_audio)
             .add_systems(Update, player_pause_resume);
     }
 }
