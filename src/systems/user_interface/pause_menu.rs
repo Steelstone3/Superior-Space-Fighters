@@ -54,10 +54,8 @@ pub fn pause_resume_game(
                         ..default()
                     }));
                 });
-        } else {
-            if let Ok(menu_parent) = menu_parent_query.get_single() {
-                commands.entity(menu_parent.entity).despawn_recursive();
-            }
+        } else if let Ok(menu_parent) = menu_parent_query.get_single() {
+            commands.entity(menu_parent.entity).despawn_recursive();
         }
     }
 }

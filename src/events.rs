@@ -2,6 +2,8 @@ pub mod collision_events;
 pub mod combat_events;
 pub mod despawn_sprite_event;
 pub mod logging_event;
+pub mod pause_audio_event;
+pub mod play_audio_event;
 pub mod spawn_audio_event;
 pub mod spawn_sprite_event;
 pub mod user_interface_events;
