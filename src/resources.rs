@@ -8,3 +8,4 @@ pub mod projectile_fire_rate;
 pub mod sector_size;
 pub mod selected_weapon;
 pub mod targetting_settings;
+pub mod game_state;
