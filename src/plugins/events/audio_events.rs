@@ -1,9 +1,6 @@
 use bevy::app::Plugin;
 
-use crate::events::{
-    pause_audio_event::PauseAudioEvent, play_audio_event::PlayAudioEvent,
-    spawn_audio_event::SpawnAudioEvent,
-};
+use crate::events::audio_events::{PauseAudioEvent, PlayAudioEvent, SpawnAudioEvent};
 
 pub struct AudioEvents;
 

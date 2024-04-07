@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::impacts::ImpactSound,
-    events::{collision_events::PlayerExoticCollisionEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{audio_events::SpawnAudioEvent, collision_events::PlayerExoticCollisionEvent},
 };
 use bevy::{
     audio::{PlaybackMode, PlaybackSettings, Volume},

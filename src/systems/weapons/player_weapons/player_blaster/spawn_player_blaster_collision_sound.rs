@@ -9,7 +9,7 @@ use bevy::{
 
 use crate::{
     assets::sounds::starships::weapons::impacts::ImpactSound,
-    events::{collision_events::PlayerBlasterCollisionEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{audio_events::SpawnAudioEvent, collision_events::PlayerBlasterCollisionEvent},
 };
 
 #[derive(Component)]

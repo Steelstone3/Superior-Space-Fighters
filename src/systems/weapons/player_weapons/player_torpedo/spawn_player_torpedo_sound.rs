@@ -1,6 +1,6 @@
 use crate::{
     assets::sounds::starships::weapons::torpedos::TorpedoSound,
-    events::{combat_events::FirePlayerTorpedoEvent, spawn_audio_event::SpawnAudioEvent},
+    events::{audio_events::SpawnAudioEvent, combat_events::FirePlayerTorpedoEvent},
 };
 use bevy::{
     audio::PlaybackSettings,

@@ -1,4 +1,4 @@
-use crate::{events::spawn_audio_event::SpawnAudioEvent, resources::music::Music};
+use crate::{events::audio_events::SpawnAudioEvent, resources::music::Music};
 use bevy::{
     audio::{PlaybackMode, PlaybackSettings, Volume},
     ecs::event::EventWriter,
