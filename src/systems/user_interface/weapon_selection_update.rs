@@ -1,10 +1,9 @@
 use crate::{
     components::user_interface::{
-        ammo_count_parent::AmmoCountParent, weapon_selection::WeaponSelection,
-        weapon_selection_parent::WeaponSelectionParent,
+        weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
     },
     events::user_interface_events::UserInterfaceEvent,
-    queries::weapon_selection_parent_queries::EntityQuery,
+    queries::{entity_query::EntityQuery, weapon_ui_queries::WeaponUiUpdateFilter},
     resources::{
         projectile_ammunition::ProjectileAmmunition,
         selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
@@ -14,12 +13,11 @@ use bevy::{
     asset::{AssetServer, Handle},
     ecs::{
         event::EventReader,
-        query::{Or, With},
         system::{Commands, Query, Res, ResMut},
     },
     hierarchy::{BuildChildren, DespawnRecursiveExt},
     render::{color::Color, texture::Image},
-    text::{JustifyText, Text, TextStyle},
+    text::{Text, TextStyle},
     ui::{
         node_bundles::{NodeBundle, TextBundle},
         BackgroundColor, Display, GridTrack, JustifyContent, PositionType, Style, UiImage, UiRect,
@@ -31,10 +29,7 @@ use bevy::{
 pub fn update_weapon_selection_icons(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    weapon_selection_parents: Query<
-        EntityQuery,
-        Or<(With<WeaponSelectionParent>, With<AmmoCountParent>)>,
-    >,
+    weapon_selection_parents: Query<EntityQuery, WeaponUiUpdateFilter>,
     selected_weapon: Res<SelectedWeapon>,
     mut user_interface_event: EventReader<UserInterfaceEvent>,
     ammunition: ResMut<ProjectileAmmunition>,
