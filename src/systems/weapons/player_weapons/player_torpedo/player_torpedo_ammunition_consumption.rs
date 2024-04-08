@@ -1,12 +1,17 @@
 use crate::{
-    events::combat_events::FirePlayerTorpedoEvent,
+    events::{combat_events::FirePlayerTorpedoEvent, user_interface_events::UserInterfaceEvent},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
-use bevy::{ecs::event::EventReader, prelude::ResMut, utils::tracing};
+use bevy::{
+    ecs::event::{EventReader, EventWriter},
+    prelude::ResMut,
+    utils::tracing,
+};
 
 pub fn player_torpedo_ammunition_consumption(
     mut ammunition: ResMut<ProjectileAmmunition>,
     mut fire_player_torpedo_events: EventReader<FirePlayerTorpedoEvent>,
+    mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {
     for _ in fire_player_torpedo_events.read() {
         ammunition.torpedo_ammunition -= 1;
@@ -14,5 +19,7 @@ pub fn player_torpedo_ammunition_consumption(
             "Fired 1 torpedo. {:?} torpedo ammunition remaining",
             ammunition.torpedo_ammunition
         );
+
+        user_interface_event.send(UserInterfaceEvent {});
     }
 }

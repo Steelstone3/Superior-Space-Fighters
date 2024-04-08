@@ -1,9 +1,13 @@
-use crate::resources::{
-    projectile_ammunition::ProjectileAmmunition,
-    projectile_ammunition_maximum::ProjectileAmmunitionMaximum,
-    projectile_ammunition_recharge::ProjectileAmmunitionRecharge,
+use crate::{
+    events::user_interface_events::UserInterfaceEvent,
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        projectile_ammunition_maximum::ProjectileAmmunitionMaximum,
+        projectile_ammunition_recharge::ProjectileAmmunitionRecharge,
+    },
 };
 use bevy::{
+    ecs::event::EventWriter,
     prelude::{Res, ResMut},
     time::Time,
     utils::tracing,
@@ -14,6 +18,7 @@ pub fn ammunition_recharge(
     mut current_ammunition: ResMut<ProjectileAmmunition>,
     maximum_ammunition: Res<ProjectileAmmunitionMaximum>,
     mut ammunition_recharge: ResMut<ProjectileAmmunitionRecharge>,
+    mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {
     if current_ammunition.blaster_ammunition == maximum_ammunition.maximum_blaster_ammunition
         && current_ammunition.torpedo_ammunition == maximum_ammunition.maximum_torpedo_ammunition
@@ -33,6 +38,8 @@ pub fn ammunition_recharge(
                 "Recovered 1 blaster. {:?} blaster shots remaining",
                 current_ammunition.blaster_ammunition
             );
+
+            user_interface_event.send(UserInterfaceEvent {});
         }
     }
 
@@ -46,6 +53,8 @@ pub fn ammunition_recharge(
                 "Recovered 1 torpedo. {:?} torpedoes remaining",
                 current_ammunition.torpedo_ammunition
             );
+
+            user_interface_event.send(UserInterfaceEvent {});
         }
     }
 
@@ -59,6 +68,8 @@ pub fn ammunition_recharge(
                 "Recovered 1 mine. {:?} mines remaining",
                 current_ammunition.mine_ammunition
             );
+
+            user_interface_event.send(UserInterfaceEvent {});
         }
     }
 
@@ -72,6 +83,8 @@ pub fn ammunition_recharge(
                 "Recovered 1 exotic. {:?} exotics remaining",
                 current_ammunition.exotic_ammunition
             );
+
+            user_interface_event.send(UserInterfaceEvent {});
         }
     }
 }

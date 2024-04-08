@@ -1,12 +1,17 @@
 use crate::{
-    events::combat_events::FirePlayerMineEvent,
+    events::{combat_events::FirePlayerMineEvent, user_interface_events::UserInterfaceEvent},
     resources::projectile_ammunition::ProjectileAmmunition,
 };
-use bevy::{ecs::event::EventReader, prelude::ResMut, utils::tracing};
+use bevy::{
+    ecs::event::{EventReader, EventWriter},
+    prelude::ResMut,
+    utils::tracing,
+};
 
 pub fn player_mine_ammunition_consumption(
     mut ammunition: ResMut<ProjectileAmmunition>,
     mut fire_player_mine_events: EventReader<FirePlayerMineEvent>,
+    mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {
     for _ in fire_player_mine_events.read() {
         ammunition.mine_ammunition -= 1;
@@ -14,5 +19,7 @@ pub fn player_mine_ammunition_consumption(
             "Fired 1 mine. {:?} mines remaining",
             ammunition.mine_ammunition
         );
+
+        user_interface_event.send(UserInterfaceEvent {});
     }
 }
