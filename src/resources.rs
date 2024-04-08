@@ -1,5 +1,6 @@
 pub mod camera_settings;
 pub mod fleet_credits;
+pub mod game_state;
 pub mod music;
 pub mod projectile_ammunition;
 pub mod projectile_ammunition_maximum;

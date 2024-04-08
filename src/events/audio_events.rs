@@ -4,6 +4,12 @@ use bevy::{
 };
 
 #[derive(Event)]
+pub struct PlayAudioEvent {}
+
+#[derive(Event)]
+pub struct PauseAudioEvent {}
+
+#[derive(Event)]
 pub struct SpawnAudioEvent {
     pub audio_path: String,
     pub playback_settings: PlaybackSettings,
