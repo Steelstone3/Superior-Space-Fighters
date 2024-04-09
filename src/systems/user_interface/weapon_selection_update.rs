@@ -3,29 +3,38 @@ use crate::{
         weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
     },
     events::user_interface_events::UserInterfaceEvent,
-    queries::weapon_selection_parent_queries::WeaponSelectionParentEntityQuery,
-    resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    queries::{entity_query::EntityQuery, weapon_ui_queries::WeaponUiUpdateFilter},
+    resources::{
+        projectile_ammunition::ProjectileAmmunition,
+        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    },
 };
 use bevy::{
     asset::{AssetServer, Handle},
     ecs::{
         event::EventReader,
-        system::{Commands, Query, Res},
+        system::{Commands, Query, Res, ResMut},
     },
     hierarchy::{BuildChildren, DespawnRecursiveExt},
     render::{color::Color, texture::Image},
-    ui::{node_bundles::NodeBundle, Display, GridTrack, PositionType, Style, UiImage, Val},
+    text::{Text, TextStyle},
+    ui::{
+        node_bundles::{NodeBundle, TextBundle},
+        BackgroundColor, Display, GridTrack, JustifyContent, PositionType, Style, UiImage, UiRect,
+        Val,
+    },
     utils::default,
 };
 
 pub fn update_weapon_selection_icons(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
-    weapon_selection_parents: Query<WeaponSelectionParentEntityQuery>,
+    weapon_selection_parents: Query<EntityQuery, WeaponUiUpdateFilter>,
     selected_weapon: Res<SelectedWeapon>,
     mut user_interface_event: EventReader<UserInterfaceEvent>,
+    ammunition: ResMut<ProjectileAmmunition>,
 ) {
-    //event called whenever selected weapon changes
+    //event called whenever ui updates
     for _ in user_interface_event.read() {
         if let Ok(weapon_selection_parent) = weapon_selection_parents.get_single() {
             commands
@@ -34,22 +43,7 @@ pub fn update_weapon_selection_icons(
         }
 
         commands
-            .spawn(NodeBundle {
-                style: Style {
-                    display: Display::Grid,
-                    grid_template_columns: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
-                    grid_template_rows: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
-                    //Must set specific width + height otherwise images wont know what size to display
-                    width: Val::Px(100.0),
-                    height: Val::Px(100.0),
-                    position_type: PositionType::Absolute,
-                    right: Val::Percent(0.0),
-                    bottom: Val::Percent(0.0),
-                    ..default()
-                },
-                background_color: Color::rgba(0.0, 0.0, 0.0, 0.0).into(),
-                ..default()
-            })
+            .spawn(weapon_icon_parent_node_bundle())
             .insert(WeaponSelectionParent {})
             .with_children(|parent| {
                 let weapon_icon: WeaponSelection =
@@ -61,6 +55,10 @@ pub fn update_weapon_selection_icons(
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
+                    .with_children(|blaster_parent| {
+                        blaster_parent
+                            .spawn(weapon_ammo_count_bundle(ammunition.blaster_ammunition));
+                    })
                     .insert(weapon_icon);
 
                 let weapon_icon: WeaponSelection =
@@ -72,6 +70,10 @@ pub fn update_weapon_selection_icons(
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
+                    .with_children(|blaster_parent| {
+                        blaster_parent
+                            .spawn(weapon_ammo_count_bundle(ammunition.torpedo_ammunition));
+                    })
                     .insert(weapon_icon);
 
                 let weapon_icon: WeaponSelection =
@@ -83,6 +85,9 @@ pub fn update_weapon_selection_icons(
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
+                    .with_children(|blaster_parent| {
+                        blaster_parent.spawn(weapon_ammo_count_bundle(ammunition.mine_ammunition));
+                    })
                     .insert(weapon_icon);
 
                 let weapon_icon: WeaponSelection =
@@ -94,8 +99,31 @@ pub fn update_weapon_selection_icons(
                 let texture: Handle<Image> = asset_server.load(weapon_icon.icon.to_string());
                 parent
                     .spawn((weapon_icon_node_bundle(), UiImage::new(texture)))
+                    .with_children(|blaster_parent| {
+                        blaster_parent
+                            .spawn(weapon_ammo_count_bundle(ammunition.exotic_ammunition));
+                    })
                     .insert(weapon_icon);
             });
+    }
+}
+
+fn weapon_icon_parent_node_bundle() -> NodeBundle {
+    NodeBundle {
+        style: Style {
+            display: Display::Grid,
+            grid_template_columns: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
+            grid_template_rows: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
+            //Must set specific width + height otherwise images wont know what size to display
+            width: Val::Px(150.0),
+            height: Val::Px(150.0),
+            position_type: PositionType::Absolute,
+            right: Val::Percent(0.0),
+            bottom: Val::Percent(0.0),
+            ..default()
+        },
+        background_color: Color::rgba(0.0, 0.0, 0.0, 0.5).into(),
+        ..default()
     }
 }
 
@@ -104,10 +132,25 @@ fn weapon_icon_node_bundle() -> NodeBundle {
         style: Style {
             width: Val::Percent(100.0),
             height: Val::Percent(100.0),
+            padding: UiRect::all(Val::Percent(10.0)),
+            justify_content: JustifyContent::End,
             ..default()
         },
-        // a `NodeBundle` is transparent by default, so to see the image we have to its color to `WHITE`
-        background_color: Color::WHITE.into(),
+        background_color: BackgroundColor(Color::WHITE),
         ..default()
+    }
+}
+
+fn weapon_ammo_count_bundle(ammo_count: u32) -> TextBundle {
+    TextBundle {
+        text: Text::from_section(
+            ammo_count.to_string(),
+            TextStyle {
+                font_size: 20.0,
+                color: Color::ANTIQUE_WHITE,
+                ..default()
+            },
+        ),
+        ..Default::default()
     }
 }
