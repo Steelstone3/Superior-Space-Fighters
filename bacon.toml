@@ -50,6 +50,16 @@ command = [
 ]
 need_stdout = true
 
+[jobs.test-coverage]
+command = [
+    "cargo",
+    "tarpaulin",
+    "--skip-clean",
+    "--color",
+    "always",
+]
+need_stdout = true
+
 [jobs.doc]
 command = [
     "cargo",
@@ -94,3 +104,4 @@ allow_warnings = true
 
 [keybindings]
 f = "job:format"
+j = "job:test-coverage"
