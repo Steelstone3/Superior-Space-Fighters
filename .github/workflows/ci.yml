@@ -34,7 +34,7 @@ jobs:
         with:
           components: clippy
       - name: Install Dependencies
-        run: sudo apt-get update; sudo apt-get install --no-install-recommends g++ pkg-config mold clang libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0 librust-alsa-sys-dev librust-libudev-sys-dev libwayland-dev libxkbcommon-dev
+        run: sudo apt-get update; sudo apt-get install --no-install-recommends g++ pkg-config lld clang libx11-dev libasound2-dev libudev-dev libxkbcommon-x11-0 librust-alsa-sys-dev librust-libudev-sys-dev libwayland-dev libxkbcommon-dev
       - name: Run clippy
         run: cargo clippy -- -D warnings
 
