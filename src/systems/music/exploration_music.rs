@@ -20,6 +20,5 @@ pub fn play_exploration_music(
         },
         entity,
     };
-
     spawn_audio_event.send(event);
 }

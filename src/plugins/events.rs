@@ -1,8 +1,12 @@
 pub mod audio_events;
+pub mod audio_events_handlers;
 pub mod collision_event_handlers;
 pub mod collision_events;
 pub mod combat_event_handlers;
 pub mod combat_events;
+pub mod core_events_handlers;
 pub mod events_plugin;
-pub mod spawning_events;
+pub mod logging_event_handlers;
+pub mod sprite_event_handlers;
+pub mod sprite_events;
 pub mod user_interface_events;

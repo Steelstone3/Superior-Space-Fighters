@@ -1,4 +1,9 @@
+pub mod ai;
+pub mod audio;
+pub mod core;
 pub mod events;
+pub mod groups;
+pub mod player;
 pub mod resources;
 pub mod run_conditions;
 pub mod running;

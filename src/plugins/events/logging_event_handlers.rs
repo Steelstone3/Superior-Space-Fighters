@@ -1,9 +1,9 @@
 use crate::systems::event_handlers::logging::logging;
 use bevy::app::{Plugin, Update};
 
-pub struct Logging;
+pub struct LoggingEventHandlers;
 
-impl Plugin for Logging {
+impl Plugin for LoggingEventHandlers {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(Update, logging);
     }

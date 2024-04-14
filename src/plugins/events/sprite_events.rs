@@ -3,9 +3,9 @@ use crate::events::{
 };
 use bevy::app::Plugin;
 
-pub struct SpawningEvents;
+pub struct SpriteEvents;
 
-impl Plugin for SpawningEvents {
+impl Plugin for SpriteEvents {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_event::<SpawnSpriteEvent>()
             .add_event::<DespawnSpriteEvent>();

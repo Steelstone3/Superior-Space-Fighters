@@ -8,9 +8,9 @@ use crate::{
     resources::music::Music,
 };
 
-pub struct Sound;
+pub struct MusicResources;
 
-impl Plugin for Sound {
+impl Plugin for MusicResources {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.insert_resource(Music {
             combat_music: CombatMusicSound::default(),
