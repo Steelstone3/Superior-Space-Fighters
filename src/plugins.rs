@@ -8,7 +8,6 @@ pub mod music;
 pub mod player;
 pub mod resources;
 pub mod run_conditions;
-pub mod sound_effects;
 pub mod space;
 pub mod sprite;
 pub mod user_interface;

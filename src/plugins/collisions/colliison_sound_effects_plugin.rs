@@ -28,30 +28,22 @@ use crate::{
     },
 };
 
-pub struct SoundEffectsPlugin;
+pub struct CollisionSoundEffectsPlugin;
 
-impl Plugin for SoundEffectsPlugin {
+impl Plugin for CollisionSoundEffectsPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(
-            Startup,
-            player_engine_rumble_sound.run_if(run_if_not_paused),
-        )
-        .add_systems(Update, spawn_player_blaster_sound.run_if(run_if_not_paused))
-        .add_systems(
             Update,
             spawn_player_blaster_collision_sound.run_if(run_if_not_paused),
         )
-        .add_systems(Update, spawn_player_torpedo_sound.run_if(run_if_not_paused))
         .add_systems(
             Update,
             spawn_player_torpedo_collision_sound.run_if(run_if_not_paused),
         )
-        .add_systems(Update, spawn_player_mine_sound.run_if(run_if_not_paused))
         .add_systems(
             Update,
             spawn_player_mine_collision_sound.run_if(run_if_not_paused),
         )
-        .add_systems(Update, spawn_player_exotic_sound.run_if(run_if_not_paused))
         .add_systems(
             Update,
             spawn_player_exoitc_collision_sound.run_if(run_if_not_paused),

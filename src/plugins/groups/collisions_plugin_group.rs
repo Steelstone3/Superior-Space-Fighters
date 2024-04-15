@@ -1,6 +1,7 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
 
 use crate::plugins::collisions::{
+    colliison_sound_effects_plugin::CollisionSoundEffectsPlugin,
     collision_event_handlers::CollisionEventHandlers, collision_events::CollisionEvents,
     collision_plugin::CollisionPlugin,
 };
@@ -13,5 +14,6 @@ impl PluginGroup for CollisionPluginGroup {
             .add(CollisionPlugin)
             .add(CollisionEvents)
             .add(CollisionEventHandlers)
+            .add(CollisionSoundEffectsPlugin)
     }
 }
