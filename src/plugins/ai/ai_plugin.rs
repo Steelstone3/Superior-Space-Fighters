@@ -10,9 +10,9 @@ use crate::{
     },
 };
 
-pub struct AIPluginGroup;
+pub struct AIPlugin;
 
-impl Plugin for AIPluginGroup {
+impl Plugin for AIPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(Startup, spawn_starships::spawn_random_starships)
             .add_systems(

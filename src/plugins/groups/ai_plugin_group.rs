@@ -6,6 +6,6 @@ pub struct AIPluginGroup;
 
 impl PluginGroup for AIPluginGroup {
     fn build(self) -> PluginGroupBuilder {
-        PluginGroupBuilder::start::<Self>().add(AIPluginGroup)
+        PluginGroupBuilder::start::<Self>().add(AIPlugin)
     }
 }
