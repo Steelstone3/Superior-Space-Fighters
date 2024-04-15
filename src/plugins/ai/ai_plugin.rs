@@ -8,9 +8,9 @@ use crate::{
     systems::starships::{spawn_starships, starship_movement},
 };
 
-pub struct AIPlugin;
+pub struct AIPluginGroup;
 
-impl Plugin for AIPlugin {
+impl Plugin for AIPluginGroup {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(Startup, spawn_starships::spawn_random_starships)
             .add_systems(

@@ -2,11 +2,10 @@ use std::env;
 
 use bevy::prelude::*;
 use plugins::{
-    ai::ai_plugin::AIPlugin,
+    ai::ai_plugin::AIPluginGroup,
     groups::{
-        audio_plugin_group::AudioPluginGroup, core_plugin_group::CorePluginGroup,
-        input_plugin_group::InputPluginGroup, player_plugin_group::PlayerPluginGroup,
-        space_plugin_group::SpacePluginGroup, sprite_plugin_group::SpritePluginGroup,
+        core_plugin_group::CorePluginGroup, input_plugin_group::InputPluginGroup,
+        player_plugin_group::PlayerPluginGroup, space_plugin_group::SpacePluginGroup,
     },
 };
 
@@ -19,7 +18,7 @@ mod resources;
 mod systems;
 
 fn main() {
-    env::set_var("RUST_BACKTRACE", "full");
+    env::set_var("RUST_BACKTRACE", "1");
     App::new()
         .add_plugins((
             DefaultPlugins
@@ -33,12 +32,10 @@ fn main() {
                     ..Default::default()
                 }),
             CorePluginGroup,
-            SpritePluginGroup,
-            AudioPluginGroup,
             PlayerPluginGroup,
             InputPluginGroup,
             SpacePluginGroup,
-            AIPlugin,
+            AIPluginGroup,
         ))
         .run();
 }

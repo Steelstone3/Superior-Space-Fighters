@@ -7,5 +7,6 @@ pub mod player;
 pub mod resources;
 pub mod run_conditions;
 pub mod running;
+pub mod sprite;
 pub mod start;
 pub mod user_interface;
