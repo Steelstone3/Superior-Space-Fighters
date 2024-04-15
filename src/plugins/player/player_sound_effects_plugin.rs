@@ -1,5 +1,5 @@
 use bevy::{
-    app::{Plugin, Startup, Update},
+    app::{Plugin, Startup},
     ecs::schedule::IntoSystemConfigs,
 };
 
