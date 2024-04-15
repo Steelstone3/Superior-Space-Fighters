@@ -4,5 +4,6 @@ pub mod core_plugin_group;
 pub mod music_plugin_group;
 pub mod player_plugin_group;
 pub mod space_plugin_group;
+pub mod trading_plugin_group;
 pub mod ui_plugin_group;
 pub mod weapon_plugin_group;
