@@ -1,10 +1,10 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
 
-use crate::plugins::ai::ai_plugin::AIPluginGroup;
+use crate::plugins::ai::ai_plugin::AIPlugin;
 
-pub struct AudioPluginGroup;
+pub struct AIPluginGroup;
 
-impl PluginGroup for AudioPluginGroup {
+impl PluginGroup for AIPluginGroup {
     fn build(self) -> PluginGroupBuilder {
         PluginGroupBuilder::start::<Self>().add(AIPluginGroup)
     }

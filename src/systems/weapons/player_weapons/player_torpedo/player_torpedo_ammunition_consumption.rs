@@ -1,6 +1,6 @@
 use crate::{
     events::{combat_events::FirePlayerTorpedoEvent, user_interface_events::UserInterfaceEvent},
-    resources::projectile_ammunition::ProjectileAmmunition,
+    resources::projectile_ammunition_resource::ProjectileAmmunitionResource,
 };
 use bevy::{
     ecs::event::{EventReader, EventWriter},
@@ -9,7 +9,7 @@ use bevy::{
 };
 
 pub fn player_torpedo_ammunition_consumption(
-    mut ammunition: ResMut<ProjectileAmmunition>,
+    mut ammunition: ResMut<ProjectileAmmunitionResource>,
     mut fire_player_torpedo_events: EventReader<FirePlayerTorpedoEvent>,
     mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {

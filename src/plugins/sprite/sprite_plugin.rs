@@ -1,13 +1,11 @@
 use bevy::app::Plugin;
 
-use crate::plugins::events::{
-    sprite_event_handlers::SpriteEventHandlers, sprite_events::SpriteEvents,
-};
+use super::{sprite_events::SpriteEvents, sprite_update_plugin::SpriteUpdatePlugin};
 
 pub struct SpritePlugin;
 
 impl Plugin for SpritePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_plugins((SpriteEvents, SpriteEventHandlers));
+        app.add_plugins((SpriteEvents, SpriteUpdatePlugin));
     }
 }

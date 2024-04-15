@@ -1,6 +1,6 @@
 use bevy::app::Plugin;
 
-use crate::resources::{sector_size::SectorSize, targetting_settings::TargettingSettings};
+use crate::resources::{sector_size::SectorSize, targetting_settings::TargettingSettingsResource};
 
 pub struct World;
 
@@ -12,7 +12,7 @@ impl Plugin for World {
             bottom_border: -1000.0,
             right_border: 1000.0,
         })
-        .insert_resource(TargettingSettings {
+        .insert_resource(TargettingSettingsResource {
             maximum_distance: 2000.0,
             is_targetting: false,
         });

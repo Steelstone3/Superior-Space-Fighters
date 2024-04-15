@@ -1,7 +1,7 @@
 use crate::{
     components::user_interface::targetting::target::Target,
     queries::starship_queries::StarshipTransformQuery,
-    resources::targetting_settings::TargettingSettings,
+    resources::targetting_settings::TargettingSettingsResource,
 };
 use bevy::{
     ecs::system::ResMut,
@@ -15,7 +15,7 @@ pub fn spawn_trading_target(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
-    mut targetting_setting: ResMut<TargettingSettings>,
+    mut targetting_setting: ResMut<TargettingSettingsResource>,
     starships: Query<StarshipTransformQuery>,
 ) {
     if !input.just_pressed(KeyCode::KeyH) {

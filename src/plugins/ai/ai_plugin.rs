@@ -5,7 +5,9 @@ use bevy::{
 
 use crate::{
     plugins::run_conditions::run_if_not_paused,
-    systems::starships::{spawn_starships, starship_movement},
+    systems::starships::{
+        despawn_starships::despawn_destoryed_starships, spawn_starships, starship_movement,
+    },
 };
 
 pub struct AIPluginGroup;
@@ -16,6 +18,7 @@ impl Plugin for AIPluginGroup {
             .add_systems(
                 Update,
                 starship_movement::ai_movement.run_if(run_if_not_paused),
-            );
+            )
+            .add_systems(Update, despawn_destoryed_starships);
     }
 }

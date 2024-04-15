@@ -1,7 +1,7 @@
 use bevy::ecs::system::Resource;
 
 #[derive(Resource)]
-pub struct SelectedWeapon {
+pub struct SelectedWeaponResource {
     pub selected_weapon: u32,
 }
 

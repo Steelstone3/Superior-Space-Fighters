@@ -1,4 +1,4 @@
-use crate::{events::audio_events::SpawnAudioEvent, resources::music::Music};
+use crate::{events::audio_events::SpawnAudioEvent, resources::music::MusicResource};
 use bevy::{
     audio::{PlaybackMode, PlaybackSettings, Volume},
     ecs::event::EventWriter,
@@ -7,7 +7,7 @@ use bevy::{
 
 pub fn play_exploration_music(
     mut commands: Commands,
-    music: Res<Music>,
+    music: Res<MusicResource>,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,
 ) {
     let entity = commands.spawn_empty().id();

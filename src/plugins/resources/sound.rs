@@ -5,14 +5,14 @@ use crate::{
         combat_music::CombatMusicSound, exploration_music::ExplorationMusicSound,
         menu_music::MenuMusicSound, trading_music::TradingMusicSound,
     },
-    resources::music::Music,
+    resources::music::MusicResource,
 };
 
-pub struct MusicResources;
+pub struct MusicResourcePlugin;
 
-impl Plugin for MusicResources {
+impl Plugin for MusicResourcePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.insert_resource(Music {
+        app.insert_resource(MusicResource {
             combat_music: CombatMusicSound::default(),
             exploration_music: ExplorationMusicSound::default(),
             trading_music: TradingMusicSound::default(),

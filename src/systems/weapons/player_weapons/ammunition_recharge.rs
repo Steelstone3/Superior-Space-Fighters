@@ -1,9 +1,8 @@
 use crate::{
     events::user_interface_events::UserInterfaceEvent,
     resources::{
-        projectile_ammunition::ProjectileAmmunition,
-        projectile_ammunition_maximum::ProjectileAmmunitionMaximum,
         projectile_ammunition_recharge::ProjectileAmmunitionRecharge,
+        projectile_ammunition_resource::ProjectileAmmunitionResource,
     },
 };
 use bevy::{
@@ -15,20 +14,19 @@ use bevy::{
 
 pub fn ammunition_recharge(
     time: Res<Time>,
-    mut current_ammunition: ResMut<ProjectileAmmunition>,
-    maximum_ammunition: Res<ProjectileAmmunitionMaximum>,
+    mut current_ammunition: ResMut<ProjectileAmmunitionResource>,
     mut ammunition_recharge: ResMut<ProjectileAmmunitionRecharge>,
     mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {
-    if current_ammunition.blaster_ammunition == maximum_ammunition.maximum_blaster_ammunition
-        && current_ammunition.torpedo_ammunition == maximum_ammunition.maximum_torpedo_ammunition
-        && current_ammunition.mine_ammunition == maximum_ammunition.maximum_mine_ammunition
-        && current_ammunition.exotic_ammunition == maximum_ammunition.maximum_exotic_ammunition
+    if current_ammunition.blaster_ammunition == current_ammunition.maximum_blaster_ammunition
+        && current_ammunition.torpedo_ammunition == current_ammunition.maximum_torpedo_ammunition
+        && current_ammunition.mine_ammunition == current_ammunition.maximum_mine_ammunition
+        && current_ammunition.exotic_ammunition == current_ammunition.maximum_exotic_ammunition
     {
         return;
     }
 
-    if current_ammunition.blaster_ammunition < maximum_ammunition.maximum_blaster_ammunition {
+    if current_ammunition.blaster_ammunition < current_ammunition.maximum_blaster_ammunition {
         ammunition_recharge.blaster_recovery_rate.tick(time.delta());
 
         if ammunition_recharge.blaster_recovery_rate.finished() {
@@ -43,7 +41,7 @@ pub fn ammunition_recharge(
         }
     }
 
-    if current_ammunition.torpedo_ammunition < maximum_ammunition.maximum_torpedo_ammunition {
+    if current_ammunition.torpedo_ammunition < current_ammunition.maximum_torpedo_ammunition {
         ammunition_recharge.torpedo_recovery_rate.tick(time.delta());
 
         if ammunition_recharge.torpedo_recovery_rate.finished() {
@@ -58,7 +56,7 @@ pub fn ammunition_recharge(
         }
     }
 
-    if current_ammunition.mine_ammunition < maximum_ammunition.maximum_mine_ammunition {
+    if current_ammunition.mine_ammunition < current_ammunition.maximum_mine_ammunition {
         ammunition_recharge.mine_recovery_rate.tick(time.delta());
 
         if ammunition_recharge.mine_recovery_rate.finished() {
@@ -73,7 +71,7 @@ pub fn ammunition_recharge(
         }
     }
 
-    if current_ammunition.exotic_ammunition < maximum_ammunition.maximum_exotic_ammunition {
+    if current_ammunition.exotic_ammunition < current_ammunition.maximum_exotic_ammunition {
         ammunition_recharge.exotic_recovery_rate.tick(time.delta());
 
         if ammunition_recharge.exotic_recovery_rate.finished() {
