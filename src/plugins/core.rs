@@ -1,3 +1,3 @@
-pub mod core_events;
-pub mod core_events_handlers;
-pub mod core_resources;
+pub mod core_events_handlers_plugin;
+pub mod core_events_plugin;
+pub mod core_resources_plugin;

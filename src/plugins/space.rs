@@ -1,2 +1,2 @@
-pub mod maintain_space;
-pub mod spawn_space;
+pub mod maintain_space_plugin;
+pub mod spawn_space_plugin;

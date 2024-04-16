@@ -1,4 +1,4 @@
-pub mod combat_event_handlers;
-pub mod combat_events;
+pub mod weapon_event_handlers_plugin;
+pub mod weapon_events_plugin;
+pub mod weapon_sound_effects_plugin;
 pub mod weapons_plugin;
-pub mod weapons_sound_effects_plugin;

@@ -12,9 +12,9 @@ use bevy::{
     ecs::schedule::IntoSystemConfigs,
 };
 
-pub struct CombatEventHandlers;
+pub struct CombatEventHandlersPlugin;
 
-impl Plugin for CombatEventHandlers {
+impl Plugin for CombatEventHandlersPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(Update, fire_player_blaster.run_if(run_if_not_paused))
             .add_systems(Update, fire_player_torpedo.run_if(run_if_not_paused))

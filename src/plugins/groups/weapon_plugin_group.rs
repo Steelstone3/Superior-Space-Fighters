@@ -1,8 +1,9 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
 
 use crate::plugins::weapons::{
-    combat_event_handlers::CombatEventHandlers, combat_events::CombatEvents,
-    weapons_plugin::WeaponsPlugin, weapons_sound_effects_plugin::WeaponSoundEffectsPlugin,
+    weapon_event_handlers_plugin::CombatEventHandlersPlugin,
+    weapon_events_plugin::CombatEventsPlugin,
+    weapon_sound_effects_plugin::WeaponSoundEffectsPlugin, weapons_plugin::WeaponsPlugin,
 };
 
 pub struct WeaponPluginGroup;
@@ -11,8 +12,8 @@ impl PluginGroup for WeaponPluginGroup {
     fn build(self) -> PluginGroupBuilder {
         PluginGroupBuilder::start::<Self>()
             .add(WeaponsPlugin)
-            .add(CombatEvents)
-            .add(CombatEventHandlers)
+            .add(CombatEventsPlugin)
+            .add(CombatEventHandlersPlugin)
             .add(WeaponSoundEffectsPlugin)
     }
 }

@@ -12,9 +12,9 @@ use bevy::{
     ecs::schedule::IntoSystemConfigs,
 };
 
-pub struct CollisionEventHandlers;
+pub struct CollisionEventHandlersPlugin;
 
-impl Plugin for CollisionEventHandlers {
+impl Plugin for CollisionEventHandlersPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(
             Update,

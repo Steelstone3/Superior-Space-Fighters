@@ -7,9 +7,9 @@ use bevy::{
     ecs::schedule::IntoSystemConfigs,
 };
 
-pub struct CoreEventHandlers;
+pub struct CoreEventHandlersPlugin;
 
-impl Plugin for CoreEventHandlers {
+impl Plugin for CoreEventHandlersPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(Update, logging.run_if(run_if_not_paused));
     }

@@ -1,6 +1,6 @@
 use bevy::app::Plugin;
 
-use super::{sprite_events::SpriteEvents, sprite_update_plugin::SpriteUpdatePlugin};
+use super::{sprite_events_plugin::SpriteEvents, sprite_update_plugin::SpriteUpdatePlugin};
 
 pub struct SpritePlugin;
 
