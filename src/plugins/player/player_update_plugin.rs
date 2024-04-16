@@ -14,7 +14,9 @@ pub struct PlayerUpdatePlugin;
 
 impl Plugin for PlayerUpdatePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(Update, player_movement.run_if(run_if_not_paused));
-        app.add_systems(Update, player_pause_resume);
+        app.add_systems(
+            Update,
+            (player_movement, player_pause_resume).run_if(run_if_not_paused),
+        );
     }
 }

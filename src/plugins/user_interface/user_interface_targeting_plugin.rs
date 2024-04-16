@@ -19,9 +19,9 @@ use crate::{
     },
 };
 
-pub struct TargetingPlugin;
+pub struct UserInterfaceTargetingPlugin;
 
-impl Plugin for TargetingPlugin {
+impl Plugin for UserInterfaceTargetingPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(
             Update,

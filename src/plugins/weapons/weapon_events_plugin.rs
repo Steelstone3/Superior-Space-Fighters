@@ -3,9 +3,9 @@ use crate::events::combat_events::{
 };
 use bevy::app::Plugin;
 
-pub struct CombatEventsPlugin;
+pub struct WeaponEventsPlugin;
 
-impl Plugin for CombatEventsPlugin {
+impl Plugin for WeaponEventsPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_event::<FirePlayerBlasterEvent>()
             .add_event::<FirePlayerTorpedoEvent>()
