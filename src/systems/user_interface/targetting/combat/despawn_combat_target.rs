@@ -1,6 +1,6 @@
 use crate::{
     queries::{starship_queries::StarshipQuery, target_queries::TargetEntityQuery},
-    resources::targetting_settings::TargettingSettings,
+    resources::targetting_settings::TargettingSettingsResource,
 };
 use bevy::{
     ecs::system::{Commands, Query, Res, ResMut},
@@ -11,7 +11,7 @@ use bevy::{
 pub fn despawn_combat_target(
     mut commands: Commands,
     input: Res<ButtonInput<KeyCode>>,
-    mut targetting_setting: ResMut<TargettingSettings>,
+    mut targetting_setting: ResMut<TargettingSettingsResource>,
     targets: Query<TargetEntityQuery>,
     starships: Query<StarshipQuery>,
 ) {

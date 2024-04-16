@@ -1,10 +1,12 @@
 use std::env;
 
 use bevy::prelude::*;
-use plugins::{
-    events::events_plugin::EventsPlugin, resources::game_resources::ResourcesPlugin,
-    running::game_running::RunningPlugin, start::game_start::StartPlugin,
-    user_interface::game_user_interface::UserInterfacePlugin,
+use plugins::groups::{
+    ai_plugin_group::AIPluginGroup, collisions_plugin_group::CollisionPluginGroup,
+    core_plugin_group::CorePluginGroup, music_plugin_group::MusicPluginGroup,
+    player_plugin_group::PlayerPluginGroup, space_plugin_group::SpacePluginGroup,
+    trading_plugin_group::TradingPluginGroup, ui_plugin_group::UserInterfacePluginGroup,
+    weapon_plugin_group::WeaponPluginGroup,
 };
 
 mod assets;
@@ -29,11 +31,15 @@ fn main() {
                     }),
                     ..Default::default()
                 }),
-            ResourcesPlugin,
-            UserInterfacePlugin,
-            StartPlugin,
-            RunningPlugin,
-            EventsPlugin,
+            CorePluginGroup,
+            PlayerPluginGroup,
+            SpacePluginGroup,
+            AIPluginGroup,
+            UserInterfacePluginGroup,
+            WeaponPluginGroup,
+            CollisionPluginGroup,
+            MusicPluginGroup,
+            TradingPluginGroup,
         ))
         .run();
 }

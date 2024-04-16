@@ -5,8 +5,8 @@ use crate::{
     events::user_interface_events::UserInterfaceEvent,
     queries::{entity_query::EntityQuery, weapon_ui_queries::WeaponUiUpdateFilter},
     resources::{
-        projectile_ammunition::ProjectileAmmunition,
-        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+        projectile_ammunition_resource::ProjectileAmmunitionResource,
+        selected_weapon::{SelectedWeaponEnum, SelectedWeaponResource},
     },
 };
 use bevy::{
@@ -30,9 +30,9 @@ pub fn update_weapon_selection_icons(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     weapon_selection_parents: Query<EntityQuery, WeaponUiUpdateFilter>,
-    selected_weapon: Res<SelectedWeapon>,
+    selected_weapon: Res<SelectedWeaponResource>,
     mut user_interface_event: EventReader<UserInterfaceEvent>,
-    ammunition: ResMut<ProjectileAmmunition>,
+    ammunition: ResMut<ProjectileAmmunitionResource>,
 ) {
     //event called whenever ui updates
     for _ in user_interface_event.read() {

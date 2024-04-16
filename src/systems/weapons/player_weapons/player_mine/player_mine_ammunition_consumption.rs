@@ -1,6 +1,6 @@
 use crate::{
     events::{combat_events::FirePlayerMineEvent, user_interface_events::UserInterfaceEvent},
-    resources::projectile_ammunition::ProjectileAmmunition,
+    resources::projectile_ammunition_resource::ProjectileAmmunitionResource,
 };
 use bevy::{
     ecs::event::{EventReader, EventWriter},
@@ -9,7 +9,7 @@ use bevy::{
 };
 
 pub fn player_mine_ammunition_consumption(
-    mut ammunition: ResMut<ProjectileAmmunition>,
+    mut ammunition: ResMut<ProjectileAmmunitionResource>,
     mut fire_player_mine_events: EventReader<FirePlayerMineEvent>,
     mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {

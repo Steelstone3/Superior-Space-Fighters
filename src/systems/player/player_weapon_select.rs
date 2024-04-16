@@ -1,6 +1,6 @@
 use crate::{
     events::user_interface_events::UserInterfaceEvent,
-    resources::selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+    resources::selected_weapon::{SelectedWeaponEnum, SelectedWeaponResource},
 };
 use bevy::{
     ecs::event::EventWriter,
@@ -11,7 +11,7 @@ use bevy::{
 
 pub fn player_weapon_select(
     input: Res<ButtonInput<KeyCode>>,
-    mut weapon_selection: ResMut<SelectedWeapon>,
+    mut weapon_selection: ResMut<SelectedWeaponResource>,
     mut user_interface_event: EventWriter<UserInterfaceEvent>,
 ) {
     // Weapon 1

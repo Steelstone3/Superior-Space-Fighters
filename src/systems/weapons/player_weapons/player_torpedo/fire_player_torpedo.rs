@@ -11,15 +11,15 @@ use crate::{
     events::combat_events::FirePlayerTorpedoEvent,
     queries::player_starship_queries::PlayerStarshipTransformQuery,
     resources::{
-        projectile_ammunition::ProjectileAmmunition,
-        selected_weapon::{SelectedWeapon, SelectedWeaponEnum},
+        projectile_ammunition_resource::ProjectileAmmunitionResource,
+        selected_weapon::{SelectedWeaponEnum, SelectedWeaponResource},
     },
 };
 
 pub fn fire_player_torpedo(
     input: Res<ButtonInput<KeyCode>>,
-    ammunition: ResMut<ProjectileAmmunition>,
-    weapon_selection: Res<SelectedWeapon>,
+    ammunition: ResMut<ProjectileAmmunitionResource>,
+    weapon_selection: Res<SelectedWeaponResource>,
     player_starships: Query<PlayerStarshipTransformQuery>,
     mut fire_player_torpedo_event: EventWriter<FirePlayerTorpedoEvent>,
 ) {
