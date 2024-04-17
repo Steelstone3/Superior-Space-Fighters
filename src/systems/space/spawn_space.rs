@@ -12,7 +12,7 @@ use rand::random;
 
 pub fn spawn_random_empty_space_background(
     mut commands: Commands,
-    mut spawn_sprite_event: EventWriter<SpawnSpriteEvent>,
+    mut spawn_sprite_event_writer: EventWriter<SpawnSpriteEvent>,
 ) {
     let space = random::<SpaceSprite>();
     let tile_size = 1920.0;
@@ -28,7 +28,7 @@ pub fn spawn_random_empty_space_background(
 
             let space = Space::new(space, tile_size, grid_position, location);
 
-            spawn_sprite_event.send(SpawnSpriteEvent {
+            spawn_sprite_event_writer.send(SpawnSpriteEvent {
                 sprite_path: space.space.to_string(),
                 size: space.size,
                 entity: commands.spawn(space).id(),

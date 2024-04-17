@@ -11,7 +11,7 @@ use crate::{
 };
 
 pub fn spawn_player_ship(
-    mut spawn_sprite_event: EventWriter<SpawnSpriteEvent>,
+    mut spawn_sprite_event_writer: EventWriter<SpawnSpriteEvent>,
     mut commands: Commands,
 ) {
     let player_starship = PlayerStarship::default();
@@ -30,5 +30,5 @@ pub fn spawn_player_ship(
         },
     };
 
-    spawn_sprite_event.send(event);
+    spawn_sprite_event_writer.send(event);
 }

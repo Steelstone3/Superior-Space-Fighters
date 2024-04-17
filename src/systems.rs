@@ -1,6 +1,7 @@
 pub mod audio;
 pub mod camera;
 pub mod controllers;
+pub mod core;
 pub mod event_handlers;
 pub mod music;
 pub mod planets;

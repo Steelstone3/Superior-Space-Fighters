@@ -1,5 +1,5 @@
 use crate::{
-    plugins::run_conditions::run_if_not_paused,
+    states::core_states::GameState,
     systems::weapons::player_weapons::player_exotic::{
         player_exotic_ammunition_consumption::player_exotic_ammunition_consumption,
         player_exotic_lifetime::player_exotic_lifetime,
@@ -9,7 +9,7 @@ use crate::{
 };
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::IntoSystemConfigs,
+    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
 };
 
 pub struct WeaponExoticPlugin;
@@ -24,7 +24,7 @@ impl Plugin for WeaponExoticPlugin {
                 player_exotic_lifetime,
                 player_exotic_movement,
             )
-                .run_if(run_if_not_paused),
+                .run_if(in_state(GameState::InGame)),
         );
     }
 }

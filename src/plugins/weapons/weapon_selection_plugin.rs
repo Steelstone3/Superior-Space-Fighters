@@ -1,16 +1,18 @@
 use crate::{
-    plugins::run_conditions::run_if_not_paused,
-    systems::player::player_weapon_select::player_weapon_select,
+    states::core_states::GameState, systems::player::player_weapon_select::player_weapon_select,
 };
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::IntoSystemConfigs,
+    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
 };
 
 pub struct WeaponSelectionPlugin;
 
 impl Plugin for WeaponSelectionPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(Update, player_weapon_select.run_if(run_if_not_paused));
+        app.add_systems(
+            Update,
+            player_weapon_select.run_if(in_state(GameState::InGame)),
+        );
     }
 }

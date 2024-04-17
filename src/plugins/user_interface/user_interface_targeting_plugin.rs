@@ -1,11 +1,10 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::IntoSystemConfigs,
+    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
 };
 
 use crate::{
-    plugins::run_conditions::run_if_not_paused,
-    resources::targetting_settings::TargettingSettingsResource,
+    states::core_states::GameState,
     systems::user_interface::targetting::{
         combat::{
             combat_target_movement::combat_target_movement,
@@ -33,12 +32,7 @@ impl Plugin for UserInterfaceTargetingPlugin {
                 trading_target_movement,
                 despawn_trading_target,
             )
-                .run_if(run_if_not_paused),
+                .run_if(in_state(GameState::InGame)),
         );
-
-        app.insert_resource(TargettingSettingsResource {
-            maximum_distance: 2000.0,
-            is_targetting: false,
-        });
     }
 }

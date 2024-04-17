@@ -1,5 +1,7 @@
 use crate::{
-    events::{combat_events::FirePlayerTorpedoEvent, user_interface_events::UserInterfaceEvent},
+    events::{
+        combat_events::FirePlayerTorpedoEvent, user_interface_events::InGameUserInterfaceEvent,
+    },
     resources::projectile_ammunition_resource::ProjectileAmmunitionResource,
 };
 use bevy::{
@@ -11,7 +13,7 @@ use bevy::{
 pub fn player_torpedo_ammunition_consumption(
     mut ammunition: ResMut<ProjectileAmmunitionResource>,
     mut fire_player_torpedo_events: EventReader<FirePlayerTorpedoEvent>,
-    mut user_interface_event: EventWriter<UserInterfaceEvent>,
+    mut user_interface_event: EventWriter<InGameUserInterfaceEvent>,
 ) {
     for _ in fire_player_torpedo_events.read() {
         ammunition.torpedo_ammunition -= 1;
@@ -20,6 +22,6 @@ pub fn player_torpedo_ammunition_consumption(
             ammunition.torpedo_ammunition
         );
 
-        user_interface_event.send(UserInterfaceEvent {});
+        user_interface_event.send(InGameUserInterfaceEvent {});
     }
 }

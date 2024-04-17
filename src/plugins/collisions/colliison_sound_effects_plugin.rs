@@ -1,10 +1,10 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::IntoSystemConfigs,
+    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
 };
 
 use crate::{
-    plugins::run_conditions::run_if_not_paused,
+    states::core_states::GameState,
     systems::weapons::player_weapons::{
         player_blaster::spawn_player_blaster_collision_sound::spawn_player_blaster_collision_sound,
         player_exotic::spawn_player_exotic_collision_sound::spawn_player_exoitc_collision_sound,
@@ -25,7 +25,7 @@ impl Plugin for CollisionSoundEffectsPlugin {
                 spawn_player_mine_collision_sound,
                 spawn_player_exoitc_collision_sound,
             )
-                .run_if(run_if_not_paused),
+                .run_if(in_state(GameState::InGame)),
         );
     }
 }
