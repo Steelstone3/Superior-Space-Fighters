@@ -1,37 +1,33 @@
 use bevy::{
-    ecs::{
-        event::EventWriter,
-        query::{Changed, With},
-        system::Query,
-    },
+    ecs::{event::EventWriter, system::Query},
     render::color::Color,
-    ui::{widget::Button, BackgroundColor, BorderColor, Interaction},
+    ui::{BackgroundColor, Interaction},
 };
 
-use crate::events::game_state_events::NewGameEvent;
+use crate::{
+    events::game_state_events::NewGameEvent,
+    queries::button_interaction_query::{ButtonInteractionFilter, ButtonInteractionMutableQuery},
+};
 
 pub fn user_interface_main_menu_button_update(
-    mut interaction_query: Query<
-        (&Interaction, &mut BackgroundColor, &mut BorderColor),
-        (Changed<Interaction>, With<Button>),
-    >,
+    mut interaction_query: Query<ButtonInteractionMutableQuery, ButtonInteractionFilter>,
     mut new_game_event_writer: EventWriter<NewGameEvent>,
 ) {
-    for (interaction, mut color, mut border_color) in &mut interaction_query {
-        match *interaction {
+    for mut interaction in &mut interaction_query {
+        match *interaction.interaction {
             Interaction::Pressed => {
-                *color = BackgroundColor(Color::rgb(0.35, 0.75, 0.35));
-                border_color.0 = Color::RED;
+                *interaction.background_colour = BackgroundColor(Color::rgb(0.35, 0.75, 0.35));
+                interaction.border_colour.0 = Color::RED;
 
                 new_game_event_writer.send(NewGameEvent {});
             }
             Interaction::Hovered => {
-                *color = BackgroundColor(Color::rgb(0.25, 0.25, 0.25));
-                border_color.0 = Color::WHITE;
+                *interaction.background_colour = BackgroundColor(Color::rgb(0.25, 0.25, 0.25));
+                interaction.border_colour.0 = Color::WHITE;
             }
             Interaction::None => {
-                *color = BackgroundColor(Color::rgb(0.15, 0.15, 0.15));
-                border_color.0 = Color::BLACK;
+                *interaction.background_colour = BackgroundColor(Color::rgb(0.15, 0.15, 0.15));
+                interaction.border_colour.0 = Color::BLACK;
             }
         }
     }

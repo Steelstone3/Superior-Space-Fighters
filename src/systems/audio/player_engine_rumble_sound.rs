@@ -1,10 +1,8 @@
 use bevy::{
-    asset::AssetServer,
-    audio::{AudioBundle, PlaybackMode, PlaybackSettings, Volume},
+    audio::{PlaybackMode, PlaybackSettings, Volume},
     ecs::{
         entity::Entity,
         event::{EventReader, EventWriter},
-        system::{Commands, Res},
     },
 };
 

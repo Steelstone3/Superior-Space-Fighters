@@ -15,8 +15,8 @@ mod events;
 mod plugins;
 mod queries;
 mod resources;
-mod systems;
 pub mod states;
+mod systems;
 
 fn main() {
     env::set_var("RUST_BACKTRACE", "1");
