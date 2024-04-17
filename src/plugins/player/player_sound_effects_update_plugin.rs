@@ -1,7 +1,4 @@
-use bevy::{
-    app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
-};
+use bevy::{app::Plugin, ecs::schedule::OnEnter};
 
 use crate::{
     states::core_states::GameState,
@@ -12,9 +9,6 @@ pub struct PlayerSoundEffectsUpdatePlugin;
 
 impl Plugin for PlayerSoundEffectsUpdatePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(
-            Update,
-            player_engine_rumble_sound.run_if(in_state(GameState::InGame)),
-        );
+        app.add_systems(OnEnter(GameState::InGame), player_engine_rumble_sound);
     }
 }

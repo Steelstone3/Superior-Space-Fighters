@@ -1,7 +1,7 @@
 use bevy::ecs::event::Event;
 
 #[derive(Event)]
-pub struct UserInterfaceEvent;
+pub struct InGameUserInterfaceEvent;
 
 #[derive(Event)]
 pub struct PauseMenuEvent;

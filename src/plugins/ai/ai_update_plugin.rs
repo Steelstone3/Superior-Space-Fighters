@@ -1,6 +1,6 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
+    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs, OnExit},
 };
 
 use crate::{
@@ -15,14 +15,10 @@ pub struct AIUpdatePlugin;
 
 impl Plugin for AIUpdatePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(
-            Update,
-            (
-                spawn_random_starships,
-                ai_movement,
-                despawn_destoryed_starships,
-            )
-                .run_if(in_state(GameState::InGame)),
-        );
+        app.add_systems(OnExit(GameState::MainMenu), (spawn_random_starships,))
+            .add_systems(
+                Update,
+                (ai_movement, despawn_destoryed_starships).run_if(in_state(GameState::InGame)),
+            );
     }
 }

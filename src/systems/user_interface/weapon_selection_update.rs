@@ -2,7 +2,7 @@ use crate::{
     components::user_interface::{
         weapon_selection::WeaponSelection, weapon_selection_parent::WeaponSelectionParent,
     },
-    events::user_interface_events::UserInterfaceEvent,
+    events::user_interface_events::InGameUserInterfaceEvent,
     queries::{entity_query::EntityQuery, weapon_ui_queries::WeaponUiUpdateFilter},
     resources::{
         projectile_ammunition_resource::ProjectileAmmunitionResource,
@@ -31,7 +31,7 @@ pub fn weapon_selection_update(
     asset_server: Res<AssetServer>,
     weapon_selection_parents: Query<EntityQuery, WeaponUiUpdateFilter>,
     selected_weapon: Res<SelectedWeaponResource>,
-    mut user_interface_event: EventReader<UserInterfaceEvent>,
+    mut user_interface_event: EventReader<InGameUserInterfaceEvent>,
     ammunition: ResMut<ProjectileAmmunitionResource>,
 ) {
     //event called whenever ui updates

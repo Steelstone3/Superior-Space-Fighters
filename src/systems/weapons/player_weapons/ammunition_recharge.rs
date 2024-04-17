@@ -1,5 +1,5 @@
 use crate::{
-    events::user_interface_events::UserInterfaceEvent,
+    events::user_interface_events::InGameUserInterfaceEvent,
     resources::{
         projectile_ammunition_recharge::ProjectileAmmunitionRecharge,
         projectile_ammunition_resource::ProjectileAmmunitionResource,
@@ -16,7 +16,7 @@ pub fn ammunition_recharge(
     time: Res<Time>,
     mut current_ammunition: ResMut<ProjectileAmmunitionResource>,
     mut ammunition_recharge: ResMut<ProjectileAmmunitionRecharge>,
-    mut user_interface_event: EventWriter<UserInterfaceEvent>,
+    mut user_interface_event: EventWriter<InGameUserInterfaceEvent>,
 ) {
     if current_ammunition.blaster_ammunition == current_ammunition.maximum_blaster_ammunition
         && current_ammunition.torpedo_ammunition == current_ammunition.maximum_torpedo_ammunition
@@ -37,7 +37,7 @@ pub fn ammunition_recharge(
                 current_ammunition.blaster_ammunition
             );
 
-            user_interface_event.send(UserInterfaceEvent {});
+            user_interface_event.send(InGameUserInterfaceEvent {});
         }
     }
 
@@ -52,7 +52,7 @@ pub fn ammunition_recharge(
                 current_ammunition.torpedo_ammunition
             );
 
-            user_interface_event.send(UserInterfaceEvent {});
+            user_interface_event.send(InGameUserInterfaceEvent {});
         }
     }
 
@@ -67,7 +67,7 @@ pub fn ammunition_recharge(
                 current_ammunition.mine_ammunition
             );
 
-            user_interface_event.send(UserInterfaceEvent {});
+            user_interface_event.send(InGameUserInterfaceEvent {});
         }
     }
 
@@ -82,7 +82,7 @@ pub fn ammunition_recharge(
                 current_ammunition.exotic_ammunition
             );
 
-            user_interface_event.send(UserInterfaceEvent {});
+            user_interface_event.send(InGameUserInterfaceEvent {});
         }
     }
 }

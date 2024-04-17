@@ -1,5 +1,4 @@
-pub mod draw_main_menu;
-pub mod draw_user_interface;
+pub mod initialize_ingame_interface;
 pub mod main_menu_user_interface;
 pub mod pause_menu_user_interface;
 pub mod targetting;

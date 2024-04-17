@@ -1,7 +1,4 @@
-use bevy::{
-    app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
-};
+use bevy::{app::Plugin, ecs::schedule::OnExit};
 
 use crate::{
     states::core_states::GameState,
@@ -17,13 +14,12 @@ pub struct SpawnSpacePlugin;
 impl Plugin for SpawnSpacePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
         app.add_systems(
-            Update,
+            OnExit(GameState::MainMenu),
             (
                 spawn_random_empty_space_background,
                 spawn_random_station,
                 spawn_random_planets,
-            )
-                .run_if(in_state(GameState::InGame)),
+            ),
         );
     }
 }

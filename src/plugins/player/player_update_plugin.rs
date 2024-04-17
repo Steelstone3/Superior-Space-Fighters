@@ -1,6 +1,6 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
+    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs, OnExit},
 };
 
 use crate::{
@@ -15,10 +15,8 @@ pub struct PlayerUpdatePlugin;
 
 impl Plugin for PlayerUpdatePlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(
-            Update,
-            (player_movement, spawn_player_ship).run_if(in_state(GameState::InGame)),
-        )
-        .add_systems(Update, player_pause_resume);
+        app.add_systems(OnExit(GameState::MainMenu), spawn_player_ship)
+            .add_systems(Update, player_movement.run_if(in_state(GameState::InGame)))
+            .add_systems(Update, player_pause_resume);
     }
 }
