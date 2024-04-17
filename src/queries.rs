@@ -1,5 +1,6 @@
 pub mod camera_queries;
 pub mod entity_query;
+pub mod main_menu_parent_queries;
 pub mod pause_menu_parent_queries;
 pub mod player_blaster_queries;
 pub mod player_exotic_queries;

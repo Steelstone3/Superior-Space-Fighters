@@ -1,6 +1,7 @@
 use bevy::{
     ecs::{
         event::EventWriter,
+        schedule::{NextState, State},
         system::{Res, ResMut},
     },
     input::{keyboard::KeyCode, ButtonInput},
@@ -8,27 +9,29 @@ use bevy::{
 
 use crate::{
     events::{
-        audio_events::PauseAudioEvent, audio_events::PlayAudioEvent,
+        audio_events::{PauseAudioEvent, PlayAudioEvent},
         user_interface_events::PauseMenuEvent,
     },
-    resources::game_state::GameState,
+    states::core_states::GameState,
 };
 
 pub fn player_pause_resume(
-    mut game_state: ResMut<GameState>,
     input: Res<ButtonInput<KeyCode>>,
     mut event_pause_resume: EventWriter<PauseMenuEvent>,
     mut event_play_audio: EventWriter<PlayAudioEvent>,
     mut event_pause_audio: EventWriter<PauseAudioEvent>,
+    current_game_state: Res<State<GameState>>,
+    mut next_game_state: ResMut<NextState<GameState>>,
 ) {
     if input.just_pressed(KeyCode::KeyP) {
-        game_state.paused = !game_state.paused;
-        event_pause_resume.send(PauseMenuEvent {});
-
-        if game_state.paused {
+        let current_game_state = current_game_state.get();
+        if current_game_state == &GameState::InGame {
+            next_game_state.set(GameState::Paused);
             event_pause_audio.send(PauseAudioEvent {});
-        } else {
+        } else if current_game_state == &GameState::Paused {
+            next_game_state.set(GameState::InGame);
             event_play_audio.send(PlayAudioEvent {});
         }
+        event_pause_resume.send(PauseMenuEvent {});
     }
 }

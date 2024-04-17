@@ -5,3 +5,6 @@ pub struct UserInterfaceEvent;
 
 #[derive(Event)]
 pub struct PauseMenuEvent;
+
+#[derive(Event)]
+pub struct MainMenuEvent;

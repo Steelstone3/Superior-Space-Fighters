@@ -1,6 +1,7 @@
 use bevy::{
     ecs::{
         event::EventReader,
+        schedule::State,
         system::{Commands, Query, Res},
     },
     hierarchy::{BuildChildren, DespawnRecursiveExt},
@@ -15,18 +16,17 @@ use bevy::{
 use crate::{
     components::user_interface::pause_menu_parent::PauseMenuParent,
     events::user_interface_events::PauseMenuEvent,
-    queries::pause_menu_parent_queries::PauseMenuParentEntityQuery,
-    resources::game_state::GameState,
+    queries::pause_menu_parent_queries::PauseMenuParentEntityQuery, states::core_states::GameState,
 };
 
-pub fn pause_resume_game(
+pub fn pause_menu_user_interface(
     mut menu_event: EventReader<PauseMenuEvent>,
-    game_state: Res<GameState>,
+    current_game_state: Res<State<GameState>>,
     menu_parent_query: Query<PauseMenuParentEntityQuery>,
     mut commands: Commands,
 ) {
     for _ in menu_event.read() {
-        if game_state.paused {
+        if current_game_state.get() == &GameState::Paused {
             commands
                 .spawn(NodeBundle {
                     style: Style {

@@ -1,1 +1,1 @@
-pub mod ai_plugin;
+pub mod ai_update_plugin;

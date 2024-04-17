@@ -26,7 +26,7 @@ use bevy::{
     utils::default,
 };
 
-pub fn update_weapon_selection_icons(
+pub fn weapon_selection_update(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     weapon_selection_parents: Query<EntityQuery, WeaponUiUpdateFilter>,
