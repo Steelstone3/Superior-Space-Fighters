@@ -15,7 +15,7 @@ mod events;
 mod plugins;
 mod queries;
 mod resources;
-pub mod states;
+mod states;
 mod systems;
 
 fn main() {
