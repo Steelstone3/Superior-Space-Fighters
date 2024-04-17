@@ -8,16 +8,12 @@ use bevy::{
 };
 
 use crate::{
-    events::{
-        audio_events::{PauseAudioEvent, PlayAudioEvent},
-        user_interface_events::PauseMenuEvent,
-    },
+    events::audio_events::{PauseAudioEvent, PlayAudioEvent},
     states::core_states::GameState,
 };
 
 pub fn player_pause_resume(
     input: Res<ButtonInput<KeyCode>>,
-    mut event_pause_resume: EventWriter<PauseMenuEvent>,
     mut event_play_audio: EventWriter<PlayAudioEvent>,
     mut event_pause_audio: EventWriter<PauseAudioEvent>,
     current_game_state: Res<State<GameState>>,
@@ -32,6 +28,5 @@ pub fn player_pause_resume(
             next_game_state.set(GameState::InGame);
             event_play_audio.send(PlayAudioEvent {});
         }
-        event_pause_resume.send(PauseMenuEvent {});
     }
 }
