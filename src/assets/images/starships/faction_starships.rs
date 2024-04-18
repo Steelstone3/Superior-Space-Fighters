@@ -1,7 +1,8 @@
+use bevy::reflect::Reflect;
 use rand_derive2::RandGen;
 use std::fmt::Display;
 
-#[derive(Default, RandGen, Debug, PartialEq)]
+#[derive(Default, RandGen, Debug, PartialEq, Reflect)]
 pub enum FactionStarshipSprite {
     AstralSovereignAllRounder,
     AstralSovereignExplorer,

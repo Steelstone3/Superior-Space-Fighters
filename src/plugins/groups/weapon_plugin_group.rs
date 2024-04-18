@@ -8,6 +8,7 @@ use crate::plugins::weapons::{
     weapon_selection_plugin::WeaponSelectionPlugin,
     weapon_sound_effects_plugin::WeaponSoundEffectsPlugin,
     weapon_torpedo_plugin::WeaponTorpedoPlugin, weapons_ammunition_plugin::WeaponsAmmunitionPlugin,
+    weapons_save_types_plugin::WeaponSaveTypesPlugin,
 };
 
 pub struct WeaponPluginGroup;
@@ -25,5 +26,6 @@ impl PluginGroup for WeaponPluginGroup {
             .add(WeaponTorpedoPlugin)
             .add(WeaponExoticPlugin)
             .add(WeaponResourcesPlugin)
+            .add(WeaponSaveTypesPlugin)
     }
 }

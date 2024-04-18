@@ -2,11 +2,16 @@ use crate::assets::{
     images::starships::faction_starships::FactionStarshipSprite,
     sounds::starships::engines::EngineSound,
 };
-use bevy::{ecs::component::Component, prelude::Vec2};
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    prelude::Vec2,
+    reflect::Reflect,
+};
 
 use super::{hull::Hull, shield::Shield};
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, Reflect, PartialEq)]
+#[reflect(Component)]
 pub struct Starship {
     pub faction_starship: FactionStarshipSprite,
     pub engine: EngineSound,

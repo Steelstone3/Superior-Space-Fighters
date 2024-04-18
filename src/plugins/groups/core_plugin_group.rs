@@ -1,11 +1,13 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
+use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 use crate::plugins::{
     audio::audio_plugin::AudioPlugin,
     camera::camera_plugin::CameraPlugin,
     core::{
         core_events_handlers_plugin::CoreEventHandlersPlugin, core_events_plugin::CoreEventsPlugin,
-        core_resources_plugin::CoreResourcesPlugin, core_states_plugin::CoreStatesPlugin,
+        core_resources_plugin::CoreResourcesPlugin, core_save_types_plugin::CoreSaveTypesPlugin,
+        core_states_plugin::CoreStatesPlugin,
     },
     sprite::sprite_plugin::SpritePlugin,
 };
@@ -22,5 +24,7 @@ impl PluginGroup for CorePluginGroup {
             .add(SpritePlugin)
             .add(AudioPlugin)
             .add(CoreStatesPlugin)
+            .add(CoreSaveTypesPlugin)
+            .add(WorldInspectorPlugin::new())
     }
 }
