@@ -1,5 +1,5 @@
 use crate::{
-    queries::starship_queries::MutableStarshipTransformQuery,
+    queries::starship_queries::MutableAIStarshipTransformQuery,
     resources::sector_size::SectorSize,
     systems::controllers::random_generator::{generate_seed, random_value_f32},
 };
@@ -9,12 +9,12 @@ use bevy::{
 };
 
 pub fn ai_movement(
-    mut starships: Query<MutableStarshipTransformQuery>,
+    mut starships: Query<MutableAIStarshipTransformQuery>,
     space_zone_border: Res<SectorSize>,
     time: Res<Time>,
 ) {
     starships.par_iter_mut().for_each(|mut starship| {
-        let ship_speed = starship.starship.velocity * time.delta_seconds();
+        let ship_speed = starship.starship.max_velocity * time.delta_seconds();
         let movement_direction = starship.transform.rotation * Vec3::Y;
         let translation_delta = movement_direction * ship_speed;
 

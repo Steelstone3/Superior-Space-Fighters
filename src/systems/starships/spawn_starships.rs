@@ -1,5 +1,5 @@
 use crate::{
-    components::starships::starship::Starship,
+    components::starships::{ai_starship::AIStarship, starship::Starship},
     events::spawn_sprite_event::SpawnSpriteEvent,
     systems::controllers::random_generator::{generate_seed, random_value_f32, random_value_i32},
 };
@@ -18,7 +18,7 @@ pub fn spawn_random_starships(
         let ship = Starship::new(random(), random());
         let texture = ship.faction_starship.to_string();
         let size = ship.size;
-        let entity = commands.spawn(ship).id();
+        let entity = commands.spawn(ship).insert(AIStarship).id();
 
         let event = SpawnSpriteEvent {
             sprite_path: texture,

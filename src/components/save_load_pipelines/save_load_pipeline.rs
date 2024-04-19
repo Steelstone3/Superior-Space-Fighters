@@ -6,7 +6,9 @@ use bevy::{
 use bevy_save::{DefaultDebugBackend, DefaultDebugFormat, Pipeline, Snapshot, SnapshotBuilder};
 
 use crate::{
-    components::starships::starship::Starship,
+    components::starships::{
+        ai_starship::AIStarship, player_starship::PlayerStarship, starship::Starship,
+    },
     events::user_interface_events::InGameUserInterfaceEvent,
     resources::projectile_ammunition_resource::ProjectileAmmunitionResource,
 };
@@ -30,10 +32,11 @@ impl<'a> Pipeline for DebugSaveLoadPipeline<'a> {
             .deny_all()
             .allow::<ProjectileAmmunitionResource>()
             .allow::<Starship>()
+            .allow::<PlayerStarship>()
+            .allow::<AIStarship>()
             .allow::<Transform>()
             .extract_entities_matching(|filter| filter.contains::<Starship>())
             .extract_resource::<ProjectileAmmunitionResource>()
-            .clear_empty()
             .build()
     }
 

@@ -7,14 +7,14 @@ use crate::{
     },
     queries::{
         player_torpedo_queries::{PlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter},
-        starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
+        starship_queries::{MutableAIStarshipTransformQuery, StarshipFilter},
     },
     systems::controllers::random_generator::generate_seed,
 };
 
 pub fn player_torpedo_collision_with_starship(
     player_torpedoes: Query<PlayerTorpedoEntityTransformQuery, PlayerTorpedoFilter>,
-    mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
+    mut starships: Query<MutableAIStarshipTransformQuery, StarshipFilter>,
     mut player_torpedo_collision_event: EventWriter<PlayerTorpedoCollisionEvent>,
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,

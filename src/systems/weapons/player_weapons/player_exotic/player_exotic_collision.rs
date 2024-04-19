@@ -5,7 +5,7 @@ use crate::{
     },
     queries::{
         player_exotic_queries::{PlayerExoticEntityTransformQuery, PlayerExoticFilter},
-        starship_queries::{MutableStarshipTransformQuery, StarshipFilter},
+        starship_queries::{MutableAIStarshipTransformQuery, StarshipFilter},
     },
     systems::controllers::random_generator::generate_seed,
 };
@@ -13,7 +13,7 @@ use bevy::{ecs::event::EventWriter, prelude::Query};
 
 pub fn player_exotic_collision_with_starship(
     player_exotics: Query<PlayerExoticEntityTransformQuery, PlayerExoticFilter>,
-    mut starships: Query<MutableStarshipTransformQuery, StarshipFilter>,
+    mut starships: Query<MutableAIStarshipTransformQuery, StarshipFilter>,
     mut player_exotic_collision_event: EventWriter<PlayerExoticCollisionEvent>,
     mut logging_event: EventWriter<LoggingEvent>,
     mut despawn_sprite_event: EventWriter<DespawnSpriteEvent>,

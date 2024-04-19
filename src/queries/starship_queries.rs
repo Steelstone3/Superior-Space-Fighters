@@ -1,5 +1,5 @@
 use crate::components::{
-    starships::{player_starship::PlayerStarship, starship::Starship},
+    starships::{ai_starship::AIStarship, player_starship::PlayerStarship, starship::Starship},
     user_interface::targetting::target::Target,
     weapons::player_weapons::{
         player_blaster::PlayerBlaster, player_exotic::PlayerExotic, player_mine::PlayerMine,
@@ -33,9 +33,18 @@ pub struct StarshipTransformQuery {
 
 #[derive(QueryData)]
 #[query_data(mutable)]
-pub struct MutableStarshipTransformQuery {
+pub struct MutablePlayerStarshipTransformQuery {
     pub transform: &'static mut Transform,
     pub starship: &'static mut Starship,
+    pub ai: &'static mut PlayerStarship,
+}
+
+#[derive(QueryData)]
+#[query_data(mutable)]
+pub struct MutableAIStarshipTransformQuery {
+    pub transform: &'static mut Transform,
+    pub starship: &'static mut Starship,
+    pub ai: &'static mut AIStarship,
 }
 
 #[derive(QueryFilter)]

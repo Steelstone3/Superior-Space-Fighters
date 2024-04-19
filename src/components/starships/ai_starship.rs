@@ -5,4 +5,4 @@ use bevy::{
 
 #[derive(Component, Debug, Reflect, PartialEq)]
 #[reflect(Component)]
-pub struct PlayerStarship;
+pub struct AIStarship;

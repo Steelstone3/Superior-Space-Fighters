@@ -17,7 +17,10 @@ pub struct Starship {
     pub engine: EngineSound,
     pub shield: Shield,
     pub hull: Hull,
-    pub velocity: f32,
+    pub acceleration: f32,
+    pub max_velocity: f32,
+    pub current_velocity: f32,
+    pub rotation_speed: f32,
     pub size: Vec2,
 }
 
@@ -28,7 +31,10 @@ impl Default for Starship {
             engine: EngineSound::default(),
             shield: Shield::default(),
             hull: Hull::default(),
-            velocity: 30.0,
+            max_velocity: 30.0,
+            acceleration: 0.1,
+            current_velocity: 0.0,
+            rotation_speed: 0.1,
             size: Vec2::new(100.0, 100.0),
         }
     }
@@ -41,7 +47,10 @@ impl Starship {
             engine,
             shield: Shield::default(),
             hull: Hull::default(),
-            velocity: 30.0,
+            max_velocity: 30.0,
+            acceleration: 0.1,
+            current_velocity: 0.0,
+            rotation_speed: 0.1,
             size: Vec2::new(100.0, 100.0),
         }
     }
@@ -69,7 +78,10 @@ mod starship_should {
         let expected_starship = Starship {
             faction_starship: FactionStarshipSprite::OuterReachMiningGuildAllRounder,
             engine: EngineSound::Engine1,
-            velocity: 30.0,
+            max_velocity: 30.0,
+            acceleration: 0.1,
+            current_velocity: 0.0,
+            rotation_speed: 1.0,
             size: Vec2 { x: 100.0, y: 100.0 },
             shield: Shield {
                 maximum: 100,
@@ -96,7 +108,10 @@ mod starship_should {
         let expected_starship = Starship {
             faction_starship: FactionStarshipSprite::SiliconFangTechnocracyAllRounder,
             engine: EngineSound::Engine4,
-            velocity: 30.0,
+            max_velocity: 30.0,
+            acceleration: 0.1,
+            current_velocity: 0.0,
+            rotation_speed: 1.0,
             size: Vec2 { x: 100.0, y: 100.0 },
             shield: Shield {
                 maximum: 100,

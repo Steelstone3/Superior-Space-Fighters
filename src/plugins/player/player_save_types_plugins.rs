@@ -3,15 +3,15 @@ use bevy::app::Plugin;
 use crate::{
     assets::images::starships::faction_starships::FactionStarshipSprite,
     components::starships::{
-        ai_starship::AIStarship, hull::Hull, shield::Shield, starship::Starship,
+        hull::Hull, player_starship::PlayerStarship, shield::Shield, starship::Starship,
     },
 };
 
-pub struct AISaveTypesPlugin;
+pub struct PlayerSaveTypesPlugin;
 
-impl Plugin for AISaveTypesPlugin {
+impl Plugin for PlayerSaveTypesPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.register_type::<AIStarship>();
+        app.register_type::<PlayerStarship>();
         app.register_type::<Starship>();
         app.register_type::<Shield>();
         app.register_type::<Hull>();

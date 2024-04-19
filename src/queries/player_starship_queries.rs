@@ -19,6 +19,7 @@ pub struct PlayerStarshipTransformQuery {
 pub struct MutablePlayerStarshipTransformQuery {
     pub transform: &'static mut Transform,
     pub player_starship: &'static mut PlayerStarship,
+    pub starship: &'static mut Starship,
 }
 
 #[derive(QueryFilter)]

@@ -18,15 +18,17 @@ pub fn spawn_starship_sprite_on_load(
 ) {
     for starship in spriteless_starships.iter() {
         let texture = asset_server.load(starship.1.faction_starship.to_string());
+        let custom_size = Some(starship.1.size);
+        let transform = *starship.2;
 
         if let Some(mut starship_entity_commands) = commands.get_entity(starship.0) {
             starship_entity_commands.insert(SpriteBundle {
                 sprite: Sprite {
-                    custom_size: Some(starship.1.size),
+                    custom_size,
                     ..Default::default()
                 },
                 texture,
-                transform: *starship.2,
+                transform,
                 ..Default::default()
             });
         };
