@@ -4,6 +4,7 @@ use crate::{
         player_mine_ammunition_consumption::player_mine_ammunition_consumption,
         player_mine_lifetime::player_mine_lifetime, player_mine_movement::player_mine_movement,
         spawn_player_mine_sprite::spawn_player_mine_sprite,
+        spawn_player_mine_sprite_on_load::spawn_player_mine_sprite_on_load,
     },
 };
 use bevy::{
@@ -24,6 +25,7 @@ impl Plugin for WeaponMinePlugin {
                 player_mine_movement,
             )
                 .run_if(in_state(GameState::InGame)),
-        );
+        )
+        .add_systems(Update, spawn_player_mine_sprite_on_load);
     }
 }

@@ -5,6 +5,7 @@ use crate::{
         player_torpedo_lifetime::player_torpedo_lifetime,
         player_torpedo_movement::player_torpedo_movement,
         spawn_player_torpedo_sprite::spawn_player_torpedo_sprite,
+        spawn_player_torpedo_sprite_on_load::spawn_player_torpedo_sprite_on_load,
     },
 };
 use bevy::{
@@ -25,6 +26,7 @@ impl Plugin for WeaponTorpedoPlugin {
                 player_torpedo_movement,
             )
                 .run_if(in_state(GameState::InGame)),
-        );
+        )
+        .add_systems(Update, spawn_player_torpedo_sprite_on_load);
     }
 }

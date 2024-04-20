@@ -1,6 +1,10 @@
-use bevy::ecs::system::Resource;
+use bevy::{
+    ecs::{reflect::ReflectResource, system::Resource},
+    reflect::Reflect,
+};
 
-#[derive(Resource)]
+#[derive(Resource, Reflect, Default)]
+#[reflect(Resource)]
 pub struct SelectedWeaponResource {
     pub selected_weapon: u32,
 }

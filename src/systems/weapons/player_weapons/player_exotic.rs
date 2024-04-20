@@ -6,3 +6,4 @@ pub mod player_exotic_movement;
 pub mod spawn_player_exotic_collision_sound;
 pub mod spawn_player_exotic_sound;
 pub mod spawn_player_exotic_sprite;
+pub mod spawn_player_exotic_sprite_on_load;

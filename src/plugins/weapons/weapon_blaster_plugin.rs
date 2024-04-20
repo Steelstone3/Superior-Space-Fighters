@@ -5,6 +5,7 @@ use crate::{
         player_blaster_lifetime::player_blaster_lifetime,
         player_blaster_movement::player_blaster_movement,
         spawn_player_blaster_sprite::spawn_player_blaster_sprite,
+        spawn_player_blaster_sprite_on_load::spawn_player_blaster_sprite_on_load,
     },
 };
 use bevy::{
@@ -25,6 +26,7 @@ impl Plugin for WeaponBlasterPlugin {
                 player_blaster_movement,
             )
                 .run_if(in_state(GameState::InGame)),
-        );
+        )
+        .add_systems(Update, spawn_player_blaster_sprite_on_load);
     }
 }

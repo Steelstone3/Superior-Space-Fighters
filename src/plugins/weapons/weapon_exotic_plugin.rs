@@ -5,6 +5,7 @@ use crate::{
         player_exotic_lifetime::player_exotic_lifetime,
         player_exotic_movement::player_exotic_movement,
         spawn_player_exotic_sprite::spawn_player_exotic_sprite,
+        spawn_player_exotic_sprite_on_load::spawn_player_exotic_sprite_on_load,
     },
 };
 use bevy::{
@@ -25,6 +26,7 @@ impl Plugin for WeaponExoticPlugin {
                 player_exotic_movement,
             )
                 .run_if(in_state(GameState::InGame)),
-        );
+        )
+        .add_systems(Update, spawn_player_exotic_sprite_on_load);
     }
 }

@@ -1,10 +1,11 @@
 use super::weapon::Weapon;
 use bevy::{
     ecs::component::Component,
+    reflect::Reflect,
     time::{Timer, TimerMode},
 };
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
 pub struct LifetimeWeapon {
     pub lifetime: Timer,
     pub weapon: Weapon,

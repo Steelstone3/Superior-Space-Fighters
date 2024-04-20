@@ -1,8 +1,8 @@
-use bevy::ecs::component::Component;
+use bevy::{ecs::component::Component, reflect::Reflect};
 
 use crate::systems::controllers::random_generator::random_value_i32;
 
-#[derive(Component, Copy, Clone, Debug, PartialEq)]
+#[derive(Component, Copy, Clone, Debug, PartialEq, Reflect)]
 pub struct Damage {
     pub base_damage: u32,
 }

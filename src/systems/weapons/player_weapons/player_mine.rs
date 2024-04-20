@@ -6,3 +6,4 @@ pub mod player_mine_movement;
 pub mod spawn_player_mine_collision_sound;
 pub mod spawn_player_mine_sound;
 pub mod spawn_player_mine_sprite;
+pub mod spawn_player_mine_sprite_on_load;

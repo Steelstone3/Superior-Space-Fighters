@@ -5,9 +5,14 @@ use crate::{
     },
     components::weapons::weapon_types::ranged_weapon::RangedWeapon,
 };
-use bevy::{ecs::component::Component, math::Vec3};
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    math::Vec3,
+    reflect::Reflect,
+};
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
+#[reflect(Component)]
 pub struct Blaster {
     pub blaster: BlasterSprite,
     pub firing_sound: BlasterSound,

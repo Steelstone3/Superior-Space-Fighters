@@ -6,3 +6,4 @@ pub mod player_blaster_movement;
 pub mod spawn_player_blaster_collision_sound;
 pub mod spawn_player_blaster_sound;
 pub mod spawn_player_blaster_sprite;
+pub mod spawn_player_blaster_sprite_on_load;

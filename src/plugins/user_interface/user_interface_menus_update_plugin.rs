@@ -25,8 +25,14 @@ impl Plugin for UserInterfaceMenusUpdatePlugin {
                 OnExit(GameState::MainMenu),
                 despawn_main_menu_user_interface,
             )
-            .add_systems(OnEnter(GameState::Paused), spawn_pause_menu_user_interface)
-            .add_systems(OnExit(GameState::Paused), despawn_pause_menu_user_interface)
+            .add_systems(
+                OnEnter(GameState::PauseMenu),
+                spawn_pause_menu_user_interface,
+            )
+            .add_systems(
+                OnExit(GameState::PauseMenu),
+                despawn_pause_menu_user_interface,
+            )
             .add_systems(
                 Update,
                 user_interface_main_menu_button_update.run_if(in_state(GameState::MainMenu)),
