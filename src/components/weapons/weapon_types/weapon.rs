@@ -1,8 +1,8 @@
-use bevy::{ecs::component::Component, math::Vec2};
+use bevy::{ecs::component::Component, math::Vec2, reflect::Reflect};
 
 use super::damage::Damage;
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
 pub struct Weapon {
     pub velocity: f32,
     pub size: Vec2,

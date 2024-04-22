@@ -1,6 +1,7 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
 
 use crate::plugins::player::{
+    player_save_types_plugins::PlayerSaveTypesPlugin,
     player_sound_effects_update_plugin::PlayerSoundEffectsUpdatePlugin,
     player_update_plugin::PlayerUpdatePlugin,
 };
@@ -12,5 +13,6 @@ impl PluginGroup for PlayerPluginGroup {
         PluginGroupBuilder::start::<Self>()
             .add(PlayerUpdatePlugin)
             .add(PlayerSoundEffectsUpdatePlugin)
+            .add(PlayerSaveTypesPlugin)
     }
 }

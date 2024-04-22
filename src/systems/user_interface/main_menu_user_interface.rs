@@ -12,7 +12,10 @@ use bevy::{
 };
 
 use crate::{
-    components::user_interface::main_menu_parent::MainMenuParent,
+    components::user_interface::{
+        main_menu_buttons::{LoadGameButton, NewGameButton},
+        main_menu_parent::MainMenuParent,
+    },
     queries::main_menu_parent_queries::MainMenuParentEntityQuery,
 };
 
@@ -23,6 +26,7 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                 display: Display::Grid,
                 grid_template_columns: vec![GridTrack::flex(1.0)],
                 grid_template_rows: vec![
+                    GridTrack::flex(1.0),
                     GridTrack::flex(1.0),
                     GridTrack::flex(1.0),
                     GridTrack::flex(1.0),
@@ -65,9 +69,38 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                     background_color: Color::rgb(0.15, 0.15, 0.15).into(),
                     ..default()
                 })
+                .insert(NewGameButton)
                 .with_children(|parent| {
                     parent.spawn(TextBundle::from_section(
                         "New Game",
+                        TextStyle {
+                            font_size: 30.0,
+                            color: Color::rgb(0.9, 0.9, 0.9),
+                            ..default()
+                        },
+                    ));
+                });
+
+            parent
+                .spawn(ButtonBundle {
+                    style: Style {
+                        width: Val::Px(150.0),
+                        height: Val::Px(65.0),
+                        border: UiRect::all(Val::Px(5.0)),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                    border_color: BorderColor(Color::BLACK),
+                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    ..default()
+                })
+                .insert(LoadGameButton)
+                .with_children(|parent| {
+                    parent.spawn(TextBundle::from_section(
+                        "Load Game",
                         TextStyle {
                             font_size: 30.0,
                             color: Color::rgb(0.9, 0.9, 0.9),

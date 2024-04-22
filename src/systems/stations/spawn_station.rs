@@ -1,5 +1,5 @@
 use crate::{
-    components::station::Station,
+    components::station::SpaceStation,
     systems::controllers::random_generator::{generate_seed, random_value_f32},
 };
 use bevy::{
@@ -9,7 +9,7 @@ use bevy::{
 use rand::random;
 
 pub fn spawn_random_station(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let station = Station::new(random(), 500.0);
+    let station = SpaceStation::new(random(), 500.0);
     let texture = asset_server.load(station.station.to_string());
 
     commands

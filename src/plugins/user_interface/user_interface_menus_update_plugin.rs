@@ -1,6 +1,6 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs, OnEnter, OnExit},
+    ecs::schedule::{OnEnter, OnExit},
 };
 
 use crate::{
@@ -12,7 +12,7 @@ use crate::{
         pause_menu_user_interface::{
             despawn_pause_menu_user_interface, spawn_pause_menu_user_interface,
         },
-        user_interface_main_menu_button_update::user_interface_main_menu_button_update,
+        user_interface_menu_button_update::user_interface_menu_button_update,
     },
 };
 
@@ -25,11 +25,14 @@ impl Plugin for UserInterfaceMenusUpdatePlugin {
                 OnExit(GameState::MainMenu),
                 despawn_main_menu_user_interface,
             )
-            .add_systems(OnEnter(GameState::Paused), spawn_pause_menu_user_interface)
-            .add_systems(OnExit(GameState::Paused), despawn_pause_menu_user_interface)
             .add_systems(
-                Update,
-                user_interface_main_menu_button_update.run_if(in_state(GameState::MainMenu)),
-            );
+                OnEnter(GameState::PauseMenu),
+                spawn_pause_menu_user_interface,
+            )
+            .add_systems(
+                OnExit(GameState::PauseMenu),
+                despawn_pause_menu_user_interface,
+            )
+            .add_systems(Update, user_interface_menu_button_update);
     }
 }

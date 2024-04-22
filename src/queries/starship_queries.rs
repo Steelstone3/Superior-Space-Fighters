@@ -1,5 +1,5 @@
 use crate::components::{
-    starships::{player_starship::PlayerStarship, starship::Starship},
+    starships::{ai_starship::AIStarship, player_starship::PlayerStarship, starship::Starship},
     user_interface::targetting::target::Target,
     weapons::player_weapons::{
         player_blaster::PlayerBlaster, player_exotic::PlayerExotic, player_mine::PlayerMine,
@@ -15,32 +15,37 @@ use bevy::{
 };
 
 #[derive(QueryData)]
-pub struct StarshipQuery {
+pub struct AIStarshipQuery {
     pub starship: &'static Starship,
+    pub ai_starship: &'static AIStarship,
 }
 
 #[derive(QueryData)]
-pub struct StarshipEntityQuery {
+pub struct AIStarshipEntityQuery {
     pub entity: Entity,
     pub starship: &'static Starship,
+    pub ai_starship: &'static AIStarship,
 }
 
 #[derive(QueryData)]
-pub struct StarshipTransformQuery {
+pub struct AIStarshipTransformQuery {
     pub transform: &'static Transform,
     pub starship: &'static Starship,
+    pub ai_starship: &'static AIStarship,
 }
 
 #[derive(QueryData)]
 #[query_data(mutable)]
-pub struct MutableStarshipTransformQuery {
+pub struct MutableAIStarshipTransformQuery {
     pub transform: &'static mut Transform,
     pub starship: &'static mut Starship,
+    pub ai: &'static mut AIStarship,
 }
 
 #[derive(QueryFilter)]
-pub struct StarshipFilter {
+pub struct AIStarshipFilter {
     with_starship: With<Starship>,
+    with_ai_starship: With<AIStarship>,
     without_player_starship: Without<PlayerStarship>,
     without_target: Without<Target>,
     without_player_blaster: Without<PlayerBlaster>,

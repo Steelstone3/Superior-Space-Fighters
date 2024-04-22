@@ -7,6 +7,7 @@ pub mod groups;
 pub mod music;
 pub mod player;
 pub mod run_conditions;
+pub mod save_load_game;
 pub mod space;
 pub mod sprite;
 pub mod trading;

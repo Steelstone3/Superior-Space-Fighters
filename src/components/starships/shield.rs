@@ -1,7 +1,7 @@
-use bevy::ecs::component::Component;
+use bevy::{ecs::component::Component, reflect::Reflect};
 
 // TODO implement regenerative shields
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
 pub struct Shield {
     pub maximum: u32,
     pub current: u32,

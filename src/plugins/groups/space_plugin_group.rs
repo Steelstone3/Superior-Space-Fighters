@@ -1,7 +1,8 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
 
 use crate::plugins::space::{
-    maintain_space_plugin::MaintainSpacePlugin, spawn_space_plugin::SpawnSpacePlugin,
+    maintain_space_plugin::MaintainSpacePlugin, space_save_types::SpaceSaveTypesPlugin,
+    spawn_space_plugin::SpawnSpacePlugin,
 };
 
 pub struct SpacePluginGroup;
@@ -11,5 +12,6 @@ impl PluginGroup for SpacePluginGroup {
         PluginGroupBuilder::start::<Self>()
             .add(SpawnSpacePlugin)
             .add(MaintainSpacePlugin)
+            .add(SpaceSaveTypesPlugin)
     }
 }

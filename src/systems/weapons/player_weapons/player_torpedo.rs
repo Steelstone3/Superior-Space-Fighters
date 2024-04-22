@@ -6,3 +6,4 @@ pub mod player_torpedo_movement;
 pub mod spawn_player_torpedo_collision_sound;
 pub mod spawn_player_torpedo_sound;
 pub mod spawn_player_torpedo_sprite;
+pub mod spawn_player_torpedo_sprite_on_load;

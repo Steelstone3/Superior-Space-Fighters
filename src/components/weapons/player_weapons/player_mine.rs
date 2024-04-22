@@ -1,8 +1,12 @@
-use bevy::ecs::component::Component;
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    reflect::Reflect,
+};
 
 use crate::components::weapons::ai_weapons::mine::Mine;
 
-#[derive(Component, Debug, PartialEq, Default)]
+#[derive(Component, Debug, PartialEq, Default, Reflect)]
+#[reflect(Component)]
 pub struct PlayerMine {
     pub mine: Mine,
 }

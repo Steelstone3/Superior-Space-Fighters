@@ -7,7 +7,7 @@ use bevy::{
     },
 };
 
-use crate::events::audio_events::{PauseAudioEvent, PlayAudioEvent, SpawnAudioEvent};
+use crate::events::audio_events::SpawnAudioEvent;
 
 pub fn spawn_audio(
     mut spawn_audio_events: EventReader<SpawnAudioEvent>,
@@ -25,24 +25,14 @@ pub fn spawn_audio(
     }
 }
 
-pub fn pause_audio(
-    audio_controllers: Query<&AudioSink>,
-    mut event_pause_audio: EventReader<PauseAudioEvent>,
-) {
-    for _ in event_pause_audio.read() {
-        for audio_controller in audio_controllers.iter() {
-            audio_controller.pause();
-        }
+pub fn pause_audio(audio_controllers: Query<&AudioSink>) {
+    for audio_controller in audio_controllers.iter() {
+        audio_controller.pause();
     }
 }
 
-pub fn play_audio(
-    audio_controllers: Query<&AudioSink>,
-    mut event_play_audio: EventReader<PlayAudioEvent>,
-) {
-    for _ in event_play_audio.read() {
-        for audio_controller in audio_controllers.iter() {
-            audio_controller.play();
-        }
+pub fn play_audio(audio_controllers: Query<&AudioSink>) {
+    for audio_controller in audio_controllers.iter() {
+        audio_controller.play();
     }
 }

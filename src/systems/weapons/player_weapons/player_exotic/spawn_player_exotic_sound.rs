@@ -1,13 +1,9 @@
 use crate::{
-    assets::sounds::starships::weapons::exotics::ExoticSound,
-    events::{audio_events::SpawnAudioEvent, combat_events::FirePlayerExoticEvent},
+    assets::sounds::starships::weapons::exotics::ExoticSound, events::audio_events::SpawnAudioEvent,
 };
 use bevy::{
     audio::PlaybackSettings,
-    ecs::{
-        component::Component,
-        event::{EventReader, EventWriter},
-    },
+    ecs::{component::Component, event::EventWriter},
     prelude::Commands,
 };
 
@@ -16,19 +12,16 @@ struct PlayerExoticSound;
 
 pub fn spawn_player_exotic_sound(
     mut commands: Commands,
-    mut fire_player_exotic_event: EventReader<FirePlayerExoticEvent>,
     mut spawn_audio_event: EventWriter<SpawnAudioEvent>,
 ) {
-    for _ in fire_player_exotic_event.read() {
-        let sound_path = ExoticSound::default().to_string();
-        let entity = commands.spawn(PlayerExoticSound).id();
+    let sound_path = ExoticSound::default().to_string();
+    let entity = commands.spawn(PlayerExoticSound).id();
 
-        let event = SpawnAudioEvent {
-            entity,
-            audio_path: sound_path,
-            playback_settings: PlaybackSettings::default(),
-        };
+    let event = SpawnAudioEvent {
+        entity,
+        audio_path: sound_path,
+        playback_settings: PlaybackSettings::default(),
+    };
 
-        spawn_audio_event.send(event);
-    }
+    spawn_audio_event.send(event);
 }

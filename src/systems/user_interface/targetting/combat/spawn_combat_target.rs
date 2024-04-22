@@ -1,6 +1,6 @@
 use crate::{
     components::user_interface::targetting::target::Target,
-    queries::starship_queries::StarshipTransformQuery,
+    queries::starship_queries::AIStarshipTransformQuery,
     resources::targetting_settings::TargettingSettingsResource,
 };
 use bevy::{
@@ -16,7 +16,7 @@ pub fn spawn_combat_target(
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
     mut targetting_setting: ResMut<TargettingSettingsResource>,
-    starships: Query<StarshipTransformQuery>,
+    starships: Query<AIStarshipTransformQuery>,
 ) {
     if !input.just_pressed(KeyCode::KeyT) {
         return;

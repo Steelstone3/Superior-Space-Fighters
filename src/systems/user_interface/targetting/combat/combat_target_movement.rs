@@ -1,7 +1,7 @@
 use crate::{
     queries::{
         player_starship_queries::{PlayerStarshipFilter, PlayerStarshipTransformQuery},
-        starship_queries::{StarshipFilter, StarshipTransformQuery},
+        starship_queries::AIStarshipTransformQuery,
         target_queries::{TargetFilter, TargetMutableTransformQuery},
     },
     resources::targetting_settings::TargettingSettingsResource,
@@ -12,7 +12,7 @@ pub fn combat_target_movement(
     targetting_setting: Res<TargettingSettingsResource>,
     mut target_transforms: Query<TargetMutableTransformQuery, TargetFilter>,
     player_starship_transforms: Query<PlayerStarshipTransformQuery, PlayerStarshipFilter>,
-    starship_transforms: Query<StarshipTransformQuery, StarshipFilter>,
+    starship_transforms: Query<AIStarshipTransformQuery>,
 ) {
     let Ok(player_starship_transform) = player_starship_transforms.get_single() else {
         return;
@@ -22,7 +22,6 @@ pub fn combat_target_movement(
         return;
     };
 
-    // tracing::info!("Find Closest Starship",);
     let mut closest_ship = None;
     let mut distance = targetting_setting.maximum_distance;
 
@@ -36,10 +35,7 @@ pub fn combat_target_movement(
 
             if distance <= targetting_setting.maximum_distance {
                 closest_ship = Some(starship_transform);
-                // tracing::info!("Closest Ship Found");
             }
-        } else {
-            continue;
         }
     }
 

@@ -4,7 +4,7 @@ use bevy::{
     transform::components::Transform,
 };
 
-#[derive(Event)]
+#[derive(Event, Clone)]
 pub struct SpawnSpriteEvent {
     pub sprite_path: String,
     pub size: Vec2,

@@ -5,9 +5,13 @@ use crate::{
     },
     components::weapons::weapon_types::lifetime_weapon::LifetimeWeapon,
 };
-use bevy::ecs::component::Component;
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    reflect::Reflect,
+};
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
+#[reflect(Component)]
 pub struct Mine {
     pub mine: MineSprite,
     pub firing_sound: MineSound,

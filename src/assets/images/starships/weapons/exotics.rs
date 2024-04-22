@@ -1,7 +1,8 @@
+use bevy::reflect::Reflect;
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(Default, RandGen, Debug, PartialEq)]
+#[derive(Default, RandGen, Debug, PartialEq, Reflect)]
 pub enum ExoticSprite {
     #[default]
     Exotic1,

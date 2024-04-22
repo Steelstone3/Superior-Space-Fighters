@@ -1,10 +1,13 @@
 use crate::{
+    events::combat_events::FirePlayerTorpedoEvent,
+    plugins::run_conditions::event_called,
     states::core_states::GameState,
     systems::weapons::player_weapons::player_torpedo::{
         player_torpedo_ammunition_consumption::player_torpedo_ammunition_consumption,
         player_torpedo_lifetime::player_torpedo_lifetime,
         player_torpedo_movement::player_torpedo_movement,
         spawn_player_torpedo_sprite::spawn_player_torpedo_sprite,
+        spawn_player_torpedo_sprite_on_load::spawn_player_torpedo_sprite_on_load,
     },
 };
 use bevy::{
@@ -21,6 +24,13 @@ impl Plugin for WeaponTorpedoPlugin {
             (
                 spawn_player_torpedo_sprite,
                 player_torpedo_ammunition_consumption,
+            )
+                .run_if(event_called::<FirePlayerTorpedoEvent>),
+        )
+        .add_systems(
+            Update,
+            (
+                spawn_player_torpedo_sprite_on_load,
                 player_torpedo_lifetime,
                 player_torpedo_movement,
             )

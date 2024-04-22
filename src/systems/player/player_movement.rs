@@ -7,77 +7,48 @@ use bevy::{
 use crate::queries::player_starship_queries::MutablePlayerStarshipTransformQuery;
 
 pub fn player_movement(
-    mut players: Query<MutablePlayerStarshipTransformQuery>,
+    mut player_query_items: Query<MutablePlayerStarshipTransformQuery>,
     input: Res<ButtonInput<KeyCode>>,
     time: Res<Time>,
 ) {
-    for mut player in &mut players {
-        let player_speed = player.player_starship.current_velocity * time.delta_seconds();
+    for mut player_query_item in &mut player_query_items {
+        let mut rotation_factor = 0.0;
 
-        // Forwards
+        if input.pressed(KeyCode::KeyA) {
+            rotation_factor += 1.0;
+        } else if input.pressed(KeyCode::KeyD) {
+            rotation_factor -= 1.0;
+        }
+
         if input.pressed(KeyCode::KeyW) {
-            player.player_starship.current_velocity = (player.player_starship.current_velocity
-                + player.player_starship.acceleration)
-                .clamp(
-                    -player.player_starship.ship.velocity,
-                    player.player_starship.ship.velocity,
-                );
-
-            let movement_direction = player.transform.rotation * Vec3::Y;
-            let translation_delta = movement_direction * player_speed;
-            player.transform.translation += translation_delta;
+            player_query_item.starship.current_velocity += player_query_item.starship.acceleration;
+        } else if input.pressed(KeyCode::KeyS) {
+            player_query_item.starship.current_velocity -= player_query_item.starship.acceleration;
         }
-        // Backwards
-        else if input.pressed(KeyCode::KeyS) {
-            player.player_starship.current_velocity = (player.player_starship.current_velocity
-                - player.player_starship.acceleration)
-                .clamp(
-                    -player.player_starship.ship.velocity,
-                    player.player_starship.ship.velocity,
-                );
 
-            let movement_direction = player.transform.rotation * Vec3::Y;
-            let translation_delta = movement_direction * player_speed / 2.0;
-            player.transform.translation += translation_delta;
-        }
-        // Slow down
-        else {
-            let movement_direction = player.transform.rotation * Vec3::Y;
-
-            if player.player_starship.current_velocity > 0.0 {
-                player.player_starship.current_velocity = (player.player_starship.current_velocity
-                    - player.player_starship.acceleration)
-                    .clamp(
-                        -player.player_starship.ship.velocity,
-                        player.player_starship.ship.velocity,
-                    );
-                let translation_delta = movement_direction * -player_speed;
-                player.transform.translation -= translation_delta;
-            } else if player.player_starship.current_velocity < 0.0 {
-                player.player_starship.current_velocity = (player.player_starship.current_velocity
-                    + player.player_starship.acceleration)
-                    .clamp(
-                        -player.player_starship.ship.velocity / 2.0,
-                        player.player_starship.ship.velocity,
-                    );
-                let translation_delta = movement_direction * player_speed;
-                player.transform.translation += translation_delta;
+        if !input.any_pressed([KeyCode::KeyW, KeyCode::KeyS]) {
+            if player_query_item.starship.current_velocity > 0.0 {
+                player_query_item.starship.current_velocity -=
+                    player_query_item.starship.acceleration;
+            } else if player_query_item.starship.current_velocity < 0.0 {
+                player_query_item.starship.current_velocity +=
+                    player_query_item.starship.acceleration;
             }
         }
 
-        // Rotate Right
-        if input.pressed(KeyCode::KeyD) {
-            let reverse_player_rotation = player.player_starship.rotation * -1.0;
-            player
-                .transform
-                .rotate_z(reverse_player_rotation * time.delta_seconds());
-        }
+        player_query_item.starship.current_velocity =
+            player_query_item.starship.current_velocity.clamp(
+                -player_query_item.starship.max_velocity,
+                player_query_item.starship.max_velocity,
+            );
 
-        // Rotate Left
-        if input.pressed(KeyCode::KeyA) {
-            player
-                .transform
-                .rotate_z(player.player_starship.rotation * time.delta_seconds());
-        }
+        player_query_item.transform.rotate_z(
+            rotation_factor * player_query_item.starship.rotation_speed * time.delta_seconds(),
+        );
+
+        let movement_direction = player_query_item.transform.rotation * Vec3::Y;
+        let movement_distance = player_query_item.starship.current_velocity * time.delta_seconds();
+        let translation_delta = movement_direction * movement_distance;
+        player_query_item.transform.translation += translation_delta;
     }
 }
