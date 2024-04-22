@@ -69,7 +69,7 @@ impl<'a> Pipeline for SaveLoadPipeline<'a> {
             .build()
     }
 
-    fn apply<'b>(world: &'b mut World, snapshot: &Snapshot) -> Result<(), bevy_save::Error> {
+    fn apply(world: &mut World, snapshot: &Snapshot) -> Result<(), bevy_save::Error> {
         tracing::info!("Loading entities and resources");
         //update game ui on load
         world.send_event(InGameUserInterfaceEvent {});

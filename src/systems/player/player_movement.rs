@@ -21,21 +21,15 @@ pub fn player_movement(
         }
 
         if input.pressed(KeyCode::KeyW) {
-            player_query_item.starship.current_velocity =
-                player_query_item.starship.current_velocity
-                    + player_query_item.starship.acceleration;
+            player_query_item.starship.current_velocity += player_query_item.starship.acceleration;
         } else if input.pressed(KeyCode::KeyS) {
-            player_query_item.starship.current_velocity =
-                player_query_item.starship.current_velocity
-                    - player_query_item.starship.acceleration;
-        } else if player_query_item.starship.current_velocity > 0.0 {
-            player_query_item.starship.current_velocity =
-                player_query_item.starship.current_velocity
-                    - player_query_item.starship.acceleration;
+            player_query_item.starship.current_velocity -= player_query_item.starship.acceleration;
+        }
+
+        if player_query_item.starship.current_velocity > 0.0 {
+            player_query_item.starship.current_velocity -= player_query_item.starship.acceleration;
         } else if player_query_item.starship.current_velocity < 0.0 {
-            player_query_item.starship.current_velocity =
-                player_query_item.starship.current_velocity
-                    + player_query_item.starship.acceleration;
+            player_query_item.starship.current_velocity += player_query_item.starship.acceleration;
         }
 
         player_query_item.starship.current_velocity =

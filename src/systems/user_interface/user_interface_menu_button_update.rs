@@ -30,23 +30,23 @@ pub fn user_interface_menu_button_update(
             Interaction::Pressed => {
                 *interaction.background_colour = BackgroundColor(Color::rgb(0.35, 0.75, 0.35));
                 interaction.border_colour.0 = Color::RED;
-                if let Some(_) = interaction.new_game_button {
+                if interaction.new_game_button.is_some() {
                     logging_event_writer.send(LoggingEvent {
                         message: "Starting New Game".to_string(),
                     });
                     next_game_state.set(GameState::InGame);
                     next_game_event_writer.send(NewGameEvent);
-                } else if let Some(_) = interaction.save_game_button {
+                } else if interaction.save_game_button.is_some() {
                     logging_event_writer.send(LoggingEvent {
                         message: "Saving Game".to_string(),
                     });
                     save_game_event.send(SaveGameEvent);
-                } else if let Some(_) = interaction.load_game_button {
+                } else if interaction.load_game_button.is_some() {
                     logging_event_writer.send(LoggingEvent {
                         message: "Loading Game".to_string(),
                     });
                     load_game_event.send(LoadGameEvent);
-                } else if let Some(_) = interaction.quit_game_button {
+                } else if interaction.quit_game_button.is_some() {
                     logging_event_writer.send(LoggingEvent {
                         message: "Returning to main menu".to_string(),
                     });
