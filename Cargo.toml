@@ -1,7 +1,7 @@
 [package]
 name = "superior-space-fighters"
 version = "0.6.0"
-authors = ["Skippy <steelstone3@gmail.com>"]
+authors = ["Skippy <steelstone3@gmail.com>", "Demengies <Demengies@gmail.com>"]
 edition = "2021"
 homepage = "https://github.com/Steelstone3/Superior-Space-Fighters"
 repository = "https://github.com/Steelstone3/Superior-Space-Fighters"
