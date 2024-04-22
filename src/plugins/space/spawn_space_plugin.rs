@@ -1,9 +1,11 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::OnExit,
+    ecs::schedule::{IntoSystemConfigs, OnExit},
 };
 
 use crate::{
+    events::user_interface_events::NewGameEvent,
+    plugins::run_conditions::event_called,
     states::core_states::GameState,
     systems::{
         planets::spawn_planet::spawn_random_planets,
@@ -28,7 +30,8 @@ impl Plugin for SpawnSpacePlugin {
                 spawn_random_empty_space_background,
                 spawn_random_station,
                 spawn_random_planets,
-            ),
+            )
+                .run_if(event_called::<NewGameEvent>),
         )
         .add_systems(
             Update,

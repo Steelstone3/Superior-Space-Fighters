@@ -1,4 +1,6 @@
 use crate::{
+    events::combat_events::FirePlayerExoticEvent,
+    plugins::run_conditions::event_called,
     states::core_states::GameState,
     systems::weapons::player_weapons::player_exotic::{
         player_exotic_ammunition_consumption::player_exotic_ammunition_consumption,
@@ -22,11 +24,17 @@ impl Plugin for WeaponExoticPlugin {
             (
                 spawn_player_exotic_sprite,
                 player_exotic_ammunition_consumption,
-                player_exotic_lifetime,
+            )
+                .run_if(event_called::<FirePlayerExoticEvent>),
+        )
+        .add_systems(
+            Update,
+            (
                 player_exotic_movement,
+                player_exotic_lifetime,
+                spawn_player_exotic_sprite_on_load,
             )
                 .run_if(in_state(GameState::InGame)),
-        )
-        .add_systems(Update, spawn_player_exotic_sprite_on_load);
+        );
     }
 }

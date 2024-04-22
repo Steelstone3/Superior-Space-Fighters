@@ -10,7 +10,7 @@ use bevy::{
 use crate::{
     events::{
         audio_events::{PauseAudioEvent, PlayAudioEvent},
-        game_state_events::PauseEvent,
+        user_interface_events::PauseEvent,
     },
     states::core_states::GameState,
 };

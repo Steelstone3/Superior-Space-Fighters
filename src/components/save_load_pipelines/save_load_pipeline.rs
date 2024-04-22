@@ -18,7 +18,7 @@ use crate::{
             player_torpedo::PlayerTorpedo,
         },
     },
-    events::{game_state_events::PauseEvent, user_interface_events::InGameUserInterfaceEvent},
+    events::user_interface_events::{InGameUserInterfaceEvent, PauseEvent},
     resources::{
         projectile_ammunition_resource::ProjectileAmmunitionResource,
         selected_weapon::SelectedWeaponResource,

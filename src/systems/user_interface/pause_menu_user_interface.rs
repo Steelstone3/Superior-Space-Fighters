@@ -3,14 +3,19 @@ use bevy::{
     hierarchy::{BuildChildren, DespawnRecursiveExt},
     prelude::default,
     render::color::Color,
+    text::{Text, TextStyle},
     ui::{
-        node_bundles::{NodeBundle, TextBundle},
-        Display, GridTrack, PositionType, Style, Val,
+        node_bundles::{ButtonBundle, NodeBundle, TextBundle},
+        AlignItems, BorderColor, Display, GridTrack, JustifyContent, JustifyItems, Style, UiRect,
+        Val,
     },
 };
 
 use crate::{
-    components::user_interface::pause_menu_parent::PauseMenuParent,
+    components::user_interface::{
+        main_menu_buttons::{LoadGameButton, SaveGameButton},
+        pause_menu_parent::PauseMenuParent,
+    },
     queries::pause_menu_parent_queries::PauseMenuParentEntityQuery,
 };
 
@@ -19,28 +24,90 @@ pub fn spawn_pause_menu_user_interface(mut commands: Commands) {
         .spawn(NodeBundle {
             style: Style {
                 display: Display::Grid,
-                grid_template_columns: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
-                grid_template_rows: vec![GridTrack::flex(1.0), GridTrack::flex(1.0)],
-                //Must set specific width + height otherwise images wont know what size to display
-                width: Val::Px(200.0),
-                height: Val::Px(100.0),
-                position_type: PositionType::Absolute,
-                left: Val::Percent(0.0),
-                top: Val::Percent(0.0),
+                grid_template_columns: vec![GridTrack::flex(1.0)],
+                grid_template_rows: vec![
+                    GridTrack::flex(1.0),
+                    GridTrack::flex(1.0),
+                    GridTrack::flex(1.0),
+                    GridTrack::flex(1.0),
+                ],
+                width: Val::Percent(100.0),
+                height: Val::Percent(100.0),
+                align_items: AlignItems::Center,
+                justify_items: JustifyItems::Center,
                 ..default()
             },
-            background_color: Color::rgba(0.0, 0.0, 0.0, 0.0).into(),
             ..default()
         })
-        .insert(PauseMenuParent {})
+        .insert(PauseMenuParent)
         .with_children(|parent| {
-            parent.spawn(TextBundle::from("Paused").with_style(Style {
-                position_type: PositionType::Absolute,
-                bottom: Val::Px(5.0),
-                left: Val::Px(15.0),
-                top: Val::Px(10.0),
-                ..default()
-            }));
+            parent.spawn(TextBundle {
+                text: Text::from_section(
+                    "Superior Space Fighters",
+                    TextStyle {
+                        font_size: 20.0,
+                        color: Color::ANTIQUE_WHITE,
+                        ..default()
+                    },
+                ),
+                ..Default::default()
+            });
+
+            parent
+                .spawn(ButtonBundle {
+                    style: Style {
+                        width: Val::Px(150.0),
+                        height: Val::Px(65.0),
+                        border: UiRect::all(Val::Px(5.0)),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                    border_color: BorderColor(Color::BLACK),
+                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    ..default()
+                })
+                .insert(SaveGameButton)
+                .with_children(|parent| {
+                    parent.spawn(TextBundle::from_section(
+                        "Save Game",
+                        TextStyle {
+                            font_size: 30.0,
+                            color: Color::rgb(0.9, 0.9, 0.9),
+                            ..default()
+                        },
+                    ));
+                });
+
+            parent
+                .spawn(ButtonBundle {
+                    style: Style {
+                        width: Val::Px(150.0),
+                        height: Val::Px(65.0),
+                        border: UiRect::all(Val::Px(5.0)),
+                        // horizontally center child text
+                        justify_content: JustifyContent::Center,
+                        // vertically center child text
+                        align_items: AlignItems::Center,
+                        ..default()
+                    },
+                    border_color: BorderColor(Color::BLACK),
+                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    ..default()
+                })
+                .insert(LoadGameButton)
+                .with_children(|parent| {
+                    parent.spawn(TextBundle::from_section(
+                        "Load Game",
+                        TextStyle {
+                            font_size: 30.0,
+                            color: Color::rgb(0.9, 0.9, 0.9),
+                            ..default()
+                        },
+                    ));
+                });
         });
 }
 
