@@ -6,7 +6,7 @@ use bevy::{
     transform::components::Transform,
     utils::tracing,
 };
-use bevy_save::{DefaultBackend, DefaultFormat, Pipeline, Snapshot, SnapshotBuilder};
+use bevy_save::{DefaultDebugBackend, DefaultDebugFormat, Pipeline, Snapshot, SnapshotBuilder};
 
 use crate::{
     components::{
@@ -25,11 +25,12 @@ use crate::{
     },
 };
 
-pub struct SaveLoadPipeline<'a>(pub &'a str);
+/// Debug saving impl will save files at given location in json format for easy testing
+pub struct DebugSaveLoadPipeline<'a>(pub &'a str);
 
-impl<'a> Pipeline for SaveLoadPipeline<'a> {
-    type Backend = DefaultBackend;
-    type Format = DefaultFormat;
+impl<'a> Pipeline for DebugSaveLoadPipeline<'a> {
+    type Backend = DefaultDebugBackend;
+    type Format = DefaultDebugFormat;
 
     type Key<'k> = &'k str;
 
