@@ -8,3 +8,6 @@ pub struct SaveGameButton;
 
 #[derive(Component)]
 pub struct LoadGameButton;
+
+#[derive(Component)]
+pub struct QuitGameButton;

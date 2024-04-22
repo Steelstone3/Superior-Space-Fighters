@@ -12,7 +12,7 @@ use crate::{
         pause_menu_user_interface::{
             despawn_pause_menu_user_interface, spawn_pause_menu_user_interface,
         },
-        user_interface_main_menu_button_update::user_interface_menu_button_update,
+        user_interface_menu_button_update::user_interface_menu_button_update,
     },
 };
 

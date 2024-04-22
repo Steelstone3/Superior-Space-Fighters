@@ -4,7 +4,7 @@ use bevy::{
 };
 
 use crate::components::user_interface::main_menu_buttons::{
-    LoadGameButton, NewGameButton, SaveGameButton,
+    LoadGameButton, NewGameButton, QuitGameButton, SaveGameButton,
 };
 
 #[derive(QueryData)]
@@ -16,6 +16,7 @@ pub struct ButtonInteractionMutableQuery {
     pub new_game_button: Option<&'static NewGameButton>,
     pub save_game_button: Option<&'static SaveGameButton>,
     pub load_game_button: Option<&'static LoadGameButton>,
+    pub quit_game_button: Option<&'static QuitGameButton>,
 }
 
 #[derive(QueryFilter)]

@@ -46,6 +46,11 @@ pub fn user_interface_menu_button_update(
                         message: "Loading Game".to_string(),
                     });
                     load_game_event.send(LoadGameEvent);
+                } else if let Some(_) = interaction.quit_game_button {
+                    logging_event_writer.send(LoggingEvent {
+                        message: "Returning to main menu".to_string(),
+                    });
+                    next_game_state.set(GameState::MainMenu)
                 }
             }
             Interaction::Hovered => {
