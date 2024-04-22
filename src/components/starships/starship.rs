@@ -81,7 +81,7 @@ mod starship_should {
             max_velocity: 30.0,
             acceleration: 0.1,
             current_velocity: 0.0,
-            rotation_speed: 1.0,
+            rotation_speed: 0.1,
             size: Vec2 { x: 100.0, y: 100.0 },
             shield: Shield {
                 maximum: 100,
@@ -111,7 +111,7 @@ mod starship_should {
             max_velocity: 30.0,
             acceleration: 0.1,
             current_velocity: 0.0,
-            rotation_speed: 1.0,
+            rotation_speed: 0.1,
             size: Vec2 { x: 100.0, y: 100.0 },
             shield: Shield {
                 maximum: 100,

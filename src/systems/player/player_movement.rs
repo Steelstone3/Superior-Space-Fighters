@@ -2,7 +2,6 @@ use bevy::{
     input::ButtonInput,
     prelude::{KeyCode, Query, Res, Vec3},
     time::Time,
-    utils::tracing,
 };
 
 use crate::queries::player_starship_queries::MutablePlayerStarshipTransformQuery;
@@ -25,10 +24,16 @@ pub fn player_movement(
             player_query_item.starship.current_velocity += player_query_item.starship.acceleration;
         } else if input.pressed(KeyCode::KeyS) {
             player_query_item.starship.current_velocity -= player_query_item.starship.acceleration;
-        } else if player_query_item.starship.current_velocity > 0.0 {
-            player_query_item.starship.current_velocity -= player_query_item.starship.acceleration;
-        } else if player_query_item.starship.current_velocity < 0.0 {
-            player_query_item.starship.current_velocity += player_query_item.starship.acceleration;
+        }
+
+        if !input.any_pressed([KeyCode::KeyW, KeyCode::KeyS]) {
+            if player_query_item.starship.current_velocity > 0.0 {
+                player_query_item.starship.current_velocity -=
+                    player_query_item.starship.acceleration;
+            } else if player_query_item.starship.current_velocity < 0.0 {
+                player_query_item.starship.current_velocity +=
+                    player_query_item.starship.acceleration;
+            }
         }
 
         player_query_item.starship.current_velocity =
