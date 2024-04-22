@@ -1,5 +1,4 @@
 use bevy::app::{PluginGroup, PluginGroupBuilder};
-use bevy_inspector_egui::quick::WorldInspectorPlugin;
 
 use crate::plugins::{
     audio::audio_plugin::AudioPlugin,
@@ -25,6 +24,5 @@ impl PluginGroup for CorePluginGroup {
             .add(AudioPlugin)
             .add(CoreStatesPlugin)
             .add(CoreSaveTypesPlugin)
-            .add(WorldInspectorPlugin::new())
     }
 }
