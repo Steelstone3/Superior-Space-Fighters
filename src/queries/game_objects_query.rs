@@ -17,8 +17,18 @@ use crate::components::{
 
 #[derive(QueryFilter)]
 pub struct InGameEntityFilter {
-    pub or_filter: Or<(With<Node>, With<Planet>, With<AudioSink>)>,
-    pub or_with_weapons: Or<(With<PlayerBlaster>, With<PlayerMine>, With<PlayerTorpedo>)>,
-    pub or_with_exotic: Or<(With<PlayerExotic>,)>,
-    pub or_with_space: Or<(With<Space>, With<SpaceStation>, With<Starship>)>,
+    pub or_filter: Or<InGameEntitiesFilter>,
 }
+
+type InGameEntitiesFilter = (
+    With<Node>,
+    With<Planet>,
+    With<AudioSink>,
+    With<PlayerBlaster>,
+    With<PlayerMine>,
+    With<PlayerTorpedo>,
+    With<PlayerExotic>,
+    With<Space>,
+    With<SpaceStation>,
+    With<Starship>,
+);
