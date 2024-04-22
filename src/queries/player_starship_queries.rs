@@ -1,6 +1,6 @@
 use crate::components::{
     space::Space,
-    starships::{player_starship::PlayerStarship, starship::Starship},
+    starships::{ai_starship::AIStarship, player_starship::PlayerStarship, starship::Starship},
     user_interface::targetting::target::Target,
 };
 use bevy::{
@@ -25,7 +25,7 @@ pub struct MutablePlayerStarshipTransformQuery {
 #[derive(QueryFilter)]
 pub struct PlayerStarshipFilter {
     with_player_starship: With<PlayerStarship>,
-    without_starship: Without<Starship>,
+    without_starship: Without<AIStarship>,
     without_target: Without<Target>,
     without_space: Without<Space>,
 }

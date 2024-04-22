@@ -4,7 +4,7 @@ use bevy::{
     time::Time,
 };
 
-use crate::queries::starship_queries::MutablePlayerStarshipTransformQuery;
+use crate::queries::player_starship_queries::MutablePlayerStarshipTransformQuery;
 
 pub fn player_movement(
     mut player_query_items: Query<MutablePlayerStarshipTransformQuery>,

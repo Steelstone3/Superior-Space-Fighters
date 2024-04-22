@@ -15,28 +15,23 @@ use bevy::{
 };
 
 #[derive(QueryData)]
-pub struct StarshipQuery {
+pub struct AIStarshipQuery {
     pub starship: &'static Starship,
+    pub ai_starship: &'static AIStarship,
 }
 
 #[derive(QueryData)]
-pub struct StarshipEntityQuery {
+pub struct AIStarshipEntityQuery {
     pub entity: Entity,
     pub starship: &'static Starship,
+    pub ai_starship: &'static AIStarship,
 }
 
 #[derive(QueryData)]
-pub struct StarshipTransformQuery {
+pub struct AIStarshipTransformQuery {
     pub transform: &'static Transform,
     pub starship: &'static Starship,
-}
-
-#[derive(QueryData)]
-#[query_data(mutable)]
-pub struct MutablePlayerStarshipTransformQuery {
-    pub transform: &'static mut Transform,
-    pub starship: &'static mut Starship,
-    pub ai: &'static mut PlayerStarship,
+    pub ai_starship: &'static AIStarship,
 }
 
 #[derive(QueryData)]
@@ -48,8 +43,9 @@ pub struct MutableAIStarshipTransformQuery {
 }
 
 #[derive(QueryFilter)]
-pub struct StarshipFilter {
+pub struct AIStarshipFilter {
     with_starship: With<Starship>,
+    with_ai_starship: With<AIStarship>,
     without_player_starship: Without<PlayerStarship>,
     without_target: Without<Target>,
     without_player_blaster: Without<PlayerBlaster>,
