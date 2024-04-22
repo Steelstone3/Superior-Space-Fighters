@@ -1,4 +1,5 @@
 use bevy::{
+    audio::AudioSink,
     ecs::query::{Or, QueryFilter, With},
     ui::Node,
 };
@@ -26,5 +27,6 @@ pub struct InGameEntityFilter {
         With<PlayerTorpedo>,
         With<PlayerExotic>,
         With<Planet>,
+        With<AudioSink>,
     )>,
 }
