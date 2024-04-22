@@ -1,6 +1,6 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
+    ecs::schedule::IntoSystemConfigs,
 };
 
 use crate::{
@@ -9,7 +9,6 @@ use crate::{
         PlayerTorpedoCollisionEvent,
     },
     plugins::run_conditions::event_called,
-    states::core_states::GameState,
     systems::weapons::player_weapons::{
         player_blaster::spawn_player_blaster_collision_sound::spawn_player_blaster_collision_sound,
         player_exotic::spawn_player_exotic_collision_sound::spawn_player_exotic_collision_sound,

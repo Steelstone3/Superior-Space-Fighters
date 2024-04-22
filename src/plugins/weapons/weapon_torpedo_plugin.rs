@@ -1,5 +1,5 @@
 use crate::{
-    events::combat_events::{FirePlayerMineEvent, FirePlayerTorpedoEvent},
+    events::combat_events::FirePlayerTorpedoEvent,
     plugins::run_conditions::event_called,
     states::core_states::GameState,
     systems::weapons::player_weapons::player_torpedo::{

@@ -1,9 +1,6 @@
 use bevy::{
     asset::AssetServer,
-    ecs::{
-        query::Without,
-        system::{Commands, Query, Res},
-    },
+    ecs::system::{Commands, Query, Res},
     sprite::{Sprite, SpriteBundle},
 };
 

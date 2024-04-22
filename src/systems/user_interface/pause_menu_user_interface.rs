@@ -30,6 +30,7 @@ pub fn spawn_pause_menu_user_interface(mut commands: Commands) {
                     GridTrack::flex(1.0),
                     GridTrack::flex(1.0),
                     GridTrack::flex(1.0),
+                    GridTrack::flex(1.0),
                 ],
                 width: Val::Percent(100.0),
                 height: Val::Percent(100.0),
