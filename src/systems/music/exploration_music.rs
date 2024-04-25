@@ -1,21 +1,24 @@
+use crate::{events::audio_events::SpawnAudioEvent, resources::music::MusicResource};
 use bevy::{
     audio::{PlaybackMode, PlaybackSettings, Volume},
-    prelude::{AssetServer, AudioBundle, Commands, Res},
+    ecs::event::EventWriter,
+    prelude::{Commands, Res},
 };
-
-use crate::resources::music::Music;
 
 pub fn play_exploration_music(
     mut commands: Commands,
-    asset_server: Res<AssetServer>,
-    music: Res<Music>,
+    music: Res<MusicResource>,
+    mut spawn_audio_event: EventWriter<SpawnAudioEvent>,
 ) {
-    commands.spawn(AudioBundle {
-        source: asset_server.load(music.exploration_music.to_string()),
-        settings: PlaybackSettings {
+    let entity = commands.spawn_empty().id();
+    let event = SpawnAudioEvent {
+        audio_path: music.exploration_music.to_string(),
+        playback_settings: PlaybackSettings {
             mode: PlaybackMode::Loop,
             volume: Volume::new(0.75),
             ..Default::default()
         },
-    });
+        entity,
+    };
+    spawn_audio_event.send(event);
 }

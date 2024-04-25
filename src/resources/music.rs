@@ -6,7 +6,7 @@ use crate::assets::sounds::music::{
 };
 
 #[derive(Resource)]
-pub struct Music {
+pub struct MusicResource {
     pub combat_music: CombatMusicSound,
     pub exploration_music: ExplorationMusicSound,
     pub trading_music: TradingMusicSound,

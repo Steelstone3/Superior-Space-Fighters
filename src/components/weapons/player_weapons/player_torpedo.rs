@@ -1,8 +1,13 @@
-use bevy::{ecs::component::Component, math::Vec3};
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    math::Vec3,
+    reflect::Reflect,
+};
 
 use crate::components::weapons::ai_weapons::torpedo::Torpedo;
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
+#[reflect(Component)]
 pub struct PlayerTorpedo {
     pub torpedo: Torpedo,
 }
@@ -44,10 +49,7 @@ mod player_torpedo_should {
                         weapon: Weapon {
                             velocity: 125.0,
                             size: Vec2 { x: 80.0, y: 80.0 },
-                            damage: Damage {
-                                base_damage: 10,
-                                damage: Default::default(),
-                            },
+                            damage: Damage { base_damage: 25 },
                         },
                     },
                 },

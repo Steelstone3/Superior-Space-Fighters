@@ -1,0 +1,11 @@
+pub mod weapon_blaster_plugin;
+pub mod weapon_event_handlers_plugin;
+pub mod weapon_events_plugin;
+pub mod weapon_exotic_plugin;
+pub mod weapon_mine_plugin;
+pub mod weapon_resources_plugin;
+pub mod weapon_selection_plugin;
+pub mod weapon_sound_effects_plugin;
+pub mod weapon_torpedo_plugin;
+pub mod weapons_ammunition_plugin;
+pub mod weapons_save_types_plugin;

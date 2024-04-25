@@ -1,9 +1,7 @@
-use bevy::ecs::component::Component;
-
-use crate::components::weapons::weapon_types::damage::Damage;
+use bevy::{ecs::component::Component, reflect::Reflect};
 
 // TODO implement regenerative shields
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
 pub struct Shield {
     pub maximum: u32,
     pub current: u32,
@@ -21,24 +19,16 @@ impl Default for Shield {
 }
 
 impl Shield {
-    pub fn take_damage(&mut self, damage: Damage) -> Damage {
-        if damage.damage >= self.current {
-            let updated_damage = Damage {
-                base_damage: damage.base_damage,
-                damage: damage.damage - self.current,
-            };
-
+    pub fn take_damage(&mut self, damage: u32) -> u32 {
+        if damage >= self.current {
             self.current = 0;
 
-            return updated_damage;
+            return damage / 2;
         }
 
-        self.current -= damage.damage;
+        self.current -= damage;
 
-        Damage {
-            base_damage: damage.base_damage,
-            damage: Default::default(),
-        }
+        0
     }
 }
 
@@ -65,78 +55,48 @@ mod shield_should {
 
     #[rstest]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 11,
-        },
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
+        11,
+        0,
         Shield {
             maximum: 100,
             current: 89,
             regeneration: 5,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 20,
-        },
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
+        20,
+        0,
         Shield {
             maximum: 100,
             current: 80,
             regeneration: 5,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
+        0,
+        0,
         Shield {
             maximum: 100,
             current: 100,
             regeneration: 5,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 101,
-        },
-        Damage {
-            base_damage: 10,
-            damage: 1,
-        },
+        101,
+        50,
         Shield {
             maximum: 100,
             current: 0,
             regeneration: 5,
     })]
     #[case(
-        Damage {
-            base_damage: 10,
-            damage: 100,
-        },
-        Damage {
-            base_damage: 10,
-            damage: 0,
-        },
+        200,
+        100,
         Shield {
             maximum: 100,
             current: 0,
             regeneration: 5,
     })]
     fn take_damage(
-        #[case] damage: Damage,
-        #[case] expected_damage: Damage,
+        #[case] damage: u32,
+        #[case] expected_damage: u32,
         #[case] expected_shield: Shield,
     ) {
         // Given

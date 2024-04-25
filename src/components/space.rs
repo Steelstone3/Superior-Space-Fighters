@@ -1,7 +1,13 @@
 use crate::assets::images::space::SpaceSprite;
-use bevy::{ecs::component::Component, math::Vec3, prelude::Vec2};
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    math::Vec3,
+    prelude::Vec2,
+    reflect::Reflect,
+};
 
-#[derive(Component, Default, Debug, PartialEq)]
+#[derive(Component, Debug, Reflect, PartialEq)]
+#[reflect(Component)]
 pub struct Space {
     pub space: SpaceSprite,
     pub size: Vec2,

@@ -5,9 +5,13 @@ use crate::{
     },
     components::weapons::weapon_types::lifetime_weapon::LifetimeWeapon,
 };
-use bevy::ecs::component::Component;
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    reflect::Reflect,
+};
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
+#[reflect(Component)]
 pub struct Mine {
     pub mine: MineSprite,
     pub firing_sound: MineSound,
@@ -21,7 +25,7 @@ impl Default for Mine {
             mine: MineSprite::default(),
             firing_sound: MineSound::default(),
             impact_sound: ImpactSound::default(),
-            lifetime_weapon: LifetimeWeapon::new(100.0, -5.0),
+            lifetime_weapon: LifetimeWeapon::new(100.0, -5.0, 75),
         }
     }
 }
@@ -47,10 +51,7 @@ mod mine_should {
                 weapon: Weapon {
                     velocity: -5.0,
                     size: Vec2 { x: 100.0, y: 100.0 },
-                    damage: Damage {
-                        base_damage: 10,
-                        damage: Default::default(),
-                    },
+                    damage: Damage { base_damage: 75 },
                 },
                 lifetime: Timer::from_seconds(10.0, TimerMode::Once),
             },

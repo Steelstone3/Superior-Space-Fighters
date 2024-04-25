@@ -1,27 +1,34 @@
 use bevy::{
-    prelude::{AssetServer, Commands, Res, Vec3},
-    sprite::{Sprite, SpriteBundle},
+    ecs::{event::EventWriter, system::Commands},
+    math::Quat,
+    prelude::Vec3,
+    transform::components::Transform,
 };
 
-use crate::components::starships::player_starship::PlayerStarship;
+use crate::{
+    components::starships::{player_starship::PlayerStarship, starship::Starship},
+    events::spawn_sprite_event::SpawnSpriteEvent,
+};
 
-pub fn spawn_player_ship(mut commands: Commands, asset_server: Res<AssetServer>) {
-    let player = PlayerStarship::default();
+pub fn spawn_player_ship(
+    mut spawn_sprite_event_writer: EventWriter<SpawnSpriteEvent>,
+    mut commands: Commands,
+) {
+    let starship = Starship::default();
+    let texture = starship.faction_starship.to_string();
+    let size = starship.size;
+    let entity = commands.spawn(starship).insert(PlayerStarship {}).id();
 
-    let texture = asset_server.load(player.ship.faction_starship.to_string());
-
-    commands
-        .spawn(SpriteBundle {
-            sprite: Sprite {
-                custom_size: Some(player.ship.size),
-                ..Default::default()
-            },
-            texture,
-            transform: bevy::prelude::Transform {
-                translation: Vec3::new(0.0, 0.0, 4.0),
-                ..Default::default()
-            },
+    let event = SpawnSpriteEvent {
+        sprite_path: texture,
+        size,
+        entity,
+        transform: Transform {
+            translation: Vec3::new(0.0, 0.0, 4.0),
+            rotation: Quat::default(),
             ..Default::default()
-        })
-        .insert(player);
+        },
+    };
+
+    spawn_sprite_event_writer.send(event);
 }

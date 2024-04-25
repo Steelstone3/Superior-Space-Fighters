@@ -1,0 +1,3 @@
+#change to nightly for latest improvements (currently causes taffy to fail to compile)
+[toolchain]
+channel = "stable"
