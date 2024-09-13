@@ -1,9 +1,10 @@
 use bevy::{
     asset::{AssetServer, Handle},
+    color::Color,
     ecs::system::{Commands, Res},
     hierarchy::BuildChildren,
     prelude::{default, NodeBundle},
-    render::{color::Color, texture::Image},
+    render::texture::Image,
     ui::{Display, GridTrack, PositionType, Style, UiImage, Val},
 };
 
@@ -24,7 +25,7 @@ pub fn spawn_weapon_selection_icons(mut commands: Commands, asset_server: Res<As
                 bottom: Val::Percent(0.0),
                 ..default()
             },
-            background_color: Color::rgba(0.0, 0.0, 0.0, 0.0).into(),
+            background_color: Color::srgba(0.0, 0.0, 0.0, 0.0).into(),
             ..default()
         })
         .with_children(|parent| {

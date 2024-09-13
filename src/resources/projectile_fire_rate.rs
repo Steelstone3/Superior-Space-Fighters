@@ -1,5 +1,6 @@
 use bevy::{ecs::system::Resource, time::Timer};
 
+#[allow(dead_code)]
 #[derive(Resource)]
 pub struct ProjectileFireRate {
     pub blaster_fire_rate: Timer,

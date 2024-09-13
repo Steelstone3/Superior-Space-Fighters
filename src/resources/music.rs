@@ -5,6 +5,7 @@ use crate::assets::sounds::music::{
     menu_music::MenuMusicSound, trading_music::TradingMusicSound,
 };
 
+#[allow(dead_code)]
 #[derive(Resource)]
 pub struct Music {
     pub combat_music: CombatMusicSound,
