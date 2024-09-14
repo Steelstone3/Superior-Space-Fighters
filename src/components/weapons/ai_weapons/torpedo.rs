@@ -5,9 +5,14 @@ use crate::{
     },
     components::weapons::weapon_types::lock_on_weapon::LockOnWeapon,
 };
-use bevy::{ecs::component::Component, math::Vec3};
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    math::Vec3,
+    reflect::Reflect,
+};
 
-#[derive(Component, Debug, PartialEq)]
+#[derive(Component, Debug, PartialEq, Reflect)]
+#[reflect(Component)]
 pub struct Torpedo {
     pub torpedo: TorpedoSprite,
     pub firing_sound: TorpedoSound,
@@ -21,7 +26,7 @@ impl Torpedo {
             torpedo: Default::default(),
             firing_sound: Default::default(),
             impact_sound: Default::default(),
-            lock_on_weapon: LockOnWeapon::new(original_position, 80.0, 125.0, 1500.0),
+            lock_on_weapon: LockOnWeapon::new(original_position, 80.0, 125.0, 1500.0, 25),
         }
     }
 }
@@ -53,10 +58,7 @@ mod torpedo_should {
                     weapon: Weapon {
                         velocity: 125.0,
                         size: Vec2 { x: 80.0, y: 80.0 },
-                        damage: Damage {
-                            base_damage: 10,
-                            damage: Default::default(),
-                        },
+                        damage: Damage { base_damage: 25 },
                     },
                 },
             },

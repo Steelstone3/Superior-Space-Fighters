@@ -1,11 +1,12 @@
 use crate::{
-    components::{starships::starship::Starship, user_interface::targetting::target::Target},
-    resources::targetting_settings::TargettingSettings,
+    components::user_interface::targetting::target::Target,
+    queries::starship_queries::AIStarshipTransformQuery,
+    resources::targetting_settings::TargettingSettingsResource,
 };
 use bevy::{
-    ecs::{query::With, system::ResMut},
+    ecs::system::ResMut,
     input::ButtonInput,
-    prelude::{AssetServer, Commands, KeyCode, Query, Res, Transform},
+    prelude::{AssetServer, Commands, KeyCode, Query, Res},
     sprite::{Sprite, SpriteBundle},
     utils::tracing,
 };
@@ -14,8 +15,8 @@ pub fn spawn_combat_target(
     mut commands: Commands,
     asset_server: Res<AssetServer>,
     input: Res<ButtonInput<KeyCode>>,
-    mut targetting_setting: ResMut<TargettingSettings>,
-    starship_transforms: Query<&Transform, With<Starship>>,
+    mut targetting_setting: ResMut<TargettingSettingsResource>,
+    starships: Query<AIStarshipTransformQuery>,
 ) {
     if !input.just_pressed(KeyCode::KeyT) {
         return;
@@ -23,8 +24,8 @@ pub fn spawn_combat_target(
 
     let mut random_starship_transform = None;
 
-    for starship_transform in starship_transforms.into_iter() {
-        random_starship_transform = Some(starship_transform)
+    for starship in starships.into_iter() {
+        random_starship_transform = Some(starship.transform)
     }
 
     if let Some(random_starship) = random_starship_transform {

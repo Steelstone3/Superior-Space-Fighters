@@ -1,3 +1,6 @@
-pub mod game_user_interface;
-pub mod targetting;
-pub mod weapon_selection;
+pub mod user_interface_events_plugin;
+pub mod user_interface_menus_update_plugin;
+pub mod user_interface_targeting_plugin;
+pub mod user_interface_targeting_resources_plugin;
+pub mod user_interface_weapon_selection_ingame_plugin;
+pub mod user_interface_weapon_selection_update_plugin;
