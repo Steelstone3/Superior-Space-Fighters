@@ -1,4 +1,4 @@
-use bevy::{app::Plugin, ecs::schedule::OnEnter};
+use bevy::{app::Plugin, prelude::OnEnter};
 
 use crate::{
     states::core_states::GameState,

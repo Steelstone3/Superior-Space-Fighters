@@ -1,10 +1,10 @@
 use bevy::{
     ecs::{
         event::{EventReader, EventWriter},
-        schedule::{NextState, State},
         system::{Res, ResMut},
     },
     input::{keyboard::KeyCode, ButtonInput},
+    prelude::{NextState, State},
 };
 
 use crate::{

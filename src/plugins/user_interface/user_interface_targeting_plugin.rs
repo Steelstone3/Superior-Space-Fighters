@@ -1,6 +1,6 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
+    prelude::{in_state, IntoSystemConfigs},
 };
 
 use crate::{

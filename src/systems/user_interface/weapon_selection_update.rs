@@ -10,9 +10,10 @@ use crate::{
 };
 use bevy::{
     asset::{AssetServer, Handle},
+    color::Color,
     ecs::system::{Commands, Query, Res, ResMut},
     hierarchy::{BuildChildren, DespawnRecursiveExt},
-    render::{color::Color, texture::Image},
+    render::texture::Image,
     text::{Text, TextStyle},
     ui::{
         node_bundles::{NodeBundle, TextBundle},
@@ -112,7 +113,7 @@ fn weapon_icon_parent_node_bundle() -> NodeBundle {
             bottom: Val::Percent(0.0),
             ..default()
         },
-        background_color: Color::rgba(0.0, 0.0, 0.0, 0.5).into(),
+        background_color: Color::linear_rgba(0.0, 0.0, 0.0, 0.5).into(),
         ..default()
     }
 }
@@ -137,7 +138,7 @@ fn weapon_ammo_count_bundle(ammo_count: u32) -> TextBundle {
             ammo_count.to_string(),
             TextStyle {
                 font_size: 20.0,
-                color: Color::ANTIQUE_WHITE,
+                color: Color::WHITE,
                 ..default()
             },
         ),

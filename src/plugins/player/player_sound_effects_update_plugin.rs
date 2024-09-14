@@ -1,7 +1,4 @@
-use bevy::{
-    app::Plugin,
-    ecs::schedule::{IntoSystemConfigs, OnEnter},
-};
+use bevy::{app::Plugin, ecs::schedule::IntoSystemConfigs, prelude::OnEnter};
 
 use crate::{
     events::user_interface_events::NewGameEvent, plugins::run_conditions::event_called,

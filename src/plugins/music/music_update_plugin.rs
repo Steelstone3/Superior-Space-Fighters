@@ -1,7 +1,7 @@
 use crate::{
     states::core_states::GameState, systems::music::exploration_music::play_exploration_music,
 };
-use bevy::{app::Plugin, ecs::schedule::OnExit};
+use bevy::{app::Plugin, prelude::OnExit};
 
 pub struct MusicUpdatePlugin;
 

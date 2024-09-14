@@ -1,4 +1,4 @@
-use bevy::app::Plugin;
+use bevy::{app::Plugin, prelude::AppExtStates};
 
 use crate::states::core_states::GameState;
 

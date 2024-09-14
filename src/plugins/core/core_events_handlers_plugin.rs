@@ -9,7 +9,7 @@ use crate::{
 };
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::OnEnter,
+    prelude::OnEnter,
 };
 
 pub struct CoreEventHandlersPlugin;

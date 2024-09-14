@@ -3,7 +3,8 @@ use crate::{
 };
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{common_conditions::in_state, IntoSystemConfigs},
+    ecs::schedule::IntoSystemConfigs,
+    prelude::in_state,
 };
 
 pub struct WeaponSelectionPlugin;

@@ -1,9 +1,7 @@
 use bevy::{
-    ecs::{
-        schedule::NextState,
-        system::{Commands, Query, ResMut},
-    },
+    ecs::system::{Commands, Query, ResMut},
     hierarchy::DespawnRecursiveExt,
+    prelude::NextState,
 };
 
 use crate::{

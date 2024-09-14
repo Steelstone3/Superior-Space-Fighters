@@ -1,6 +1,6 @@
 use bevy::{
     app::{Plugin, Update},
-    ecs::schedule::{OnEnter, OnExit},
+    prelude::{OnEnter, OnExit},
 };
 
 use crate::{

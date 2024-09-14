@@ -1,10 +1,10 @@
 use bevy::{
+    color::Color,
     ecs::{
         event::EventWriter,
-        schedule::NextState,
         system::{Query, ResMut},
     },
-    render::color::Color,
+    prelude::NextState,
     ui::{BackgroundColor, Interaction},
 };
 
@@ -28,8 +28,9 @@ pub fn user_interface_menu_button_update(
     for mut interaction in &mut interaction_query {
         match *interaction.interaction {
             Interaction::Pressed => {
-                *interaction.background_colour = BackgroundColor(Color::rgb(0.35, 0.75, 0.35));
-                interaction.border_colour.0 = Color::RED;
+                *interaction.background_colour =
+                    BackgroundColor(Color::linear_rgb(0.35, 0.75, 0.35));
+                interaction.border_colour.0 = Color::linear_rgb(1.0, 0.0, 0.0);
                 if interaction.new_game_button.is_some() {
                     logging_event_writer.send(LoggingEvent {
                         message: "Starting New Game".to_string(),
@@ -54,11 +55,13 @@ pub fn user_interface_menu_button_update(
                 }
             }
             Interaction::Hovered => {
-                *interaction.background_colour = BackgroundColor(Color::rgb(0.25, 0.25, 0.25));
+                *interaction.background_colour =
+                    BackgroundColor(Color::linear_rgb(0.25, 0.25, 0.25));
                 interaction.border_colour.0 = Color::WHITE;
             }
             Interaction::None => {
-                *interaction.background_colour = BackgroundColor(Color::rgb(0.15, 0.15, 0.15));
+                *interaction.background_colour =
+                    BackgroundColor(Color::linear_rgb(0.15, 0.15, 0.15));
                 interaction.border_colour.0 = Color::BLACK;
             }
         }

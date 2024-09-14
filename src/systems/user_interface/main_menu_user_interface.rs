@@ -1,8 +1,8 @@
 use bevy::{
+    color::Color,
     ecs::system::{Commands, Query},
     hierarchy::{BuildChildren, DespawnRecursiveExt},
     prelude::default,
-    render::color::Color,
     text::{Text, TextStyle},
     ui::{
         node_bundles::{ButtonBundle, NodeBundle, TextBundle},
@@ -46,7 +46,7 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                     "Superior Space Fighters",
                     TextStyle {
                         font_size: 20.0,
-                        color: Color::ANTIQUE_WHITE,
+                        color: Color::WHITE,
                         ..default()
                     },
                 ),
@@ -66,7 +66,7 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                         ..default()
                     },
                     border_color: BorderColor(Color::BLACK),
-                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    background_color: Color::linear_rgb(0.15, 0.15, 0.15).into(),
                     ..default()
                 })
                 .insert(NewGameButton)
@@ -75,7 +75,7 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                         "New Game",
                         TextStyle {
                             font_size: 30.0,
-                            color: Color::rgb(0.9, 0.9, 0.9),
+                            color: Color::linear_rgb(0.9, 0.9, 0.9),
                             ..default()
                         },
                     ));
@@ -94,7 +94,7 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                         ..default()
                     },
                     border_color: BorderColor(Color::BLACK),
-                    background_color: Color::rgb(0.15, 0.15, 0.15).into(),
+                    background_color: Color::linear_rgb(0.15, 0.15, 0.15).into(),
                     ..default()
                 })
                 .insert(LoadGameButton)
@@ -103,7 +103,7 @@ pub fn spawn_main_menu_user_interface(mut commands: Commands) {
                         "Load Game",
                         TextStyle {
                             font_size: 30.0,
-                            color: Color::rgb(0.9, 0.9, 0.9),
+                            color: Color::linear_rgb(0.9, 0.9, 0.9),
                             ..default()
                         },
                     ));
