@@ -1,26 +1,31 @@
-use crate::components::weapons::player_weapons::player_torpedo::PlayerTorpedo;
+use crate::queries::player_torpedo_queries::PlayerTorpedoEntityTransformQuery;
 use bevy::{
-    prelude::{Commands, Entity, Query},
-    transform::components::Transform,
+    prelude::{Commands, Query},
     utils::tracing,
 };
 
 pub fn player_torpedo_lifetime(
     mut commands: Commands,
-    mut torpedoes: Query<(Entity, &mut Transform, &mut PlayerTorpedo)>,
+    mut player_torpedoes: Query<PlayerTorpedoEntityTransformQuery>,
 ) {
-    for (torpedo_entity, torpedo_transform, torpedo) in &mut torpedoes {
-        let is_past_maximum_range = (torpedo_transform.translation
-            - torpedo
+    for player_torpedo in &mut player_torpedoes {
+        let is_past_maximum_range = (player_torpedo.transform.translation
+            - player_torpedo
+                .player_torpedo
                 .torpedo
                 .lock_on_weapon
                 .ranged_weapon
                 .original_position)
             .length()
-            > torpedo.torpedo.lock_on_weapon.ranged_weapon.range;
+            > player_torpedo
+                .player_torpedo
+                .torpedo
+                .lock_on_weapon
+                .ranged_weapon
+                .range;
 
         if is_past_maximum_range {
-            commands.entity(torpedo_entity).despawn();
+            commands.entity(player_torpedo.entity).despawn();
 
             tracing::info!("Torpedo despawned",);
         }

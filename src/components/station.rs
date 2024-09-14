@@ -1,13 +1,18 @@
 use crate::assets::images::space_stations::SpaceStationSprite;
-use bevy::{ecs::component::Component, prelude::Vec2};
+use bevy::{
+    ecs::{component::Component, reflect::ReflectComponent},
+    prelude::Vec2,
+    reflect::Reflect,
+};
 
-#[derive(Component, Debug, PartialEq)]
-pub struct Station {
+#[derive(Component, Debug, PartialEq, Reflect)]
+#[reflect(Component)]
+pub struct SpaceStation {
     pub station: SpaceStationSprite,
     pub size: Vec2,
 }
 
-impl Station {
+impl SpaceStation {
     pub fn new(station: SpaceStationSprite, size: f32) -> Self {
         Self {
             station,
@@ -23,13 +28,13 @@ mod station_should {
     #[test]
     fn create_new() {
         // Given
-        let expected_station = Station {
+        let expected_station = SpaceStation {
             station: SpaceStationSprite::AstralSovereignStation1,
             size: Vec2::new(100.0, 100.0),
         };
 
         // When
-        let station = Station::new(SpaceStationSprite::AstralSovereignStation1, 100.0);
+        let station = SpaceStation::new(SpaceStationSprite::AstralSovereignStation1, 100.0);
 
         // Then
         assert_eq!(expected_station, station)
