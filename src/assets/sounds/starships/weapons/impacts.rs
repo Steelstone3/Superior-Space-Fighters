@@ -1,7 +1,8 @@
+use bevy::reflect::Reflect;
 use core::fmt::Display;
 use rand_derive2::RandGen;
 
-#[derive(Default, RandGen, Debug, PartialEq, Eq)]
+#[derive(Default, RandGen, Debug, PartialEq, Eq, Reflect)]
 pub enum ImpactSound {
     #[default]
     Impact1,
