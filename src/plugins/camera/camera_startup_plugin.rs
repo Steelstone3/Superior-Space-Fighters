@@ -1,13 +1,11 @@
-use bevy::{app::Plugin, prelude::OnEnter};
+use bevy::app::{Plugin, Startup};
 
-use crate::{
-    states::core_states::GameState, systems::camera::spawn_player_camera::spawn_player_camera,
-};
+use crate::systems::camera::spawn_player_camera::spawn_player_camera;
 
 pub struct CameraStartupPlugin;
 
 impl Plugin for CameraStartupPlugin {
     fn build(&self, app: &mut bevy::prelude::App) {
-        app.add_systems(OnEnter(GameState::MainMenu), spawn_player_camera);
+        app.add_systems(Startup, spawn_player_camera);
     }
 }
