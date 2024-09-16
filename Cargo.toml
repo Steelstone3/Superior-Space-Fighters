@@ -35,7 +35,7 @@ bevy = { version = "0.14", default-features = false, features = [
     "multi_threaded",
     "bevy_state",
 ] }
-bevy_save = "0.14"
+bevy_save = { git = "https://github.com/perry-blueberry/bevy_save", branch = "update-to-bevy-0.14" }
 float-lerp = "0"
 rand = "0"
 rand_derive2 = "0"
